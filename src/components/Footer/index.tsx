@@ -2,12 +2,9 @@ import { Text, HStack, Container } from "@chakra-ui/layout";
 import styled from "@emotion/styled";
 import {Link} from "@chakra-ui/react";
 import React from "react";
+import {IBaseProps} from "../../interfaces/props";
 
-interface IProps {
-
-}
-
-const Footer:React.FC<IProps>=(props:IProps)=>{
+const Footer:React.FC<IBaseProps>=(props:IBaseProps)=>{
   return (
     <FooterContainer maxW="container.xl" centerContent>
       <HStack py={5} wrap="wrap" spacing={6}>

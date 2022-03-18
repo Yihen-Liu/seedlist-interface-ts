@@ -2,56 +2,20 @@ import React from "react";
 import {QueryArea} from "./query";
 import {SaveArea} from "./save";
 import {SignupArea} from "./signup";
+import {useSelector} from "react-redux";
+import {pageState, StateType} from "../../reducers/state";
+import {IBaseProps} from "../../interfaces/props";
 
-interface IProps {
-}
+const InputAreas:React.FC<IBaseProps> = (props:IBaseProps) => {
+    const label = useSelector((state:StateType)=>state.page);
 
-const InputAreas:React.FC<IProps> = (props:IProps) => {
     return(
         <div>
-
+            {label===pageState.SIGNUP && <SignupArea />}
+            {label===pageState.SAVE && <SaveArea />}
+            {label === pageState.QUERY && <QueryArea />}
         </div>
     );
 }
-
-/*
-class InputAreas extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            interactInputs: "",
-            activeLabel: props.activeLabel
-        }
-    }
-
-    setActiveLabel = (label) =>{
-        this.setState({activeLabel:label});
-        this.props.setActiveLabel(label);
-    }
-
-    render() {
-        if(this.state.activeLabel=="no"){
-            this.state.interactInputs = <SignupArea activeLabel={this.state.activeLabel} setActivelabel={this.setActiveLabel} />;
-        }
-
-        if(this.state.activeLabel=="signup"){
-            this.state.interactInputs = <SignupArea activelabel={this.state.activeLabel} setActiveLabel={this.setActiveLabel} />;
-        }
-
-        if(this.state.activeLabel=="save"){
-           this.state.interactInputs = <SaveArea activeLabel={this.state.activeLabel} setActiveLabel={this.setActiveLabel} />;
-        }
-
-        if(this.state.activeLabel=="query"){
-            this.state.interactInputs = <QueryArea activeLabel={this.state.activeLabel} setActiveLabel={this.setActiveLabel} />;
-        }
-        return (
-            <div>
-                {this.state.interactInputs}
-            </div>
-        );
-    }
-}
-*/
 
 export {InputAreas} ;

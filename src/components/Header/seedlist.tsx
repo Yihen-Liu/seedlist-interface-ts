@@ -1,23 +1,15 @@
 import {HStack, Text} from "@chakra-ui/layout";
 import React from "react";
 import {Link} from "@chakra-ui/react";
+import {IBaseProps} from "../../interfaces/props";
 
-interface IProps {
-
-}
-
-const Seedlist:React.FC<IProps>=(props:IProps) => {
+const Seedlist:React.FC<IBaseProps>=(props:IBaseProps) => {
     return(
-        <Link href="/">
-            <a>
-                <HStack spacing={2}>
-                    <Text fontSize="4xl" fontWeight="extrabold">
-                        seedlist
-                    </Text>
-                </HStack>
-            </a>
-        </Link>
-
+			<HStack spacing={2}>
+				<Text fontSize="5xl">
+					seedlist
+				</Text>
+			</HStack>
     );
 }
 

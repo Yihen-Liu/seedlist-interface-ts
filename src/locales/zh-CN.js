@@ -1,0 +1,1 @@
+/*eslint-disable*/module.exports={messages:{"Add More":"继续添加","Brain Wallet":"脑钱包","Cancel":"取消","Entropy":"熵值","Let's Query":"开始查询","Let's Save":"开始存储","Let's Sign":"Let's Sign","Let's Sign-up":"开始注册","Mask":"身份","Please connect wallet firstly":"请您提前连接钱包...","Please enter your password":"请输入您的密码","Query":"查询","Save":"存储","Sign Up":"注册","Submit":"提交"}};

@@ -1,22 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {App} from './components/App';
-import "./style/App.scss";
-
-import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-
-const theme = extendTheme({
-    fonts: {
-        heading: "Inter",
-        body: "Inter",
-    },
-});
+import {ThemeProvider} from "./theme/chakra";
+import {LanguageProvider} from "./i18n";
+import {ReduxProvider} from "./reducers/provider";
 
 ReactDOM.render(
-  <React.StrictMode>
-      <ChakraProvider theme={theme}>
-        <App />
-      </ChakraProvider>
-  </React.StrictMode>,
+    <React.StrictMode>
+       <ReduxProvider >
+           <LanguageProvider>
+               <ThemeProvider>
+                   <App />
+               </ThemeProvider>
+           </LanguageProvider>
+       </ReduxProvider>
+    </React.StrictMode>,
+
   document.getElementById('root')
 );

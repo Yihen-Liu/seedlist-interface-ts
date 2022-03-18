@@ -1,49 +1,22 @@
-import React from "react";
+import React, {useCallback} from "react";
 import {Button} from "@chakra-ui/button";
+import {useDispatch} from "react-redux";
+import {queryAction} from "../../reducers/action";
+import {Trans} from "@lingui/macro";
+import {IBaseProps} from "../../interfaces/props";
 
-/*
-class Query extends React.Component{
-   constructor(props) {
-      super(props);
-      this.state = {
-         message:"Query",
-          activeLabel:props.activeLabel
-      }
-   }
+const QueryLabel:React.FC<IBaseProps> = (props:IBaseProps)=>{
+    const dispatch = useDispatch();
+    const click = useCallback(()=>dispatch(queryAction()),[dispatch]);
 
-    setActiveLabel = (label)=>{
-        this.props.setActiveLabel(label);
-        this.setState({activeLabel:label})
-    }
-
-   render() {
-     return(
-         <Button
-             colorScheme="blackAlpha"
-             fontSize="xl"
-             onClick={()=>{this.setActiveLabel("query")}}
-             w={["32", "40"]}
-         >
-             {this.state.message}
-         </Button>
-     );
-   }
-}
-*/
-
-interface IProps {
-
-}
-
-const QueryLabel:React.FC<IProps> = (props:IProps)=>{
     return(
         <Button
             colorScheme="blackAlpha"
             fontSize="xl"
-            onClick={()=>{}}
+            onClick={click}
             w={["32", "40"]}
         >
-            Query
+          <Trans> Query </Trans>
         </Button>
     );
 }

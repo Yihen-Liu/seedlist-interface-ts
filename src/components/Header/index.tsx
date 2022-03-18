@@ -1,41 +1,20 @@
-import { Text, Box, HStack, Container, Center } from "@chakra-ui/layout";
-import { Button, ButtonGroup } from "@chakra-ui/button";
+import {  HStack, Container } from "@chakra-ui/layout";
 import {Seedlist} from "./seedlist";
 /*import { useWeb3 } from "../../helpers/web3"; */
 import React from "react";
 import {PageRouter} from "./routers";
-import {Wallet} from "./wallet";
+import WalletInfo from "../Wallet/wallet";
+import {IBaseProps} from "../../interfaces/props";
+import {Menu} from "./menu";
 
-/*
-class Header extends React.Component{
-    constructor(props) {
-        super(props);
-
-    }
-
-    render() {
-        return (
-            <Container maxW="container.xl">
-                <HStack py={5} wrap="wrap" spacing={0}>
-                    <Seedlist />
-                    <PageRouter />
-                    <Wallet />
-                </HStack>
-            </Container>
-        )
-    }
-}
-*/
-interface IProps {
-
-}
-const Header:React.FC<IProps> = (props:IProps)=>{
+const Header:React.FC<IBaseProps> = (props:IBaseProps)=>{
     return(
         <Container maxW="container.xl">
             <HStack py={5} wrap="wrap" spacing={0}>
                 <Seedlist />
                 <PageRouter />
-                <Wallet />
+                <WalletInfo />
+                <Menu />
             </HStack>
         </Container>
     );

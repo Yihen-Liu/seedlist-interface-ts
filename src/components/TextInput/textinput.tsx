@@ -1,14 +1,12 @@
-import { useCallback } from "react";
-
+import {IBaseProps} from "../../interfaces/props";
 import { Input, InputGroup, InputRightElement} from "@chakra-ui/react";
 
-
-interface IProps {
-
-}
-const TextInput:React.FC<IProps> = (props:IProps)=>{
+const TextInput:React.FC<IBaseProps> = (props:IBaseProps)=>{
     return(
-        <div></div>
+        <InputGroup>
+            <Input />
+            <InputRightElement />
+        </InputGroup>
     );
 }
 
