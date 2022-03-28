@@ -20,9 +20,13 @@
     "@types/react-dom": "^17.0.9",
     "@typescript-eslint/eslint-plugin": "^5.14.0",
     "@typescript-eslint/parser": "^5.14.0",
+    "bip32": "^2.0.6",
+    "bip39": "^3.0.4",
     "bnc-onboard": "^1.25.0",
+    "create-hash": "^1.2.0",
     "crypto-js": "^4.0.0",
     "eslint": "^8.10.0",
+    "ethereumjs-util": "^7.0.10",
     "ethers": "^5.1.0",
     "framer-motion": "^6.2.8",
     "react": "^17.0.2",
@@ -32,6 +36,7 @@
     "redux": "^4.1.2",
     "sass": "^1.49.9",
     "scrypt-js": "^3.0.1",
+    "stream": "^0.0.2",
     "typescript": "^4.4.2",
     "web-vitals": "^2.1.0"
   },
@@ -41,7 +46,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lingui-compile": "lingui compile",
-    "lingui-extract": "lingui extract"
+    "lingui-extract": "lingui extract",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -63,6 +69,9 @@
   },
   "devDependencies": {
     "@lingui/cli": "^3.13.2",
-    "@lingui/macro": "^3.13.2"
+    "@lingui/macro": "^3.13.2",
+    "@types/bs58check": "^2.1.0",
+    "@types/create-hash": "^1.2.2",
+    "@types/ethereumjs-util": "^6.1.0"
   }
 }
