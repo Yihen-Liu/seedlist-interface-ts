@@ -3,7 +3,8 @@ import {ActionModel, ActionType, pageState, StateType} from "./state";
 function initializeState():StateType {
     return {
         page: pageState.SIGNUP,
-	    action:ActionType.CLICK_SIGNUP
+	    action:ActionType.CLICK_SIGNUP,
+	    walletConnection:false
     }
 }
 

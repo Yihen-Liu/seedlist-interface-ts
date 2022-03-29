@@ -1,5 +1,5 @@
 import React, {useCallback} from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { etherClient, IWalletInfo, contractChainId, contractChainName } from '../../ethers/etherClient';
 import {Box} from "@chakra-ui/layout";
 import {Button} from "@chakra-ui/button";
@@ -12,13 +12,18 @@ import {wallet} from "bnc-onboard/dist/src/stores";
 
 const WalletInfo: React.FC<IBaseProps> = (props:IBaseProps) => {
     const [walletInfo, setWalletInfo] = useState<IWalletInfo | null>(null);
-    // const [loaded, setLoaded] = useState(false);
+
 	const action = useSelector((state:StateType)=>state.action);
 
 	const dispatch = useDispatch();
-	const click = useCallback(()=>{
-		dispatch(walletConnectionAction(action));
-	},[dispatch]);
+
+	useMemo(()=>{
+		if(contractChainId===walletInfo?.chainId){
+			dispatch(walletConnectionAction(action, true));
+		}else{
+			dispatch(walletConnectionAction(action, false));
+		}
+	}, [dispatch, walletInfo?.address, walletInfo?.chainId]);
 
 	useEffect(() => {
         const doSetWalletInfo = () => {
@@ -26,8 +31,6 @@ const WalletInfo: React.FC<IBaseProps> = (props:IBaseProps) => {
                 (info) => {
                     if (info) {
 	                    setWalletInfo(info);
-
-	                    //click();
                     }
                 })
                 .catch(() => {

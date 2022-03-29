@@ -2,8 +2,12 @@ import {Box, HStack, Stack, VStack} from "@chakra-ui/layout";
 import {TextInput} from "./textinput";
 import React from "react";
 import {IBaseProps} from "../../interfaces/props";
+import {useSelector} from "react-redux";
+import {StateType} from "../../reducers/state";
 
 const SaveArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
+	const isConnection = useSelector((state:StateType)=>state.walletConnection);
+
     return(
         <VStack spacing={0}  color="black">
             <Box
@@ -15,6 +19,9 @@ const SaveArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
             >
                 <Stack spacing={2}>
                     <TextInput
+	                    placeholder={'seedlist space name ...'}
+	                    type={'text'}
+	                    disabled={!isConnection}
 /*
                         disabled={this.state.spacename.disabled}
                         onChange={this.setSpaceName}
@@ -33,6 +40,9 @@ const SaveArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
                 <HStack spacing={2}>
                     <Box w="30%">
                         <TextInput
+	                        placeholder={'label ...'}
+	                        type={'text'}
+	                        disabled={!isConnection}
 /*
                             disabled={this.state.label.disabled}
                             onChange={this.setLabel}
@@ -43,6 +53,9 @@ const SaveArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
 
                     <Box w="70%">
                         <TextInput
+	                        placeholder={'saved content ...'}
+	                        type={'text'}
+	                        disabled={!isConnection}
 /*
                             disabled={this.state.content.disabled}
                             onChange={this.setContent}

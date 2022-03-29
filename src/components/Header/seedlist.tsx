@@ -1,6 +1,5 @@
 import {HStack, Text} from "@chakra-ui/layout";
 import React from "react";
-import {Link} from "@chakra-ui/react";
 import {IBaseProps} from "../../interfaces/props";
 
 const Seedlist:React.FC<IBaseProps>=(props:IBaseProps) => {

@@ -15,6 +15,7 @@ const QueryArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
             >
                 <Stack spacing={2}>
                     <TextInput
+	                    placeholder={'seedlist space name ...'}
 /*
                         onChange={()=>{}}
                         placeholder={"placeholder..."}

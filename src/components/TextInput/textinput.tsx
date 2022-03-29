@@ -1,10 +1,21 @@
 import {IBaseProps} from "../../interfaces/props";
 import { Input, InputGroup, InputRightElement} from "@chakra-ui/react";
 
-const TextInput:React.FC<IBaseProps> = (props:IBaseProps)=>{
+interface TextProps extends IBaseProps{
+	type?:string
+	placeholder?:string
+	disabled?:boolean
+}
+
+const TextInput:React.FC<TextProps> = (props:TextProps)=>{
     return(
         <InputGroup>
-            <Input />
+            <Input
+                type={props.type}
+                placeholder={props.placeholder}
+                disabled={props.disabled}
+            />
+
             <InputRightElement />
         </InputGroup>
     );

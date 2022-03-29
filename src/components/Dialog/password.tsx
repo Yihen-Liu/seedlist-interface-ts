@@ -21,7 +21,7 @@ const PasswordInQuery:React.FC<IBaseProps> = (props:IBaseProps)=>{
     const dispatch = useDispatch();
 
     const isPassword = useSelector((state:StateType)=>state.password);
-
+	const isConnection = useSelector((state:StateType)=>state.walletConnection)
     useEffect(()=>{
         if(isPassword===true){
             setOpen(true);
@@ -29,7 +29,7 @@ const PasswordInQuery:React.FC<IBaseProps> = (props:IBaseProps)=>{
     },[isPassword])
 
     const doCancel = useCallback(()=>{
-        dispatch(cancelPasswordAction(ActionType.CLICK_QUERY))
+        dispatch(cancelPasswordAction(ActionType.CLICK_QUERY, isConnection))
         setOpen(isOpen)
     },[dispatch])
 
@@ -57,7 +57,7 @@ const PasswordInQuery:React.FC<IBaseProps> = (props:IBaseProps)=>{
                         <Stack spacing='24px'>
                             <Box>
                                 <Text fontSize="18px" color="white"> </Text>
-                                <Input  id='username' placeholder='password ...' />
+                                <Input  id='username' placeholder='password ...' type='password'/>
                             </Box>
                         </Stack>
                     </DrawerBody>
@@ -80,15 +80,16 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
     const dispatch = useDispatch();
 
     const isPassword = useSelector((state:StateType)=>state.password);
+	const isConnection = useSelector((state:StateType)=>state.walletConnection);
 
-    useEffect(()=>{
+	useEffect(()=>{
         if(isPassword===true){
             setOpen(true);
         }
     },[isPassword])
 
     const doCancel = useCallback(()=>{
-        dispatch(cancelPasswordAction(ActionType.CLICK_SAVE))
+        dispatch(cancelPasswordAction(ActionType.CLICK_SAVE, isConnection))
         setOpen(isOpen)
     },[dispatch])
 
@@ -114,7 +115,7 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
                         <Stack spacing='24px'>
                             <Box>
                                 <Text fontSize="18px" color="white"> </Text>
-                                <Input  id='username' placeholder='password ...' />
+                                <Input  id='username' placeholder='password ...' type='password' />
                             </Box>
                         </Stack>
                     </DrawerBody>
