@@ -11,12 +11,26 @@ const TextInput:React.FC<TextProps> = (props:TextProps)=>{
     return(
         <InputGroup>
             <Input
+	            autoComplete="off"
+	            autoCorrect="off"
+	            height={12}
+	            minLength={1}
+	            maxLength={512}
+	            spellCheck="false"
+	            fontSize="xl"
+	            focusBorderColor="white"
                 type={props.type}
                 placeholder={props.placeholder}
                 disabled={props.disabled}
             />
 
-            <InputRightElement />
+            <InputRightElement
+	            width="48px"
+	            pointerEvents="none"
+	            color="gray.600"
+	            fontSize="1.2em"
+	            height="12"
+            />
         </InputGroup>
     );
 }
