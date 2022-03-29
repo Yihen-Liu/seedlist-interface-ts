@@ -1,4 +1,4 @@
-import { createStore, Store } from 'redux';
+import { createStore } from 'redux';
 
 import {reducers} from "./index"
 import {StoreType} from "./state";

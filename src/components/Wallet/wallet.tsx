@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import { useState, useEffect, useMemo } from 'react';
 import { etherClient, IWalletInfo, contractChainId, contractChainName } from '../../ethers/etherClient';
 import {Box} from "@chakra-ui/layout";
@@ -7,8 +7,7 @@ import {Image} from "@chakra-ui/react";
 import {IBaseProps} from "../../interfaces/props";
 import {useDispatch, useSelector} from "react-redux";
 import {StateType} from "../../reducers/state";
-import {saveAction, walletConnectionAction} from "../../reducers/action";
-import {wallet} from "bnc-onboard/dist/src/stores";
+import { walletConnectionAction} from "../../reducers/action";
 
 const WalletInfo: React.FC<IBaseProps> = (props:IBaseProps) => {
     const [walletInfo, setWalletInfo] = useState<IWalletInfo | null>(null);

@@ -2,16 +2,16 @@ import React from "react";
 import {Box, Center, Container, Stack, Text} from "@chakra-ui/layout";
 import {Header} from "./Header";
 import {Footer} from "./Footer";
-import {SignBoard} from "./Board/signup";
-import {SaveBoard} from "./Board/save";
-import {QueryBoard} from "./Board/query";
 import {Heading} from "@chakra-ui/react";
-import {useSelector} from "react-redux";
-import {pageState, StateType} from "../reducers/state";
+import {StateType} from "../reducers/state";
 import {IBaseProps} from "../interfaces/props";
+import {Navigate, Route, Routes} from "react-router-dom";
+import { Mask } from "../pages/mask";
+import { Brainwallet } from "../pages/brainwallet";
+import {Entropy} from "../pages/entropy";
+import {BrowserRouter as Router} from "react-router-dom";
 
 const App:React.FC<IBaseProps> = (props:IBaseProps)=>{
-        const label= useSelector((state:StateType)=>state.page);
 
         return(
             <Box minH="100vh" color="white">
@@ -19,19 +19,15 @@ const App:React.FC<IBaseProps> = (props:IBaseProps)=>{
                     <title>seedlist.org</title>
                 </Heading>
                 <Stack spacing={20}>
-                    <Header />
-                    <Center>
-                        <Container>
-                            <Center>
-                                <Text fontSize="4xl" fontWeight="extrabold">
-                                    IN CRYPTO, WE TRUST
-                                </Text>
-                            </Center>
-                            {label === pageState.SIGNUP && <SignBoard />}
-                            {label === pageState.QUERY && <QueryBoard />}
-                            {label === pageState.SAVE && <SaveBoard />}
-                        </Container>
-                    </Center>
+					<Router>
+						<Header />
+						<Routes>
+							<Route path="/" element={ <Navigate to="/entropy" />}> </Route>
+							<Route path="/entropy" element={<Entropy />}> </Route>
+							<Route path="/brainwallet" element={<Brainwallet />}> </Route>
+							<Route path="/mask" element={<Mask />}> </Route>
+						</Routes>
+					</Router>
                 </Stack>
                 <Footer/>
             </Box>

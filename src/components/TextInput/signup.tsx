@@ -2,7 +2,7 @@ import React from "react";
 import {Box, Stack, VStack} from "@chakra-ui/layout";
 import {TextInput} from "./textinput";
 import {IBaseProps} from "../../interfaces/props";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {StateType} from "../../reducers/state";
 
 const SignupArea:React.FC<IBaseProps> = (props:IBaseProps)=>{

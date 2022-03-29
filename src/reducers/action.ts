@@ -1,4 +1,4 @@
-import {ActionModel, ActionType, StateType} from "./state";
+import {ActionModel, ActionType } from "./state";
 
 export function signupAction(isConnection:boolean):ActionModel {
     return {
