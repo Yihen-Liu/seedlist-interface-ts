@@ -1,27 +1,40 @@
-import React,{useMemo} from "react";
+import React, {useCallback, useMemo} from "react";
 import {Button} from "@chakra-ui/button";
 import {Trans} from "@lingui/macro";
 import {IBaseProps} from "../../interfaces/props";
 import {useSelector} from "react-redux";
 import {StateType} from "../../reducers/state";
 import {WarningIcon} from "@chakra-ui/icons";
+import {CryptoMachine} from "../../lib/crypto";
 
 const SignupButton:React.FC<IBaseProps> = (props:IBaseProps) => {
 	const isConnection = useSelector((state:StateType)=>state.walletConnection);
+
+	const spaceName = useSelector((state:StateType)=>state.spaceNameValue);
+	const password = useSelector((state:StateType)=>state.passwordValue);
+
+	const signup = useCallback(()=>{
+		console.log("spacename:",spaceName,", password:",password)
+		let encryptor = new CryptoMachine();
+		if(spaceName===undefined || password===undefined){
+			return
+		}
+		console.log(encryptor.getAddrAndEtherSignForStorage(spaceName, password))
+	},[spaceName, password])
 
 	const activeButton = useMemo(()=>{
 		return(
 			<Button
 				colorScheme="blackAlpha"
 				fontSize="xl"
-				onClick={()=>{} }
+				onClick={signup}
 				w="100%"
 			>
 				<Trans>Let's Sign </Trans>
 			</Button>
 		);
 
-	},[isConnection]);
+	},[signup]);
 
 	const inactiveButton = useMemo(()=>{
 		return(
@@ -35,7 +48,7 @@ const SignupButton:React.FC<IBaseProps> = (props:IBaseProps) => {
 			</Button>
 		);
 
-	},[isConnection]);
+	},[]);
 
 	return(
 		<>

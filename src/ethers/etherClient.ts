@@ -126,9 +126,30 @@ class SeedlistClient {
 		addr:string, addr0:string, addrHash:string,
 		r:string, s:string, v:number, randomNum:BigNumber,
 		config:PayableOverrides={}):Promise<any>{
+		if(this.provider === undefined || this.seedlist === undefined || this.signer === undefined){
+			return Promise.reject("need to connect a valid provider and signer")
+		}
 
+		const gas=await this.seedlist.connect(this.signer).estimateGas.
+		initKeySpace( addr, addr0, addrHash, r, s, v, randomNum,{...config})
+
+		const transaction = await this.seedlist.connect(this.signer).initKeySpace(
+			addr, addr0, addrHash, r, s, v, randomNum, { gasLimit:gas.mul(13).div(10), ...config })
+
+		const receipt = await transaction.wait(this._waitConfirmations);
+		return receipt;
 	}
 
+/*
+	const gas = await this.evolution
+		.connect(this.signer)
+		.estimateGas.mint(id, { ...config });
+	const transaction = await this.evolution
+		.connect(this.signer)
+		.mint(id, { gasLimit: gas.mul(13).div(10), ...config });
+	const receipt = await transaction.wait(this._waitConfirmations);
+	return receipt;
+*/
 	//function spaceExist(address addr, bytes32 addrHash, bytes32 r, bytes32 s, uint8 v) network external override view returns(bool){
 	public async spaceExist(addr:string, addrHash:string, r:string,
 		s:string, v:number, config:PayableOverrides={}):Promise<any>{

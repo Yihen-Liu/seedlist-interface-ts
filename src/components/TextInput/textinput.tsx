@@ -1,10 +1,13 @@
 import {IBaseProps} from "../../interfaces/props";
 import { Input, InputGroup, InputRightElement} from "@chakra-ui/react";
+import React from "react";
 
 interface TextProps extends IBaseProps{
 	type?:string
 	placeholder?:string
 	disabled?:boolean
+	value?:string
+	onChange?: (event: { target: { value: React.SetStateAction<string>; }; })=>void
 }
 
 const TextInput:React.FC<TextProps> = (props:TextProps)=>{
@@ -22,6 +25,7 @@ const TextInput:React.FC<TextProps> = (props:TextProps)=>{
                 type={props.type}
                 placeholder={props.placeholder}
                 disabled={props.disabled}
+	            onChange={props.onChange}
             />
 
             <InputRightElement

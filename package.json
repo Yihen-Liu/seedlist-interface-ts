@@ -23,6 +23,10 @@
     "bip32": "^2.0.6",
     "bip39": "^3.0.4",
     "bnc-onboard": "^1.25.0",
+    "buffer": "^6.0.3",
+    "process": "^0.11.10",
+    "stream-browserify": "^3.0.0",
+    "react-app-rewired": "^2.2.1",
     "create-hash": "^1.2.0",
     "crypto-js": "^4.0.0",
     "eslint": "^8.10.0",
@@ -43,10 +47,16 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start.0": "react-scripts start",
+    "build.0": "react-scripts build",
+    "test.0": "react-scripts test",
+    "eject.0": "react-scripts eject",
+
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject",
+
     "lingui-compile": "lingui compile",
     "lingui-extract": "lingui extract",
     "deploy": "gh-pages -d build"
@@ -74,6 +84,7 @@
     "@lingui/macro": "^3.13.2",
     "@types/bs58check": "^2.1.0",
     "@types/create-hash": "^1.2.2",
+    "@types/crypto-js": "^4.1.1",
     "@types/ethereumjs-util": "^6.1.0"
   }
 }

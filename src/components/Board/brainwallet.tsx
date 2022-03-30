@@ -1,8 +1,5 @@
 import React from "react";
 import {Box, Center, HStack, Stack} from "@chakra-ui/layout";
-import {Labels} from "../Labels/labels";
-import {InputAreas} from "../TextInput/inputareas";
-import {Buttons} from "../Buttons/buttons";
 import {IBaseProps} from "../../interfaces/props";
 import {WalletLabels} from "../Labels/wallet";
 import {WalletButton} from "../Buttons/wallet";

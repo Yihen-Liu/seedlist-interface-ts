@@ -1,9 +1,8 @@
 import React from "react";
-import {Box, Center, Container, Stack, Text} from "@chakra-ui/layout";
+import {Box, Stack, Text} from "@chakra-ui/layout";
 import {Header} from "./Header";
 import {Footer} from "./Footer";
 import {Heading} from "@chakra-ui/react";
-import {StateType} from "../reducers/state";
 import {IBaseProps} from "../interfaces/props";
 import {Navigate, Route, Routes} from "react-router-dom";
 import { Mask } from "../pages/mask";

@@ -1,13 +1,27 @@
-import React from "react";
+import React, {useMemo, useState} from "react";
 import {Box, Stack, VStack} from "@chakra-ui/layout";
 import {TextInput} from "./textinput";
 import {IBaseProps} from "../../interfaces/props";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {StateType} from "../../reducers/state";
+import {signupPasswordAction, signupSpacenameAction} from "../../reducers/action";
 
 const SignupArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
+	const dispatch = useDispatch();
+
 	const isConnection = useSelector((state:StateType)=>state.walletConnection);
-	//const dispatch = useDispatch();
+	const [spaceValue, setSpaceValue] = useState<string>("")
+	const [pwdValue, setPwdValue] = useState<string>("")
+	const handleSpaceChange = (event: { target: { value: React.SetStateAction<string>; }; })=>setSpaceValue(event.target.value)
+	const handlePwdChange = (event: { target: { value: React.SetStateAction<string>; }; })=>setPwdValue(event.target.value)
+
+	useMemo(()=>{
+		dispatch(signupSpacenameAction(isConnection, spaceValue));
+	},[dispatch, isConnection, spaceValue])
+
+	useMemo(()=>{
+		dispatch(signupPasswordAction(isConnection, pwdValue));
+	},[dispatch,isConnection, pwdValue])
 
     return(
         <VStack spacing={0}  color="black">
@@ -23,6 +37,8 @@ const SignupArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	                    placeholder={'seedlist space name ...'}
 	                    type={'text'}
 	                    disabled={!isConnection}
+	                    value={spaceValue}
+	                    onChange={handleSpaceChange}
 /*
                         disabled={this.state.spacename.disabled}
                         onChange={this.setSpaceName}
@@ -43,6 +59,8 @@ const SignupArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	                    type={'password'}
 	                    placeholder={'password ...'}
 	                    disabled={!isConnection}
+	                    value={pwdValue}
+	                    onChange={handlePwdChange}
 /*
                         disabled={this.state.password.disabled}
                         onChange={this.setPassword}

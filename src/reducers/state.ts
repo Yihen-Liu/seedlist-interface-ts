@@ -5,6 +5,8 @@ export enum ActionType {
     CLICK_SAVE = 'save',
     CLICK_QUERY = 'query',
     INPUT_PASSWORD = 'save-password',
+	SIGNUP_INPUT_SPACENAME = 'signup-input-spacename',
+	SIGNUP_INPUT_PASSWORD = 'signup-input-password'
 }
 
 export enum pageState {
@@ -20,13 +22,21 @@ export interface StateType {
 	action:ActionType,
     password?: boolean,
     walletConnection:boolean
+	spaceNameValue?: string
+	passwordValue?: string
+	labelValue?: string
+	contentValue?: string
 }
 
 export interface ActionModel {
     type: ActionType,
-	page?:pageState,
+	page?: pageState,
     password?: boolean,
-    walletConnection:boolean
+    walletConnection: boolean
+	spaceNameValue?: string
+	passwordValue?: string
+	labelValue?: string
+	contentValue?: string
 }
 
 export type StoreType = Store<StateType, ActionModel>;
