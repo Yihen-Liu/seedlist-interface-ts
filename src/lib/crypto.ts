@@ -8,11 +8,6 @@ class CryptoMachine {
 	LABEL_SALT_LEN:number = 32;
 	CONTENT_PASSWORD_SALT_LEN:number = 32;
 
-	shortenAddress(netName:string, address:string):string{
-		if (!address) return "N/A";
-		return netName + ' | ' + `${address.substring(0, 6)}...${address.substring(36)}`;
-	}
-
 	calculateOnceHash(str:string):string{
 		return this.calculateMultiHash(str,1);
 	}

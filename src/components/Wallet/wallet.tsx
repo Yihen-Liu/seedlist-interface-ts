@@ -23,7 +23,7 @@ const WalletInfo: React.FC<IBaseProps> = (props:IBaseProps) => {
 		}else{
 			dispatch(walletConnectionAction(action, false));
 		}
-	}, [dispatch, walletInfo?.address, walletInfo?.chainId]);
+	}, [dispatch, walletInfo?.chainId, action]);
 
 	useEffect(() => {
         const doSetWalletInfo = () => {

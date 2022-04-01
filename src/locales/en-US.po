@@ -26,6 +26,7 @@ msgid "Brain Wallet"
 msgstr "Brain Wallet"
 
 #: src/components/Dialog/password.tsx
+#: src/components/Dialog/password.tsx
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -46,8 +47,8 @@ msgid "Ethereum Mainnet"
 msgstr "Ethereum Mainnet"
 
 #: src/components/Header/menu.tsx
-msgid "Language"
-msgstr "Language"
+#~ msgid "Language"
+#~ msgstr "Language"
 
 #: src/components/Buttons/wallet.tsx
 msgid "Let's Generate"
@@ -80,6 +81,7 @@ msgid "Please connect wallet firstly"
 msgstr "Please connect wallet firstly"
 
 #: src/components/Dialog/password.tsx
+#: src/components/Dialog/password.tsx
 msgid "Please enter your password"
 msgstr "Please enter your password"
 
@@ -100,6 +102,7 @@ msgid "Sign Up"
 msgstr "Sign Up"
 
 #: src/components/Dialog/password.tsx
+#: src/components/Dialog/password.tsx
 msgid "Submit"
 msgstr "Submit"
 
@@ -110,3 +113,7 @@ msgstr "Switch to"
 #: src/components/Labels/singup.tsx
 msgid "User have to sign up a spacename before save or query content."
 msgstr "User have to sign up a spacename before save or query content."
+
+#: src/components/TextInput/signup.tsx
+#~ msgid "seedlist space name ..."
+#~ msgstr "seedlist space name ..."

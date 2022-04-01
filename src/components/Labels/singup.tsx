@@ -18,7 +18,7 @@ const SignupLabel:React.FC<IBaseProps> = (props:IBaseProps) =>{
 		if(page === pageState.SIGNUP){
 			setColor("")
 		}
-	},[])
+	},[page])
 
 	const labelExplain = useMemo(()=>{
 		return(

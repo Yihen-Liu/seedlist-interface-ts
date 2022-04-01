@@ -129,8 +129,7 @@ class SeedlistClient {
 			return Promise.reject("need to connect a valid provider and signer")
 		}
 
-		const gas=await this.seedlist.connect(this.signer).estimateGas.
-		initKeySpace( addr, addr0, addrHash, r, s, v, randomNum,{...config})
+		const gas=await this.seedlist.connect(this.signer).estimateGas.initKeySpace( addr, addr0, addrHash, r, s, v, randomNum,{...config})
 
 		const transaction = await this.seedlist.connect(this.signer).initKeySpace(
 			addr, addr0, addrHash, r, s, v, randomNum, { gasLimit:gas.mul(13).div(10), ...config })

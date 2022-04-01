@@ -26,6 +26,7 @@ msgid "Brain Wallet"
 msgstr ""
 
 #: src/components/Dialog/password.tsx
+#: src/components/Dialog/password.tsx
 msgid "Cancel"
 msgstr ""
 
@@ -46,8 +47,8 @@ msgid "Ethereum Mainnet"
 msgstr ""
 
 #: src/components/Header/menu.tsx
-msgid "Language"
-msgstr ""
+#~ msgid "Language"
+#~ msgstr ""
 
 #: src/components/Buttons/wallet.tsx
 msgid "Let's Generate"
@@ -80,6 +81,7 @@ msgid "Please connect wallet firstly"
 msgstr ""
 
 #: src/components/Dialog/password.tsx
+#: src/components/Dialog/password.tsx
 msgid "Please enter your password"
 msgstr ""
 
@@ -99,6 +101,7 @@ msgstr ""
 msgid "Sign Up"
 msgstr ""
 
+#: src/components/Dialog/password.tsx
 #: src/components/Dialog/password.tsx
 msgid "Submit"
 msgstr ""

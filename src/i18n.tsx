@@ -1,10 +1,14 @@
 import React from "react";
 import {IBaseProps} from "./interfaces/props";
 import {Provider} from "./lib/i18n";
+import {languageState} from "./hooks/useLanguage";
+import {useRecoilState} from "recoil";
+
 const LanguageProvider:React.FC<IBaseProps> = (props:IBaseProps)=>{
+	const [lang, ] = useRecoilState(languageState)
 	return(
 		<Provider
-			locale="zh-CN"
+			locale={lang}
 			forceRenderAfterLocaleChange={false}
 			children={props.children}
 		/>

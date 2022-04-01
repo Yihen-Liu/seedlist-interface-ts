@@ -1,11 +1,18 @@
-import React,{useMemo} from "react";
+import React, {useCallback} from "react";
 import {IBaseProps} from "../../interfaces/props";
-import {Button, IconButton, Menu, MenuButton, MenuDivider, MenuItem, MenuItemOption, MenuList, MenuOptionGroup} from "@chakra-ui/react";
+import {IconButton, Menu, MenuButton, MenuDivider, MenuItemOption, MenuList, MenuOptionGroup} from "@chakra-ui/react";
 import {Box} from "@chakra-ui/layout";
 import {Trans} from "@lingui/macro";
-import {ChevronDownIcon, HamburgerIcon} from "@chakra-ui/icons";
+import {HamburgerIcon} from "@chakra-ui/icons";
+import {languageState} from "../../hooks/useLanguage";
+import {useRecoilState} from "recoil";
 
 const Menus:React.FC<IBaseProps> = (props:IBaseProps) =>{
+	const [ , setLang] = useRecoilState(languageState)
+	const doCheck = useCallback((value:string)=>{
+		setLang(value)
+	},[setLang])
+
     return(
         <>
         <Box width="10px" /> <Box>
@@ -37,8 +44,8 @@ const Menus:React.FC<IBaseProps> = (props:IBaseProps) =>{
 					</MenuOptionGroup>
 					<MenuDivider />
 					<MenuOptionGroup defaultValue='english' title='Language' type='radio'>
-						<MenuItemOption _hover={{ bg: 'blackAlpha.500'}} value='chinese'>中文</MenuItemOption>
-						<MenuItemOption _hover={{ bg: 'blackAlpha.500'}} value='english'>English</MenuItemOption>
+						<MenuItemOption onClick={()=>{doCheck("zh-CN")}} _hover={{ bg: 'blackAlpha.500'}} value='chinese'>中文</MenuItemOption>
+						<MenuItemOption onClick={()=>{doCheck("en-US")}} _hover={{ bg: 'blackAlpha.500'}} value='english'>English</MenuItemOption>
 					</MenuOptionGroup>
 				</MenuList>
 			</Menu>

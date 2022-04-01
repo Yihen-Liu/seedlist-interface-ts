@@ -5,6 +5,8 @@ import {IBaseProps} from "../../interfaces/props";
 import {useDispatch, useSelector} from "react-redux";
 import {StateType} from "../../reducers/state";
 import {signupPasswordAction, signupSpacenameAction} from "../../reducers/action";
+import {useRecoilState} from "recoil";
+import {languageState} from "../../hooks/useLanguage";
 
 const SignupArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const dispatch = useDispatch();
@@ -14,6 +16,21 @@ const SignupArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const [pwdValue, setPwdValue] = useState<string>("")
 	const handleSpaceChange = (event: { target: { value: React.SetStateAction<string>; }; })=>setSpaceValue(event.target.value)
 	const handlePwdChange = (event: { target: { value: React.SetStateAction<string>; }; })=>setPwdValue(event.target.value)
+
+	const [lang, ] = useRecoilState(languageState)
+	const [spaceNameHolder, setSpaceNameHolder]	= useState<string>("seedlist space name ...")
+	const [passwordHolder, setPasswordHolder] = useState<string>("password ...")
+	useMemo(()=>{
+		if(lang==='zh-CN'){
+			setSpaceNameHolder("输入用户空间名称 ...")
+			setPasswordHolder("密钥 ...")
+		}
+
+		if(lang==='en-US'){
+			setSpaceNameHolder("seedlist space name ...")
+			setPasswordHolder("password ...")
+		}
+	},[lang])
 
 	useMemo(()=>{
 		dispatch(signupSpacenameAction(isConnection, spaceValue));
@@ -34,7 +51,7 @@ const SignupArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
             >
                 <Stack spacing={2}>
                     <TextInput
-	                    placeholder={'seedlist space name ...'}
+	                    placeholder={spaceNameHolder}
 	                    type={'text'}
 	                    disabled={!isConnection}
 	                    value={spaceValue}
@@ -57,7 +74,7 @@ const SignupArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
                 <Stack spacing={2}>
                     <TextInput
 	                    type={'password'}
-	                    placeholder={'password ...'}
+	                    placeholder={passwordHolder}
 	                    disabled={!isConnection}
 	                    value={pwdValue}
 	                    onChange={handlePwdChange}

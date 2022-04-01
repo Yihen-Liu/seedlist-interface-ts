@@ -1,12 +1,32 @@
 import {Box, HStack, Stack, VStack} from "@chakra-ui/layout";
 import {TextInput} from "./textinput";
-import React from "react";
+import React, {useMemo, useState} from "react";
 import {IBaseProps} from "../../interfaces/props";
 import {useSelector} from "react-redux";
 import {StateType} from "../../reducers/state";
+import {useRecoilState} from "recoil";
+import {languageState} from "../../hooks/useLanguage";
 
 const SaveArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const isConnection = useSelector((state:StateType)=>state.walletConnection);
+
+	const [lang, ] = useRecoilState(languageState)
+	const [spaceNameHolder, setSpaceNameHolder]	= useState<string>("seedlist space name ...")
+	const [labelHolder, setLabelHolder] = useState<string>("label ...")
+	const [contentHolder, setContentHolder] = useState<string>("saved content ...")
+	useMemo(()=>{
+		if(lang==='zh-CN'){
+			setSpaceNameHolder("输入用户空间名称 ...")
+			setLabelHolder("标签名")
+			setContentHolder("存储内容 ...")
+		}
+
+		if(lang==='en-US'){
+			setSpaceNameHolder("seedlist space name ...")
+			setLabelHolder("label ...")
+			setContentHolder("saved content ...")
+		}
+	},[lang])
 
     return(
         <VStack spacing={0}  color="black">
@@ -19,7 +39,7 @@ const SaveArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
             >
                 <Stack spacing={2}>
                     <TextInput
-	                    placeholder={'seedlist space name ...'}
+	                    placeholder={spaceNameHolder}
 	                    type={'text'}
 	                    disabled={!isConnection}
 /*
@@ -40,7 +60,7 @@ const SaveArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
                 <HStack spacing={2}>
                     <Box w="30%">
                         <TextInput
-	                        placeholder={'label ...'}
+	                        placeholder={labelHolder}
 	                        type={'text'}
 	                        disabled={!isConnection}
 /*
@@ -53,7 +73,7 @@ const SaveArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
 
                     <Box w="70%">
                         <TextInput
-	                        placeholder={'saved content ...'}
+	                        placeholder={contentHolder}
 	                        type={'text'}
 	                        disabled={!isConnection}
 /*

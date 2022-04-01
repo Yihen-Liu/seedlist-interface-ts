@@ -19,7 +19,7 @@ const SaveLabel:React.FC<IBaseProps> = (iprops:IBaseProps)=>{
 		if(page===pageState.SAVE){
 			setColor("")
 		}
-	},[])
+	},[page])
 
     return(
         <Button

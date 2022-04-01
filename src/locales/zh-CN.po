@@ -26,6 +26,7 @@ msgid "Brain Wallet"
 msgstr "脑钱包"
 
 #: src/components/Dialog/password.tsx
+#: src/components/Dialog/password.tsx
 msgid "Cancel"
 msgstr "取消"
 
@@ -45,10 +46,6 @@ msgstr "以太坊"
 msgid "Ethereum Mainnet"
 msgstr "以太坊主网"
 
-#: src/components/Header/menu.tsx
-msgid "Language"
-msgstr "语言"
-
 #: src/components/Buttons/wallet.tsx
 msgid "Let's Generate"
 msgstr "开始生成"
@@ -65,10 +62,6 @@ msgstr "开始存储"
 msgid "Let's Sign"
 msgstr "开始注册"
 
-#: src/components/Buttons/signup.tsx
-#~ msgid "Let's Sign-up"
-#~ msgstr "开始注册"
-
 #: src/components/Header/routers.tsx
 msgid "Mask"
 msgstr "身份"
@@ -79,6 +72,7 @@ msgstr "身份"
 msgid "Please connect wallet firstly"
 msgstr "请您提前连接钱包"
 
+#: src/components/Dialog/password.tsx
 #: src/components/Dialog/password.tsx
 msgid "Please enter your password"
 msgstr "请输入您的密码"
@@ -99,6 +93,7 @@ msgstr "存储"
 msgid "Sign Up"
 msgstr "注册"
 
+#: src/components/Dialog/password.tsx
 #: src/components/Dialog/password.tsx
 msgid "Submit"
 msgstr "提交"

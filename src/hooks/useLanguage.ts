@@ -1,8 +1,8 @@
-import {useState, useCallback} from "react";
+import {atom} from "recoil";
 
-export function useLanguage(language:string):[string,()=>void]  {
-	const [lang, setLang] = useState<string>("en-US")
-
-	const setLanguage = useCallback(() => setLang(lang => language), [])
-	return [lang, setLanguage]
-}
+export const languageState = atom(
+	{
+		key:"language",
+		default:"en-US"
+	}
+);
