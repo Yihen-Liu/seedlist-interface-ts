@@ -17,6 +17,10 @@ msgstr ""
 msgid "Add More"
 msgstr "继续添加"
 
+#: src/components/Labels/bitcoin.tsx
+msgid "Bitcoin"
+msgstr "比特币"
+
 #: src/components/Header/routers.tsx
 msgid "Brain Wallet"
 msgstr "脑钱包"
@@ -25,9 +29,29 @@ msgstr "脑钱包"
 msgid "Cancel"
 msgstr "取消"
 
+#: src/components/Wallet/wallet.tsx
+msgid "Connect Wallet"
+msgstr "连接钱包"
+
 #: src/components/Header/routers.tsx
 msgid "Entropy"
 msgstr "熵值"
+
+#: src/components/Labels/ethereum.tsx
+msgid "Ethereum"
+msgstr "以太坊"
+
+#: src/components/Header/menu.tsx
+msgid "Ethereum Mainnet"
+msgstr "以太坊主网"
+
+#: src/components/Header/menu.tsx
+msgid "Language"
+msgstr "语言"
+
+#: src/components/Buttons/wallet.tsx
+msgid "Let's Generate"
+msgstr "开始生成"
 
 #: src/components/Buttons/query.tsx
 msgid "Let's Query"
@@ -39,7 +63,7 @@ msgstr "开始存储"
 
 #: src/components/Buttons/signup.tsx
 msgid "Let's Sign"
-msgstr ""
+msgstr "开始注册"
 
 #: src/components/Buttons/signup.tsx
 #~ msgid "Let's Sign-up"
@@ -49,9 +73,11 @@ msgstr ""
 msgid "Mask"
 msgstr "身份"
 
+#: src/components/Buttons/save.tsx
+#: src/components/Buttons/signup.tsx
 #: src/components/Buttons/unconnect.tsx
 msgid "Please connect wallet firstly"
-msgstr "请您提前连接钱包..."
+msgstr "请您提前连接钱包"
 
 #: src/components/Dialog/password.tsx
 msgid "Please enter your password"
@@ -59,7 +85,11 @@ msgstr "请输入您的密码"
 
 #: src/components/Labels/query.tsx
 msgid "Query"
-msgstr "查询"
+msgstr "查找"
+
+#: src/components/Header/menu.tsx
+msgid "Rinkeby Test Network"
+msgstr "Rinkeby测试网"
 
 #: src/components/Labels/save.tsx
 msgid "Save"
@@ -72,3 +102,11 @@ msgstr "注册"
 #: src/components/Dialog/password.tsx
 msgid "Submit"
 msgstr "提交"
+
+#: src/components/Wallet/wallet.tsx
+msgid "Switch to"
+msgstr "切换到"
+
+#: src/components/Labels/singup.tsx
+msgid "User have to sign up a spacename before save or query content."
+msgstr "在存储和查询之前，user需要先在以太坊链上，注册用户空间名称"

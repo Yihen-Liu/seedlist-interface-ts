@@ -3,7 +3,6 @@
 import {DefaultEncrypt__factory } from "../types";
 import { ethers, Signer, BigNumber, PayableOverrides } from "ethers";
 import type { Web3Provider, Provider } from "@ethersproject/providers";
-import { randomInt } from "./math";
 import detectEthereumProvider from "@metamask/detect-provider";
 
 //const EVOLUTION_CONTRACT_ADDRESS = "0x49e0e90064256a92AfCA34c513925ef3a14026C7";
@@ -225,14 +224,6 @@ class SeedlistClient {
         return this.seedlist.totalSupply({ ...config });
     }
 
-    public async newMint(config: PayableOverrides = {}) {
-        if (this.provider === undefined || this.seedlist === undefined) {
-            return Promise.reject("need to connect a valid provider");
-        }
-        let id = randomInt(0, 9800);
-        // console.log("newMint:", id);
-        return this.mint(BigNumber.from(id), config);
-    }
 }
 
 const INFURA_KEY = process.env.REACT_APP_ENCRYPT_CONTRACT_ADDR;

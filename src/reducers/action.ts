@@ -54,7 +54,6 @@ export function cancelPasswordAction(action:ActionType, isConnection:boolean):Ac
 }
 
 export function walletConnectionAction(action:ActionType, isConnection:boolean):ActionModel {
-
 	return {
 		type:action,
 		walletConnection:isConnection

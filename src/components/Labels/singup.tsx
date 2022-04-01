@@ -20,8 +20,16 @@ const SignupLabel:React.FC<IBaseProps> = (props:IBaseProps) =>{
 		}
 	},[])
 
+	const labelExplain = useMemo(()=>{
+		return(
+			<Trans>
+				User have to sign up a spacename before save or query content.
+			</Trans>
+		)
+	},[])
+
     return(
-        <Tooltip placement="left" hasArrow={true} fontSize={18} label="User have to sign up a spacename before save or query content.">
+        <Tooltip placement="left" hasArrow={true} fontSize={18} bg={'#2b2d32'} label={labelExplain}>
             <Button
                 colorScheme="blackAlpha"
                 fontSize="xl"

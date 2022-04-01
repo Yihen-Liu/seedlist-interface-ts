@@ -31,7 +31,7 @@ class CryptoMachine {
 		const onceHash = this.calculateOnceHash(keyspace+password+label);
 		let deep = onceHash.substring(0,6)+onceHash.substring(onceHash.length-4);
 		let step = parseInt(deep, 16)%8;
-		return step==0?8 : step;
+		return step === 0?8 : step;
 	}
 
 	getHashStep8_16(keyspace:string):number {
@@ -102,7 +102,7 @@ class CryptoMachine {
 		let onceHash = this.calculateOnceHash(watchAddr+labelValue+id);
 		let prefixNum = onceHash.substring(0,4);
 		let res = parseInt(prefixNum, 16)%2;
-		if(res==1){
+		if(res===1){
 			return this.calculateWalletAddressBaseOnSeed(this.calculateOnceHash(watchAddr+this.calculateMultiHash(labelValue, this.getLabelHashStep32_64(id))));
 		}else{
 			let kid0 = this.calculateWalletAddressBaseOnSeed(this.calculateOnceHash(watchAddr+this.calculateMultiHash(labelValue, this.getLabelHashStep32_64(id))));

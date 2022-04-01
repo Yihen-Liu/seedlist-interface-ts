@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect, useMemo } from 'react';
 import { etherClient, IWalletInfo, contractChainId, contractChainName } from '../../ethers/etherClient';
+import {Trans} from "@lingui/macro";
 import {Box} from "@chakra-ui/layout";
 import {Button} from "@chakra-ui/button";
 import {Image} from "@chakra-ui/react";
@@ -55,16 +56,16 @@ const WalletInfo: React.FC<IBaseProps> = (props:IBaseProps) => {
                     isLoading={false} >
                 <Image src="./metamask.svg" width="22" height="22" />
 
-                { !walletInfo && <div>Connect Wallet</div>}
+                { !walletInfo && <div> <Trans> Connect Wallet </Trans> </div>}
+
                 {walletInfo && walletInfo.chainId !== contractChainId && (
-                    <div>Switch to {contractChainName}</div>
+                    <div> <Trans> Switch to </Trans> {contractChainName} </div>
                 )}
+
                 {walletInfo && walletInfo.chainId === contractChainId &&(
-                    <div>
-                        <div>
-                            {walletInfo.address.substr(0, 6)}...{walletInfo.address.substr(-4)}
-                        </div>
-                    </div>
+					<div>
+						{walletInfo.address.substr(0, 6)}...{walletInfo.address.substr(-4)}
+					</div>
                 )}
             </Button>
         </Box>

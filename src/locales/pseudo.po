@@ -17,6 +17,10 @@ msgstr ""
 msgid "Add More"
 msgstr ""
 
+#: src/components/Labels/bitcoin.tsx
+msgid "Bitcoin"
+msgstr ""
+
 #: src/components/Header/routers.tsx
 msgid "Brain Wallet"
 msgstr ""
@@ -25,8 +29,28 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
+#: src/components/Wallet/wallet.tsx
+msgid "Connect Wallet"
+msgstr ""
+
 #: src/components/Header/routers.tsx
 msgid "Entropy"
+msgstr ""
+
+#: src/components/Labels/ethereum.tsx
+msgid "Ethereum"
+msgstr ""
+
+#: src/components/Header/menu.tsx
+msgid "Ethereum Mainnet"
+msgstr ""
+
+#: src/components/Header/menu.tsx
+msgid "Language"
+msgstr ""
+
+#: src/components/Buttons/wallet.tsx
+msgid "Let's Generate"
 msgstr ""
 
 #: src/components/Buttons/query.tsx
@@ -49,6 +73,8 @@ msgstr ""
 msgid "Mask"
 msgstr ""
 
+#: src/components/Buttons/save.tsx
+#: src/components/Buttons/signup.tsx
 #: src/components/Buttons/unconnect.tsx
 msgid "Please connect wallet firstly"
 msgstr ""
@@ -61,6 +87,10 @@ msgstr ""
 msgid "Query"
 msgstr ""
 
+#: src/components/Header/menu.tsx
+msgid "Rinkeby Test Network"
+msgstr ""
+
 #: src/components/Labels/save.tsx
 msgid "Save"
 msgstr ""
@@ -71,4 +101,12 @@ msgstr ""
 
 #: src/components/Dialog/password.tsx
 msgid "Submit"
+msgstr ""
+
+#: src/components/Wallet/wallet.tsx
+msgid "Switch to"
+msgstr ""
+
+#: src/components/Labels/singup.tsx
+msgid "User have to sign up a spacename before save or query content."
 msgstr ""

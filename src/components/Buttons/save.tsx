@@ -41,7 +41,7 @@ const SaveButton:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			    disabled={true}
 			    size="lg"
 		    >
-			    <WarningIcon w={5} h={5} color="red.500" /> Please connect wallet firstly
+			    <WarningIcon w={5} h={5} color="red.500" /> <Trans> Please connect wallet firstly </Trans>
 		    </Button>
 	    );
 

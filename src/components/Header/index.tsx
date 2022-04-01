@@ -5,7 +5,7 @@ import React from "react";
 import {PageRouter} from "./routers";
 import WalletInfo from "../Wallet/wallet";
 import {IBaseProps} from "../../interfaces/props";
-import {Menu} from "./menu";
+import {Menus} from "./menu";
 
 const Header:React.FC<IBaseProps> = (props:IBaseProps)=>{
     return(
@@ -14,7 +14,7 @@ const Header:React.FC<IBaseProps> = (props:IBaseProps)=>{
                 <Seedlist />
                 <PageRouter />
                 <WalletInfo />
-                <Menu />
+                <Menus />
             </HStack>
         </Container>
     );

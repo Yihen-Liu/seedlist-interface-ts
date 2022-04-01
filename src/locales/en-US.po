@@ -17,6 +17,10 @@ msgstr ""
 msgid "Add More"
 msgstr "Add More"
 
+#: src/components/Labels/bitcoin.tsx
+msgid "Bitcoin"
+msgstr "Bitcoin"
+
 #: src/components/Header/routers.tsx
 msgid "Brain Wallet"
 msgstr "Brain Wallet"
@@ -25,9 +29,29 @@ msgstr "Brain Wallet"
 msgid "Cancel"
 msgstr "Cancel"
 
+#: src/components/Wallet/wallet.tsx
+msgid "Connect Wallet"
+msgstr "Connect Wallet"
+
 #: src/components/Header/routers.tsx
 msgid "Entropy"
 msgstr "Entropy"
+
+#: src/components/Labels/ethereum.tsx
+msgid "Ethereum"
+msgstr "Ethereum"
+
+#: src/components/Header/menu.tsx
+msgid "Ethereum Mainnet"
+msgstr "Ethereum Mainnet"
+
+#: src/components/Header/menu.tsx
+msgid "Language"
+msgstr "Language"
+
+#: src/components/Buttons/wallet.tsx
+msgid "Let's Generate"
+msgstr "Let's Generate"
 
 #: src/components/Buttons/query.tsx
 msgid "Let's Query"
@@ -49,6 +73,8 @@ msgstr "Let's Sign"
 msgid "Mask"
 msgstr "Mask"
 
+#: src/components/Buttons/save.tsx
+#: src/components/Buttons/signup.tsx
 #: src/components/Buttons/unconnect.tsx
 msgid "Please connect wallet firstly"
 msgstr "Please connect wallet firstly"
@@ -61,6 +87,10 @@ msgstr "Please enter your password"
 msgid "Query"
 msgstr "Query"
 
+#: src/components/Header/menu.tsx
+msgid "Rinkeby Test Network"
+msgstr "Rinkeby Test Network"
+
 #: src/components/Labels/save.tsx
 msgid "Save"
 msgstr "Save"
@@ -72,3 +102,11 @@ msgstr "Sign Up"
 #: src/components/Dialog/password.tsx
 msgid "Submit"
 msgstr "Submit"
+
+#: src/components/Wallet/wallet.tsx
+msgid "Switch to"
+msgstr "Switch to"
+
+#: src/components/Labels/singup.tsx
+msgid "User have to sign up a spacename before save or query content."
+msgstr "User have to sign up a spacename before save or query content."
