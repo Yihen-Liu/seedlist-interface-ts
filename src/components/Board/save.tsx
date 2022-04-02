@@ -3,7 +3,7 @@ import {Box, Center, HStack, Stack} from "@chakra-ui/layout";
 import {Labels} from "../Labels/labels";
 import {InputAreas} from "../TextInput/inputareas";
 import {Buttons} from "../Buttons/buttons";
-import {PasswordInSave} from "../Dialog/password";
+import {PasswordInSave} from "../Dialog/PasswordInSave";
 import {IBaseProps} from "../../interfaces/props";
 
 const SaveBoard:React.FC<IBaseProps>=(props:IBaseProps)=>{

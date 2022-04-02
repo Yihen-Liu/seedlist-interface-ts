@@ -13,6 +13,70 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "1. 21 million tokens are given to community users as an incentive cycle;"
+msgstr ""
+
+#: src/components/Dialog/PasswordInSave.tsx
+#~ msgid "1. 以2100万个token给到社区用户为一个激励周期；"
+#~ msgstr ""
+
+#: src/components/Dialog/PasswordInSave.tsx
+#~ msgid "2. In the first cycle, the excitation amount is 2100 each time it is stored;"
+#~ msgstr ""
+
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "2. Incentives are generated along with the user's storage behavior. If there is no storage, there will be no incentives;"
+msgstr ""
+
+#: src/components/Dialog/PasswordInSave.tsx
+#~ msgid "2. 激励是伴随着用户的存储行为产生的，没有存储，则没有激励；"
+#~ msgstr ""
+
+#: src/components/Dialog/PasswordInSave.tsx
+#~ msgid "2. 第一个周期里，每次存储时，激励量是2100个；"
+#~ msgstr ""
+
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "3. In the first cycle, the excitation amount is 2100 each time it is stored;"
+msgstr ""
+
+#: src/components/Dialog/PasswordInSave.tsx
+#~ msgid "3. When entering the next cycle, each excitation amount is half of the previous cycle;"
+#~ msgstr ""
+
+#: src/components/Dialog/PasswordInSave.tsx
+#~ msgid "3. 进入下一个周期时，每次激励量是上个周期的一半；"
+#~ msgstr ""
+
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "4. When entering the next cycle, each excitation amount is half of the previous cycle;"
+msgstr ""
+
+#: src/components/Dialog/PasswordInSave.tsx
+#~ msgid "4. With each user's token incentive, a 10% increment will be issued to the DAO address;"
+#~ msgstr ""
+
+#: src/components/Dialog/PasswordInSave.tsx
+#~ msgid "4. 伴随每次用户的token激励，会有10%的增量下发至DAO地址；"
+#~ msgstr ""
+
+#: src/components/Dialog/PasswordInSave.tsx
+#~ msgid "5. Using the displacement halving, the total amount of token incentives for a complete cycle is about 23.1 million;"
+#~ msgstr ""
+
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "5. With each user's token incentive, a 10% increment will be issued to the DAO address;"
+msgstr ""
+
+#: src/components/Dialog/PasswordInSave.tsx
+#~ msgid "5. 采用位移减半，一个完整周期的token激励总量约为2310万个；"
+#~ msgstr ""
+
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "6. Using the displacement halving, the total amount of token incentives for a complete cycle is about 23.1 million;"
+msgstr ""
+
 #: src/components/Buttons/save.tsx
 msgid "Add More"
 msgstr ""
@@ -25,8 +89,8 @@ msgstr ""
 msgid "Brain Wallet"
 msgstr ""
 
-#: src/components/Dialog/password.tsx
-#: src/components/Dialog/password.tsx
+#: src/components/Dialog/PasswordInQuery.tsx
+#: src/components/Dialog/PasswordInSave.tsx
 msgid "Cancel"
 msgstr ""
 
@@ -34,9 +98,17 @@ msgstr ""
 msgid "Connect Wallet"
 msgstr ""
 
+#: src/components/Dialog/password.tsx
+#~ msgid "Do you want to mint airdrop token?"
+#~ msgstr ""
+
+#: src/components/Dialog/PasswordInSave.tsx
+#~ msgid "Do you want to mint seed token?"
+#~ msgstr ""
+
 #: src/components/Header/routers.tsx
-msgid "Entropy"
-msgstr ""
+#~ msgid "Entropy"
+#~ msgstr ""
 
 #: src/components/Labels/ethereum.tsx
 msgid "Ethereum"
@@ -44,6 +116,10 @@ msgstr ""
 
 #: src/components/Header/menu.tsx
 msgid "Ethereum Mainnet"
+msgstr ""
+
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "I want to mint seed incentive token"
 msgstr ""
 
 #: src/components/Header/menu.tsx
@@ -80,13 +156,17 @@ msgstr ""
 msgid "Please connect wallet firstly"
 msgstr ""
 
-#: src/components/Dialog/password.tsx
-#: src/components/Dialog/password.tsx
+#: src/components/Dialog/PasswordInQuery.tsx
+#: src/components/Dialog/PasswordInSave.tsx
 msgid "Please enter your password"
 msgstr ""
 
 #: src/components/Labels/query.tsx
 msgid "Query"
+msgstr ""
+
+#: src/components/menu/brainwallet.tsx
+msgid "Random Puzzle"
 msgstr ""
 
 #: src/components/Header/menu.tsx
@@ -101,8 +181,16 @@ msgstr ""
 msgid "Sign Up"
 msgstr ""
 
-#: src/components/Dialog/password.tsx
-#: src/components/Dialog/password.tsx
+#: src/components/menu/brainwallet.tsx
+#~ msgid "SpaceName & Password"
+#~ msgstr ""
+
+#: src/components/menu/brainwallet.tsx
+#~ msgid "SpaceName&Password"
+#~ msgstr ""
+
+#: src/components/Dialog/PasswordInQuery.tsx
+#: src/components/Dialog/PasswordInSave.tsx
 msgid "Submit"
 msgstr ""
 
@@ -112,6 +200,14 @@ msgstr ""
 
 #: src/components/Labels/singup.tsx
 msgid "User have to sign up a spacename before save or query content."
+msgstr ""
+
+#: src/components/Header/routers.tsx
+msgid "Vault"
+msgstr ""
+
+#: src/components/menu/brainwallet.tsx
+msgid "VaultName&Password"
 msgstr ""
 
 #: src/components/TextInput/signup.tsx

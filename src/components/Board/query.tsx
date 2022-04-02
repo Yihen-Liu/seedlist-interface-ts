@@ -3,7 +3,7 @@ import {Box, Center, HStack, Stack} from "@chakra-ui/layout";
 import {Labels} from "../Labels/labels";
 import {InputAreas} from "../TextInput/inputareas";
 import {Buttons} from "../Buttons/buttons";
-import {PasswordInQuery } from "../Dialog/password";
+import {PasswordInQuery } from "../Dialog/PasswordInQuery";
 import {IBaseProps} from "../../interfaces/props";
 
 const QueryBoard:React.FC<IBaseProps> = (props:IBaseProps)=>{

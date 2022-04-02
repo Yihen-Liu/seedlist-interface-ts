@@ -11,18 +11,18 @@ const SaveArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const isConnection = useSelector((state:StateType)=>state.walletConnection);
 
 	const [lang, ] = useRecoilState(languageState)
-	const [spaceNameHolder, setSpaceNameHolder]	= useState<string>("seedlist space name ...")
+	const [spaceNameHolder, setSpaceNameHolder]	= useState<string>("Enter vault name ...")
 	const [labelHolder, setLabelHolder] = useState<string>("label ...")
 	const [contentHolder, setContentHolder] = useState<string>("saved content ...")
 	useMemo(()=>{
 		if(lang==='zh-CN'){
-			setSpaceNameHolder("输入用户空间名称 ...")
+			setSpaceNameHolder("输入保险库空间名称 ...")
 			setLabelHolder("标签名")
 			setContentHolder("存储内容 ...")
 		}
 
 		if(lang==='en-US'){
-			setSpaceNameHolder("seedlist space name ...")
+			setSpaceNameHolder("Enter vault name ...")
 			setLabelHolder("label ...")
 			setContentHolder("saved content ...")
 		}

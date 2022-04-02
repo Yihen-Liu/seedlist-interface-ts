@@ -3,9 +3,13 @@ import {Box, Center, HStack, Stack} from "@chakra-ui/layout";
 import {IBaseProps} from "../../interfaces/props";
 import {WalletLabels} from "../Labels/wallet";
 import {WalletButton} from "../Buttons/wallet";
-import {WalletArea} from "../TextInput/brainwallet";
+import {WalletPuzzleArea} from "../TextInput/brainwallet/PuzzelArea";
+import {WalletEntropyArea} from "../TextInput/brainwallet/EntropyArea";
+import {useRecoilState} from "recoil";
+import {generatorState} from "../../hooks/Atoms";
 
 const WalletBoard:React.FC<IBaseProps>=(props:IBaseProps)=>{
+	const [generator, ] = useRecoilState(generatorState)
 	return(
 		<Center>
 			<Stack>
@@ -14,7 +18,8 @@ const WalletBoard:React.FC<IBaseProps>=(props:IBaseProps)=>{
 
 						<WalletLabels />
 
-						<WalletArea />
+						{generator==='puzzle' && <WalletPuzzleArea />}
+						{generator==='entropy' && <WalletEntropyArea />}
 
 						<HStack spacing="24px" width="100%">
 							<WalletButton />

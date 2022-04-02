@@ -13,9 +13,7 @@ const SignBoard:React.FC<IBaseProps>=(props:IBaseProps)=>{
                     <Stack spacing={6}>
 
                         <Labels />
-
                         <InputAreas />
-
                         <HStack spacing="24px" width="100%">
                             <Buttons />
                         </HStack>

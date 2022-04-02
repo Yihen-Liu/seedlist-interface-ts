@@ -7,14 +7,14 @@ import {languageState} from "../../hooks/useLanguage";
 
 const QueryArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const [lang, ] = useRecoilState(languageState)
-	const [spaceNameHolder, setSpaceNameHolder]	= useState<string>("seedlist space name ...")
+	const [spaceNameHolder, setSpaceNameHolder]	= useState<string>("Enter vault name ...")
 	useMemo(()=>{
 		if(lang==='zh-CN'){
-			setSpaceNameHolder("输入用户空间名称 ...")
+			setSpaceNameHolder("输入保险库空间名称 ...")
 		}
 
 		if(lang==='en-US'){
-			setSpaceNameHolder("seedlist space name ...")
+			setSpaceNameHolder("Enter vault name ...")
 		}
 	},[lang])
 

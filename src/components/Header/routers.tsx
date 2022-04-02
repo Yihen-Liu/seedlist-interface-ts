@@ -45,29 +45,29 @@ const PageRouter:React.FC<IBaseProps> = (props:IBaseProps)=> {
 			<Box flexGrow={1}>
 				<Center>
 					<ButtonGroup spacing="2">
-						<Button bg="#2b2d32" colorScheme="blackAlpha" onClick={()=>clickButton("entropy")}>
-							<Text fontSize="xl" color={entropyColor}>
-								<NavLink to="/entropy">
-									<Trans>Entropy </Trans>
-								</NavLink>
-							</Text>
-						</Button>
+						<NavLink to="/entropy">
+							<Button bg="#2b2d32" colorScheme="blackAlpha" onClick={()=>clickButton("entropy")}>
+								<Text fontSize="xl" color={entropyColor}>
+										<Trans>Vault </Trans>
+								</Text>
+							</Button>
+						</NavLink>
 
-						<Button bg="#2b2d32" colorScheme="blackAlpha" onClick={()=>clickButton("wallet")}>
-							<Text fontSize="xl" color={walletColor}>
-								<NavLink to="/brainwallet">
-									<Trans>Brain Wallet</Trans>
-								</NavLink>
-							</Text>
-						</Button>
+						<NavLink to="/brainwallet">
+							<Button bg="#2b2d32" colorScheme="blackAlpha" onClick={()=>clickButton("wallet")}>
+								<Text fontSize="xl" color={walletColor}>
+										<Trans>Brain Wallet</Trans>
+								</Text>
+							</Button>
+						</NavLink>
 
-						<Button  bg="#2b2d32" colorScheme="blackAlpha" onClick={()=>clickButton("mask")}>
-							<Text fontSize="xl" color={maskColor}>
-								<NavLink to="/mask">
-									<Trans>Mask</Trans>
-								</NavLink>
-							</Text>
-						</Button>
+						<NavLink to="/mask">
+							<Button  bg="#2b2d32" colorScheme="blackAlpha" onClick={()=>clickButton("mask")}>
+								<Text fontSize="xl" color={maskColor}>
+										<Trans>Mask</Trans>
+								</Text>
+							</Button>
+						</NavLink>
 					</ButtonGroup>
 				</Center>
 			</Box>

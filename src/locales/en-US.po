@@ -13,6 +13,70 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "1. 21 million tokens are given to community users as an incentive cycle;"
+msgstr "1. 21 million tokens are given to community users as an incentive cycle;"
+
+#: src/components/Dialog/PasswordInSave.tsx
+#~ msgid "1. 以2100万个token给到社区用户为一个激励周期；"
+#~ msgstr "1. 以2100万个token给到社区用户为一个激励周期；"
+
+#: src/components/Dialog/PasswordInSave.tsx
+#~ msgid "2. In the first cycle, the excitation amount is 2100 each time it is stored;"
+#~ msgstr "2. In the first cycle, the excitation amount is 2100 each time it is stored;"
+
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "2. Incentives are generated along with the user's storage behavior. If there is no storage, there will be no incentives;"
+msgstr "2. Incentives are generated along with the user's storage behavior. If there is no storage, there will be no incentives;"
+
+#: src/components/Dialog/PasswordInSave.tsx
+#~ msgid "2. 激励是伴随着用户的存储行为产生的，没有存储，则没有激励；"
+#~ msgstr "2. 激励是伴随着用户的存储行为产生的，没有存储，则没有激励；"
+
+#: src/components/Dialog/PasswordInSave.tsx
+#~ msgid "2. 第一个周期里，每次存储时，激励量是2100个；"
+#~ msgstr "2. 第一个周期里，每次存储时，激励量是2100个；"
+
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "3. In the first cycle, the excitation amount is 2100 each time it is stored;"
+msgstr "3. In the first cycle, the excitation amount is 2100 each time it is stored;"
+
+#: src/components/Dialog/PasswordInSave.tsx
+#~ msgid "3. When entering the next cycle, each excitation amount is half of the previous cycle;"
+#~ msgstr "3. When entering the next cycle, each excitation amount is half of the previous cycle;"
+
+#: src/components/Dialog/PasswordInSave.tsx
+#~ msgid "3. 进入下一个周期时，每次激励量是上个周期的一半；"
+#~ msgstr "3. 进入下一个周期时，每次激励量是上个周期的一半；"
+
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "4. When entering the next cycle, each excitation amount is half of the previous cycle;"
+msgstr "4. When entering the next cycle, each excitation amount is half of the previous cycle;"
+
+#: src/components/Dialog/PasswordInSave.tsx
+#~ msgid "4. With each user's token incentive, a 10% increment will be issued to the DAO address;"
+#~ msgstr "4. With each user's token incentive, a 10% increment will be issued to the DAO address;"
+
+#: src/components/Dialog/PasswordInSave.tsx
+#~ msgid "4. 伴随每次用户的token激励，会有10%的增量下发至DAO地址；"
+#~ msgstr "4. 伴随每次用户的token激励，会有10%的增量下发至DAO地址；"
+
+#: src/components/Dialog/PasswordInSave.tsx
+#~ msgid "5. Using the displacement halving, the total amount of token incentives for a complete cycle is about 23.1 million;"
+#~ msgstr "5. Using the displacement halving, the total amount of token incentives for a complete cycle is about 23.1 million;"
+
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "5. With each user's token incentive, a 10% increment will be issued to the DAO address;"
+msgstr "5. With each user's token incentive, a 10% increment will be issued to the DAO address;"
+
+#: src/components/Dialog/PasswordInSave.tsx
+#~ msgid "5. 采用位移减半，一个完整周期的token激励总量约为2310万个；"
+#~ msgstr "5. 采用位移减半，一个完整周期的token激励总量约为2310万个；"
+
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "6. Using the displacement halving, the total amount of token incentives for a complete cycle is about 23.1 million;"
+msgstr "6. Using the displacement halving, the total amount of token incentives for a complete cycle is about 23.1 million;"
+
 #: src/components/Buttons/save.tsx
 msgid "Add More"
 msgstr "Add More"
@@ -25,8 +89,8 @@ msgstr "Bitcoin"
 msgid "Brain Wallet"
 msgstr "Brain Wallet"
 
-#: src/components/Dialog/password.tsx
-#: src/components/Dialog/password.tsx
+#: src/components/Dialog/PasswordInQuery.tsx
+#: src/components/Dialog/PasswordInSave.tsx
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -34,9 +98,17 @@ msgstr "Cancel"
 msgid "Connect Wallet"
 msgstr "Connect Wallet"
 
+#: src/components/Dialog/password.tsx
+#~ msgid "Do you want to mint airdrop token?"
+#~ msgstr "Do you want to mint airdrop token?"
+
+#: src/components/Dialog/PasswordInSave.tsx
+#~ msgid "Do you want to mint seed token?"
+#~ msgstr "Do you want to mint seed token?"
+
 #: src/components/Header/routers.tsx
-msgid "Entropy"
-msgstr "Entropy"
+#~ msgid "Entropy"
+#~ msgstr "Entropy"
 
 #: src/components/Labels/ethereum.tsx
 msgid "Ethereum"
@@ -45,6 +117,10 @@ msgstr "Ethereum"
 #: src/components/Header/menu.tsx
 msgid "Ethereum Mainnet"
 msgstr "Ethereum Mainnet"
+
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "I want to mint seed incentive token"
+msgstr "I want to mint seed incentive token"
 
 #: src/components/Header/menu.tsx
 #~ msgid "Language"
@@ -80,14 +156,18 @@ msgstr "Mask"
 msgid "Please connect wallet firstly"
 msgstr "Please connect wallet firstly"
 
-#: src/components/Dialog/password.tsx
-#: src/components/Dialog/password.tsx
+#: src/components/Dialog/PasswordInQuery.tsx
+#: src/components/Dialog/PasswordInSave.tsx
 msgid "Please enter your password"
 msgstr "Please enter your password"
 
 #: src/components/Labels/query.tsx
 msgid "Query"
 msgstr "Query"
+
+#: src/components/menu/brainwallet.tsx
+msgid "Random Puzzle"
+msgstr "Random Puzzle"
 
 #: src/components/Header/menu.tsx
 msgid "Rinkeby Test Network"
@@ -101,8 +181,16 @@ msgstr "Save"
 msgid "Sign Up"
 msgstr "Sign Up"
 
-#: src/components/Dialog/password.tsx
-#: src/components/Dialog/password.tsx
+#: src/components/menu/brainwallet.tsx
+#~ msgid "SpaceName & Password"
+#~ msgstr "SpaceName & Password"
+
+#: src/components/menu/brainwallet.tsx
+#~ msgid "SpaceName&Password"
+#~ msgstr "SpaceName&Password"
+
+#: src/components/Dialog/PasswordInQuery.tsx
+#: src/components/Dialog/PasswordInSave.tsx
 msgid "Submit"
 msgstr "Submit"
 
@@ -113,6 +201,14 @@ msgstr "Switch to"
 #: src/components/Labels/singup.tsx
 msgid "User have to sign up a spacename before save or query content."
 msgstr "User have to sign up a spacename before save or query content."
+
+#: src/components/Header/routers.tsx
+msgid "Vault"
+msgstr "Vault"
+
+#: src/components/menu/brainwallet.tsx
+msgid "VaultName&Password"
+msgstr "VaultName&Password"
 
 #: src/components/TextInput/signup.tsx
 #~ msgid "seedlist space name ..."

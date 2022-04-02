@@ -1,12 +1,12 @@
 import React, {useMemo, useState} from "react";
-import {Box, Stack, VStack} from "@chakra-ui/layout";
-import {TextInput} from "./textinput";
-import {IBaseProps} from "../../interfaces/props";
+import {IBaseProps} from "../../../interfaces/props";
 import {useRecoilState} from "recoil";
-import {languageState} from "../../hooks/useLanguage";
-import {puzzleState} from "../../hooks/usePuzzle";
+import {puzzleState} from "../../../hooks/usePuzzle";
+import {languageState} from "../../../hooks/useLanguage";
+import {Box, Stack, VStack} from "@chakra-ui/layout";
+import {TextInput} from "../textinput";
 
-const WalletArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
+const WalletPuzzleArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const [puzzleValue, setPuzzleValue] = useState<string>("")
 	const [, setPuzzle] = useRecoilState(puzzleState)
 	const handlePuzzleChange = (event: { target: { value: React.SetStateAction<string>; }; })=>{
@@ -18,7 +18,7 @@ const WalletArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const [phraseHolder, setPhraseHolder]	= useState<string>("enter your stronger phrase ...")
 	useMemo(()=>{
 		if(lang==='zh-CN'){
-			setPhraseHolder("请输入一个足够健壮的初始熵 ...")
+			setPhraseHolder("请输入一个足够健壮的密码短语 ...")
 		}
 
 		if(lang==='en-US'){
@@ -49,5 +49,4 @@ const WalletArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
 
 	);
 }
-
-export {WalletArea};
+export {WalletPuzzleArea};
