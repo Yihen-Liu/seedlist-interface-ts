@@ -10,6 +10,7 @@ import {labelState} from "../../hooks/useLabel";
 import {useDispatch, useSelector} from "react-redux";
 import {StateType} from "../../reducers/state";
 import {signupAction} from "../../reducers/action";
+import {generatorState} from "../../hooks/Atoms";
 
 const PageRouter:React.FC<IBaseProps> = (props:IBaseProps)=> {
 	const [entropyColor, setEntropyActive] = useState<string>("");
@@ -17,6 +18,7 @@ const PageRouter:React.FC<IBaseProps> = (props:IBaseProps)=> {
 	const [maskColor, setMaskActive] = useState<string>("gray");
 	const [, setPage] = useRecoilState(pageState)
 	const [, setLabel] = useRecoilState(labelState)
+	const [, setWalletGenerator] = useRecoilState(generatorState)
 	const dispatch = useDispatch();
 	const isConnection = useSelector((state:StateType)=>state.walletConnection);
 
@@ -32,6 +34,7 @@ const PageRouter:React.FC<IBaseProps> = (props:IBaseProps)=> {
 			setWalletActive("");
 			setPage("wallet")
 			setLabel("bitcoin")
+			setWalletGenerator("puzzle")
 		}
 		if(btn==="entropy"){
 			setEntropyActive("");
