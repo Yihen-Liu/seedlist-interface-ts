@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkseedlist_interface_ts=self.webpackChunkseedlist_interface_ts||[]).push([[1499],{1499:function(e,s,t){e.exports=t.p+"static/media/sw-TZ.90d1515c7175db565b7e.po"}}]);

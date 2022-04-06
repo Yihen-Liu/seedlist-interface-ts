@@ -1,0 +1,137 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2022-04-06 12:18+0800\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: ar-SA\n"
+
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "1. 21 million tokens are given to community users as an incentive cycle;"
+msgstr ""
+
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "2. Incentives are generated along with the user's storage behavior. If there is no storage, there will be no incentives;"
+msgstr ""
+
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "3. In the first cycle, the excitation amount is 2100 each time it is stored;"
+msgstr ""
+
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "4. When entering the next cycle, each excitation amount is half of the previous cycle;"
+msgstr ""
+
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "5. With each user's token incentive, a 10% increment will be issued to the DAO address;"
+msgstr ""
+
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "6. Using the displacement halving, the total amount of token incentives for a complete cycle is about 23.1 million;"
+msgstr ""
+
+#: src/components/Buttons/save.tsx
+msgid "Add More"
+msgstr ""
+
+#: src/components/Labels/bitcoin.tsx
+msgid "Bitcoin"
+msgstr ""
+
+#: src/components/Header/routers.tsx
+msgid "Brain Wallet"
+msgstr ""
+
+#: src/components/Dialog/PasswordInQuery.tsx
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "Cancel"
+msgstr ""
+
+#: src/components/Wallet/wallet.tsx
+msgid "Connect Wallet"
+msgstr ""
+
+#: src/components/Labels/ethereum.tsx
+msgid "Ethereum"
+msgstr ""
+
+#: src/components/Header/menu.tsx
+msgid "Ethereum Mainnet"
+msgstr ""
+
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "I want to mint seed incentive token"
+msgstr ""
+
+#: src/components/Header/routers.tsx
+msgid "Identity"
+msgstr ""
+
+#: src/components/Buttons/wallet.tsx
+msgid "Let's Generate"
+msgstr ""
+
+#: src/components/Buttons/query.tsx
+msgid "Let's Query"
+msgstr ""
+
+#: src/components/Buttons/save.tsx
+msgid "Let's Save"
+msgstr ""
+
+#: src/components/Buttons/signup.tsx
+msgid "Let's Sign"
+msgstr ""
+
+#: src/components/Buttons/save.tsx
+#: src/components/Buttons/signup.tsx
+#: src/components/Buttons/unconnect.tsx
+msgid "Please connect wallet firstly"
+msgstr ""
+
+#: src/components/Dialog/PasswordInQuery.tsx
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "Please enter your password"
+msgstr ""
+
+#: src/components/Labels/query.tsx
+msgid "Query"
+msgstr ""
+
+#: src/components/menu/brainwallet.tsx
+msgid "Random Puzzle"
+msgstr ""
+
+#: src/components/Header/menu.tsx
+msgid "Rinkeby Test Network"
+msgstr ""
+
+#: src/components/Labels/save.tsx
+msgid "Save"
+msgstr ""
+
+#: src/components/Labels/singup.tsx
+msgid "Sign Up"
+msgstr ""
+
+#: src/components/Dialog/PasswordInQuery.tsx
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "Submit"
+msgstr ""
+
+#: src/components/Wallet/wallet.tsx
+msgid "Switch to"
+msgstr ""
+
+#: src/components/Labels/singup.tsx
+msgid "User have to sign up a spacename before save or query content."
+msgstr ""
+
+#: src/components/Header/routers.tsx
+msgid "Vault"
+msgstr ""
+
+#: src/components/menu/brainwallet.tsx
+msgid "VaultName&Password"
+msgstr ""
