@@ -1,9 +1,9 @@
 import {Box, Center, Text} from "@chakra-ui/layout";
 import {Button, ButtonGroup} from "@chakra-ui/button";
-import React, {useCallback, useState} from "react";
+import React, {useCallback, useMemo, useState} from "react";
 import {Trans} from "@lingui/macro";
 import {IBaseProps} from "../../interfaces/props";
-import {NavLink} from "react-router-dom"
+import {NavLink, useLocation} from "react-router-dom"
 import {useRecoilState} from "recoil";
 import { pageState } from "../../hooks/usePage";
 import {labelState} from "../../hooks/useLabel";
@@ -21,7 +21,24 @@ const PageRouter:React.FC<IBaseProps> = (props:IBaseProps)=> {
 	const [, setWalletGenerator] = useRecoilState(generatorState)
 	const dispatch = useDispatch();
 	const isConnection = useSelector((state:StateType)=>state.walletConnection);
-
+	let location = useLocation()
+	useMemo(()=>{
+		setVaultActive("gray");
+		setWalletActive("gray");
+		setIdActive("gray");
+		if(location.pathname==="/identity"){
+			console.log("location: ", location.pathname)
+			setIdActive("")
+		}
+		if(location.pathname==="/brainwallet"){
+			console.log("location: ", location.pathname)
+			setWalletActive("")
+		}
+		if(location.pathname==="/vault"){
+			console.log("location: ", location.pathname)
+			setVaultActive("")
+		}
+	},[location.pathname])
 	const clickButton = useCallback((btn:string)=>{
 		setVaultActive("gray");
 		setWalletActive("gray");
