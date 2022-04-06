@@ -13,9 +13,9 @@ import {signupAction} from "../../reducers/action";
 import {generatorState} from "../../hooks/Atoms";
 
 const PageRouter:React.FC<IBaseProps> = (props:IBaseProps)=> {
-	const [entropyColor, setEntropyActive] = useState<string>("");
+	const [vaultColor, setVaultActive] = useState<string>("");
 	const [walletColor, setWalletActive] = useState<string>("gray");
-	const [maskColor, setMaskActive] = useState<string>("gray");
+	const [idColor, setIdActive] = useState<string>("gray");
 	const [, setPage] = useRecoilState(pageState)
 	const [, setLabel] = useRecoilState(labelState)
 	const [, setWalletGenerator] = useRecoilState(generatorState)
@@ -23,12 +23,12 @@ const PageRouter:React.FC<IBaseProps> = (props:IBaseProps)=> {
 	const isConnection = useSelector((state:StateType)=>state.walletConnection);
 
 	const clickButton = useCallback((btn:string)=>{
-		setEntropyActive("gray");
+		setVaultActive("gray");
 		setWalletActive("gray");
-		setMaskActive("gray");
-		if(btn === "mask"){
-			setMaskActive("");
-			setPage("mask")
+		setIdActive("gray");
+		if(btn === "identity"){
+			setIdActive("");
+			setPage("identity")
 		}
 		if(btn === "wallet"){
 			setWalletActive("");
@@ -36,9 +36,9 @@ const PageRouter:React.FC<IBaseProps> = (props:IBaseProps)=> {
 			setLabel("bitcoin")
 			setWalletGenerator("puzzle")
 		}
-		if(btn==="entropy"){
-			setEntropyActive("");
-			setPage("entropy")
+		if(btn==="vault"){
+			setVaultActive("");
+			setPage("vault")
 			setLabel("signup")
 			dispatch(signupAction(isConnection))
 		}
@@ -48,9 +48,9 @@ const PageRouter:React.FC<IBaseProps> = (props:IBaseProps)=> {
 			<Box flexGrow={1}>
 				<Center>
 					<ButtonGroup spacing="2">
-						<NavLink to="/entropy">
-							<Button bg="#2b2d32" colorScheme="blackAlpha" onClick={()=>clickButton("entropy")}>
-								<Text fontSize="xl" color={entropyColor}>
+						<NavLink to="/vault">
+							<Button bg="#2b2d32" colorScheme="blackAlpha" onClick={()=>clickButton("vault")}>
+								<Text fontSize="xl" color={vaultColor}>
 										<Trans>Vault </Trans>
 								</Text>
 							</Button>
@@ -64,10 +64,10 @@ const PageRouter:React.FC<IBaseProps> = (props:IBaseProps)=> {
 							</Button>
 						</NavLink>
 
-						<NavLink to="/mask">
-							<Button  bg="#2b2d32" colorScheme="blackAlpha" onClick={()=>clickButton("mask")}>
-								<Text fontSize="xl" color={maskColor}>
-										<Trans>Mask</Trans>
+						<NavLink to="/identity">
+							<Button  bg="#2b2d32" colorScheme="blackAlpha" onClick={()=>clickButton("identity")}>
+								<Text fontSize="xl" color={idColor}>
+										<Trans>Identity</Trans>
 								</Text>
 							</Button>
 						</NavLink>

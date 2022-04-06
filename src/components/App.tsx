@@ -1,13 +1,13 @@
 import React from "react";
-import {Box, Stack, Text} from "@chakra-ui/layout";
+import {Box, Stack} from "@chakra-ui/layout";
 import {Header} from "./Header";
 import {Footer} from "./Footer";
 import {Heading} from "@chakra-ui/react";
 import {IBaseProps} from "../interfaces/props";
 import {Navigate, Route, Routes} from "react-router-dom";
-import { Mask } from "../pages/mask";
+import { Identity } from "../pages/identity";
 import { Brainwallet } from "../pages/brainwallet";
-import {Entropy} from "../pages/entropy";
+import {Vault} from "../pages/vault";
 import {BrowserRouter as Router} from "react-router-dom";
 
 const App:React.FC<IBaseProps> = (props:IBaseProps)=>{
@@ -21,10 +21,10 @@ const App:React.FC<IBaseProps> = (props:IBaseProps)=>{
 					<Router>
 						<Header />
 						<Routes>
-							<Route path="/" element={ <Navigate to="/entropy" />}> </Route>
-							<Route path="/entropy" element={<Entropy />}> </Route>
+							<Route path="/" element={ <Navigate to="/vault" />}> </Route>
+							<Route path="/vault" element={<Vault />}> </Route>
 							<Route path="/brainwallet" element={<Brainwallet />}> </Route>
-							<Route path="/mask" element={<Mask />}> </Route>
+							<Route path="/identity" element={<Identity />}> </Route>
 						</Routes>
 					</Router>
                 </Stack>

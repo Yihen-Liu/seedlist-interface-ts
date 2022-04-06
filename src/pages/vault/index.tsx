@@ -7,7 +7,7 @@ import {SignBoard} from "../../components/Board/signup";
 import {SaveBoard} from "../../components/Board/save";
 import {QueryBoard} from "../../components/Board/query";
 
-const Entropy:React.FC<IBaseProps> = (props:IBaseProps)=>{
+const Vault:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const label= useSelector((state:StateType)=>state.page);
 
 	return(
@@ -26,4 +26,4 @@ const Entropy:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	);
 }
 
-export {Entropy};
+export {Vault};

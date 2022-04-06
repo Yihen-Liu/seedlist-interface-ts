@@ -2,7 +2,7 @@ import React from "react";
 import {Center, Container, Text} from "@chakra-ui/layout";
 import { IBaseProps } from "../../interfaces/props";
 
-const Mask:React.FC<IBaseProps> = (props:IBaseProps)=>{
+const Identity:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	return(
 		<Center>
 			<Container>
@@ -19,4 +19,4 @@ const Mask:React.FC<IBaseProps> = (props:IBaseProps)=>{
 );
 }
 
-export {Mask};
+export {Identity};

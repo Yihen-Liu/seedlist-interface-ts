@@ -4,7 +4,7 @@ import {IBaseProps} from "../../interfaces/props";
 import {WalletLabels} from "../Labels/wallet";
 import {WalletButton} from "../Buttons/wallet";
 import {WalletPuzzleArea} from "../TextInput/brainwallet/PuzzelArea";
-import {WalletEntropyArea} from "../TextInput/brainwallet/EntropyArea";
+import {WalletVaultArea} from "../TextInput/brainwallet/VaultArea";
 import {useRecoilState} from "recoil";
 import {generatorState} from "../../hooks/Atoms";
 
@@ -19,7 +19,7 @@ const WalletBoard:React.FC<IBaseProps>=(props:IBaseProps)=>{
 						<WalletLabels />
 
 						{generator==='puzzle' && <WalletPuzzleArea />}
-						{generator==='entropy' && <WalletEntropyArea />}
+						{generator==='entropy' && <WalletVaultArea />}
 
 						<HStack spacing="24px" width="100%">
 							<WalletButton />

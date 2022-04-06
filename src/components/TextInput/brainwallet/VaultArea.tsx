@@ -8,7 +8,7 @@ import {signupPasswordAction, signupSpacenameAction} from "../../../reducers/act
 import {Box, Stack, VStack} from "@chakra-ui/layout";
 import {TextInput} from "../textinput";
 
-const WalletEntropyArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
+const WalletVaultArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const dispatch = useDispatch();
 
 	const isConnection = useSelector((state:StateType)=>state.walletConnection);
@@ -78,4 +78,4 @@ const WalletEntropyArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
 
 	);
 }
-export {WalletEntropyArea};
+export {WalletVaultArea};
