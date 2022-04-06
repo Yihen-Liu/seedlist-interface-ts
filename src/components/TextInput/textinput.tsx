@@ -7,7 +7,7 @@ interface TextProps extends IBaseProps{
 	placeholder?:string
 	disabled?:boolean
 	value?:string
-	onChange?: (event: { target: { value: React.SetStateAction<string>; }; })=>void
+	onChange?: (event: React.FormEvent<HTMLInputElement>)=>void
 }
 
 const TextInput:React.FC<TextProps> = (props:TextProps)=>{

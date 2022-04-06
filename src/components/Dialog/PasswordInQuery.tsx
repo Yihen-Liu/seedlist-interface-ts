@@ -5,7 +5,7 @@ import {
 	DrawerContent,
 	DrawerHeader,
 	DrawerBody,
-	DrawerFooter, DrawerCloseButton, Input, Checkbox, useCheckbox
+	DrawerFooter, DrawerCloseButton, Input
 } from "@chakra-ui/react";
 import {Box, Stack, Text} from "@chakra-ui/layout";
 import {Button} from "@chakra-ui/button";

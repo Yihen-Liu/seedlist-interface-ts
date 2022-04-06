@@ -41,7 +41,7 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	},[lang])
 
 	const economicModelDesc = useMemo(()=>{
-		if(checked==false) return;
+		if(checked===false) return;
 		return(
 			<Box marginY="20px">
 					<Text marginY="10px" color="white">

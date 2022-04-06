@@ -9,9 +9,9 @@ import {TextInput} from "../textinput";
 const WalletPuzzleArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const [puzzleValue, setPuzzleValue] = useState<string>("")
 	const [, setPuzzle] = useRecoilState(puzzleState)
-	const handlePuzzleChange = (event: { target: { value: React.SetStateAction<string>; }; })=>{
-		setPuzzleValue(event.target.value)
-		setPuzzle(event.target.value)
+	const handlePuzzleChange = (event: React.FormEvent<HTMLInputElement>)=>{
+		setPuzzleValue(event.currentTarget.value)
+		setPuzzle(event.currentTarget.value)
 	}
 
 	const [lang, ] = useRecoilState(languageState)

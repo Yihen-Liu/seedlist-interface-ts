@@ -14,8 +14,8 @@ const SignupArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const isConnection = useSelector((state:StateType)=>state.walletConnection);
 	const [spaceValue, setSpaceValue] = useState<string>("")
 	const [pwdValue, setPwdValue] = useState<string>("")
-	const handleSpaceChange = (event: { target: { value: React.SetStateAction<string>; }; })=>setSpaceValue(event.target.value)
-	const handlePwdChange = (event: { target: { value: React.SetStateAction<string>; }; })=>setPwdValue(event.target.value)
+	const handleSpaceChange = (event: React.FormEvent<HTMLInputElement>)=>setSpaceValue(event.currentTarget.value)
+	const handlePwdChange = (event: React.FormEvent<HTMLInputElement>)=>setPwdValue(event.currentTarget.value)
 
 	const [lang, ] = useRecoilState(languageState)
 	const [spaceNameHolder, setSpaceNameHolder]	= useState<string>("Enter vault name ...")

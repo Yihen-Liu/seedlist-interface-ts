@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from "react";
+import React, {useCallback} from "react";
 import {Button} from "@chakra-ui/button";
 import {Trans} from "@lingui/macro";
 import {IBaseProps} from "../../interfaces/props";
