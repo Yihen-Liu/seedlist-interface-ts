@@ -3,7 +3,7 @@ import {IBaseProps} from "../../../interfaces/props";
 import {useDispatch, useSelector} from "react-redux";
 import {StateType} from "../../../reducers/state";
 import {useRecoilState} from "recoil";
-import {languageState} from "../../../hooks/useLanguage";
+import {languageState} from "../../../hooks/Atoms";
 import {signupPasswordAction, signupSpacenameAction} from "../../../reducers/action";
 import {Box, Stack, VStack} from "@chakra-ui/layout";
 import {TextInput} from "../textinput";

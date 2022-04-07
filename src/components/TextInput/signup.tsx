@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {StateType} from "../../reducers/state";
 import {signupPasswordAction, signupSpacenameAction} from "../../reducers/action";
 import {useRecoilState} from "recoil";
-import {languageState} from "../../hooks/useLanguage";
+import {languageState} from "../../hooks/Atoms";
 
 const SignupArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const dispatch = useDispatch();

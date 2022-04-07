@@ -3,7 +3,7 @@ import {Button} from "@chakra-ui/button";
 import {Trans} from "@lingui/macro";
 import {IBaseProps} from "../../interfaces/props";
 import {useRecoilState} from "recoil";
-import {labelState} from "../../hooks/useLabel";
+import {labelState} from "../../hooks/Atoms";
 import {Text} from "@chakra-ui/layout";
 
 

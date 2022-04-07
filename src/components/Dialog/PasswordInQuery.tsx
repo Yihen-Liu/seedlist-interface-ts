@@ -5,7 +5,7 @@ import {
 	DrawerContent,
 	DrawerHeader,
 	DrawerBody,
-	DrawerFooter, DrawerCloseButton, Input
+	DrawerFooter, DrawerCloseButton, Input, IconButton, Checkbox, HStack, Tooltip
 } from "@chakra-ui/react";
 import {Box, Stack, Text} from "@chakra-ui/layout";
 import {Button} from "@chakra-ui/button";
@@ -15,20 +15,35 @@ import {cancelPasswordAction} from "../../reducers/action";
 import {IBaseProps} from "../../interfaces/props";
 import {Trans} from "@lingui/macro";
 import {useRecoilState} from "recoil";
-import {languageState} from "../../hooks/useLanguage";
+import {languageState} from "../../hooks/Atoms";
+import {ViewOffIcon} from "@chakra-ui/icons";
 
 const PasswordInQuery:React.FC<IBaseProps> = (props:IBaseProps)=>{
+
+	/*
+	* let map= new Map<string, string>();
+	  map.set("a1","1");
+	*
+	* map.forEach((value , key) =>{
+        ....
+		});
+
+		map.clear()
+	* */
 	const [isOpen, setOpen] = useState<boolean>(false)
 	const dispatch = useDispatch();
 	const [lang, ] = useRecoilState(languageState)
 	const [passwordHolder, setPasswordHolder]	= useState<string>("password ...")
+	const [tipMessage, setTipMessage] = useState<string>("Click me to decrypt")
 	useMemo(()=>{
 		if(lang==='zh-CN'){
 			setPasswordHolder("密钥...")
+			setTipMessage("点击解密内容")
 		}
 
 		if(lang==='en-US'){
 			setPasswordHolder("password ...")
+			setTipMessage("Click me to decrypt")
 		}
 	},[lang])
 
@@ -48,6 +63,12 @@ const PasswordInQuery:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const doSubmit = useCallback(()=>{
 
 	},[])
+
+	const showQueryContent = useMemo(()=>{
+		return(
+			<></>
+		)
+	},[]);
 
 	return(
 		<Drawer
@@ -72,6 +93,23 @@ const PasswordInQuery:React.FC<IBaseProps> = (props:IBaseProps)=>{
 							<Input  id='username' placeholder={passwordHolder} type='password'/>
 						</Box>
 					</Stack>
+
+					<Stack spacing='30px'>
+						<Box marginY="20px">
+							<Tooltip label={tipMessage} aria-label='A tooltip' bg="blackAlpha.900">
+								<Text color="white" marginY="10px">
+									Label1: **************************
+								</Text>
+							</Tooltip>
+
+							<Tooltip label={tipMessage} aria-label='A tooltip' bg="blackAlpha.900">
+								<Text color="white" marginY="10px">
+									Label2: **************************
+								</Text>
+							</Tooltip>
+						</Box>
+					</Stack>
+
 				</DrawerBody>
 
 				<DrawerFooter borderTopWidth='1px'>

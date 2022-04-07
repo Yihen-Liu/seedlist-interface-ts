@@ -6,10 +6,13 @@ import {useSelector} from "react-redux";
 import {StateType} from "../../reducers/state";
 import {WarningIcon} from "@chakra-ui/icons";
 import {CryptoMachine} from "../../lib/crypto";
+import {useSuccessToast, useWarningToast} from "../../hooks/useToast";
 
 const SignupButton:React.FC<IBaseProps> = (props:IBaseProps) => {
 	const isConnection = useSelector((state:StateType)=>state.walletConnection);
 
+	const successToast = useSuccessToast()
+	const warningToast = useWarningToast()
 	const spaceName = useSelector((state:StateType)=>state.spaceNameValue);
 	const password = useSelector((state:StateType)=>state.passwordValue);
 
@@ -17,9 +20,11 @@ const SignupButton:React.FC<IBaseProps> = (props:IBaseProps) => {
 		console.log("spacename:",spaceName,", password:",password)
 		let encryptor = new CryptoMachine();
 		if(spaceName===undefined || password===undefined){
+			warningToast("Undefined content")
 			return
 		}
-		console.log(encryptor.getAddrAndEtherSignForStorage(spaceName, password))
+			console.log(encryptor.getAddrAndEtherSignForStorage(spaceName, password))
+			successToast("Init Vault Spacename Success")
 	},[spaceName, password])
 
 	const activeButton = useMemo(()=>{

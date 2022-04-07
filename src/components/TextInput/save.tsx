@@ -5,7 +5,7 @@ import {IBaseProps} from "../../interfaces/props";
 import {useSelector} from "react-redux";
 import {StateType} from "../../reducers/state";
 import {useRecoilState} from "recoil";
-import {languageState} from "../../hooks/useLanguage";
+import {languageState} from "../../hooks/Atoms";
 
 const SaveArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const isConnection = useSelector((state:StateType)=>state.walletConnection);

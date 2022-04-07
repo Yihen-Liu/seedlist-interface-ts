@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import {SettingsIcon} from "@chakra-ui/icons";
 import {useRecoilState} from "recoil";
-import {languageState} from "../../hooks/useLanguage";
+import {languageState} from "../../hooks/Atoms";
 import {generatorState} from "../../hooks/Atoms";
 
 

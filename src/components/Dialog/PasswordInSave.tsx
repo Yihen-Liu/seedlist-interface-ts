@@ -15,7 +15,7 @@ import {cancelPasswordAction} from "../../reducers/action";
 import {IBaseProps} from "../../interfaces/props";
 import {Trans} from "@lingui/macro";
 import {useRecoilState} from "recoil";
-import {languageState} from "../../hooks/useLanguage";
+import {languageState} from "../../hooks/Atoms";
 import { ChangeEvent } from "react";
 
 const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{

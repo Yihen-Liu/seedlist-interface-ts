@@ -6,3 +6,30 @@ export const generatorState = atom(
 		default:"puzzle"
 	}
 );
+export const pageState = atom(
+	{
+		key:"pageTag",
+		default:"entropy"
+	}
+);
+
+export const puzzleState = atom(
+	{
+		key:"puzzleInWalletGenerate",
+		default:""
+	}
+);
+
+export const languageState = atom(
+	{
+		key:"language",
+		default:"en-US"
+	}
+);
+
+export const labelState = atom(
+	{
+		key:"labelTag",
+		default:"bitcoin"
+	}
+);

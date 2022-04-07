@@ -5,8 +5,8 @@ import {Trans} from "@lingui/macro";
 import {IBaseProps} from "../../interfaces/props";
 import {NavLink, useLocation} from "react-router-dom"
 import {useRecoilState} from "recoil";
-import { pageState } from "../../hooks/usePage";
-import {labelState} from "../../hooks/useLabel";
+import { pageState } from "../../hooks/Atoms";
+import {labelState} from "../../hooks/Atoms";
 import {useDispatch, useSelector} from "react-redux";
 import {StateType} from "../../reducers/state";
 import {signupAction} from "../../reducers/action";

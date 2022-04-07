@@ -1,8 +1,8 @@
 import React, {useMemo, useState} from "react";
 import {IBaseProps} from "../../../interfaces/props";
 import {useRecoilState} from "recoil";
-import {puzzleState} from "../../../hooks/usePuzzle";
-import {languageState} from "../../../hooks/useLanguage";
+import {puzzleState} from "../../../hooks/Atoms";
+import {languageState} from "../../../hooks/Atoms";
 import {Box, Stack, VStack} from "@chakra-ui/layout";
 import {TextInput} from "../textinput";
 

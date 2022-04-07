@@ -4,7 +4,7 @@ import {IconButton, Menu, MenuButton, MenuDivider, MenuItemOption, MenuList, Men
 import {Box} from "@chakra-ui/layout";
 import {Trans} from "@lingui/macro";
 import {HamburgerIcon} from "@chakra-ui/icons";
-import {languageState} from "../../hooks/useLanguage";
+import {languageState} from "../../hooks/Atoms";
 import {useRecoilState} from "recoil";
 
 const Menus:React.FC<IBaseProps> = (props:IBaseProps) =>{

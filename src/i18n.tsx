@@ -1,7 +1,7 @@
 import React from "react";
 import {IBaseProps} from "./interfaces/props";
 import {Provider} from "./lib/i18n";
-import {languageState} from "./hooks/useLanguage";
+import {languageState} from "./hooks/Atoms";
 import {useRecoilState} from "recoil";
 
 const LanguageProvider:React.FC<IBaseProps> = (props:IBaseProps)=>{

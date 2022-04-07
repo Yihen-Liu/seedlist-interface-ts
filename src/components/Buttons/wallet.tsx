@@ -3,9 +3,9 @@ import {Button} from "@chakra-ui/button";
 import {Trans} from "@lingui/macro";
 import {IBaseProps} from "../../interfaces/props";
 import {useRecoilState} from "recoil";
-import {labelState} from "../../hooks/useLabel";
+import {labelState} from "../../hooks/Atoms";
 import {GenBitcoinBrainWallet, GenEthereumBrainWallet} from "../../lib/brainwallet";
-import {puzzleState} from "../../hooks/usePuzzle";
+import {puzzleState} from "../../hooks/Atoms";
 
 const WalletButton:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const [label,] = useRecoilState(labelState)

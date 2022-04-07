@@ -3,7 +3,7 @@ import {TextInput} from "./textinput";
 import React, {useMemo, useState} from "react";
 import {IBaseProps} from "../../interfaces/props";
 import {useRecoilState} from "recoil";
-import {languageState} from "../../hooks/useLanguage";
+import {languageState} from "../../hooks/Atoms";
 
 const QueryArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const [lang, ] = useRecoilState(languageState)
