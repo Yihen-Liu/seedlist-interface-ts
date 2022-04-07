@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect, useMemo } from 'react';
-import { etherClient, IWalletInfo, contractChainId, contractChainName } from '../../ethers/etherClient';
+import { etherClient, IWalletInfo } from '../../ethers/etherClient';
 import {Trans} from "@lingui/macro";
 import {Box} from "@chakra-ui/layout";
 import {Button} from "@chakra-ui/button";
@@ -9,21 +9,35 @@ import {IBaseProps} from "../../interfaces/props";
 import {useDispatch, useSelector} from "react-redux";
 import {StateType} from "../../reducers/state";
 import { walletConnectionAction} from "../../reducers/action";
+import {useRecoilState} from "recoil";
+import {networkState} from "../../hooks/Atoms";
 
 const WalletInfo: React.FC<IBaseProps> = (props:IBaseProps) => {
     const [walletInfo, setWalletInfo] = useState<IWalletInfo | null>(null);
-
 	const action = useSelector((state:StateType)=>state.action);
-
+	const [network,] = useRecoilState(networkState)
 	const dispatch = useDispatch();
+	const [chainId, setChainId] = useState<number>(4)
+	const [chainName, setChainName] = useState<string>("Rinkeby")
 
 	useMemo(()=>{
-		if(contractChainId===walletInfo?.chainId){
+		if(network==="rinkeby"){
+			setChainName("Rinkeby")
+			setChainId(4)
+		}
+		if(network==="mainnet"){
+			setChainName("Mainnet")
+			setChainId(1)
+		}
+	},[network])
+
+	useMemo(()=>{
+		if(chainId===walletInfo?.chainId){
 			dispatch(walletConnectionAction(action, true));
 		}else{
 			dispatch(walletConnectionAction(action, false));
 		}
-	}, [dispatch, walletInfo?.chainId, action]);
+	}, [dispatch, walletInfo?.chainId, action, chainId]);
 
 	useEffect(() => {
         const doSetWalletInfo = () => {
@@ -58,11 +72,11 @@ const WalletInfo: React.FC<IBaseProps> = (props:IBaseProps) => {
 
                 { !walletInfo && <div> <Trans> Connect Wallet </Trans> </div>}
 
-                {walletInfo && walletInfo.chainId !== contractChainId && (
-                    <div> <Trans> Switch to </Trans> {contractChainName} </div>
+                {walletInfo && walletInfo.chainId !== chainId && (
+                    <div> <Trans> Switch Wallet </Trans> {chainName} </div>
                 )}
 
-                {walletInfo && walletInfo.chainId === contractChainId &&(
+                {walletInfo && walletInfo.chainId === chainId &&(
 					<div>
 						{walletInfo.address.substr(0, 6)}...{walletInfo.address.substr(-4)}
 					</div>

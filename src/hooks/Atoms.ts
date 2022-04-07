@@ -33,3 +33,9 @@ export const labelState = atom(
 		default:"bitcoin"
 	}
 );
+export const networkState = atom(
+	{
+		key:"networkTag",
+		default:"rinkeby"
+	}
+);

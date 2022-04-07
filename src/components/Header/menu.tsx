@@ -4,16 +4,25 @@ import {IconButton, Menu, MenuButton, MenuDivider, MenuItemOption, MenuList, Men
 import {Box} from "@chakra-ui/layout";
 import {Trans} from "@lingui/macro";
 import {HamburgerIcon} from "@chakra-ui/icons";
-import {languageState} from "../../hooks/Atoms";
+import {languageState, networkState} from "../../hooks/Atoms";
 import {useRecoilState} from "recoil";
+import {useSearchParams} from "react-router-dom";
 
 const Menus:React.FC<IBaseProps> = (props:IBaseProps) =>{
 	const [ lang, setLang] = useRecoilState(languageState)
+	const [, setNetwork] = useRecoilState(networkState)
 	const [langTitle, setLangTitle]	= useState<string>("Language")
 	const [networkTitle, setNetworkTitle]	= useState<string>("Network")
-	const doCheck = useCallback((value:string)=>{
+	const [routerPrams, setRouterParams] = useSearchParams()
+
+	const doClickLanguage = useCallback((value:string)=>{
 		setLang(value)
-	},[setLang])
+	},[])
+
+	const doClickNetwork = useCallback((value:string)=>{
+		setNetwork(value)
+	},[])
+
 	useMemo(()=>{
 		if(lang==='zh-CN'){
 			setLangTitle("语言")
@@ -48,17 +57,17 @@ const Menus:React.FC<IBaseProps> = (props:IBaseProps) =>{
 				/>
 				<MenuList maxWidth='100px' bgColor={"#2b2d32"} borderColor={"black"}>
 					<MenuOptionGroup defaultValue='rinkeby' title={networkTitle} type='radio'>
-						<MenuItemOption _hover={{ bg: 'blackAlpha.500'}} value='rinkeby'>
+						<MenuItemOption _hover={{ bg: 'blackAlpha.500'}} value='rinkeby' onClick={()=>doClickNetwork("rinkeby")}>
 						  <Trans> Rinkeby Test Network </Trans>
 						</MenuItemOption>
-						<MenuItemOption _hover={{ bg: 'blackAlpha.500'}} value='mainnet' isDisabled={true}>
+						<MenuItemOption _hover={{ bg: 'blackAlpha.500'}} value='mainnet' onClick={()=>doClickNetwork("mainnet")}>
 							<Trans> Ethereum Mainnet </Trans>
 						</MenuItemOption>
 					</MenuOptionGroup>
 					<MenuDivider />
 					<MenuOptionGroup defaultValue='english' title={langTitle} type='radio'>
-						<MenuItemOption onClick={()=>{doCheck("zh-CN")}} _hover={{ bg: 'blackAlpha.500'}} value='chinese'>中文</MenuItemOption>
-						<MenuItemOption onClick={()=>{doCheck("en-US")}} _hover={{ bg: 'blackAlpha.500'}} value='english'>English</MenuItemOption>
+						<MenuItemOption onClick={()=>{doClickLanguage("zh-CN")}} _hover={{ bg: 'blackAlpha.500'}} value='chinese'>中文</MenuItemOption>
+						<MenuItemOption onClick={()=>{doClickLanguage("en-US")}} _hover={{ bg: 'blackAlpha.500'}} value='english'>English</MenuItemOption>
 					</MenuOptionGroup>
 				</MenuList>
 			</Menu>

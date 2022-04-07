@@ -6,6 +6,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: tr-TR\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
 
 #: src/components/Dialog/PasswordInSave.tsx
 msgid "1. 21 million tokens are given to community users as an incentive cycle;"
@@ -121,8 +127,12 @@ msgid "Submit"
 msgstr ""
 
 #: src/components/Wallet/wallet.tsx
-msgid "Switch to"
+msgid "Switch Wallet"
 msgstr ""
+
+#: src/components/Wallet/wallet.tsx
+#~ msgid "Switch to"
+#~ msgstr ""
 
 #: src/components/Labels/singup.tsx
 msgid "User have to sign up a spacename before save or query content."
