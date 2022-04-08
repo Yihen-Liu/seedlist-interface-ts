@@ -9,7 +9,7 @@ import {IBaseProps} from "../../interfaces/props";
 const QueryBoard:React.FC<IBaseProps> = (props:IBaseProps)=>{
     return(
         <Center>
-            <Stack>
+            <Stack marginY="10px">
                 <Box bgColor="#2b2d32" p="5" w="100%" maxW="lg" borderRadius="8" >
                     <Stack spacing={6}>
 
