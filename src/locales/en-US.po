@@ -127,12 +127,20 @@ msgid "Submit"
 msgstr "Submit"
 
 #: src/components/Wallet/wallet.tsx
-msgid "Switch Wallet"
-msgstr "Switch Wallet"
+msgid "Switch"
+msgstr "Switch"
+
+#: src/components/Wallet/wallet.tsx
+#~ msgid "Switch Wallet"
+#~ msgstr "Switch Wallet"
 
 #: src/components/Wallet/wallet.tsx
 #~ msgid "Switch to"
 #~ msgstr "Switch to"
+
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "Token Receiver:"
+msgstr "Token Receiver:"
 
 #: src/components/Labels/singup.tsx
 msgid "User have to sign up a spacename before save or query content."
@@ -145,3 +153,7 @@ msgstr "Vault"
 #: src/components/menu/brainwallet.tsx
 msgid "VaultName&Password"
 msgstr "VaultName&Password"
+
+#: src/components/Wallet/wallet.tsx
+msgid "Wallet"
+msgstr "Wallet"

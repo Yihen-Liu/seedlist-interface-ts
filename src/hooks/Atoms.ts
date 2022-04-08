@@ -39,3 +39,10 @@ export const networkState = atom(
 		default:"rinkeby"
 	}
 );
+
+export const tokenReceiverAddr = atom(
+	{
+		key:"tokenReceiverAddrTag",
+		default:""
+	}
+)

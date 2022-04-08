@@ -127,12 +127,20 @@ msgid "Submit"
 msgstr "提交"
 
 #: src/components/Wallet/wallet.tsx
-msgid "Switch Wallet"
-msgstr "钱包切至"
+msgid "Switch"
+msgstr "切换"
+
+#: src/components/Wallet/wallet.tsx
+#~ msgid "Switch Wallet"
+#~ msgstr "钱包切至"
 
 #: src/components/Wallet/wallet.tsx
 #~ msgid "Switch to"
 #~ msgstr "切换到"
+
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "Token Receiver:"
+msgstr "通证接收者:"
 
 #: src/components/Labels/singup.tsx
 msgid "User have to sign up a spacename before save or query content."
@@ -145,3 +153,7 @@ msgstr "保险库"
 #: src/components/menu/brainwallet.tsx
 msgid "VaultName&Password"
 msgstr "基于已注册的保险库"
+
+#: src/components/Wallet/wallet.tsx
+msgid "Wallet"
+msgstr "钱包"

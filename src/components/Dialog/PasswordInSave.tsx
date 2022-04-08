@@ -15,7 +15,7 @@ import {cancelPasswordAction} from "../../reducers/action";
 import {IBaseProps} from "../../interfaces/props";
 import {Trans} from "@lingui/macro";
 import {useRecoilState} from "recoil";
-import {languageState} from "../../hooks/Atoms";
+import {languageState, tokenReceiverAddr} from "../../hooks/Atoms";
 import { ChangeEvent } from "react";
 
 const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
@@ -25,6 +25,7 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const isPassword = useSelector((state:StateType)=>state.password);
 	const isConnection = useSelector((state:StateType)=>state.walletConnection);
 
+	const [receiverAddr,] = useRecoilState(tokenReceiverAddr)
 	const [lang, ] = useRecoilState(languageState)
 	const [passwordHolder, setPasswordHolder]	= useState<string>("password ...")
 	const [checked, setChecked] = useState<boolean>(false)
@@ -39,6 +40,20 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			setPasswordHolder("password ...")
 		}
 	},[lang])
+
+	const tokenReceiverAddress = useMemo(()=>{
+		if(checked===false) return;
+		return(
+			<Stack spacing='24px'>
+				<Box>
+					<Text fontSize="15px" color="white">
+						<Trans>Token Receiver: </Trans>
+					</Text>
+					<Input  id='username' placeholder={receiverAddr} />
+				</Box>
+			</Stack>
+		);
+	},[checked])
 
 	const economicModelDesc = useMemo(()=>{
 		if(checked===false) return;
@@ -117,6 +132,7 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 								</Text>
 							</Checkbox>
 							{economicModelDesc}
+							{tokenReceiverAddress}
 						</Box>
 					</Stack>
 				</DrawerBody>
