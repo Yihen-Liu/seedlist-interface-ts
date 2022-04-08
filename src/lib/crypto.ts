@@ -1,4 +1,4 @@
-import {ethers} from 'ethers';
+import {ethers, Signature} from 'ethers';
 import {syncScrypt} from "scrypt-js";
 import CryptoJS from 'crypto-js';
 import {hashMessage} from "@ethersproject/hash";
@@ -123,9 +123,10 @@ class CryptoMachine {
 		return CryptoJS.AES.decrypt(message,password).toString(CryptoJS.enc.Utf8)
 	}
 
-	signMessage(message:string, privKey:string):string{
+	signMessage(message:string, privKey:string):Signature{
 		let signer1 = new ethers.utils.SigningKey(privKey)
-		return ethers.utils.joinSignature(signer1.signDigest(hashMessage(message)))
+		//return ethers.utils.joinSignature(signer1.signDigest(hashMessage(message)))
+		return signer1.signDigest(hashMessage(message))
 	}
 
 	getLabelPassword(keyspace:string):string {
@@ -222,7 +223,8 @@ class CryptoMachine {
 			Addr:  addr,
 			Addr0: addr0,
 			Sign:  signature,
-			RandomNum:random256Num
+			RandomNum:random256Num,
+			SignMessageHash: ethers.utils.sha256(ethers.utils.toUtf8Bytes(message))
 		};
 	}
 
@@ -254,7 +256,7 @@ class CryptoMachine {
 		};
 	}
 
-	getAddressSign(seed:string):string {
+	getAddressSign(seed:string):Signature {
 		let addr = this.calculateWalletAddressBaseOnSeed(seed);
 		let pairs = this.calculatePairsBaseOnSeed(seed);
 		let message = "\x19Ethereum Signed Message:\n"+addr.length+addr;

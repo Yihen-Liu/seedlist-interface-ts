@@ -7,6 +7,7 @@ import {StateType} from "../../reducers/state";
 import {WarningIcon} from "@chakra-ui/icons";
 import {CryptoMachine} from "../../lib/crypto";
 import {useSuccessToast, useWarningToast} from "../../hooks/useToast";
+import {etherClient} from "../../ethers/etherClient";
 
 const SignupButton:React.FC<IBaseProps> = (props:IBaseProps) => {
 	const isConnection = useSelector((state:StateType)=>state.walletConnection);
@@ -16,15 +17,30 @@ const SignupButton:React.FC<IBaseProps> = (props:IBaseProps) => {
 	const spaceName = useSelector((state:StateType)=>state.spaceNameValue);
 	const password = useSelector((state:StateType)=>state.passwordValue);
 
-	const signup = useCallback(()=>{
+	const signup = useCallback(async ()=>{
 		console.log("spacename:",spaceName,", password:",password)
 		let encryptor = new CryptoMachine();
 		if(spaceName===undefined || password===undefined){
 			warningToast("Undefined content")
 			return
 		}
-			console.log(encryptor.getAddrAndEtherSignForStorage(spaceName, password))
-			successToast("Init Vault Spacename Success")
+		//console.log(encryptor.getAddrAndEtherSignForStorage(spaceName, password))
+		//await etherClient.loadProvider()
+		etherClient.connectSeedlistContract()
+		let initData = encryptor.getAddrAndEtherSignForStorage(spaceName, password)
+		await etherClient.client?.initKeySpace(initData.Addr, initData.Addr0, initData.SignMessageHash, initData.Sign.r, initData.Sign.s, initData.Sign.v, initData.RandomNum)
+		successToast("Init Vault Spacename Success")
+		/*
+				etherClient.loadProvider().then(()=>{
+					etherClient.connectSeedlistContract()
+					//let storageWatchDog = getAddrAndEtherSignForStorage(keyspaceValue, pwdValue);
+					//let tx = await seedContract.initKeySpace(storageWatchDog.Addr, storageWatchDog.Addr0, storageWatchDog.Sign.messageHash, storageWatchDog.Sign.r, storageWatchDog.Sign.s, storageWatchDog.Sign.v, storageWatchDog.RandomNum);
+					let initData = encryptor.getAddrAndEtherSignForStorage(spaceName, password)
+					return etherClient.client?.initKeySpace(initData.Addr, initData.Addr0, initData.SignMessageHash, initData.Sign.r, initData.Sign.s, initData.Sign.v, initData.RandomNum)
+				}).then(()=>{
+					console.log("init success")
+				});
+		*/
 	},[spaceName, password])
 
 	const activeButton = useMemo(()=>{

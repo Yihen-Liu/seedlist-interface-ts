@@ -123,7 +123,7 @@ class SeedlistClient {
 	//function initKeySpace(address addr, address addr0, bytes32 addrHash, bytes32 r, bytes32 s,uint8 v, uint256 randomNum) network canAdd override public returns(bool){
 	public async initKeySpace(
 		addr:string, addr0:string, addrHash:string,
-		r:string, s:string, v:number, randomNum:BigNumber,
+		r:string, s:string, v:number, randomNum:string,
 		config:PayableOverrides={}):Promise<any>{
 		if(this.provider === undefined || this.seedlist === undefined || this.signer === undefined){
 			return Promise.reject("need to connect a valid provider and signer")
