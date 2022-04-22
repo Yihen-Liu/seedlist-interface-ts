@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import {DefaultEncrypt__factory } from "../types";
+import {VaultHub__factory } from "../types";
 import { ethers, Signer, BigNumber, PayableOverrides } from "ethers";
 import type { Web3Provider, Provider } from "@ethersproject/providers";
 import detectEthereumProvider from "@metamask/detect-provider";
@@ -100,7 +100,8 @@ class SeedlistClient {
 
     public connectProvider(address: string, provider: Provider): SeedlistClient {
         this.provider = provider;
-        this.seedlist = DefaultEncrypt__factory.connect(address, this.provider);
+        this.seedlist = VaultHub__factory.connect(address, this.provider);
+
         return this;
     }
 

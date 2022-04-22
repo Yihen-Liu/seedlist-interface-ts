@@ -21,7 +21,7 @@ const WalletButton:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			console.log("bitcoin:")
 			console.log(addrs)
 		}
-	},[label])
+	},[label, puzzle])
 
 	return(
 		<Button

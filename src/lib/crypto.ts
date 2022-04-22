@@ -123,10 +123,14 @@ class CryptoMachine {
 		return CryptoJS.AES.decrypt(message,password).toString(CryptoJS.enc.Utf8)
 	}
 
-	signMessage(message:string, privKey:string):Signature{
+	async signMessage(message:string, privKey:string):Promise<Signature>{
 		let signer1 = new ethers.utils.SigningKey(privKey)
 		//return ethers.utils.joinSignature(signer1.signDigest(hashMessage(message)))
-		return signer1.signDigest(hashMessage(message))
+		let wallet = new ethers.Wallet(privKey)
+		let flatSig = await wallet.signMessage(message)
+		return ethers.utils.splitSignature(flatSig)
+		//let messageHashBytes = ethers.utils.arrayify()
+		//return signer1.signDigest(hashMessage(message))
 	}
 
 	getLabelPassword(keyspace:string):string {
@@ -210,13 +214,14 @@ class CryptoMachine {
 		return this.decryptMessage(encryptContent, pwd);
 	}
 
-	getAddrAndEtherSignForStorage(keyspace:string, password:string) {
+	async getAddrAndEtherSignForStorage(keyspace:string, password:string) {
 		let seed = this.calculateValidSeed(keyspace, password);
 		let addr = this.calculateWalletAddressBaseOnSeed(seed);
 		let addr0 = this.calculateWalletAddressBaseOnSeed(this.calculateOnceHash(addr+this.calculateOnceHash(keyspace+password)));
 		let pairs = this.calculatePairsBaseOnSeed(this.calculateOnceHash(addr+this.calculateOnceHash(keyspace+password)));
 		let message = "\x19Ethereum Signed Message:\n"+addr0.length+addr0;
-		let signature = this.signMessage(message, pairs.privKey);
+		console.log("addr0.length:",addr0.length)
+		let signature = await this.signMessage(message, pairs.privKey);
 		let random256Num = ethers.utils.sha256(ethers.utils.toUtf8Bytes(addr0));
 
 		return{
@@ -224,7 +229,7 @@ class CryptoMachine {
 			Addr0: addr0,
 			Sign:  signature,
 			RandomNum:random256Num,
-			SignMessageHash: ethers.utils.sha256(ethers.utils.toUtf8Bytes(message))
+			SignMessageHash: ethers.utils.id(addr0)
 		};
 	}
 
@@ -256,7 +261,7 @@ class CryptoMachine {
 		};
 	}
 
-	getAddressSign(seed:string):Signature {
+	getAddressSign(seed:string):Promise<Signature> {
 		let addr = this.calculateWalletAddressBaseOnSeed(seed);
 		let pairs = this.calculatePairsBaseOnSeed(seed);
 		let message = "\x19Ethereum Signed Message:\n"+addr.length+addr;

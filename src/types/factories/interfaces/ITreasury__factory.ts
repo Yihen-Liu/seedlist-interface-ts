@@ -3,24 +3,19 @@
 /* eslint-disable */
 
 import { Contract, Signer, utils } from "ethers";
-import { Provider } from "@ethersproject/providers";
-import type { ITreasury, ITreasuryInterface } from "../ITreasury";
+import type { Provider } from "@ethersproject/providers";
+import type { ITreasury, ITreasuryInterface } from "../../interfaces/ITreasury";
 
 const _abi = [
   {
     inputs: [
       {
         internalType: "address",
-        name: "verifier",
-        type: "address",
-      },
-      {
-        internalType: "address",
         name: "receiver",
         type: "address",
       },
     ],
-    name: "Mint",
+    name: "mint",
     outputs: [
       {
         internalType: "bool",

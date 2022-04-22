@@ -27,7 +27,11 @@ const SignupButton:React.FC<IBaseProps> = (props:IBaseProps) => {
 		//console.log(encryptor.getAddrAndEtherSignForStorage(spaceName, password))
 		//await etherClient.loadProvider()
 		etherClient.connectSeedlistContract()
-		let initData = encryptor.getAddrAndEtherSignForStorage(spaceName, password)
+		etherClient.connectSigner()
+		if(!etherClient.client){
+			console.error("connect signer error in signup")
+		}
+		let initData = await encryptor.getAddrAndEtherSignForStorage(spaceName, password)
 		await etherClient.client?.initKeySpace(initData.Addr, initData.Addr0, initData.SignMessageHash, initData.Sign.r, initData.Sign.s, initData.Sign.v, initData.RandomNum)
 		successToast("Init Vault Spacename Success")
 		/*

@@ -49,6 +49,8 @@ msgstr "比特币"
 msgid "Brain Wallet"
 msgstr "脑钱包"
 
+#: src/components/Dialog/BitcoinAddress.tsx
+#: src/components/Dialog/EthereumAddress.tsx
 #: src/components/Dialog/PasswordInQuery.tsx
 #: src/components/Dialog/PasswordInSave.tsx
 msgid "Cancel"
@@ -96,6 +98,8 @@ msgstr "开始注册"
 msgid "Please connect wallet firstly"
 msgstr "请您提前连接钱包"
 
+#: src/components/Dialog/BitcoinAddress.tsx
+#: src/components/Dialog/EthereumAddress.tsx
 #: src/components/Dialog/PasswordInQuery.tsx
 #: src/components/Dialog/PasswordInSave.tsx
 msgid "Please enter your password"
@@ -121,6 +125,8 @@ msgstr "存储"
 msgid "Sign Up"
 msgstr "注册"
 
+#: src/components/Dialog/BitcoinAddress.tsx
+#: src/components/Dialog/EthereumAddress.tsx
 #: src/components/Dialog/PasswordInQuery.tsx
 #: src/components/Dialog/PasswordInSave.tsx
 msgid "Submit"
