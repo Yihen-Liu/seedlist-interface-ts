@@ -4935,7 +4935,7 @@ cross-spawn@^7.0.2, cross-spawn@^7.0.3:
 
 crypto-browserify@3.12.0:
   version "3.12.0"
-  resolved "https://registry.npmmirror.com/crypto-browserify/-/crypto-browserify-3.12.0.tgz"
+  resolved "https://registry.npmmirror.com/crypto-browserify/-/crypto-browserify-3.12.0.tgz#396cf9f3137f03e4b8e532c58f698254e00f80ec"
   integrity sha512-fz4spIh+znjO2VjL+IdhEpRJ3YN6sMzITSBijk6FK2UvTqruSQW+/cCZTSNsMiZNvUeq0CqurF+dAbyiGOY6Wg==
   dependencies:
     browserify-cipher "^1.0.0"
@@ -5602,11 +5602,6 @@ email-addresses@^3.0.1:
   version "3.1.0"
   resolved "https://registry.npmmirror.com/email-addresses/-/email-addresses-3.1.0.tgz"
   integrity sha512-k0/r7GrWVL32kZlGwfPNgB2Y/mMXVTq/decgLczm/j34whdaspNrZO8CnXPf1laaHxI6ptUlsnAxN+UAPw+fzg==
-
-emitter-component@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.npmmirror.com/emitter-component/-/emitter-component-1.1.1.tgz"
-  integrity sha512-G+mpdiAySMuB7kesVRLuyvYRqDmshB7ReKEVuyBPkzQlmiDiLrt7hHHIy4Aff552bgknVN7B2/d3lzhGO5dvpQ==
 
 emittery@^0.8.1:
   version "0.8.1"
@@ -11121,13 +11116,6 @@ stream-browserify@^3.0.0:
   dependencies:
     inherits "~2.0.4"
     readable-stream "^3.5.0"
-
-stream@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.npmmirror.com/stream/-/stream-0.0.2.tgz"
-  integrity sha512-gCq3NDI2P35B2n6t76YJuOp7d6cN/C7Rt0577l91wllh0sY9ZBuw9KaSGqH/b0hzn3CWWJbpbW0W0WvQ1H/Q7g==
-  dependencies:
-    emitter-component "^1.1.1"
 
 strict-uri-encode@^1.0.0:
   version "1.1.0"

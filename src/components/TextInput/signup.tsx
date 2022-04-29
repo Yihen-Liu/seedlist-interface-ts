@@ -56,11 +56,6 @@ const SignupArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	                    disabled={!isConnection}
 	                    value={spaceValue}
 	                    onChange={handleSpaceChange}
-/*
-                        disabled={this.state.spacename.disabled}
-                        onChange={this.setSpaceName}
-                        placeholder={this.state.spacename.message}
-*/
                     />
                 </Stack>
             </Box>
@@ -78,12 +73,6 @@ const SignupArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	                    disabled={!isConnection}
 	                    value={pwdValue}
 	                    onChange={handlePwdChange}
-/*
-                        disabled={this.state.password.disabled}
-                        onChange={this.setPassword}
-                        placeholder={this.state.password.message}
-                        type={'password'}
-*/
                     />
                 </Stack>
             </Box>

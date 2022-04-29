@@ -7,6 +7,8 @@ import {WalletPuzzleArea} from "../TextInput/brainwallet/PuzzelArea";
 import {WalletVaultArea} from "../TextInput/brainwallet/VaultArea";
 import {useRecoilState} from "recoil";
 import {generatorState} from "../../hooks/Atoms";
+import {BitcoinAddress} from "../Dialog/BitcoinAddress";
+import {EthereumAddress} from "../Dialog/EthereumAddress";
 
 const WalletBoard:React.FC<IBaseProps>=(props:IBaseProps)=>{
 	const [generator, ] = useRecoilState(generatorState)
@@ -24,7 +26,8 @@ const WalletBoard:React.FC<IBaseProps>=(props:IBaseProps)=>{
 						<HStack spacing="24px" width="100%">
 							<WalletButton />
 						</HStack>
-
+						<BitcoinAddress />
+						<EthereumAddress />
 					</Stack>
 				</Box>
 			</Stack>

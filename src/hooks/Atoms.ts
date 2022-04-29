@@ -74,3 +74,17 @@ export const labelNameState = atom(
 		default:""
 	}
 )
+
+export const bitcoinWalletState = atom(
+	{
+		key:"bitcoinWalletTag",
+		default:false
+	}
+);
+
+export const ethereumWalletState = atom(
+	{
+		key:"ethereumWalletTag",
+		default:false
+	}
+);

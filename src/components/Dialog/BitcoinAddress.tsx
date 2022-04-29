@@ -15,21 +15,11 @@ import {cancelPasswordAction} from "../../reducers/action";
 import {IBaseProps} from "../../interfaces/props";
 import {Trans} from "@lingui/macro";
 import {useRecoilState} from "recoil";
-import {languageState} from "../../hooks/Atoms";
+import {bitcoinWalletState, languageState} from "../../hooks/Atoms";
 import {ViewOffIcon} from "@chakra-ui/icons";
 
 const BitcoinAddress:React.FC<IBaseProps> = (props:IBaseProps)=>{
 
-	/*
-	* let map= new Map<string, string>();
-	  map.set("a1","1");
-	*
-	* map.forEach((value , key) =>{
-        ....
-		});
-
-		map.clear()
-	* */
 	const [isOpen, setOpen] = useState<boolean>(false)
 	const dispatch = useDispatch();
 	const [lang, ] = useRecoilState(languageState)
@@ -47,18 +37,18 @@ const BitcoinAddress:React.FC<IBaseProps> = (props:IBaseProps)=>{
 		}
 	},[lang])
 
-	const isPassword = useSelector((state:StateType)=>state.password);
+	const [isBitcoinWallet, setBitcoinWallet] = useRecoilState(bitcoinWalletState);
 	const isConnection = useSelector((state:StateType)=>state.walletConnection)
 	useEffect(()=>{
-		if(isPassword===true){
+		if(isBitcoinWallet===true){
 			setOpen(true);
 		}
-	},[isPassword])
+	},[isBitcoinWallet])
 
 	const doCancel = useCallback(()=>{
-		dispatch(cancelPasswordAction(ActionType.CLICK_QUERY, isConnection))
-		setOpen(isOpen)
-	},[dispatch])
+		setOpen(false);
+		setBitcoinWallet(false);
+	},[])
 
 	const doSubmit = useCallback(()=>{
 
@@ -82,18 +72,11 @@ const BitcoinAddress:React.FC<IBaseProps> = (props:IBaseProps)=>{
 				<DrawerHeader borderBottomWidth='1px'>
 
 					<Text fontSize="18px" color="white">
-						<Trans>Please enter your password</Trans>
+						<Trans>Bitcoin Address:</Trans>
 					</Text>
 				</DrawerHeader>
 
 				<DrawerBody>
-					<Stack spacing='24px'>
-						<Box>
-							<Text fontSize="18px" color="white"> </Text>
-							<Input  id='username' placeholder={passwordHolder} type='password'/>
-						</Box>
-					</Stack>
-
 					<Stack spacing='30px'>
 						<Box marginY="20px">
 							<Tooltip label={tipMessage} aria-label='A tooltip' bg="blackAlpha.900">
