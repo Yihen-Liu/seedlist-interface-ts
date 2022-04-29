@@ -7,7 +7,7 @@ export function useWarningToast():(msg:string)=>void{
 		description: message,
 		isClosable: true,
 		status:"warning",
-		duration:2000,
+		duration:5000,
 		position:"top"
 	})
 }
@@ -19,7 +19,7 @@ export function useSuccessToast():(msg:string)=>void{
 		description: message,
 		isClosable: true,
 		status:"success",
-		duration:2000,
+		duration:5000,
 		position:"top"
 	})
 }

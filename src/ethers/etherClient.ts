@@ -120,115 +120,105 @@ class SeedlistClient {
         }
         return Promise.resolve(this.seedlist);
     }
-	//add by Yihen.Liu
-	//function initKeySpace(address addr, address addr0, bytes32 addrHash, bytes32 r, bytes32 s,uint8 v, uint256 randomNum) network canAdd override public returns(bool){
-	public async initKeySpace(
-		addr:string, addr0:string, addrHash:string,
-		r:string, s:string, v:number, randomNum:string,
+
+	public async initPrivateVault(
+		addr:string,
+		r:string, s:string, v:number, deadline:number,
 		config:PayableOverrides={}):Promise<any>{
 		if(this.provider === undefined || this.seedlist === undefined || this.signer === undefined){
 			return Promise.reject("need to connect a valid provider and signer")
 		}
+		const gas=await this.seedlist.connect(this.signer).estimateGas.initPrivateVault( addr, deadline, v, r, s, {...config})
 
-		const gas=await this.seedlist.connect(this.signer).estimateGas.initKeySpace( addr, addr0, addrHash, r, s, v, randomNum,{...config})
-
-		const transaction = await this.seedlist.connect(this.signer).initKeySpace(
-			addr, addr0, addrHash, r, s, v, randomNum, { gasLimit:gas.mul(13).div(10), ...config })
+		const transaction = await this.seedlist.connect(this.signer).initPrivateVault(
+			addr, deadline, v, r, s, { gasLimit:gas.mul(13).div(10), ...config })
 
 		const receipt = await transaction.wait(this._waitConfirmations);
 		return receipt;
 	}
 
-/*
-	const gas = await this.evolution
-		.connect(this.signer)
-		.estimateGas.mint(id, { ...config });
-	const transaction = await this.evolution
-		.connect(this.signer)
-		.mint(id, { gasLimit: gas.mul(13).div(10), ...config });
-	const receipt = await transaction.wait(this._waitConfirmations);
-	return receipt;
-*/
-	//function spaceExist(address addr, bytes32 addrHash, bytes32 r, bytes32 s, uint8 v) network external override view returns(bool){
-	public async spaceExist(addr:string, addrHash:string, r:string,
+	public async vaultHasRegister(addr:string, deadline:number, r:string,
 		s:string, v:number, config:PayableOverrides={}):Promise<any>{
-
-	}
-		//function addKey(address keyspace, address addr, address addr0, bytes32 addrHash, bytes32 r, bytes32 s, uint8 v,
-	// address id, address kid, string memory cryptoKey, string memory labelName) network canAdd override external returns(bool){
-	public async addKey(
-		keyspace:string, addr:string, addr0:string, addrHash:string,
-		r:string, s:string, v:number, id:string, kid:string,
-		cryptoKey:string, labelName:string,
-		config:PayableOverrides={}):Promise<any>{
-
+		if(this.provider === undefined || this.seedlist === undefined || this.signer === undefined){
+			return Promise.reject("need to connect a valid provider and signer")
+		}
+		return this.seedlist.vaultHasRegister(addr, deadline, v, r, s);
 	}
 
-	//function addSplitKey(address keyspace, address addr, address addr0, bytes32 addrHash, bytes32 r, bytes32 s,
-	// uint8 v, address id, address kid0,address kid1, string memory cryptoKey, string memory labelName) network canAdd external {
-	public async addSplitKey(
-		keyspace:string, addr:string, addr0:string, addrHash:string,
-		r:string, s:string, v:number, id:string, kid0:string,
-		kid1:string, cryptoKey:string, labelName:string,
-		config:PayableOverrides={}):Promise<any>{
+	public async saveDataWithMinting(
+		addr:string, data:string, cryptoLabel:string, receiver:string, deadline:number,
+		r:string, s:string, v:number, config:PayableOverrides={}):Promise<any>{
 
+		if(this.provider === undefined || this.seedlist === undefined || this.signer === undefined){
+			return Promise.reject("need to connect a valid provider and signer")
+		}
+
+		const gas=await this.seedlist.connect(this.signer).estimateGas.savePrivateDataWithMinting( addr, data, cryptoLabel, receiver, deadline, v, r, s, {...config})
+
+		const transaction = await this.seedlist.connect(this.signer).savePrivateDataWithMinting(
+			addr, data, cryptoLabel, receiver, deadline, v, r, s, { gasLimit:gas.mul(13).div(10), ...config })
+
+		const receipt = await transaction.wait(this._waitConfirmations);
+		return receipt;
 	}
 
-	//function isLabelExist(address addr, bytes32 addrHash, bytes32 r, bytes32 s, uint8 v, address labelId) network external override view returns(bool) {
-	public async isLabelExist(addr:string, addrHash:string, r:string,
-	    s:string, v:number, labelId:string, config:PayableOverrides={}):Promise<any>{
+	public async saveDataWithoutMinting(
+		addr:string, data:string, cryptoLabel:string, deadline:number,
+		r:string, s:string, v:number, config:PayableOverrides={}):Promise<any>{
 
+		if(this.provider === undefined || this.seedlist === undefined || this.signer === undefined){
+			return Promise.reject("need to connect a valid provider and signer")
+		}
+
+		const gas=await this.seedlist.connect(this.signer).estimateGas.savePrivateDataWithoutMinting( addr, data, cryptoLabel, deadline, v, r, s, {...config})
+
+		const transaction = await this.seedlist.connect(this.signer).savePrivateDataWithoutMinting(
+			addr, data, cryptoLabel, deadline, v, r, s, { gasLimit:gas.mul(13).div(10), ...config })
+
+		const receipt = await transaction.wait(this._waitConfirmations);
+		return receipt;
 	}
 
-	//function getKey(address id, address addr, bytes32 addrHash, bytes32 r, bytes32 s, uint8 v) override external view returns(string memory){
-	public async getKey(id:string, addr:string, addrHash:string,
-		r:string, s:string, v:number ,config:PayableOverrides={}):Promise<any>{
-
+	public async labelName(addr:string ,index:number, deadline:number, r:string, s:string, v:number, config:PayableOverrides={}):Promise<any>{
+		if(this.provider === undefined || this.seedlist === undefined || this.signer === undefined){
+			return Promise.reject("need to connect a valid provider and signer")
+		}
+		return this.seedlist.getLabelNameByIndex(addr, deadline, index, v, r, s);
 	}
 
-	//function getSplitKey(address addr, bytes32 addrHash, bytes32 r, bytes32 s, uint8 v, address kid0, address kid1) external view returns(string memory, string memory){
-	public async getSplitKey( addr:string, addrHash:string, r:string,
-		s:string, v:number ,kid0:string, kid1:string, config:PayableOverrides={}):Promise<any>{
-
+	public async queryDataByIndex(addr:string ,index:number, deadline:number, r:string, s:string, v:number, config:PayableOverrides={}):Promise<any>{
+		if(this.provider === undefined || this.seedlist === undefined || this.signer === undefined){
+			return Promise.reject("need to connect a valid provider and signer")
+		}
+		return this.seedlist.queryPrivateDataByIndex(addr, index, deadline, v, r, s);
 	}
 
+	public async queryDataByLabelName(addr:string ,label:string, deadline:number, r:string, s:string, v:number, config:PayableOverrides={}):Promise<any>{
+		if(this.provider === undefined || this.seedlist === undefined || this.signer === undefined){
+			return Promise.reject("need to connect a valid provider and signer")
+		}
+		return this.seedlist.queryPrivateDataByName(addr, label, deadline, v, r, s);
+	}
+
+	public async hasMinted(addr:string, deadline:number, r:string, s:string, v:number, config:PayableOverrides={}):Promise<any>{
+		if(this.provider === undefined || this.seedlist === undefined || this.signer === undefined){
+			return Promise.reject("need to connect a valid provider and signer")
+		}
+		return this.seedlist.hasMinted(addr, deadline, v, r, s);
+	}
+
+	public async totalSavedItems(addr:string, deadline:number, r:string, s:string, v:number, config:PayableOverrides={}):Promise<any>{
+		if(this.provider === undefined || this.seedlist === undefined || this.signer === undefined){
+			return Promise.reject("need to connect a valid provider and signer")
+		}
+		return this.seedlist.totalSavedItems(addr, deadline, v, r, s);
+	}
 	//end
-    public async mint(
-        id: BigNumber,
-        config: PayableOverrides = {}
-    ): Promise<any> {
-        if (
-            this.provider === undefined ||
-            this.seedlist === undefined ||
-            this.signer === undefined
-        ) {
-            return Promise.reject("need to connect a valid provider and signer");
-        }
-        const gas = await this.seedlist.connect(this.signer).estimateGas.mint(id, { ...config });
-        const transaction = await this.seedlist.connect(this.signer).mint(id, { gasLimit: gas.mul(13).div(10), ...config });
-        const receipt = await transaction.wait(this._waitConfirmations);
-        return receipt;
-    }
-
-    public async ownerOf(id: BigNumber, config: PayableOverrides = {}) {
-        if (this.provider === undefined || this.seedlist === undefined) {
-            return Promise.reject("need to connect a valid provider");
-        }
-        return this.seedlist.ownerOf(id, { ...config });
-    }
-
-    public async totalSupply(config: PayableOverrides = {}) {
-        if (this.provider === undefined || this.seedlist === undefined) {
-            return Promise.reject("need to connect a valid provider");
-        }
-        return this.seedlist.totalSupply({ ...config });
-    }
-
 }
 
-const INFURA_KEY = process.env.REACT_APP_ENCRYPT_CONTRACT_ADDR;
+const INFURA_KEY = process.env.REACT_APP_VAULTHUB_CONTRACT_ADDR;
 if (typeof INFURA_KEY === 'undefined') {
-    throw new Error(`REACT_APP_ENCRYPT_CONTRACT_ADDR must be a defined environment variable`)
+    throw new Error(`REACT_APP_VAULTHUB_CONTRACT_ADDR must be a defined environment variable`)
 }
 
-export const etherClient = new EtherClient(process.env.REACT_APP_ENCRYPT_CONTRACT_ADDR?process.env.REACT_APP_ENCRYPT_CONTRACT_ADDR:"");
+export const etherClient = new EtherClient(process.env.REACT_APP_VAULTHUB_CONTRACT_ADDR?process.env.REACT_APP_VAULTHUB_CONTRACT_ADDR:"");

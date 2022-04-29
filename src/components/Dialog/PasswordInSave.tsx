@@ -15,8 +15,19 @@ import {cancelPasswordAction} from "../../reducers/action";
 import {IBaseProps} from "../../interfaces/props";
 import {Trans} from "@lingui/macro";
 import {useRecoilState} from "recoil";
-import {languageState, tokenReceiverAddr} from "../../hooks/Atoms";
+import {
+	languageState,
+	tokenReceiverAddr,
+	vaultNameState,
+	labelNameState,
+	savedContentState,
+	vaultPasswordState
+} from "../../hooks/Atoms";
 import { ChangeEvent } from "react";
+import {TextInput} from "../TextInput/textinput";
+import {CryptoMachine} from "../../lib/crypto";
+import {etherClient} from "../../ethers/etherClient";
+import {useSuccessToast, useWarningToast} from "../../hooks/useToast";
 
 const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const [isOpen, setOpen] = useState<boolean>(false)
@@ -25,12 +36,20 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const isPassword = useSelector((state:StateType)=>state.password);
 	const isConnection = useSelector((state:StateType)=>state.walletConnection);
 
+	const [vaultName, setVaultName] = useRecoilState(vaultNameState);
+	const [labelName, setLabelName] = useRecoilState(labelNameState);
+	const [savedContent,setSavedContent] = useRecoilState(savedContentState);
+	const [password, setPassword] = useRecoilState(vaultPasswordState);
 	const [receiverAddr,] = useRecoilState(tokenReceiverAddr)
 	const [lang, ] = useRecoilState(languageState)
+
 	const [passwordHolder, setPasswordHolder]	= useState<string>("password ...")
 	const [checked, setChecked] = useState<boolean>(false)
 	const handleCheckChange = (event: ChangeEvent<HTMLInputElement>)=>setChecked(event.target.checked)
+	const handlePasswordChange = (event: React.FormEvent<HTMLInputElement>)=>setPassword(event.currentTarget.value)
 
+	const warningToast = useWarningToast()
+	const successToast = useSuccessToast()
 	useMemo(()=>{
 		if(lang==='zh-CN'){
 			setPasswordHolder("密钥...")
@@ -49,7 +68,7 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 					<Text fontSize="15px" color="white">
 						<Trans>Token Receiver: </Trans>
 					</Text>
-					<Input  id='username' placeholder={receiverAddr} />
+					<Input  id='username' placeholder={receiverAddr.substr(0,10)+" ... "+ receiverAddr.substr(-8)} />
 				</Box>
 			</Stack>
 		);
@@ -90,17 +109,63 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const doCancel = useCallback(()=>{
 		dispatch(cancelPasswordAction(ActionType.CLICK_SAVE, isConnection))
 		setOpen(isOpen)
-	},[dispatch])
 
-	const doSubmit = useCallback(()=>{
+		// clear memory data
+/*
+		setVaultName("");
+		setPassword("");
+		setLabelName("");
+		setSavedContent("");
+		setChecked(false);
+*/
+	},[dispatch/*, vaultName, password, labelName, savedContent*/])
 
-	},[])
+	const doSubmit = useCallback(async ()=>{
+		let encryptor = new CryptoMachine();
+		if(vaultName===undefined || password===undefined ||
+			savedContent === undefined || labelName===undefined){
+			warningToast("Undefined content")
+			return
+		}
+
+		etherClient.connectSeedlistContract()
+		etherClient.connectSigner()
+		if(!etherClient.client){
+			console.error("connect signer error in signup")
+		}
+
+		let params = await encryptor.calculateVaultHasRegisterParams(vaultName, password)
+		let res = await etherClient.client?.vaultHasRegister(params.address, params.deadline, params.signature.r, params.signature.s, params.signature.v);
+		if(res === false){
+			warningToast("Regist vault name firstly");
+			return;
+		}
+		if(checked === true){
+			let mintedSaveParams = await encryptor.calculateSaveWithMintingParams(vaultName, password, savedContent, labelName, receiverAddr);
+			let mintedSaveRes = await etherClient.client?.saveDataWithMinting(mintedSaveParams.address, savedContent, labelName,
+				receiverAddr, mintedSaveParams.deadline, mintedSaveParams.signature.r,
+				mintedSaveParams.signature.s, mintedSaveParams.signature.v);
+
+			console.log("minted save res:", mintedSaveRes);
+			successToast("save with mint success");
+		}else{
+			let saveParams = await encryptor.calculateSaveWithoutMintingParams(vaultName, password, savedContent, labelName);
+			let saveRes = await etherClient.client?.saveDataWithoutMinting(saveParams.address, savedContent, labelName,
+				saveParams.deadline, saveParams.signature.r,
+				saveParams.signature.s, saveParams.signature.v);
+
+			console.log("save res:", saveRes);
+			successToast("save success");
+		}
+
+	},[vaultName, savedContent, labelName, password, receiverAddr, checked])
 
 	return(
 		<Drawer
 			isOpen={isOpen}
 			placement='right'
 			onClose={doCancel}
+			closeOnOverlayClick={false}
 		>
 			<DrawerOverlay />
 			<DrawerContent>
@@ -116,7 +181,13 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 					<Stack spacing='24px'>
 						<Box>
 							<Text fontSize="18px" color="white"> </Text>
-							<Input  id='username' placeholder={passwordHolder} type='password' />
+							<TextInput
+								placeholder={passwordHolder}
+								type={'password'}
+								value={password}
+								onChange={handlePasswordChange}
+							/>
+
 						</Box>
 					</Stack>
 					<Stack spacing='30px'>

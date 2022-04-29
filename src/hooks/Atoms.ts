@@ -46,3 +46,31 @@ export const tokenReceiverAddr = atom(
 		default:""
 	}
 )
+
+export const savedContentState = atom(
+	{
+		key:"savedContentTag",
+		default:""
+	}
+)
+
+export const vaultNameState = atom(
+	{
+		key:"vaultNameTag",
+		default:""
+	}
+)
+
+export const vaultPasswordState = atom(
+	{
+		key:"vaultPasswordTag",
+		default:""
+	}
+)
+
+export const labelNameState = atom(
+	{
+		key:"labelNameTag",
+		default:""
+	}
+)

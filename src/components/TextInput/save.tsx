@@ -5,28 +5,38 @@ import {IBaseProps} from "../../interfaces/props";
 import {useSelector} from "react-redux";
 import {StateType} from "../../reducers/state";
 import {useRecoilState} from "recoil";
-import {languageState} from "../../hooks/Atoms";
+import {languageState, vaultPasswordState, labelNameState, vaultNameState, savedContentState} from "../../hooks/Atoms";
 
 const SaveArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const isConnection = useSelector((state:StateType)=>state.walletConnection);
 
 	const [lang, ] = useRecoilState(languageState)
-	const [spaceNameHolder, setSpaceNameHolder]	= useState<string>("Enter vault name ...")
+	const [content, setContent] = useRecoilState(savedContentState);
+	const [labelName, setLabelName] = useRecoilState(labelNameState);
+	const [vaultName, setVaultName] = useRecoilState(vaultNameState);
+
+	const [vaultNameHolder, setVaultNameHolder]	= useState<string>("Enter vault name ...")
 	const [labelHolder, setLabelHolder] = useState<string>("label ...")
 	const [contentHolder, setContentHolder] = useState<string>("saved content ...")
+
+	const handleVaultNameChange = (event: React.FormEvent<HTMLInputElement>)=>setVaultName(event.currentTarget.value)
+	const handleContentChange = (event: React.FormEvent<HTMLInputElement>)=>setContent(event.currentTarget.value)
+	const handleLabelChange = (event: React.FormEvent<HTMLInputElement>)=>setLabelName(event.currentTarget.value)
+
 	useMemo(()=>{
+		console.log("vault/label/content:",vaultName, labelName, content);
 		if(lang==='zh-CN'){
-			setSpaceNameHolder("输入保险库空间名称 ...")
+			setVaultNameHolder("输入保险库空间名称 ...")
 			setLabelHolder("标签名")
 			setContentHolder("存储内容 ...")
 		}
 
 		if(lang==='en-US'){
-			setSpaceNameHolder("Enter vault name ...")
+			setVaultNameHolder("Enter vault name ...")
 			setLabelHolder("label ...")
 			setContentHolder("saved content ...")
 		}
-	},[lang])
+	},[lang, vaultName, labelName, content])
 
     return(
         <VStack spacing={0}  color="black">
@@ -39,14 +49,11 @@ const SaveArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
             >
                 <Stack spacing={2}>
                     <TextInput
-	                    placeholder={spaceNameHolder}
+	                    placeholder={vaultNameHolder}
 	                    type={'text'}
 	                    disabled={!isConnection}
-/*
-                        disabled={this.state.spacename.disabled}
-                        onChange={this.setSpaceName}
-                        placeholder={this.state.spacename.message}
-*/
+	                    value={vaultName}
+	                    onChange={handleVaultNameChange}
                     />
                 </Stack>
             </Box>
@@ -63,11 +70,8 @@ const SaveArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	                        placeholder={labelHolder}
 	                        type={'text'}
 	                        disabled={!isConnection}
-/*
-                            disabled={this.state.label.disabled}
-                            onChange={this.setLabel}
-                            placeholder={this.state.label.message}
-*/
+	                        value={labelName}
+	                        onChange={handleLabelChange}
                         />
                     </Box>
 
@@ -76,11 +80,8 @@ const SaveArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	                        placeholder={contentHolder}
 	                        type={'text'}
 	                        disabled={!isConnection}
-/*
-                            disabled={this.state.content.disabled}
-                            onChange={this.setContent}
-                            placeholder={this.state.content.message}
-*/
+	                        value={content}
+	                        onChange={handleContentChange}
                         />
                     </Box>
 
