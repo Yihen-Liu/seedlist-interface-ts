@@ -60,8 +60,11 @@ const Menus:React.FC<IBaseProps> = (props:IBaseProps) =>{
 						<MenuItemOption _hover={{ bg: 'blackAlpha.500'}} value='rinkeby' onClick={()=>doClickNetwork("rinkeby")}>
 						  <Trans> Rinkeby Test Network </Trans>
 						</MenuItemOption>
-						<MenuItemOption _hover={{ bg: 'blackAlpha.500'}} value='mainnet' onClick={()=>doClickNetwork("mainnet")}>
+						<MenuItemOption isDisabled={true} _hover={{ bg: 'blackAlpha.500'}} value='mainnet' onClick={()=>doClickNetwork("mainnet")}>
 							<Trans> Ethereum Mainnet </Trans>
+						</MenuItemOption>
+						<MenuItemOption isDisabled={true} _hover={{ bg: 'blackAlpha.500'}} value='arbitrum' onClick={()=>doClickNetwork("arbitrum")}>
+							<Trans> Arbitrum Network </Trans>
 						</MenuItemOption>
 					</MenuOptionGroup>
 					<MenuDivider />
