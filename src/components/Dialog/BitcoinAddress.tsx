@@ -67,18 +67,19 @@ const BitcoinAddress:React.FC<IBaseProps> = (props:IBaseProps)=>{
 
 	const showAddressContent = useMemo(()=>{
 		const contents = addrs?.map((addr: string, index: number) =>
+			<>
 			<Grid
 				h='100px'
 				templateRows='repeat(3, 1fr)'
 				templateColumns='repeat(10, 1fr)'
 				gap={1}
-				marginY={"20px"}
+				marginY={"30px"}
 
 			>
 				<GridItem rowSpan={3} colSpan={1} >
 					<QRCodeSVG
 						value={addr}
-						size={88}
+						size={96}
 						bgColor={"#000000"}
 						fgColor={"#ffffff"}
 						level={"L"}
@@ -93,7 +94,7 @@ const BitcoinAddress:React.FC<IBaseProps> = (props:IBaseProps)=>{
 				<GridItem rowSpan={3} colSpan={1}>
 					<QRCodeSVG
 						value={privkeys===undefined?"":privkeys[index]}
-						size={88}
+						size={96}
 						bgColor={"#000000"}
 						fgColor={"#ffffff"}
 						level={"L"}
@@ -105,13 +106,15 @@ const BitcoinAddress:React.FC<IBaseProps> = (props:IBaseProps)=>{
 				<GridItem colSpan={1} ><Text color={"whiteAlpha.600"}><Trans>PrivateKey</Trans>:</Text></GridItem>
 				<GridItem colSpan={8}>
 					<Grid templateColumns='repeat(100, 1fr)' >
-						<GridItem colSpan={11}></GridItem>
-						<GridItem colSpan={89}>
+						<GridItem colSpan={9}></GridItem>
+						<GridItem colSpan={91}>
 							<Text color={"whiteAlpha.600"}> {privkeys===undefined?"":privkeys[index]} </Text>
 						</GridItem>
 					</Grid>
 				</GridItem>
 			</Grid>
+			<hr />
+			</>
 		);
 		return(
 			<>{contents}</>
