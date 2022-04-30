@@ -100,7 +100,7 @@ const EthereumAddress:React.FC<IBaseProps> = (props:IBaseProps)=>{
 				</GridItem>
 
 				<GridItem colSpan={7}> </GridItem>
-				<GridItem colSpan={1} ><Text color={"whiteAlpha.600"}><Trans>PrivateKey</Trans> : </Text></GridItem>
+				<GridItem colSpan={1} ><Text color={"whiteAlpha.600"}><Trans>PrivateKey</Trans>: </Text></GridItem>
 				<GridItem colSpan={8}>
 					<Grid templateColumns='repeat(100, 1fr)' >
 						<GridItem colSpan={9}></GridItem>
