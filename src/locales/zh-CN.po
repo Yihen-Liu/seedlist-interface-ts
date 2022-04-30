@@ -45,6 +45,10 @@ msgstr "继续添加"
 msgid "Bitcoin"
 msgstr "比特币"
 
+#: src/components/Dialog/BitcoinAddress.tsx
+msgid "Bitcoin Address:"
+msgstr "比特币地址"
+
 #: src/components/Header/routers.tsx
 msgid "Brain Wallet"
 msgstr "脑钱包"
@@ -63,6 +67,10 @@ msgstr "连接钱包"
 #: src/components/Labels/ethereum.tsx
 msgid "Ethereum"
 msgstr "以太坊"
+
+#: src/components/Dialog/EthereumAddress.tsx
+msgid "Ethereum Address:"
+msgstr "以太坊地址:"
 
 #: src/components/Header/menu.tsx
 msgid "Ethereum Mainnet"
@@ -92,14 +100,17 @@ msgstr "开始存储"
 msgid "Let's Sign"
 msgstr "开始注册"
 
+#: src/components/Dialog/BitcoinAddress.tsx
+#: src/components/Dialog/EthereumAddress.tsx
+msgid "More Address"
+msgstr "更多地址"
+
 #: src/components/Buttons/save.tsx
 #: src/components/Buttons/signup.tsx
 #: src/components/Buttons/unconnect.tsx
 msgid "Please connect wallet firstly"
 msgstr "请您提前连接钱包"
 
-#: src/components/Dialog/BitcoinAddress.tsx
-#: src/components/Dialog/EthereumAddress.tsx
 #: src/components/Dialog/PasswordInQuery.tsx
 #: src/components/Dialog/PasswordInSave.tsx
 msgid "Please enter your password"
@@ -125,8 +136,6 @@ msgstr "存储"
 msgid "Sign Up"
 msgstr "注册"
 
-#: src/components/Dialog/BitcoinAddress.tsx
-#: src/components/Dialog/EthereumAddress.tsx
 #: src/components/Dialog/PasswordInQuery.tsx
 #: src/components/Dialog/PasswordInSave.tsx
 msgid "Submit"

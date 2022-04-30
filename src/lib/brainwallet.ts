@@ -15,7 +15,7 @@ function addr(node:BIP32Interface):string {
 	return  encode(payload);
 }
 
-export function GenBitcoinBrainWallet(from:number=0, end:number, puzzle:string, passphrase:string=""){
+export function GenBitcoinBrainWalletByPuzzle(from:number=0, end:number, puzzle:string, passphrase:string=""){
 	let addrs:string[] = [];
 	let privkeys: string[] = [];
 	let entropy = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(puzzle.trim().toUpperCase())).substring(2);
@@ -40,7 +40,7 @@ export function GenBitcoinBrainWallet(from:number=0, end:number, puzzle:string, 
 	};
 }
 
-export function GenEthereumBrainWallet(from:number=0, end:number, puzzle:string, passphrase:string="") {
+export function GenEthereumBrainWalletByPuzzle(from:number=0, end:number, puzzle:string, passphrase:string="") {
 	let addrs:string[] = [];
 	let privkeys:string[] = [];
 	let entropy = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(puzzle.trim().toUpperCase())).substring(2);

@@ -45,6 +45,10 @@ msgstr "Add More"
 msgid "Bitcoin"
 msgstr "Bitcoin"
 
+#: src/components/Dialog/BitcoinAddress.tsx
+msgid "Bitcoin Address:"
+msgstr "Bitcoin Address:"
+
 #: src/components/Header/routers.tsx
 msgid "Brain Wallet"
 msgstr "Brain Wallet"
@@ -63,6 +67,10 @@ msgstr "Connect Wallet"
 #: src/components/Labels/ethereum.tsx
 msgid "Ethereum"
 msgstr "Ethereum"
+
+#: src/components/Dialog/EthereumAddress.tsx
+msgid "Ethereum Address:"
+msgstr "Ethereum Address:"
 
 #: src/components/Header/menu.tsx
 msgid "Ethereum Mainnet"
@@ -92,14 +100,17 @@ msgstr "Let's Save"
 msgid "Let's Sign"
 msgstr "Let's Sign"
 
+#: src/components/Dialog/BitcoinAddress.tsx
+#: src/components/Dialog/EthereumAddress.tsx
+msgid "More Address"
+msgstr "More Address"
+
 #: src/components/Buttons/save.tsx
 #: src/components/Buttons/signup.tsx
 #: src/components/Buttons/unconnect.tsx
 msgid "Please connect wallet firstly"
 msgstr "Please connect wallet firstly"
 
-#: src/components/Dialog/BitcoinAddress.tsx
-#: src/components/Dialog/EthereumAddress.tsx
 #: src/components/Dialog/PasswordInQuery.tsx
 #: src/components/Dialog/PasswordInSave.tsx
 msgid "Please enter your password"
@@ -125,8 +136,6 @@ msgstr "Save"
 msgid "Sign Up"
 msgstr "Sign Up"
 
-#: src/components/Dialog/BitcoinAddress.tsx
-#: src/components/Dialog/EthereumAddress.tsx
 #: src/components/Dialog/PasswordInQuery.tsx
 #: src/components/Dialog/PasswordInSave.tsx
 msgid "Submit"

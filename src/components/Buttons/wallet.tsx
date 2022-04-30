@@ -4,7 +4,7 @@ import {Trans} from "@lingui/macro";
 import {IBaseProps} from "../../interfaces/props";
 import {useRecoilState} from "recoil";
 import {bitcoinWalletState, ethereumWalletState, labelState} from "../../hooks/Atoms";
-import {GenBitcoinBrainWallet, GenEthereumBrainWallet} from "../../lib/brainwallet";
+import {GenBitcoinBrainWalletByPuzzle, GenEthereumBrainWalletByPuzzle} from "../../lib/brainwallet";
 import {puzzleState} from "../../hooks/Atoms";
 
 const WalletButton:React.FC<IBaseProps> = (props:IBaseProps)=>{
@@ -15,15 +15,11 @@ const WalletButton:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const doClick = useCallback(()=>{
 		if(label==="ethereum"){
 			setEthereumWallet(true);
-			let addrs = GenEthereumBrainWallet(0,10, puzzle)
-			console.log("ethereum:")
-			console.log(addrs)
+			setBitcoinWallet(false);
 		}
 		if(label==="bitcoin"){
 			setBitcoinWallet(true);
-			let addrs = GenBitcoinBrainWallet(0, 10, puzzle)
-			console.log("bitcoin:")
-			console.log(addrs)
+			setEthereumWallet(false);
 		}
 	},[label, puzzle])
 

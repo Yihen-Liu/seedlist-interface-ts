@@ -5,9 +5,9 @@ import {
 	DrawerContent,
 	DrawerHeader,
 	DrawerBody,
-	DrawerFooter, DrawerCloseButton, Input, IconButton, Checkbox, HStack, Tooltip
+	DrawerFooter, DrawerCloseButton, Input, IconButton, Checkbox, HStack, Tooltip, Spacer, Flex, GridItem, Grid
 } from "@chakra-ui/react";
-import {Box, Stack, Text} from "@chakra-ui/layout";
+import {Box, Stack, Text, VStack} from "@chakra-ui/layout";
 import {Button} from "@chakra-ui/button";
 import {useDispatch, useSelector} from "react-redux";
 import {ActionType, StateType} from "../../reducers/state";
@@ -15,34 +15,42 @@ import {cancelPasswordAction} from "../../reducers/action";
 import {IBaseProps} from "../../interfaces/props";
 import {Trans} from "@lingui/macro";
 import {useRecoilState} from "recoil";
-import {bitcoinWalletState, languageState} from "../../hooks/Atoms";
+import {
+	bitcoinWalletState,
+	generatorState,
+	labelState,
+	languageState,
+	puzzleState,
+	vaultNameState, vaultPasswordState
+} from "../../hooks/Atoms";
 import {ViewOffIcon} from "@chakra-ui/icons";
+import {QRCodeSVG} from 'qrcode.react';
+import {TextInput} from "../TextInput/textinput";
+import {GenBitcoinBrainWalletByPuzzle} from "../../lib/brainwallet";
 
 const BitcoinAddress:React.FC<IBaseProps> = (props:IBaseProps)=>{
 
 	const [isOpen, setOpen] = useState<boolean>(false)
-	const dispatch = useDispatch();
-	const [lang, ] = useRecoilState(languageState)
 	const [passwordHolder, setPasswordHolder]	= useState<string>("password ...")
-	const [tipMessage, setTipMessage] = useState<string>("Click me to decrypt")
-	useMemo(()=>{
-		if(lang==='zh-CN'){
-			setPasswordHolder("密钥...")
-			setTipMessage("点击解密内容")
-		}
-
-		if(lang==='en-US'){
-			setPasswordHolder("password ...")
-			setTipMessage("Click me to decrypt")
-		}
-	},[lang])
 
 	const [isBitcoinWallet, setBitcoinWallet] = useRecoilState(bitcoinWalletState);
 	const isConnection = useSelector((state:StateType)=>state.walletConnection)
-	useEffect(()=>{
-		if(isBitcoinWallet===true){
-			setOpen(true);
+
+	const [generator, ] = useRecoilState(generatorState);
+	const [puzzle, ] = useRecoilState(puzzleState);
+	const [vaultName, ] = useRecoilState(vaultNameState);
+	const [password, ] = useRecoilState(vaultPasswordState);
+	const [addrs, setAddrs] = useState<string[]>();
+	const [privkeys, setPrivkeys] =useState<string[]>();
+	useMemo(()=>{
+		setOpen(isBitcoinWallet);
+		if(isBitcoinWallet===false) return;
+		if(generator==="puzzle"){
+			let wallet = GenBitcoinBrainWalletByPuzzle(0,10, puzzle)
+			setAddrs(wallet.addrs);
+			setPrivkeys(wallet.privkeys);
 		}
+
 	},[isBitcoinWallet])
 
 	const doCancel = useCallback(()=>{
@@ -54,17 +62,67 @@ const BitcoinAddress:React.FC<IBaseProps> = (props:IBaseProps)=>{
 
 	},[])
 
-	const showQueryContent = useMemo(()=>{
+	const showAddressContent = useMemo(()=>{
+		const contents = addrs?.map((addr: string, index: number) =>
+			<Grid
+				h='100px'
+				templateRows='repeat(3, 1fr)'
+				templateColumns='repeat(10, 1fr)'
+				gap={1}
+				marginY={"20px"}
+
+			>
+				<GridItem rowSpan={3} colSpan={1} >
+					<QRCodeSVG
+						value={addr}
+						size={88}
+						bgColor={"#000000"}
+						fgColor={"#ffffff"}
+						level={"L"}
+						includeMargin={false}
+					/>
+				</GridItem>
+
+				<GridItem colSpan={8}>
+					<Text color={"white"}> Address/{index}:<br/> {addr} </Text>
+				</GridItem>
+
+				<GridItem rowSpan={3} colSpan={1}>
+					<QRCodeSVG
+						value={privkeys===undefined?"":privkeys[index]}
+						size={88}
+						bgColor={"#000000"}
+						fgColor={"#ffffff"}
+						level={"L"}
+						includeMargin={false}
+					/>
+				</GridItem>
+
+				<GridItem colSpan={7}> </GridItem>
+				<GridItem colSpan={1} ><Text color={"white"}>PrivateKey/{index}:</Text></GridItem>
+				<GridItem colSpan={8}>
+					<Grid templateColumns='repeat(100, 1fr)' >
+						<GridItem colSpan={11}></GridItem>
+						<GridItem colSpan={89}>
+							<Text color={"white"}> {privkeys===undefined?"":privkeys[index]} </Text>
+						</GridItem>
+					</Grid>
+				</GridItem>
+			</Grid>
+		);
 		return(
-			<></>
-		)
-	},[]);
+			<>{contents}</>
+		);
+	},[addrs, privkeys]);
 
 	return(
 		<Drawer
 			isOpen={isOpen}
 			placement='right'
 			onClose={doCancel}
+			size='xl'
+			closeOnOverlayClick={false}
+			closeOnEsc={true}
 		>
 			<DrawerOverlay />
 			<DrawerContent>
@@ -78,18 +136,8 @@ const BitcoinAddress:React.FC<IBaseProps> = (props:IBaseProps)=>{
 
 				<DrawerBody>
 					<Stack spacing='30px'>
-						<Box marginY="20px">
-							<Tooltip label={tipMessage} aria-label='A tooltip' bg="blackAlpha.900">
-								<Text color="white" marginY="10px">
-									Label1: **************************
-								</Text>
-							</Tooltip>
-
-							<Tooltip label={tipMessage} aria-label='A tooltip' bg="blackAlpha.900">
-								<Text color="white" marginY="10px">
-									Label2: **************************
-								</Text>
-							</Tooltip>
+						<Box>
+							{showAddressContent}
 						</Box>
 					</Stack>
 
@@ -100,7 +148,7 @@ const BitcoinAddress:React.FC<IBaseProps> = (props:IBaseProps)=>{
 						<Trans>Cancel</Trans>
 					</Button>
 					<Button colorScheme='blackAlpha' mr={3} onClick={doSubmit}>
-						<Trans>Submit</Trans>
+						<Trans>More Address</Trans>
 					</Button>
 				</DrawerFooter>
 			</DrawerContent>
