@@ -46,6 +46,10 @@ msgstr "继续添加"
 msgid "Address"
 msgstr "钱包地址"
 
+#: src/components/Header/menu.tsx
+msgid "Arbitrum Mainnet"
+msgstr "Arbitrum主网"
+
 #: src/components/Labels/bitcoin.tsx
 msgid "Bitcoin"
 msgstr "比特币"

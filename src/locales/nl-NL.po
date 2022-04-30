@@ -46,6 +46,14 @@ msgstr ""
 msgid "Address"
 msgstr ""
 
+#: src/components/Header/menu.tsx
+msgid "Arbitrum Mainnet"
+msgstr ""
+
+#: src/components/Header/menu.tsx
+#~ msgid "Arbitrum Network"
+#~ msgstr ""
+
 #: src/components/Labels/bitcoin.tsx
 msgid "Bitcoin"
 msgstr ""

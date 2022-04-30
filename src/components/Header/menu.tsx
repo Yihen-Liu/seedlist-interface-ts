@@ -64,7 +64,7 @@ const Menus:React.FC<IBaseProps> = (props:IBaseProps) =>{
 							<Trans> Ethereum Mainnet </Trans>
 						</MenuItemOption>
 						<MenuItemOption isDisabled={true} _hover={{ bg: 'blackAlpha.500'}} value='arbitrum' onClick={()=>doClickNetwork("arbitrum")}>
-							<Trans> Arbitrum Network </Trans>
+							<Trans> Arbitrum Mainnet </Trans>
 						</MenuItemOption>
 					</MenuOptionGroup>
 					<MenuDivider />
