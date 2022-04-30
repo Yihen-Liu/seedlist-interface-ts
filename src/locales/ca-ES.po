@@ -41,6 +41,11 @@ msgstr ""
 msgid "Add More"
 msgstr ""
 
+#: src/components/Dialog/BitcoinAddress.tsx
+#: src/components/Dialog/EthereumAddress.tsx
+msgid "Address"
+msgstr ""
+
 #: src/components/Labels/bitcoin.tsx
 msgid "Bitcoin"
 msgstr ""
@@ -114,6 +119,11 @@ msgstr ""
 #: src/components/Dialog/PasswordInQuery.tsx
 #: src/components/Dialog/PasswordInSave.tsx
 msgid "Please enter your password"
+msgstr ""
+
+#: src/components/Dialog/BitcoinAddress.tsx
+#: src/components/Dialog/EthereumAddress.tsx
+msgid "PrivateKey"
 msgstr ""
 
 #: src/components/Labels/query.tsx

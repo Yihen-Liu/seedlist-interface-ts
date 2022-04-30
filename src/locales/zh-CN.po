@@ -41,6 +41,11 @@ msgstr "6. 采用位移减半，一个完整周期的token激励总量约为2310
 msgid "Add More"
 msgstr "继续添加"
 
+#: src/components/Dialog/BitcoinAddress.tsx
+#: src/components/Dialog/EthereumAddress.tsx
+msgid "Address"
+msgstr "钱包地址"
+
 #: src/components/Labels/bitcoin.tsx
 msgid "Bitcoin"
 msgstr "比特币"
@@ -115,6 +120,11 @@ msgstr "请您提前连接钱包"
 #: src/components/Dialog/PasswordInSave.tsx
 msgid "Please enter your password"
 msgstr "请输入您的密码"
+
+#: src/components/Dialog/BitcoinAddress.tsx
+#: src/components/Dialog/EthereumAddress.tsx
+msgid "PrivateKey"
+msgstr "用户私钥"
 
 #: src/components/Labels/query.tsx
 msgid "Query"

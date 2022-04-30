@@ -41,6 +41,11 @@ msgstr "6. Using the displacement halving, the total amount of token incentives 
 msgid "Add More"
 msgstr "Add More"
 
+#: src/components/Dialog/BitcoinAddress.tsx
+#: src/components/Dialog/EthereumAddress.tsx
+msgid "Address"
+msgstr "Address"
+
 #: src/components/Labels/bitcoin.tsx
 msgid "Bitcoin"
 msgstr "Bitcoin"
@@ -115,6 +120,11 @@ msgstr "Please connect wallet firstly"
 #: src/components/Dialog/PasswordInSave.tsx
 msgid "Please enter your password"
 msgstr "Please enter your password"
+
+#: src/components/Dialog/BitcoinAddress.tsx
+#: src/components/Dialog/EthereumAddress.tsx
+msgid "PrivateKey"
+msgstr "PrivateKey"
 
 #: src/components/Labels/query.tsx
 msgid "Query"

@@ -42,25 +42,28 @@ const BitcoinAddress:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const [password, ] = useRecoilState(vaultPasswordState);
 	const [addrs, setAddrs] = useState<string[]>();
 	const [privkeys, setPrivkeys] =useState<string[]>();
+	const [step, setStep] = useState<number>(1);
 	useMemo(()=>{
 		setOpen(isBitcoinWallet);
 		if(isBitcoinWallet===false) return;
 		if(generator==="puzzle"){
-			let wallet = GenBitcoinBrainWalletByPuzzle(0,10, puzzle)
+			let wallet = GenBitcoinBrainWalletByPuzzle(0,10*step, puzzle)
 			setAddrs(wallet.addrs);
 			setPrivkeys(wallet.privkeys);
 		}
 
-	},[isBitcoinWallet])
+	},[isBitcoinWallet, step])
 
 	const doCancel = useCallback(()=>{
 		setOpen(false);
 		setBitcoinWallet(false);
+		setStep(1);
 	},[])
 
 	const doSubmit = useCallback(()=>{
-
-	},[])
+		console.log("do submit:", step);
+		setStep(step+1);
+	},[step])
 
 	const showAddressContent = useMemo(()=>{
 		const contents = addrs?.map((addr: string, index: number) =>
@@ -84,7 +87,7 @@ const BitcoinAddress:React.FC<IBaseProps> = (props:IBaseProps)=>{
 				</GridItem>
 
 				<GridItem colSpan={8}>
-					<Text color={"white"}> Address/{index}:<br/> {addr} </Text>
+					<Text color={"white"}> <Trans>Address</Trans>/{index+1} :<br/> {addr} </Text>
 				</GridItem>
 
 				<GridItem rowSpan={3} colSpan={1}>
@@ -99,12 +102,12 @@ const BitcoinAddress:React.FC<IBaseProps> = (props:IBaseProps)=>{
 				</GridItem>
 
 				<GridItem colSpan={7}> </GridItem>
-				<GridItem colSpan={1} ><Text color={"white"}>PrivateKey/{index}:</Text></GridItem>
+				<GridItem colSpan={1} ><Text color={"whiteAlpha.600"}><Trans>PrivateKey</Trans> :</Text></GridItem>
 				<GridItem colSpan={8}>
 					<Grid templateColumns='repeat(100, 1fr)' >
 						<GridItem colSpan={11}></GridItem>
 						<GridItem colSpan={89}>
-							<Text color={"white"}> {privkeys===undefined?"":privkeys[index]} </Text>
+							<Text color={"whiteAlpha.600"}> {privkeys===undefined?"":privkeys[index]} </Text>
 						</GridItem>
 					</Grid>
 				</GridItem>
@@ -147,7 +150,7 @@ const BitcoinAddress:React.FC<IBaseProps> = (props:IBaseProps)=>{
 					<Button variant='outline' colorScheme='whiteAlpha' mr={3} onClick={doCancel}>
 						<Trans>Cancel</Trans>
 					</Button>
-					<Button colorScheme='blackAlpha' mr={3} onClick={doSubmit}>
+					<Button colorScheme='blackAlpha' mr={3} onClick={()=>doSubmit()}>
 						<Trans>More Address</Trans>
 					</Button>
 				</DrawerFooter>
