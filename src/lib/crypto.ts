@@ -3,7 +3,7 @@ import {syncScrypt} from "scrypt-js";
 import CryptoJS from 'crypto-js';
 import {hashMessage} from "@ethersproject/hash";
 import {
-	DOMAIN_SEPARATOR, GET_LABEL_NAME_BY_INDEX,
+	DOMAIN_SEPARATOR, GET_LABEL_NAME_BY_INDEX, HAS_MINTED_PERMIT_TYPE_HASH,
 	INDEX_QUERY_PERMIT_TYPE_HASH,
 	INIT_VAULT_PERMIT_TYPE_HASH,
 	MINT_SAVE_PERMIT_TYPE_HASH,
@@ -327,6 +327,31 @@ class CryptoMachine {
 			signature: sig,
 			address: address
 		}
+	}
+
+	async calculateHasMintedParams(vaultName:string, password:string){
+		let pairs = this.calculateMainPairs(vaultName, password);
+
+		let wallet = new ethers.Wallet(pairs.privKey);
+		let address = await wallet.getAddress();
+		let deadline = Date.parse(new Date().toString()) / 1000 + 300;
+
+		let combineMessage = ethers.utils.solidityKeccak256(
+			["address", "uint", "bytes32", "bytes32"],
+			[address,  deadline, DOMAIN_SEPARATOR, HAS_MINTED_PERMIT_TYPE_HASH],
+		);
+		let messageHash = ethers.utils.keccak256(ethers.utils.arrayify(combineMessage.toLowerCase()));
+
+		let messageHashBytes = ethers.utils.arrayify(messageHash);
+		let flatSig = await wallet.signMessage(messageHashBytes);
+		let sig = ethers.utils.splitSignature(flatSig);
+
+		return{
+			deadline: deadline,
+			signature: sig,
+			address: address
+		}
+
 	}
 
 	async calculateSaveWithMintingParams(vaultName:string, password:string, content:string, label:string,receiver:string) {

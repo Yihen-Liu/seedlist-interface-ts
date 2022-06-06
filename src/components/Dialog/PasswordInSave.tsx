@@ -146,6 +146,19 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			return;
 		}
 		if(checked === true){
+			let hasMintedParams = await  encryptor.calculateHasMintedParams(vaultName, password);
+			let hasMintedRes = await etherClient.client?.hasMinted(hasMintedParams.address, hasMintedParams.deadline, hasMintedParams.signature.r,
+				hasMintedParams.signature.s, hasMintedParams.signature.v);
+			if(hasMintedRes === true){
+				if(lang==='zh-CN'){
+					warningToast("一个存储空间，只能参与一次通证铸造");
+				}
+				if(lang==='en-US'){
+					warningToast("Mint only once with same vault name");
+				}
+				return
+			}
+
 			let mintedSaveParams = await encryptor.calculateSaveWithMintingParams(vaultName, password, savedContent, labelName, receiverAddr);
 			let mintedSaveRes = await etherClient.client?.saveDataWithMinting(mintedSaveParams.address, savedContent, labelName,
 				receiverAddr, mintedSaveParams.deadline, mintedSaveParams.signature.r,

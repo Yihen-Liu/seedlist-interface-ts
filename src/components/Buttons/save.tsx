@@ -6,36 +6,14 @@ import {passwordAction} from "../../reducers/action";
 import {Trans} from "@lingui/macro";
 import {IBaseProps} from "../../interfaces/props";
 import {ActionType, StateType} from "../../reducers/state";
-import {useRecoilState} from "recoil";
-import {labelNameState, languageState, savedContentState, vaultNameState} from "../../hooks/Atoms";
-import {useWarningToast} from "../../hooks/useToast";
 
 const SaveButton:React.FC<IBaseProps> = (props:IBaseProps)=>{
     const dispatch = useDispatch();
-	const warningToast = useWarningToast()
-
-	const [content, ] = useRecoilState(savedContentState);
-	const [labelName, ] = useRecoilState(labelNameState);
-	const [vaultName, ] = useRecoilState(vaultNameState);
-	const [lang, ] = useRecoilState(languageState)
 
 	const isConnection = useSelector((state:StateType)=>state.walletConnection);
     const doSave = useCallback(()=>{
-    	console.log("content/vault/label:", content, vaultName, labelName);
-    	if(content === "" || labelName=== "" || vaultName === ""||
-		    content === undefined || labelName===undefined || vaultName===undefined
-	    ){
-    		if(lang==="en-US"){
-			    warningToast("Invalid input of Vault/Label/Content");
-		    }
-    		if(lang === "zh-CN"){
-    			warningToast("输入的内容有误，请检查");
-		    }
-		    return;
-	    }
     	dispatch(passwordAction(ActionType.CLICK_SAVE, isConnection));
-
-    },[dispatch, content, labelName, vaultName]);
+    },[dispatch]);
 
     const activeButton = useMemo(()=>{
 	    return (
