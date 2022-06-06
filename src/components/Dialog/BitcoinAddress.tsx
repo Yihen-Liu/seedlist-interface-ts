@@ -15,10 +15,10 @@ import {useRecoilState} from "recoil";
 import {
 	bitcoinWalletState,
 	generatorState,
-	puzzleState
+	puzzleState, vaultNameState, vaultPasswordState
 } from "../../hooks/Atoms";
 import {QRCodeSVG} from 'qrcode.react';
-import {GenBitcoinBrainWalletByPuzzle} from "../../lib/brainwallet";
+import {GenBitcoinBrainWalletByEntropy, GenBitcoinBrainWalletByPuzzle} from "../../lib/brainwallet";
 
 const BitcoinAddress:React.FC<IBaseProps> = (props:IBaseProps)=>{
 
@@ -28,6 +28,8 @@ const BitcoinAddress:React.FC<IBaseProps> = (props:IBaseProps)=>{
 
 	const [generator, ] = useRecoilState(generatorState);
 	const [puzzle, ] = useRecoilState(puzzleState);
+	const [vaultName,] = useRecoilState(vaultNameState);
+	const [password, ] = useRecoilState(vaultPasswordState);
 	const [addrs, setAddrs] = useState<string[]>();
 	const [privkeys, setPrivkeys] =useState<string[]>();
 	const [step, setStep] = useState<number>(1);
@@ -35,12 +37,18 @@ const BitcoinAddress:React.FC<IBaseProps> = (props:IBaseProps)=>{
 		setOpen(isBitcoinWallet);
 		if(isBitcoinWallet===false) return;
 		if(generator==="puzzle"){
+			console.log("puzzle:", puzzle)
 			let wallet = GenBitcoinBrainWalletByPuzzle(0,10*step, puzzle)
 			setAddrs(wallet.addrs);
 			setPrivkeys(wallet.privkeys);
 		}
-
-	},[isBitcoinWallet, step])
+		if(generator==="entropy"){
+			console.log("entropy:", vaultName,", ",password)
+			let wallet = GenBitcoinBrainWalletByEntropy(0, 10*step, vaultName, password);
+			setAddrs(wallet.addrs);
+			setPrivkeys(wallet.privkeys);
+		}
+	},[isBitcoinWallet, step, vaultName, password])
 
 	const doCancel = useCallback(()=>{
 		setOpen(false);

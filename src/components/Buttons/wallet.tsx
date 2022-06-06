@@ -3,15 +3,53 @@ import {Button} from "@chakra-ui/button";
 import {Trans} from "@lingui/macro";
 import {IBaseProps} from "../../interfaces/props";
 import {useRecoilState} from "recoil";
-import {bitcoinWalletState, ethereumWalletState, labelState} from "../../hooks/Atoms";
+import {
+	bitcoinWalletState,
+	ethereumWalletState,
+	generatorState,
+	labelState, languageState,
+	vaultNameState,
+	vaultPasswordState
+} from "../../hooks/Atoms";
 import {puzzleState} from "../../hooks/Atoms";
+import {useWarningToast} from "../../hooks/useToast";
 
 const WalletButton:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const [label,] = useRecoilState(labelState)
 	const [puzzle,] = useRecoilState(puzzleState)
+	const [vaultName,] = useRecoilState(vaultNameState);
+	const [password, ] = useRecoilState(vaultPasswordState);
 	const [, setBitcoinWallet] = useRecoilState(bitcoinWalletState);
 	const [, setEthereumWallet] = useRecoilState(ethereumWalletState);
+	const [generator, ] = useRecoilState(generatorState);
+	const [lang, ] = useRecoilState(languageState)
+	const warningToast = useWarningToast()
+
 	const doClick = useCallback(()=>{
+		if(generator === "puzzle"){
+			if(puzzle==="" || puzzle===undefined){
+				if(lang==="zh-CN"){
+					warningToast("密码短语不许为空")
+				}
+				if(lang==="en-US"){
+					warningToast("Puzzle not allow empty")
+				}
+				return;
+			}
+		}
+
+		if(generator === "entropy"){
+			if(vaultName==="" || password==="" || vaultName===undefined || password===undefined){
+				if(lang==="zh-CN"){
+					warningToast("保险库名称及密码不许为空")
+				}
+				if(lang==="en-US"){
+					warningToast("Vault name and password not allow empty")
+				}
+				return;
+			}
+		}
+
 		if(label==="ethereum"){
 			setEthereumWallet(true);
 			setBitcoinWallet(false);
@@ -20,7 +58,7 @@ const WalletButton:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			setBitcoinWallet(true);
 			setEthereumWallet(false);
 		}
-	},[label, puzzle])
+	},[label, puzzle, generator, lang, vaultName, password])
 
 	return(
 		<Button

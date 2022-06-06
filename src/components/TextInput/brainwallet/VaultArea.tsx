@@ -3,7 +3,7 @@ import {IBaseProps} from "../../../interfaces/props";
 import {useDispatch, useSelector} from "react-redux";
 import {StateType} from "../../../reducers/state";
 import {useRecoilState} from "recoil";
-import {languageState} from "../../../hooks/Atoms";
+import {languageState, vaultNameState, vaultPasswordState} from "../../../hooks/Atoms";
 import {signupPasswordAction, signupSpacenameAction} from "../../../reducers/action";
 import {Box, Stack, VStack} from "@chakra-ui/layout";
 import {TextInput} from "../textinput";
@@ -14,6 +14,9 @@ const WalletVaultArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const isConnection = useSelector((state:StateType)=>state.walletConnection);
 	const [spaceValue, setSpaceValue] = useState<string>("")
 	const [pwdValue, setPwdValue] = useState<string>("")
+	const [,setVaultName] = useRecoilState(vaultNameState);
+	const [, setVaultPassword] = useRecoilState(vaultPasswordState);
+
 	const handleSpaceChange = (event: React.FormEvent<HTMLInputElement>)=>setSpaceValue(event.currentTarget.value)
 	const handlePwdChange = (event: React.FormEvent<HTMLInputElement>)=>setPwdValue(event.currentTarget.value)
 
@@ -31,6 +34,11 @@ const WalletVaultArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			setPasswordHolder("password ...")
 		}
 	},[lang])
+
+	useMemo(()=>{
+		setVaultName(spaceValue);
+		setVaultPassword(pwdValue);
+	},[spaceValue, pwdValue])
 
 	useMemo(()=>{
 		dispatch(signupSpacenameAction(isConnection, spaceValue));
