@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import {VaultHub__factory } from "../types";
-import { ethers, Signer, BigNumber, PayableOverrides } from "ethers";
+import { ethers, Signer, PayableOverrides } from "ethers";
 import type { Web3Provider, Provider } from "@ethersproject/providers";
 import detectEthereumProvider from "@metamask/detect-provider";
 

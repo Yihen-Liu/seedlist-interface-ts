@@ -134,13 +134,9 @@ class CryptoMachine {
 	}
 
 	async signMessage(message:string, privKey:string):Promise<Signature>{
-		let signer1 = new ethers.utils.SigningKey(privKey)
-		//return ethers.utils.joinSignature(signer1.signDigest(hashMessage(message)))
 		let wallet = new ethers.Wallet(privKey)
 		let flatSig = await wallet.signMessage(message)
 		return ethers.utils.splitSignature(flatSig)
-		//let messageHashBytes = ethers.utils.arrayify()
-		//return signer1.signDigest(hashMessage(message))
 	}
 
 	getLabelPassword(keyspace:string):string {

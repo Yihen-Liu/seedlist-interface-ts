@@ -5,7 +5,7 @@ import {
 	DrawerContent,
 	DrawerHeader,
 	DrawerBody,
-	DrawerFooter, DrawerCloseButton, Input, IconButton, Checkbox, HStack, Tooltip
+	DrawerFooter, DrawerCloseButton, HStack, Tooltip
 } from "@chakra-ui/react";
 import {Box, Stack, Text, VStack} from "@chakra-ui/layout";
 import {Button, ButtonGroup} from "@chakra-ui/button";
@@ -16,7 +16,6 @@ import {IBaseProps} from "../../interfaces/props";
 import {Trans} from "@lingui/macro";
 import {useRecoilState} from "recoil";
 import {languageState, vaultNameState, vaultPasswordState} from "../../hooks/Atoms";
-import {ViewOffIcon} from "@chakra-ui/icons";
 import {TextInput} from "../TextInput/textinput";
 import {CryptoMachine} from "../../lib/crypto";
 import {etherClient} from "../../ethers/etherClient";
@@ -33,7 +32,7 @@ const PasswordInQuery:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const [passwordHolder, setPasswordHolder]	= useState<string>("password ...")
 	const [tipMessage, setTipMessage] = useState<string>("Click me to decrypt")
 
-	const [vaultName, setVaultName] = useRecoilState(vaultNameState);
+	const [vaultName, ] = useRecoilState(vaultNameState);
 	const [password, setPassword] = useRecoilState(vaultPasswordState);
 	const handlePasswordChange = (event: React.FormEvent<HTMLInputElement>)=>setPassword(event.currentTarget.value)
 

@@ -36,9 +36,9 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const isPassword = useSelector((state:StateType)=>state.password);
 	const isConnection = useSelector((state:StateType)=>state.walletConnection);
 
-	const [vaultName, setVaultName] = useRecoilState(vaultNameState);
-	const [labelName, setLabelName] = useRecoilState(labelNameState);
-	const [savedContent,setSavedContent] = useRecoilState(savedContentState);
+	const [vaultName, ] = useRecoilState(vaultNameState);
+	const [labelName, ] = useRecoilState(labelNameState);
+	const [savedContent,] = useRecoilState(savedContentState);
 	const [password, setPassword] = useRecoilState(vaultPasswordState);
 	const [receiverAddr,] = useRecoilState(tokenReceiverAddr)
 	const [lang, ] = useRecoilState(languageState)
@@ -111,20 +111,19 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 		setOpen(isOpen)
 
 		// clear memory data
-/*
-		setVaultName("");
-		setPassword("");
-		setLabelName("");
-		setSavedContent("");
-		setChecked(false);
-*/
-	},[dispatch/*, vaultName, password, labelName, savedContent*/])
+	},[dispatch])
 
 	const doSubmit = useCallback(async ()=>{
 		let encryptor = new CryptoMachine();
 		if(vaultName===undefined || password===undefined ||
 			savedContent === undefined || labelName===undefined){
-			warningToast("Undefined content")
+			if(lang==='zh-CN'){
+				warningToast("输入内容有误,请检查")
+			}
+
+			if(lang==='en-US'){
+				warningToast("Undefined content, check again")
+			}
 			return
 		}
 
@@ -137,7 +136,13 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 		let params = await encryptor.calculateVaultHasRegisterParams(vaultName, password)
 		let res = await etherClient.client?.vaultHasRegister(params.address, params.deadline, params.signature.r, params.signature.s, params.signature.v);
 		if(res === false){
-			warningToast("Regist vault name firstly");
+			if(lang==='zh-CN'){
+				warningToast("请您先注册空间名");
+			}
+
+			if(lang==='en-US'){
+				warningToast("Regist vault name firstly");
+			}
 			return;
 		}
 		if(checked === true){
@@ -146,16 +151,26 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 				receiverAddr, mintedSaveParams.deadline, mintedSaveParams.signature.r,
 				mintedSaveParams.signature.s, mintedSaveParams.signature.v);
 
-			console.log("minted save res:", mintedSaveRes);
-			successToast("save with mint success");
+			if(lang==='zh-CN'){
+				successToast("存储成功，并完成通证铸造");
+			}
+
+			if(lang==='en-US'){
+				successToast("save with mint success");
+			}
 		}else{
 			let saveParams = await encryptor.calculateSaveWithoutMintingParams(vaultName, password, savedContent, labelName);
 			let saveRes = await etherClient.client?.saveDataWithoutMinting(saveParams.address, savedContent, labelName,
 				saveParams.deadline, saveParams.signature.r,
 				saveParams.signature.s, saveParams.signature.v);
 
-			console.log("save res:", saveRes);
-			successToast("save success");
+			if(lang==='zh-CN'){
+				successToast("存储成功");
+			}
+
+			if(lang==='en-US'){
+				successToast("save success");
+			}
 		}
 
 	},[vaultName, savedContent, labelName, password, receiverAddr, checked])

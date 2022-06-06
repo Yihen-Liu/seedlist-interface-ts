@@ -94,8 +94,8 @@ msgid "I want to mint seed incentive token"
 msgstr "I want to mint seed incentive token"
 
 #: src/components/Header/routers.tsx
-msgid "Identity"
-msgstr "Identity"
+#~ msgid "Identity"
+#~ msgstr "Identity"
 
 #: src/components/Buttons/wallet.tsx
 msgid "Let's Generate"
@@ -112,6 +112,10 @@ msgstr "Let's Save"
 #: src/components/Buttons/signup.tsx
 msgid "Let's Sign"
 msgstr "Let's Sign"
+
+#: src/components/Header/routers.tsx
+msgid "Meta Identity"
+msgstr "Meta Identity"
 
 #: src/components/Dialog/BitcoinAddress.tsx
 #: src/components/Dialog/EthereumAddress.tsx

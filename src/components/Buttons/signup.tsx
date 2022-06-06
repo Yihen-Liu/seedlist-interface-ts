@@ -49,7 +49,7 @@ const SignupButton:React.FC<IBaseProps> = (props:IBaseProps) => {
 
 		let params = await encryptor.calculateVaultHasRegisterParams(spaceName, password)
 		let res = await etherClient.client?.vaultHasRegister(params.address, params.deadline, params.signature.r, params.signature.s, params.signature.v);
-		if(res == true){
+		if(res === true){
 			if(lang === "en-US"){
 				warningToast("Same information has been registed.");
 			}
@@ -64,12 +64,12 @@ const SignupButton:React.FC<IBaseProps> = (props:IBaseProps) => {
 
 		let _params = await encryptor.calculateVaultHasRegisterParams(spaceName, password)
 		let _res = await etherClient.client?.vaultHasRegister(_params.address, _params.deadline, _params.signature.r, _params.signature.s, _params.signature.v);
-		if(_res == true){
+		if(_res === true){
 			if(lang==="zh-CN"){
-				successToast("Init Vault Spacename Success");
+				successToast("保险库空间名称注册成功");
 			}
 			if(lang=== "en-US"){
-				successToast("保险库空间名称注册成功");
+				successToast("Init Vault Spacename Success");
 			}
 		}
 

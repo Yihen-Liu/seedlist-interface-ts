@@ -16,7 +16,7 @@ const WalletInfo: React.FC<IBaseProps> = (props:IBaseProps) => {
     const [walletInfo, setWalletInfo] = useState<IWalletInfo | null>(null);
 	const action = useSelector((state:StateType)=>state.action);
 	const [network,] = useRecoilState(networkState)
-	const [receiverAddr, setReceiverAddr] = useRecoilState(tokenReceiverAddr)
+	const [, setReceiverAddr] = useRecoilState(tokenReceiverAddr)
 	const dispatch = useDispatch();
 	const [chainId, setChainId] = useState<number>(4)
 	const [chainName, setChainName] = useState<string>("Rinkeby")

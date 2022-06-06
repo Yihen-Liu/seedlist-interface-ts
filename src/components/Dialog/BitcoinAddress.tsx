@@ -1,45 +1,33 @@
-import React, {useCallback, useEffect, useMemo, useState} from "react";
+import React, {useCallback, useMemo, useState} from "react";
 import {
 	Drawer,
 	DrawerOverlay,
 	DrawerContent,
 	DrawerHeader,
 	DrawerBody,
-	DrawerFooter, DrawerCloseButton, Input, IconButton, Checkbox, HStack, Tooltip, Spacer, Flex, GridItem, Grid
+	DrawerFooter, DrawerCloseButton, GridItem, Grid
 } from "@chakra-ui/react";
-import {Box, Stack, Text, VStack} from "@chakra-ui/layout";
+import {Box, Stack, Text} from "@chakra-ui/layout";
 import {Button} from "@chakra-ui/button";
-import {useDispatch, useSelector} from "react-redux";
-import {ActionType, StateType} from "../../reducers/state";
-import {cancelPasswordAction} from "../../reducers/action";
 import {IBaseProps} from "../../interfaces/props";
 import {Trans} from "@lingui/macro";
 import {useRecoilState} from "recoil";
 import {
 	bitcoinWalletState,
 	generatorState,
-	labelState,
-	languageState,
-	puzzleState,
-	vaultNameState, vaultPasswordState
+	puzzleState
 } from "../../hooks/Atoms";
-import {ViewOffIcon} from "@chakra-ui/icons";
 import {QRCodeSVG} from 'qrcode.react';
-import {TextInput} from "../TextInput/textinput";
 import {GenBitcoinBrainWalletByPuzzle} from "../../lib/brainwallet";
 
 const BitcoinAddress:React.FC<IBaseProps> = (props:IBaseProps)=>{
 
 	const [isOpen, setOpen] = useState<boolean>(false)
-	const [passwordHolder, setPasswordHolder]	= useState<string>("password ...")
 
 	const [isBitcoinWallet, setBitcoinWallet] = useRecoilState(bitcoinWalletState);
-	const isConnection = useSelector((state:StateType)=>state.walletConnection)
 
 	const [generator, ] = useRecoilState(generatorState);
 	const [puzzle, ] = useRecoilState(puzzleState);
-	const [vaultName, ] = useRecoilState(vaultNameState);
-	const [password, ] = useRecoilState(vaultPasswordState);
 	const [addrs, setAddrs] = useState<string[]>();
 	const [privkeys, setPrivkeys] =useState<string[]>();
 	const [step, setStep] = useState<number>(1);

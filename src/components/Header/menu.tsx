@@ -6,14 +6,12 @@ import {Trans} from "@lingui/macro";
 import {HamburgerIcon} from "@chakra-ui/icons";
 import {languageState, networkState} from "../../hooks/Atoms";
 import {useRecoilState} from "recoil";
-import {useSearchParams} from "react-router-dom";
 
 const Menus:React.FC<IBaseProps> = (props:IBaseProps) =>{
 	const [ lang, setLang] = useRecoilState(languageState)
 	const [, setNetwork] = useRecoilState(networkState)
 	const [langTitle, setLangTitle]	= useState<string>("Language")
 	const [networkTitle, setNetworkTitle]	= useState<string>("Network")
-	const [routerPrams, setRouterParams] = useSearchParams()
 
 	const doClickLanguage = useCallback((value:string)=>{
 		setLang(value)
