@@ -27,15 +27,12 @@ const PageRouter:React.FC<IBaseProps> = (props:IBaseProps)=> {
 		setWalletActive("gray");
 		setIdActive("gray");
 		if(location.pathname==="/identity"){
-			console.log("location: ", location.pathname)
 			setIdActive("")
 		}
 		if(location.pathname==="/brainwallet"){
-			console.log("location: ", location.pathname)
 			setWalletActive("")
 		}
 		if(location.pathname==="/vault"){
-			console.log("location: ", location.pathname)
 			setVaultActive("")
 		}
 	},[location.pathname])
