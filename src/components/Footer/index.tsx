@@ -12,7 +12,7 @@ const Footer:React.FC<IBaseProps>=(props:IBaseProps)=>{
 		  <Link href="https://github.com/seedlist/seedlist.github.io">
 			  <HStack spacing={2}>
 				  <Text fontSize="1xl" fontWeight="">
-					  Github:v1.0.0
+					  Github: v1.0
 				  </Text>
 			  </HStack>
 		  </Link>
