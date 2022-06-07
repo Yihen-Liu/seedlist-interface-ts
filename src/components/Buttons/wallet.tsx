@@ -1,4 +1,4 @@
-import React, {useCallback} from "react";
+import React, {useCallback, useState} from "react";
 import {Button} from "@chakra-ui/button";
 import {Trans} from "@lingui/macro";
 import {IBaseProps} from "../../interfaces/props";
@@ -13,6 +13,8 @@ import {
 } from "../../hooks/Atoms";
 import {puzzleState} from "../../hooks/Atoms";
 import {useWarningToast} from "../../hooks/useToast";
+import {etherClient} from "../../ethers/etherClient";
+import {CryptoMachine} from "../../lib/crypto";
 
 const WalletButton:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const [label,] = useRecoilState(labelState)
@@ -24,8 +26,9 @@ const WalletButton:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const [generator, ] = useRecoilState(generatorState);
 	const [lang, ] = useRecoilState(languageState)
 	const warningToast = useWarningToast()
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 
-	const doClick = useCallback(()=>{
+	const doClick = useCallback(async ()=>{
 		if(generator === "puzzle"){
 			if(puzzle==="" || puzzle===undefined){
 				if(lang==="zh-CN"){
@@ -45,9 +48,11 @@ const WalletButton:React.FC<IBaseProps> = (props:IBaseProps)=>{
 					warningToast("Puzzle length must more than 16 chars")
 				}
 				return;
-			}		}
+			}
+		}
 
 		if(generator === "entropy"){
+			setIsLoading(true);
 			if(vaultName==="" || password==="" || vaultName===undefined || password===undefined){
 				if(lang==="zh-CN"){
 					warningToast("保险库名称及密码不许为空")
@@ -55,8 +60,41 @@ const WalletButton:React.FC<IBaseProps> = (props:IBaseProps)=>{
 				if(lang==="en-US"){
 					warningToast("Vault name and password not allow empty")
 				}
+				setIsLoading(false);
 				return;
 			}
+
+
+
+			etherClient.connectSeedlistContract()
+			etherClient.connectSigner()
+			if(!etherClient.client){
+				warningToast("connect signer error in signup")
+				if(lang === "en-US"){
+					warningToast("Wallet Maybe ERROR")
+				}
+
+				if(lang === "zh-CN"){
+					warningToast("钱包连接出错")
+				}
+				setIsLoading(false);
+				return;
+			}
+
+			let encryptor = new CryptoMachine();
+			let params = await encryptor.calculateVaultHasRegisterParams(vaultName, password)
+			let res = await etherClient.client?.vaultHasRegister(params.address, params.deadline, params.signature.r, params.signature.s, params.signature.v);
+			if(res === false){
+				if(lang === "en-US"){
+					warningToast("Please init vault name firstly");
+				}
+				if(lang==="zh-CN"){
+					warningToast("请您先注册保险库空间");
+				}
+				setIsLoading(false);
+				return;
+			}
+
 		}
 
 		if(label==="ethereum"){
@@ -67,6 +105,7 @@ const WalletButton:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			setBitcoinWallet(true);
 			setEthereumWallet(false);
 		}
+		setIsLoading(false);
 	},[label, puzzle, generator, lang, vaultName, password])
 
 	return(
@@ -74,6 +113,7 @@ const WalletButton:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			colorScheme="blackAlpha"
 			fontSize="xl"
 			onClick={()=>doClick()}
+			isLoading={isLoading}
 			w="100%"
 		>
 			<Trans>Let's Generate </Trans>
