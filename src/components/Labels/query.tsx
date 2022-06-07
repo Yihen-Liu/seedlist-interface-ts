@@ -6,6 +6,8 @@ import {Trans} from "@lingui/macro";
 import {IBaseProps} from "../../interfaces/props";
 import {pageState, StateType} from "../../reducers/state";
 import {Text} from "@chakra-ui/layout";
+import {useRecoilState} from "recoil";
+import {labelNameState, savedContentState, vaultNameState, vaultPasswordState} from "../../hooks/Atoms";
 
 const QueryLabel:React.FC<IBaseProps> = (props:IBaseProps)=>{
     const dispatch = useDispatch();
@@ -14,6 +16,11 @@ const QueryLabel:React.FC<IBaseProps> = (props:IBaseProps)=>{
 
 	const [color, setColor] = useState<string>("gray");
 	const page = useSelector((state:StateType)=>state.page);
+
+	const [, setVaultName] = useRecoilState(vaultNameState);
+	const [, setLabelName] = useRecoilState(labelNameState);
+	const [,setSavedContent] = useRecoilState(savedContentState);
+	const [, setPassword] = useRecoilState(vaultPasswordState);
 
 	useMemo(()=>{
 		if(page === pageState.QUERY){
@@ -25,7 +32,13 @@ const QueryLabel:React.FC<IBaseProps> = (props:IBaseProps)=>{
         <Button
             colorScheme="blackAlpha"
             fontSize="xl"
-            onClick={click}
+            onClick={()=>{
+            	dispatch(queryAction(isConnection));
+	            setVaultName("");
+	            setLabelName("");
+	            setSavedContent("");
+	            setPassword("");
+            }}
             w={["32", "40"]}
         >
 	        <Text color={color}> <Trans> Query </Trans> </Text>

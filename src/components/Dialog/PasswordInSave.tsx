@@ -21,7 +21,7 @@ import {
 	vaultNameState,
 	labelNameState,
 	savedContentState,
-	vaultPasswordState
+	vaultPasswordState, saveBtnIsLoadingState
 } from "../../hooks/Atoms";
 import { ChangeEvent } from "react";
 import {TextInput} from "../TextInput/textinput";
@@ -42,7 +42,7 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const [password, setPassword] = useRecoilState(vaultPasswordState);
 	const [receiverAddr,] = useRecoilState(tokenReceiverAddr)
 	const [lang, ] = useRecoilState(languageState)
-
+	const [saveBtnLoading, setSaveBtnIsLoading] = useRecoilState(saveBtnIsLoadingState);
 	const [passwordHolder, setPasswordHolder]	= useState<string>("password ...")
 	const [checked, setChecked] = useState<boolean>(false)
 	const handleCheckChange = (event: ChangeEvent<HTMLInputElement>)=>setChecked(event.target.checked)
@@ -114,16 +114,18 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	},[dispatch])
 
 	const doSubmit = useCallback(async ()=>{
+		setSaveBtnIsLoading(true);
 		let encryptor = new CryptoMachine();
-		if(vaultName===undefined || password===undefined ||
-			savedContent === undefined || labelName===undefined){
+		if(vaultName===undefined || password===undefined || savedContent === undefined || labelName===undefined ||
+			vaultName==="" || password === "" || savedContent === "" || labelName === ""){
 			if(lang==='zh-CN'){
-				warningToast("输入内容有误,请检查")
+				warningToast("输入内容不许为空,请检查")
 			}
 
 			if(lang==='en-US'){
-				warningToast("Undefined content, check again")
+				warningToast("Undefined input contents, check again")
 			}
+			setSaveBtnIsLoading(false);
 			return
 		}
 
@@ -131,6 +133,8 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 		etherClient.connectSigner()
 		if(!etherClient.client){
 			console.error("connect signer error in signup")
+			setSaveBtnIsLoading(false);
+			return;
 		}
 
 		let params = await encryptor.calculateVaultHasRegisterParams(vaultName, password)
@@ -143,6 +147,7 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			if(lang==='en-US'){
 				warningToast("Regist vault name firstly");
 			}
+			setSaveBtnIsLoading(false);
 			return;
 		}
 		if(checked === true){
@@ -156,13 +161,19 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 				if(lang==='en-US'){
 					warningToast("Mint only once with same vault name");
 				}
+				setSaveBtnIsLoading(false);
 				return
 			}
 
 			let mintedSaveParams = await encryptor.calculateSaveWithMintingParams(vaultName, password, savedContent, labelName, receiverAddr);
-			let mintedSaveRes = await etherClient.client?.saveDataWithMinting(mintedSaveParams.address, savedContent, labelName,
-				receiverAddr, mintedSaveParams.deadline, mintedSaveParams.signature.r,
-				mintedSaveParams.signature.s, mintedSaveParams.signature.v);
+			try {
+				let mintedSaveRes = await etherClient.client?.saveDataWithMinting(mintedSaveParams.address, savedContent, labelName,
+					receiverAddr, mintedSaveParams.deadline, mintedSaveParams.signature.r,
+					mintedSaveParams.signature.s, mintedSaveParams.signature.v);
+			}catch (e) {
+				setSaveBtnIsLoading(false);
+				return;
+			}
 
 			if(lang==='zh-CN'){
 				successToast("存储成功，并完成通证铸造");
@@ -171,11 +182,17 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			if(lang==='en-US'){
 				successToast("save with mint success");
 			}
+			setSaveBtnIsLoading(false);
 		}else{
 			let saveParams = await encryptor.calculateSaveWithoutMintingParams(vaultName, password, savedContent, labelName);
-			let saveRes = await etherClient.client?.saveDataWithoutMinting(saveParams.address, savedContent, labelName,
-				saveParams.deadline, saveParams.signature.r,
-				saveParams.signature.s, saveParams.signature.v);
+			try {
+				let saveRes = await etherClient.client?.saveDataWithoutMinting(saveParams.address, savedContent, labelName,
+					saveParams.deadline, saveParams.signature.r,
+					saveParams.signature.s, saveParams.signature.v);
+			}catch (e) {
+					setSaveBtnIsLoading(false);
+					return;
+			}
 
 			if(lang==='zh-CN'){
 				successToast("存储成功");
@@ -184,6 +201,7 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			if(lang==='en-US'){
 				successToast("save success");
 			}
+			setSaveBtnIsLoading(false);
 		}
 
 	},[vaultName, savedContent, labelName, password, receiverAddr, checked])
@@ -240,7 +258,7 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 					<Button variant='outline' colorScheme='whiteAlpha' mr={3} onClick={doCancel}>
 						<Trans>Cancel</Trans>
 					</Button>
-					<Button colorScheme='blackAlpha' mr={3} onClick={doSubmit}>
+					<Button colorScheme='blackAlpha' isLoading={saveBtnLoading} mr={3} onClick={doSubmit}>
 						<Trans>Submit</Trans>
 					</Button>
 				</DrawerFooter>

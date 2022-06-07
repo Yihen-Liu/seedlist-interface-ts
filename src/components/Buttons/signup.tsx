@@ -9,18 +9,20 @@ import {CryptoMachine} from "../../lib/crypto";
 import {useSuccessToast, useWarningToast} from "../../hooks/useToast";
 import {etherClient} from "../../ethers/etherClient";
 import {useRecoilState} from "recoil";
-import {languageState} from "../../hooks/Atoms";
+import {languageState, signupBtnIsLoadingState} from "../../hooks/Atoms";
 
 const SignupButton:React.FC<IBaseProps> = (props:IBaseProps) => {
 	const isConnection = useSelector((state:StateType)=>state.walletConnection);
 
-	const successToast = useSuccessToast()
-	const warningToast = useWarningToast()
+	const successToast = useSuccessToast();
+	const warningToast = useWarningToast();
 	const spaceName = useSelector((state:StateType)=>state.spaceNameValue);
 	const password = useSelector((state:StateType)=>state.passwordValue);
-	const [lang, ] = useRecoilState(languageState)
+	const [lang, ] = useRecoilState(languageState);
+	const [signupIsLoading, setSignupIsLoading] = useRecoilState(signupBtnIsLoadingState);
 
 	const signup = useCallback(async ()=>{
+		setSignupIsLoading(true);
 		let encryptor = new CryptoMachine();
 		if(spaceName===undefined || password===undefined || spaceName === "" || password===""){
 			if(lang === "en-US"){
@@ -30,6 +32,7 @@ const SignupButton:React.FC<IBaseProps> = (props:IBaseProps) => {
 			if(lang === "zh-CN"){
 				warningToast("保险库名称或密钥不允许为空")
 			}
+			setSignupIsLoading(false);
 			return
 		}
 
@@ -44,6 +47,7 @@ const SignupButton:React.FC<IBaseProps> = (props:IBaseProps) => {
 			if(lang === "zh-CN"){
 				warningToast("钱包连接出错")
 			}
+			setSignupIsLoading(false);
 			return;
 		}
 
@@ -56,12 +60,17 @@ const SignupButton:React.FC<IBaseProps> = (props:IBaseProps) => {
 			if(lang==="zh-CN"){
 				warningToast("相同的保险库名和密钥已被注册");
 			}
+			setSignupIsLoading(false);
 			return;
 		}
 
 		let vaultParams = await encryptor.calculateInitVaultHubParams(spaceName, password);
-		let res0 = await etherClient.client?.initPrivateVault(vaultParams.address, vaultParams.signature.r, vaultParams.signature.s, vaultParams.signature.v ,vaultParams.deadline);
-
+		try {
+			let res0 = await etherClient.client?.initPrivateVault(vaultParams.address, vaultParams.signature.r, vaultParams.signature.s, vaultParams.signature.v ,vaultParams.deadline);
+		}catch (e) {
+			setSignupIsLoading(false);
+			return;
+		}
 		let _params = await encryptor.calculateVaultHasRegisterParams(spaceName, password)
 		let _res = await etherClient.client?.vaultHasRegister(_params.address, _params.deadline, _params.signature.r, _params.signature.s, _params.signature.v);
 		if(_res === true){
@@ -72,6 +81,7 @@ const SignupButton:React.FC<IBaseProps> = (props:IBaseProps) => {
 				successToast("Init Vault Spacename Success");
 			}
 		}
+		setSignupIsLoading(false);
 
 	},[spaceName, password])
 
@@ -81,13 +91,14 @@ const SignupButton:React.FC<IBaseProps> = (props:IBaseProps) => {
 				colorScheme="blackAlpha"
 				fontSize="xl"
 				onClick={signup}
+				isLoading={signupIsLoading}
 				w="100%"
 			>
 				<Trans>Let's Sign </Trans>
 			</Button>
 		);
 
-	},[signup]);
+	},[signup, signupIsLoading]);
 
 	const inactiveButton = useMemo(()=>{
 		return(

@@ -88,3 +88,17 @@ export const ethereumWalletState = atom(
 		default:false
 	}
 );
+
+export const signupBtnIsLoadingState = atom(
+	{
+		key:"signupBtnIsLoadingTag",
+		default:false
+	}
+);
+
+export const saveBtnIsLoadingState = atom(
+	{
+		key:"saveBtnIsLoadingTag",
+		default:false
+	}
+);
