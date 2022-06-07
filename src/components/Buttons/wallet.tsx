@@ -36,7 +36,16 @@ const WalletButton:React.FC<IBaseProps> = (props:IBaseProps)=>{
 				}
 				return;
 			}
-		}
+
+			if(puzzle.length<16){
+				if(lang==="zh-CN"){
+					warningToast("密码短语长度最少16位")
+				}
+				if(lang==="en-US"){
+					warningToast("Puzzle length must more than 16 chars")
+				}
+				return;
+			}		}
 
 		if(generator === "entropy"){
 			if(vaultName==="" || password==="" || vaultName===undefined || password===undefined){
