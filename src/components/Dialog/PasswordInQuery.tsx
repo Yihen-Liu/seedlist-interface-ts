@@ -139,7 +139,6 @@ const PasswordInQuery:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	},[savedContents,savedLabels])
 
 	const showQueryContent = useMemo(()=>{
-		console.log("showQueryContent:", savedContents);
 		const contents = savedLabels.map( (label:string, index:number)=>
 			<HStack>
 				<Tooltip label={tipMessage} aria-label='A tooltip' bg="blackAlpha.900">
