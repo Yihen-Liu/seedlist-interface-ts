@@ -36,6 +36,18 @@ const SignupButton:React.FC<IBaseProps> = (props:IBaseProps) => {
 			return
 		}
 
+		if(spaceName.length<8 || password.length<8){
+			if(lang === "en-US"){
+				warningToast("content length must more than 8 chars")
+			}
+
+			if(lang === "zh-CN"){
+				warningToast("内容长度必须大于8位")
+			}
+			setSignupIsLoading(false);
+			return
+
+		}
 		etherClient.connectSeedlistContract()
 		etherClient.connectSigner()
 		if(!etherClient.client){

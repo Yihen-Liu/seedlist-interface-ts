@@ -159,7 +159,6 @@ const PasswordInQuery:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			placement='right'
 			onClose={doCancel}
 			closeOnOverlayClick={false}
-			size='md'
 		>
 			<DrawerOverlay />
 			<DrawerContent>
