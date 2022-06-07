@@ -29,7 +29,7 @@ const PasswordInQuery:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const dispatch = useDispatch();
 	const [lang, ] = useRecoilState(languageState)
-	const [passwordHolder, setPasswordHolder]	= useState<string>("password ...")
+	const [passwordHolder, setPasswordHolder] = useState<string>("password ...")
 	const [tipMessage, setTipMessage] = useState<string>("Click me to decrypt")
 
 	const [vaultName, ] = useRecoilState(vaultNameState);
@@ -59,8 +59,9 @@ const PasswordInQuery:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	},[isPassword])
 
 	const doCancel = useCallback(()=>{
-		dispatch(cancelPasswordAction(ActionType.CLICK_QUERY, isConnection))
-		setOpen(isOpen)
+		dispatch(cancelPasswordAction(ActionType.CLICK_QUERY, isConnection));
+		setIsLoading(false);
+		setOpen(isOpen);
 		setSavedLabels([]);
 		setSavedContents([]);
 	},[vaultName, dispatch])
@@ -106,7 +107,7 @@ const PasswordInQuery:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			let label = await etherClient.client?.labelName(getLabelNameByIndexParams.address, i, getLabelNameByIndexParams.deadline,
 				getLabelNameByIndexParams.signature.r, getLabelNameByIndexParams.signature.s, getLabelNameByIndexParams.signature.v);
 			_savedLabels[i] = label;
-			 _savedContents[i] = "**************************";
+			_savedContents[i] = "**************************";
 		}
 		setSavedLabels(_savedLabels);
 		setSavedContents(_savedContents);
@@ -128,16 +129,17 @@ const PasswordInQuery:React.FC<IBaseProps> = (props:IBaseProps)=>{
 		}
 
 		let queryByNameParams = await encryptor.calculateQueryByNameParams(vaultName, password, label);
-		let content = await etherClient.client?.queryDataByLabelName(queryByNameParams.address, label, queryByNameParams.deadline, queryByNameParams.signature.r, queryByNameParams.signature.s, queryByNameParams.signature.v);
+		let content = await etherClient.client?.queryDataByLabelName(queryByNameParams.address, label, queryByNameParams.deadline,
+			queryByNameParams.signature.r, queryByNameParams.signature.s, queryByNameParams.signature.v);
 		let _savedContents = savedContents;
 		console.log("content:", content);
 		_savedContents[index] = content;
-		setSavedContents(_savedContents);
+		setSavedContents(_savedContents.concat());
 		console.log("saveContents:", savedContents);
 	},[savedContents,savedLabels])
 
 	const showQueryContent = useMemo(()=>{
-		//console.log("showQueryContent:", savedContents);
+		console.log("showQueryContent:", savedContents);
 		const contents = savedLabels.map( (label:string, index:number)=>
 			<HStack>
 				<Tooltip label={tipMessage} aria-label='A tooltip' bg="blackAlpha.900">
