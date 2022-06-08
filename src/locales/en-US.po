@@ -94,8 +94,12 @@ msgid "Download Zip"
 msgstr "Download Zip"
 
 #: src/pages/donate/index.tsx
-msgid "ERC20/ETH Donate Address"
-msgstr "ERC20/ETH Donate Address"
+#~ msgid "ERC20/ETH Donate Address"
+#~ msgstr "ERC20/ETH Donate Address"
+
+#: src/pages/donate/index.tsx
+msgid "ETH(ERC20) Donate Address"
+msgstr "ETH(ERC20) Donate Address"
 
 #: src/components/Labels/ethereum.tsx
 msgid "Ethereum"

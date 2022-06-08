@@ -90,7 +90,7 @@ msgid "Download Zip"
 msgstr "本地运行"
 
 #: src/pages/donate/index.tsx
-msgid "ERC20/ETH Donate Address"
+msgid "ETH(ERC20) Donate Address"
 msgstr "以太坊(ERC20)捐赠地址"
 
 #: src/components/Labels/ethereum.tsx
