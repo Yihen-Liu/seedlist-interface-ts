@@ -83,7 +83,7 @@ msgstr "捐赠"
 
 #: src/components/Footer/index.tsx
 msgid "Download Zip"
-msgstr "下载源码"
+msgstr "本地运行"
 
 #: src/components/Labels/ethereum.tsx
 msgid "Ethereum"
