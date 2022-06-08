@@ -11,7 +11,7 @@ const Footer:React.FC<IBaseProps>=(props:IBaseProps)=>{
     <FooterContainer maxW="container.xl" centerContent>
       <HStack py={5} wrap="wrap" spacing={6}>
 
-		  <Link href="https://github.com/seedlist/seedlist.github.io">
+		  <Link href="https://github.com/seedlist/seedlist-interface-ts" target="_blank">
 			  <HStack spacing={2}>
 				  <Text fontSize="1xl" fontWeight="">
 					  <Trans>Github</Trans>: v1.0
@@ -27,7 +27,7 @@ const Footer:React.FC<IBaseProps>=(props:IBaseProps)=>{
 			  </HStack>
           </NavLink>
 
-          <Link href="https://github.com/seedlist/seedlist-docs/blob/main/protocol/seedlist_en.md">
+          <Link href="https://github.com/seedlist/seedlist-docs" target="_blank">
 			  <HStack spacing={2}>
 				  <Text fontSize="1xl" fontWeight="">
 					 <Trans>Docs</Trans>
@@ -35,7 +35,7 @@ const Footer:React.FC<IBaseProps>=(props:IBaseProps)=>{
 			  </HStack>
           </Link>
 
-          <Link href="https://discord.gg/kQgg5kkpA5">
+          <Link href="https://discord.gg/kQgg5kkpA5" target="_blank">
 			  <HStack spacing={2}>
 				  <Text fontSize="1xl" fontWeight="">
 					  Discord
