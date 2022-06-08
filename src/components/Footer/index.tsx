@@ -51,13 +51,13 @@ const Footer:React.FC<IBaseProps>=(props:IBaseProps)=>{
 			  </HStack>
           </Link>
 
-	      <Link href="/donate">
+	      <NavLink to="/donate">
 		      <HStack spacing={2}>
 			      <Text fontSize="1xl" fontWeight="">
 				      <Trans>Donate Me </Trans>
 			      </Text>
 		      </HStack>
-	      </Link>
+	      </NavLink>
 
       </HStack>
     </FooterContainer>

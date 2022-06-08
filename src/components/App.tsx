@@ -30,9 +30,9 @@ const App:React.FC<IBaseProps> = (props:IBaseProps)=>{
 							<Route path="/*" element={<NotFound />}> </Route>
 							<Route path="/donate" element={<Donate />}> </Route>
 						</Routes>
+						<Footer/>
 					</Router>
                 </Stack>
-                <Footer/>
             </Box>
         );
 }
