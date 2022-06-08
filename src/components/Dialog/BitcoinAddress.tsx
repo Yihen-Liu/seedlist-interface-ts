@@ -55,7 +55,6 @@ const BitcoinAddress:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	},[])
 
 	const doSubmit = useCallback(()=>{
-		console.log("do submit:", step);
 		setStep(step+1);
 	},[step])
 

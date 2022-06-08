@@ -116,8 +116,10 @@ const PasswordInQuery:React.FC<IBaseProps> = (props:IBaseProps)=>{
 
 	const doDecrypto = useCallback(async (label:string, index:number)=>{
 		let encryptor = new CryptoMachine();
+		setIsLoading(true);
 		if(vaultName===undefined || password===undefined) {
 			warningToast("Undefined content")
+			setIsLoading(false);
 			return
 		}
 
@@ -125,17 +127,16 @@ const PasswordInQuery:React.FC<IBaseProps> = (props:IBaseProps)=>{
 		etherClient.connectSigner()
 		if(!etherClient.client){
 			warningToast("connect signer error in signup")
+			setIsLoading(false);
 			return
 		}
 
 		let queryByNameParams = await encryptor.calculateQueryByNameParams(vaultName, password, label);
 		let content = await etherClient.client?.queryDataByLabelName(queryByNameParams.address, label, queryByNameParams.deadline,
 			queryByNameParams.signature.r, queryByNameParams.signature.s, queryByNameParams.signature.v);
-		let _savedContents = savedContents;
-		console.log("content:", content);
-		_savedContents[index] = content;
-		setSavedContents(_savedContents.concat());
-		console.log("saveContents:", savedContents);
+		savedContents[index] = content;
+		setSavedContents(savedContents.concat());
+		setIsLoading(false);
 	},[savedContents,savedLabels])
 
 	const showQueryContent = useMemo(()=>{
