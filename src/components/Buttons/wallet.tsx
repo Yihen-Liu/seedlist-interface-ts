@@ -86,10 +86,10 @@ const WalletButton:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			let res = await etherClient.client?.vaultHasRegister(params.address, params.deadline, params.signature.r, params.signature.s, params.signature.v);
 			if(res === false){
 				if(lang === "en-US"){
-					warningToast("Please init vault name firstly");
+					warningToast("vault space does not exist, init firstly");
 				}
 				if(lang==="zh-CN"){
-					warningToast("请您先注册保险库空间");
+					warningToast("保险库空间不存在，请先注册");
 				}
 				setIsLoading(false);
 				return;

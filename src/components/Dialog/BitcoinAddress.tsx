@@ -37,13 +37,11 @@ const BitcoinAddress:React.FC<IBaseProps> = (props:IBaseProps)=>{
 		setOpen(isBitcoinWallet);
 		if(isBitcoinWallet===false) return;
 		if(generator==="puzzle"){
-			console.log("puzzle:", puzzle)
 			let wallet = GenBitcoinBrainWalletByPuzzle(0,10*step, puzzle)
 			setAddrs(wallet.addrs);
 			setPrivkeys(wallet.privkeys);
 		}
 		if(generator==="entropy"){
-			console.log("entropy:", vaultName,", ",password)
 			let wallet = GenBitcoinBrainWalletByEntropy(0, 10*step, vaultName, password);
 			setAddrs(wallet.addrs);
 			setPrivkeys(wallet.privkeys);
@@ -102,8 +100,8 @@ const BitcoinAddress:React.FC<IBaseProps> = (props:IBaseProps)=>{
 				<GridItem colSpan={1} ><Text color={"whiteAlpha.600"}><Trans>PrivateKey</Trans>:</Text></GridItem>
 				<GridItem colSpan={8}>
 					<Grid templateColumns='repeat(100, 1fr)' >
-						<GridItem colSpan={9}></GridItem>
-						<GridItem colSpan={91}>
+						<GridItem colSpan={18}></GridItem>
+						<GridItem colSpan={82}>
 							<Text color={"whiteAlpha.600"}> {privkeys===undefined?"":privkeys[index]} </Text>
 						</GridItem>
 					</Grid>

@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import {Link} from "@chakra-ui/react";
 import React from "react";
 import {IBaseProps} from "../../interfaces/props";
+import {Trans} from "@lingui/macro";
 
 const Footer:React.FC<IBaseProps>=(props:IBaseProps)=>{
   return (
@@ -12,7 +13,7 @@ const Footer:React.FC<IBaseProps>=(props:IBaseProps)=>{
 		  <Link href="https://github.com/seedlist/seedlist.github.io">
 			  <HStack spacing={2}>
 				  <Text fontSize="1xl" fontWeight="">
-					  Github: v1.0
+					  <Trans>Github</Trans>: v1.0
 				  </Text>
 			  </HStack>
 		  </Link>
@@ -20,7 +21,7 @@ const Footer:React.FC<IBaseProps>=(props:IBaseProps)=>{
           <Link href="https://github.com/seedlist/seedlist-interface/blob/main/LICENSE">
 			  <HStack spacing={2}>
 				  <Text fontSize="1xl" fontWeight="">
-					  License: MIT
+					  <Trans>License</Trans>: MIT
 				  </Text>
 			  </HStack>
           </Link>
@@ -28,7 +29,7 @@ const Footer:React.FC<IBaseProps>=(props:IBaseProps)=>{
           <Link href="https://github.com/seedlist/seedlist-docs/blob/main/protocol/seedlist_en.md">
 			  <HStack spacing={2}>
 				  <Text fontSize="1xl" fontWeight="">
-					  Protocol
+					 <Trans>Docs</Trans>
 				  </Text>
 			  </HStack>
           </Link>
@@ -44,7 +45,7 @@ const Footer:React.FC<IBaseProps>=(props:IBaseProps)=>{
           <Link href="https://github.com/seedlist/seedlist.github.io/archive/refs/heads/main.zip">
 			  <HStack spacing={2}>
 				  <Text fontSize="1xl" fontWeight="">
-					  Download Zip
+					  <Trans>Download Zip</Trans>
 				  </Text>
 			  </HStack>
           </Link>
@@ -52,7 +53,7 @@ const Footer:React.FC<IBaseProps>=(props:IBaseProps)=>{
 	      <Link href="/">
 		      <HStack spacing={2}>
 			      <Text fontSize="1xl" fontWeight="">
-				      Donate Me
+				      <Trans>Donate Me </Trans>
 			      </Text>
 		      </HStack>
 	      </Link>

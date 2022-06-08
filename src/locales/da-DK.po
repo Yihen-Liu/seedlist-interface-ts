@@ -77,6 +77,18 @@ msgstr ""
 msgid "Connect Wallet"
 msgstr ""
 
+#: src/components/Footer/index.tsx
+msgid "Docs"
+msgstr ""
+
+#: src/components/Footer/index.tsx
+msgid "Donate Me"
+msgstr ""
+
+#: src/components/Footer/index.tsx
+msgid "Download Zip"
+msgstr ""
+
 #: src/components/Labels/ethereum.tsx
 msgid "Ethereum"
 msgstr ""
@@ -87,6 +99,10 @@ msgstr ""
 
 #: src/components/Header/menu.tsx
 msgid "Ethereum Mainnet"
+msgstr ""
+
+#: src/components/Footer/index.tsx
+msgid "Github"
 msgstr ""
 
 #: src/components/Dialog/PasswordInSave.tsx
@@ -111,6 +127,10 @@ msgstr ""
 
 #: src/components/Buttons/signup.tsx
 msgid "Let's Sign"
+msgstr ""
+
+#: src/components/Footer/index.tsx
+msgid "License"
 msgstr ""
 
 #: src/components/Header/routers.tsx

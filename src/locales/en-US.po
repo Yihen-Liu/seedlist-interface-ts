@@ -77,6 +77,18 @@ msgstr "Cancel"
 msgid "Connect Wallet"
 msgstr "Connect Wallet"
 
+#: src/components/Footer/index.tsx
+msgid "Docs"
+msgstr "Docs"
+
+#: src/components/Footer/index.tsx
+msgid "Donate Me"
+msgstr "Donate Me"
+
+#: src/components/Footer/index.tsx
+msgid "Download Zip"
+msgstr "Download Zip"
+
 #: src/components/Labels/ethereum.tsx
 msgid "Ethereum"
 msgstr "Ethereum"
@@ -88,6 +100,10 @@ msgstr "Ethereum Address:"
 #: src/components/Header/menu.tsx
 msgid "Ethereum Mainnet"
 msgstr "Ethereum Mainnet"
+
+#: src/components/Footer/index.tsx
+msgid "Github"
+msgstr "Github"
 
 #: src/components/Dialog/PasswordInSave.tsx
 msgid "I want to mint seed incentive token"
@@ -112,6 +128,10 @@ msgstr "Let's Save"
 #: src/components/Buttons/signup.tsx
 msgid "Let's Sign"
 msgstr "Let's Sign"
+
+#: src/components/Footer/index.tsx
+msgid "License"
+msgstr "License"
 
 #: src/components/Header/routers.tsx
 msgid "Meta Identity"

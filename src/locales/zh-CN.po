@@ -73,6 +73,18 @@ msgstr "取消"
 msgid "Connect Wallet"
 msgstr "连接钱包"
 
+#: src/components/Footer/index.tsx
+msgid "Docs"
+msgstr "文档"
+
+#: src/components/Footer/index.tsx
+msgid "Donate Me"
+msgstr "捐赠"
+
+#: src/components/Footer/index.tsx
+msgid "Download Zip"
+msgstr "下载源码"
+
 #: src/components/Labels/ethereum.tsx
 msgid "Ethereum"
 msgstr "以太坊"
@@ -84,6 +96,10 @@ msgstr "以太坊地址:"
 #: src/components/Header/menu.tsx
 msgid "Ethereum Mainnet"
 msgstr "以太坊主网"
+
+#: src/components/Footer/index.tsx
+msgid "Github"
+msgstr "源码"
 
 #: src/components/Dialog/PasswordInSave.tsx
 msgid "I want to mint seed incentive token"
@@ -104,6 +120,10 @@ msgstr "开始存储"
 #: src/components/Buttons/signup.tsx
 msgid "Let's Sign"
 msgstr "开始注册"
+
+#: src/components/Footer/index.tsx
+msgid "License"
+msgstr "协议"
 
 #: src/components/Header/routers.tsx
 msgid "Meta Identity"
