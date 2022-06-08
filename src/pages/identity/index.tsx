@@ -1,6 +1,7 @@
 import React from "react";
 import {Center, Container, Text} from "@chakra-ui/layout";
 import { IBaseProps } from "../../interfaces/props";
+import {Image} from "@chakra-ui/react";
 
 const Identity:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	return(
@@ -12,7 +13,7 @@ const Identity:React.FC<IBaseProps> = (props:IBaseProps)=>{
 					</Text>
 				</Center>
 				<Center>
-					coming soon...
+					<Image marginY="80px" src="./coming-soon.svg" width="200" height="200" />
 				</Center>
 			</Container>
 		</Center>
