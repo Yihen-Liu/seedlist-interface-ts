@@ -131,7 +131,7 @@ msgstr "开始注册"
 
 #: src/components/Footer/index.tsx
 msgid "License"
-msgstr "协议"
+msgstr "许可证"
 
 #: src/components/Header/routers.tsx
 msgid "Meta Identity"
