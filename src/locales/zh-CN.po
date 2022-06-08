@@ -50,6 +50,10 @@ msgstr "钱包地址"
 msgid "Arbitrum Mainnet"
 msgstr "Arbitrum主网"
 
+#: src/pages/donate/index.tsx
+msgid "BTC Donate Address"
+msgstr "比特币捐赠地址"
+
 #: src/components/Labels/bitcoin.tsx
 msgid "Bitcoin"
 msgstr "比特币"
@@ -84,6 +88,10 @@ msgstr "捐赠"
 #: src/components/Footer/index.tsx
 msgid "Download Zip"
 msgstr "本地运行"
+
+#: src/pages/donate/index.tsx
+msgid "ERC20/ETH Donate Address"
+msgstr "以太坊(ERC20)捐赠地址"
 
 #: src/components/Labels/ethereum.tsx
 msgid "Ethereum"

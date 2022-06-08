@@ -10,6 +10,7 @@ import { Brainwallet } from "../pages/brainwallet";
 import {Vault} from "../pages/vault";
 import {BrowserRouter as Router} from "react-router-dom";
 import {NotFound} from "../pages/error/404";
+import {Donate} from "../pages/donate";
 
 const App:React.FC<IBaseProps> = (props:IBaseProps)=>{
 
@@ -27,6 +28,7 @@ const App:React.FC<IBaseProps> = (props:IBaseProps)=>{
 							<Route path="/brainwallet" element={<Brainwallet />}> </Route>
 							<Route path="/identity" element={<Identity />}> </Route>
 							<Route path="/*" element={<NotFound />}> </Route>
+							<Route path="/donate" element={<Donate />}> </Route>
 						</Routes>
 					</Router>
                 </Stack>

@@ -4,6 +4,7 @@ import {Link} from "@chakra-ui/react";
 import React from "react";
 import {IBaseProps} from "../../interfaces/props";
 import {Trans} from "@lingui/macro";
+import {NavLink} from "react-router-dom";
 
 const Footer:React.FC<IBaseProps>=(props:IBaseProps)=>{
   return (
@@ -50,7 +51,7 @@ const Footer:React.FC<IBaseProps>=(props:IBaseProps)=>{
 			  </HStack>
           </Link>
 
-	      <Link href="/">
+	      <Link href="/donate">
 		      <HStack spacing={2}>
 			      <Text fontSize="1xl" fontWeight="">
 				      <Trans>Donate Me </Trans>
