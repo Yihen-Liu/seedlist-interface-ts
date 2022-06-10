@@ -29,6 +29,7 @@ export interface IVaultHubInterface extends utils.Interface {
     "initPrivateVault(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "queryPrivateDataByIndex(address,uint64,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "queryPrivateDataByName(address,string,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "queryPrivateVaultAddress(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "savePrivateDataWithMinting(address,string,string,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "savePrivateDataWithoutMinting(address,string,string,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "totalSavedItems(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
@@ -42,6 +43,7 @@ export interface IVaultHubInterface extends utils.Interface {
       | "initPrivateVault"
       | "queryPrivateDataByIndex"
       | "queryPrivateDataByName"
+      | "queryPrivateVaultAddress"
       | "savePrivateDataWithMinting"
       | "savePrivateDataWithoutMinting"
       | "totalSavedItems"
@@ -81,6 +83,10 @@ export interface IVaultHubInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "queryPrivateDataByName",
     values: [string, string, BigNumberish, BigNumberish, BytesLike, BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "queryPrivateVaultAddress",
+    values: [string, BigNumberish, BigNumberish, BytesLike, BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "savePrivateDataWithMinting",
@@ -131,6 +137,10 @@ export interface IVaultHubInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "queryPrivateDataByName",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "queryPrivateVaultAddress",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -228,6 +238,15 @@ export interface IVaultHub extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
+    queryPrivateVaultAddress(
+      addr: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
     savePrivateDataWithMinting(
       addr: string,
       data: string,
@@ -318,6 +337,15 @@ export interface IVaultHub extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
+  queryPrivateVaultAddress(
+    addr: string,
+    deadline: BigNumberish,
+    v: BigNumberish,
+    r: BytesLike,
+    s: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
   savePrivateDataWithMinting(
     addr: string,
     data: string,
@@ -401,6 +429,15 @@ export interface IVaultHub extends BaseContract {
     queryPrivateDataByName(
       addr: string,
       label: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    queryPrivateVaultAddress(
+      addr: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -501,6 +538,15 @@ export interface IVaultHub extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    queryPrivateVaultAddress(
+      addr: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     savePrivateDataWithMinting(
       addr: string,
       data: string,
@@ -585,6 +631,15 @@ export interface IVaultHub extends BaseContract {
     queryPrivateDataByName(
       addr: string,
       label: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    queryPrivateVaultAddress(
+      addr: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,

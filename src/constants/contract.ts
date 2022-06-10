@@ -1,5 +1,5 @@
 // keccak256('EIP712Domain(string name, string version, uint256 chainId, address VaultHubContract)');
-export const DOMAIN_SEPARATOR = "0x98c7c3628f4516ee8688ffc97700337684424c569733dd3fe3afc76b731e1597";
+export const DOMAIN_SEPARATOR = "0x0a649d1d16975cf8ed13b50c2bacf9612da88ed1990943291c41b5fcc5c8b2c0";
 
 // keccak256('savePrivateDataWithMinting(address addr, string memory data, string memory cryptoLabel,
 // address receiver, uint deadline)');
@@ -32,3 +32,28 @@ export const TOTAL_SAVED_ITEMS_PERMIT_TYPE_HASH = "0xc8091172f8dd383be784278ec56
 
 //keccak256('getLabelNameByIndex(address addr, uint256 deadline, uint64 index)')
 export const GET_LABEL_NAME_BY_INDEX = "0xbd5bc3ca2c7ea773b900edfe638ad04ce3697bf85885abdbe90a2f7c1266d9ee";
+
+//keccak256('queryPrivateVaultAddress(address addr, uint deadline)')
+export const QUERY_PRIVATE_VAULT_ADDRESS_PERMIT_TYPE_HASH = "0xf63b757fe5d6cdcf507967b75ba29c7b30eb7a73f255ccde1db9178daf683f69";
+
+// private vault contract caller used
+export const PRIVATE_VAULT_DOMAIN = "0x33993b0a0c04c5525c02867be7cc2bcdd49fe2643cfab46c731ff30cc29f3124"
+//keccak256('labelNameDirectly(uint64 index, uint256 deadline)')
+export const LABEL_NAME_PERMIT_TYPE_HASH =
+	"0xcbb2475c190d2e287f7de56c688846f7612f70b210a3856ad34c475cbad0dda7";
+
+//keccak256('getPrivateDataByNameDirectly(string memory name, uint256 deadline)')
+export const  GET_PRIVATE_DATA_BY_NAME_PERMIT_TYPE_HASH =
+	"0x83a9c8c05ed0fb1e4d4baaef671e3f96099729926f732e6aaac34a751230c7b8";
+
+//keccak256('getPrivateDataByIndexDirectly(uint64 index, uint256 deadline)')
+export const  GET_PRIVATE_DATA_BY_INDEX_PERMIT_TYPE_HASH =
+	"0x17558919af4007c4fb94572ba8e807922ff7db103814e127ad21ef481ca35d98";
+
+//keccak256('saveWithoutMintingDirectly(string memory data, string memory cryptoLabel, uint256 deadline)')
+export const  SAVE_WITHOUT_MINTING_PERMIT_TYPE_HASH =
+	"0xdf412ff5be017ec35abe4df3f9a2b33c93ab92336a734ac392576c30bad057f5";
+
+//keccak256('saveWithMintingDirectly(string memory data, string memory cryptoLabel, uint256 deadline)')
+export const SAVE_WITH_MINTING_PERMIT_TYPE_HASH =
+	"0xd9066cfdcd2adeb7f91eaa0872abd8e0ce6c9e7c131f920e0b52e3b052a791c8";

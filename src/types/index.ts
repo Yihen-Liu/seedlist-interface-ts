@@ -6,6 +6,8 @@ export type { interfaces };
 export type { PrivateVault } from "./PrivateVault";
 export type { VaultHub } from "./VaultHub";
 export * as factories from "./factories";
+export type { IPrivateVaultHub } from "./interfaces/IPrivateVault.sol/IPrivateVaultHub";
+export { IPrivateVaultHub__factory } from "./factories/interfaces/IPrivateVault.sol/IPrivateVaultHub__factory";
 export type { ITreasury } from "./interfaces/ITreasury";
 export { ITreasury__factory } from "./factories/interfaces/ITreasury__factory";
 export type { IVaultHub } from "./interfaces/IVaultHub";

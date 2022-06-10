@@ -24,37 +24,115 @@ import type {
 
 export interface PrivateVaultInterface extends utils.Interface {
   functions: {
-    "getLabelByIndex(uint64)": FunctionFragment;
-    "getLabelByName(string)": FunctionFragment;
+    "DOMAIN_NAME()": FunctionFragment;
+    "DOMAIN_SEPARATOR()": FunctionFragment;
+    "DOMAIN_TYPE_HASH()": FunctionFragment;
+    "DOMAIN_VERSION()": FunctionFragment;
+    "GET_PRIVATE_DATA_BY_INDEX_PERMIT_TYPE_HASH()": FunctionFragment;
+    "GET_PRIVATE_DATA_BY_NAME_PERMIT_TYPE_HASH()": FunctionFragment;
+    "LABEL_NAME_PERMIT_TYPE_HASH()": FunctionFragment;
+    "SAVE_WITHOUT_MINTING_PERMIT_TYPE_HASH()": FunctionFragment;
+    "SAVE_WITH_MINTING_PERMIT_TYPE_HASH()": FunctionFragment;
+    "getPrivateDataByIndex(uint64)": FunctionFragment;
+    "getPrivateDataByIndexDirectly(uint64,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "getPrivateDataByName(string)": FunctionFragment;
+    "getPrivateDataByNameDirectly(string,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "labelName(uint64)": FunctionFragment;
+    "labelNameDirectly(uint64,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "minted()": FunctionFragment;
     "saveWithMinting(string,string)": FunctionFragment;
+    "saveWithMintingDirectly(string,string,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "saveWithoutMinting(string,string)": FunctionFragment;
+    "saveWithoutMintingDirectly(string,string,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "signer()": FunctionFragment;
     "total()": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "getLabelByIndex"
-      | "getLabelByName"
+      | "DOMAIN_NAME"
+      | "DOMAIN_SEPARATOR"
+      | "DOMAIN_TYPE_HASH"
+      | "DOMAIN_VERSION"
+      | "GET_PRIVATE_DATA_BY_INDEX_PERMIT_TYPE_HASH"
+      | "GET_PRIVATE_DATA_BY_NAME_PERMIT_TYPE_HASH"
+      | "LABEL_NAME_PERMIT_TYPE_HASH"
+      | "SAVE_WITHOUT_MINTING_PERMIT_TYPE_HASH"
+      | "SAVE_WITH_MINTING_PERMIT_TYPE_HASH"
+      | "getPrivateDataByIndex"
+      | "getPrivateDataByIndexDirectly"
+      | "getPrivateDataByName"
+      | "getPrivateDataByNameDirectly"
       | "labelName"
+      | "labelNameDirectly"
       | "minted"
       | "saveWithMinting"
+      | "saveWithMintingDirectly"
       | "saveWithoutMinting"
+      | "saveWithoutMintingDirectly"
+      | "signer"
       | "total"
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "getLabelByIndex",
+    functionFragment: "DOMAIN_NAME",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "DOMAIN_SEPARATOR",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "DOMAIN_TYPE_HASH",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "DOMAIN_VERSION",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "GET_PRIVATE_DATA_BY_INDEX_PERMIT_TYPE_HASH",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "GET_PRIVATE_DATA_BY_NAME_PERMIT_TYPE_HASH",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "LABEL_NAME_PERMIT_TYPE_HASH",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "SAVE_WITHOUT_MINTING_PERMIT_TYPE_HASH",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "SAVE_WITH_MINTING_PERMIT_TYPE_HASH",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getPrivateDataByIndex",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "getLabelByName",
+    functionFragment: "getPrivateDataByIndexDirectly",
+    values: [BigNumberish, BigNumberish, BigNumberish, BytesLike, BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getPrivateDataByName",
     values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getPrivateDataByNameDirectly",
+    values: [string, BigNumberish, BigNumberish, BytesLike, BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "labelName",
     values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "labelNameDirectly",
+    values: [BigNumberish, BigNumberish, BigNumberish, BytesLike, BytesLike]
   ): string;
   encodeFunctionData(functionFragment: "minted", values?: undefined): string;
   encodeFunctionData(
@@ -62,29 +140,95 @@ export interface PrivateVaultInterface extends utils.Interface {
     values: [string, string]
   ): string;
   encodeFunctionData(
+    functionFragment: "saveWithMintingDirectly",
+    values: [string, string, BigNumberish, BigNumberish, BytesLike, BytesLike]
+  ): string;
+  encodeFunctionData(
     functionFragment: "saveWithoutMinting",
     values: [string, string]
   ): string;
+  encodeFunctionData(
+    functionFragment: "saveWithoutMintingDirectly",
+    values: [string, string, BigNumberish, BigNumberish, BytesLike, BytesLike]
+  ): string;
+  encodeFunctionData(functionFragment: "signer", values?: undefined): string;
   encodeFunctionData(functionFragment: "total", values?: undefined): string;
 
   decodeFunctionResult(
-    functionFragment: "getLabelByIndex",
+    functionFragment: "DOMAIN_NAME",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "getLabelByName",
+    functionFragment: "DOMAIN_SEPARATOR",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "DOMAIN_TYPE_HASH",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "DOMAIN_VERSION",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "GET_PRIVATE_DATA_BY_INDEX_PERMIT_TYPE_HASH",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "GET_PRIVATE_DATA_BY_NAME_PERMIT_TYPE_HASH",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "LABEL_NAME_PERMIT_TYPE_HASH",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "SAVE_WITHOUT_MINTING_PERMIT_TYPE_HASH",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "SAVE_WITH_MINTING_PERMIT_TYPE_HASH",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getPrivateDataByIndex",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getPrivateDataByIndexDirectly",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getPrivateDataByName",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getPrivateDataByNameDirectly",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "labelName", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "labelNameDirectly",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "minted", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "saveWithMinting",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "saveWithMintingDirectly",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "saveWithoutMinting",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "saveWithoutMintingDirectly",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "signer", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "total", data: BytesLike): Result;
 
   events: {};
@@ -117,15 +261,71 @@ export interface PrivateVault extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    getLabelByIndex(
+    DOMAIN_NAME(overrides?: CallOverrides): Promise<[string]>;
+
+    DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<[string]>;
+
+    DOMAIN_TYPE_HASH(overrides?: CallOverrides): Promise<[string]>;
+
+    DOMAIN_VERSION(overrides?: CallOverrides): Promise<[string]>;
+
+    GET_PRIVATE_DATA_BY_INDEX_PERMIT_TYPE_HASH(
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
+    GET_PRIVATE_DATA_BY_NAME_PERMIT_TYPE_HASH(
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
+    LABEL_NAME_PERMIT_TYPE_HASH(overrides?: CallOverrides): Promise<[string]>;
+
+    SAVE_WITHOUT_MINTING_PERMIT_TYPE_HASH(
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
+    SAVE_WITH_MINTING_PERMIT_TYPE_HASH(
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
+    getPrivateDataByIndex(
       index: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
-    getLabelByName(name: string, overrides?: CallOverrides): Promise<[string]>;
+    getPrivateDataByIndexDirectly(
+      index: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
+    getPrivateDataByName(
+      name: string,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
+    getPrivateDataByNameDirectly(
+      name: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
     labelName(
       index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
+    labelNameDirectly(
+      index: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
@@ -137,23 +337,101 @@ export interface PrivateVault extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    saveWithMintingDirectly(
+      data: string,
+      cryptoLabel: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     saveWithoutMinting(
       data: string,
       cryptoLabel: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    saveWithoutMintingDirectly(
+      data: string,
+      cryptoLabel: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    signer(overrides?: CallOverrides): Promise<[string]>;
+
     total(overrides?: CallOverrides): Promise<[BigNumber]>;
   };
 
-  getLabelByIndex(
+  DOMAIN_NAME(overrides?: CallOverrides): Promise<string>;
+
+  DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
+
+  DOMAIN_TYPE_HASH(overrides?: CallOverrides): Promise<string>;
+
+  DOMAIN_VERSION(overrides?: CallOverrides): Promise<string>;
+
+  GET_PRIVATE_DATA_BY_INDEX_PERMIT_TYPE_HASH(
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  GET_PRIVATE_DATA_BY_NAME_PERMIT_TYPE_HASH(
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  LABEL_NAME_PERMIT_TYPE_HASH(overrides?: CallOverrides): Promise<string>;
+
+  SAVE_WITHOUT_MINTING_PERMIT_TYPE_HASH(
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  SAVE_WITH_MINTING_PERMIT_TYPE_HASH(
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  getPrivateDataByIndex(
     index: BigNumberish,
     overrides?: CallOverrides
   ): Promise<string>;
 
-  getLabelByName(name: string, overrides?: CallOverrides): Promise<string>;
+  getPrivateDataByIndexDirectly(
+    index: BigNumberish,
+    deadline: BigNumberish,
+    v: BigNumberish,
+    r: BytesLike,
+    s: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  getPrivateDataByName(
+    name: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  getPrivateDataByNameDirectly(
+    name: string,
+    deadline: BigNumberish,
+    v: BigNumberish,
+    r: BytesLike,
+    s: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   labelName(index: BigNumberish, overrides?: CallOverrides): Promise<string>;
+
+  labelNameDirectly(
+    index: BigNumberish,
+    deadline: BigNumberish,
+    v: BigNumberish,
+    r: BytesLike,
+    s: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   minted(overrides?: CallOverrides): Promise<boolean>;
 
@@ -163,23 +441,99 @@ export interface PrivateVault extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  saveWithMintingDirectly(
+    data: string,
+    cryptoLabel: string,
+    deadline: BigNumberish,
+    v: BigNumberish,
+    r: BytesLike,
+    s: BytesLike,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   saveWithoutMinting(
     data: string,
     cryptoLabel: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  saveWithoutMintingDirectly(
+    data: string,
+    cryptoLabel: string,
+    deadline: BigNumberish,
+    v: BigNumberish,
+    r: BytesLike,
+    s: BytesLike,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   total(overrides?: CallOverrides): Promise<BigNumber>;
 
   callStatic: {
-    getLabelByIndex(
+    DOMAIN_NAME(overrides?: CallOverrides): Promise<string>;
+
+    DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
+
+    DOMAIN_TYPE_HASH(overrides?: CallOverrides): Promise<string>;
+
+    DOMAIN_VERSION(overrides?: CallOverrides): Promise<string>;
+
+    GET_PRIVATE_DATA_BY_INDEX_PERMIT_TYPE_HASH(
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    GET_PRIVATE_DATA_BY_NAME_PERMIT_TYPE_HASH(
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    LABEL_NAME_PERMIT_TYPE_HASH(overrides?: CallOverrides): Promise<string>;
+
+    SAVE_WITHOUT_MINTING_PERMIT_TYPE_HASH(
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    SAVE_WITH_MINTING_PERMIT_TYPE_HASH(
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    getPrivateDataByIndex(
       index: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
 
-    getLabelByName(name: string, overrides?: CallOverrides): Promise<string>;
+    getPrivateDataByIndexDirectly(
+      index: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    getPrivateDataByName(
+      name: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    getPrivateDataByNameDirectly(
+      name: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     labelName(index: BigNumberish, overrides?: CallOverrides): Promise<string>;
+
+    labelNameDirectly(
+      index: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     minted(overrides?: CallOverrides): Promise<boolean>;
 
@@ -189,11 +543,33 @@ export interface PrivateVault extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    saveWithMintingDirectly(
+      data: string,
+      cryptoLabel: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     saveWithoutMinting(
       data: string,
       cryptoLabel: string,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    saveWithoutMintingDirectly(
+      data: string,
+      cryptoLabel: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    signer(overrides?: CallOverrides): Promise<string>;
 
     total(overrides?: CallOverrides): Promise<BigNumber>;
   };
@@ -201,15 +577,71 @@ export interface PrivateVault extends BaseContract {
   filters: {};
 
   estimateGas: {
-    getLabelByIndex(
+    DOMAIN_NAME(overrides?: CallOverrides): Promise<BigNumber>;
+
+    DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<BigNumber>;
+
+    DOMAIN_TYPE_HASH(overrides?: CallOverrides): Promise<BigNumber>;
+
+    DOMAIN_VERSION(overrides?: CallOverrides): Promise<BigNumber>;
+
+    GET_PRIVATE_DATA_BY_INDEX_PERMIT_TYPE_HASH(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    GET_PRIVATE_DATA_BY_NAME_PERMIT_TYPE_HASH(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    LABEL_NAME_PERMIT_TYPE_HASH(overrides?: CallOverrides): Promise<BigNumber>;
+
+    SAVE_WITHOUT_MINTING_PERMIT_TYPE_HASH(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    SAVE_WITH_MINTING_PERMIT_TYPE_HASH(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getPrivateDataByIndex(
       index: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getLabelByName(name: string, overrides?: CallOverrides): Promise<BigNumber>;
+    getPrivateDataByIndexDirectly(
+      index: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getPrivateDataByName(
+      name: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getPrivateDataByNameDirectly(
+      name: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     labelName(
       index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    labelNameDirectly(
+      index: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -221,28 +653,105 @@ export interface PrivateVault extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    saveWithMintingDirectly(
+      data: string,
+      cryptoLabel: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     saveWithoutMinting(
       data: string,
       cryptoLabel: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    saveWithoutMintingDirectly(
+      data: string,
+      cryptoLabel: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    signer(overrides?: CallOverrides): Promise<BigNumber>;
+
     total(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    getLabelByIndex(
+    DOMAIN_NAME(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    DOMAIN_TYPE_HASH(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    DOMAIN_VERSION(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    GET_PRIVATE_DATA_BY_INDEX_PERMIT_TYPE_HASH(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    GET_PRIVATE_DATA_BY_NAME_PERMIT_TYPE_HASH(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    LABEL_NAME_PERMIT_TYPE_HASH(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    SAVE_WITHOUT_MINTING_PERMIT_TYPE_HASH(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    SAVE_WITH_MINTING_PERMIT_TYPE_HASH(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getPrivateDataByIndex(
       index: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    getLabelByName(
+    getPrivateDataByIndexDirectly(
+      index: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getPrivateDataByName(
       name: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getPrivateDataByNameDirectly(
+      name: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     labelName(
       index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    labelNameDirectly(
+      index: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -254,11 +763,33 @@ export interface PrivateVault extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    saveWithMintingDirectly(
+      data: string,
+      cryptoLabel: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     saveWithoutMinting(
       data: string,
       cryptoLabel: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
+
+    saveWithoutMintingDirectly(
+      data: string,
+      cryptoLabel: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    signer(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     total(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };

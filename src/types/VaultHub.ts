@@ -38,6 +38,7 @@ export interface VaultHubInterface extends utils.Interface {
     "INIT_VAULT_PERMIT_TYPE_HASH()": FunctionFragment;
     "MINT_SAVE_PERMIT_TYPE_HASH()": FunctionFragment;
     "NAME_QUERY_PERMIT_TYPE_HASH()": FunctionFragment;
+    "QUERY_PRIVATE_VAULT_ADDRESS_PERMIT_TYPE_HASH()": FunctionFragment;
     "SAVE_PERMIT_TYPE_HASH()": FunctionFragment;
     "TOTAL_SAVED_ITEMS_PERMIT_TYPE_HASH()": FunctionFragment;
     "VAULT_HAS_REGISTER_PERMIT_TYPE_HASH()": FunctionFragment;
@@ -47,6 +48,7 @@ export interface VaultHubInterface extends utils.Interface {
     "owner()": FunctionFragment;
     "queryPrivateDataByIndex(address,uint64,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "queryPrivateDataByName(address,string,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "queryPrivateVaultAddress(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "savePrivateDataWithMinting(address,string,string,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "savePrivateDataWithoutMinting(address,string,string,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "setTreasuryAddress(address)": FunctionFragment;
@@ -67,6 +69,7 @@ export interface VaultHubInterface extends utils.Interface {
       | "INIT_VAULT_PERMIT_TYPE_HASH"
       | "MINT_SAVE_PERMIT_TYPE_HASH"
       | "NAME_QUERY_PERMIT_TYPE_HASH"
+      | "QUERY_PRIVATE_VAULT_ADDRESS_PERMIT_TYPE_HASH"
       | "SAVE_PERMIT_TYPE_HASH"
       | "TOTAL_SAVED_ITEMS_PERMIT_TYPE_HASH"
       | "VAULT_HAS_REGISTER_PERMIT_TYPE_HASH"
@@ -76,6 +79,7 @@ export interface VaultHubInterface extends utils.Interface {
       | "owner"
       | "queryPrivateDataByIndex"
       | "queryPrivateDataByName"
+      | "queryPrivateVaultAddress"
       | "savePrivateDataWithMinting"
       | "savePrivateDataWithoutMinting"
       | "setTreasuryAddress"
@@ -125,6 +129,10 @@ export interface VaultHubInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "QUERY_PRIVATE_VAULT_ADDRESS_PERMIT_TYPE_HASH",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "SAVE_PERMIT_TYPE_HASH",
     values?: undefined
   ): string;
@@ -170,6 +178,10 @@ export interface VaultHubInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "queryPrivateDataByName",
     values: [string, string, BigNumberish, BigNumberish, BytesLike, BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "queryPrivateVaultAddress",
+    values: [string, BigNumberish, BigNumberish, BytesLike, BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "savePrivateDataWithMinting",
@@ -251,6 +263,10 @@ export interface VaultHubInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "QUERY_PRIVATE_VAULT_ADDRESS_PERMIT_TYPE_HASH",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "SAVE_PERMIT_TYPE_HASH",
     data: BytesLike
   ): Result;
@@ -278,6 +294,10 @@ export interface VaultHubInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "queryPrivateDataByName",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "queryPrivateVaultAddress",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -374,6 +394,10 @@ export interface VaultHub extends BaseContract {
 
     NAME_QUERY_PERMIT_TYPE_HASH(overrides?: CallOverrides): Promise<[string]>;
 
+    QUERY_PRIVATE_VAULT_ADDRESS_PERMIT_TYPE_HASH(
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
     SAVE_PERMIT_TYPE_HASH(overrides?: CallOverrides): Promise<[string]>;
 
     TOTAL_SAVED_ITEMS_PERMIT_TYPE_HASH(
@@ -427,6 +451,15 @@ export interface VaultHub extends BaseContract {
     queryPrivateDataByName(
       addr: string,
       label: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
+    queryPrivateVaultAddress(
+      addr: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -503,6 +536,10 @@ export interface VaultHub extends BaseContract {
 
   NAME_QUERY_PERMIT_TYPE_HASH(overrides?: CallOverrides): Promise<string>;
 
+  QUERY_PRIVATE_VAULT_ADDRESS_PERMIT_TYPE_HASH(
+    overrides?: CallOverrides
+  ): Promise<string>;
+
   SAVE_PERMIT_TYPE_HASH(overrides?: CallOverrides): Promise<string>;
 
   TOTAL_SAVED_ITEMS_PERMIT_TYPE_HASH(
@@ -556,6 +593,15 @@ export interface VaultHub extends BaseContract {
   queryPrivateDataByName(
     addr: string,
     label: string,
+    deadline: BigNumberish,
+    v: BigNumberish,
+    r: BytesLike,
+    s: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  queryPrivateVaultAddress(
+    addr: string,
     deadline: BigNumberish,
     v: BigNumberish,
     r: BytesLike,
@@ -632,6 +678,10 @@ export interface VaultHub extends BaseContract {
 
     NAME_QUERY_PERMIT_TYPE_HASH(overrides?: CallOverrides): Promise<string>;
 
+    QUERY_PRIVATE_VAULT_ADDRESS_PERMIT_TYPE_HASH(
+      overrides?: CallOverrides
+    ): Promise<string>;
+
     SAVE_PERMIT_TYPE_HASH(overrides?: CallOverrides): Promise<string>;
 
     TOTAL_SAVED_ITEMS_PERMIT_TYPE_HASH(
@@ -685,6 +735,15 @@ export interface VaultHub extends BaseContract {
     queryPrivateDataByName(
       addr: string,
       label: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    queryPrivateVaultAddress(
+      addr: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -779,6 +838,10 @@ export interface VaultHub extends BaseContract {
 
     NAME_QUERY_PERMIT_TYPE_HASH(overrides?: CallOverrides): Promise<BigNumber>;
 
+    QUERY_PRIVATE_VAULT_ADDRESS_PERMIT_TYPE_HASH(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     SAVE_PERMIT_TYPE_HASH(overrides?: CallOverrides): Promise<BigNumber>;
 
     TOTAL_SAVED_ITEMS_PERMIT_TYPE_HASH(
@@ -832,6 +895,15 @@ export interface VaultHub extends BaseContract {
     queryPrivateDataByName(
       addr: string,
       label: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    queryPrivateVaultAddress(
+      addr: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -921,6 +993,10 @@ export interface VaultHub extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    QUERY_PRIVATE_VAULT_ADDRESS_PERMIT_TYPE_HASH(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     SAVE_PERMIT_TYPE_HASH(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -976,6 +1052,15 @@ export interface VaultHub extends BaseContract {
     queryPrivateDataByName(
       addr: string,
       label: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    queryPrivateVaultAddress(
+      addr: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,

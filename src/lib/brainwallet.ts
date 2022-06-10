@@ -25,6 +25,7 @@ function WIFPrivKey(node:BIP32Interface):string {
 export function GenBitcoinBrainWalletByPuzzle(from:number=0, end:number, puzzle:string, passphrase:string=""){
 	let addrs:string[] = [];
 	let privkeys: string[] = [];
+	let hexPrivkeys: string[] = [];
 	let entropy = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(puzzle.trim().toUpperCase())).substring(2);
 	let mnemonic = bip39.entropyToMnemonic(Buffer.from(entropy, "hex"));
 	let seed = bip39.mnemonicToSeedSync(mnemonic, passphrase);
@@ -36,13 +37,15 @@ export function GenBitcoinBrainWalletByPuzzle(from:number=0, end:number, puzzle:
 		if(node.privateKey===undefined) continue;
 
 		privkeys[i] = WIFPrivKey(node);
+		hexPrivkeys[i] = node.privateKey.toString("hex")
 		let address = addr(node);
 		addrs[i] =address;
 	}
 
 	return {
 		addrs: addrs,
-		privkeys:privkeys
+		privkeys:privkeys,
+		hexPrivkeys:hexPrivkeys
 	};
 }
 

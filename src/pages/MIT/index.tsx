@@ -1,8 +1,6 @@
 import React from "react";
-import {Box, Center, Container, HStack, Text} from "@chakra-ui/layout";
+import {Box, Center} from "@chakra-ui/layout";
 import { IBaseProps } from "../../interfaces/props";
-import {Image} from "@chakra-ui/react";
-import {Trans} from "@lingui/macro";
 
 const MIT:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	return(
