@@ -5,7 +5,7 @@ import {
 	DrawerContent,
 	DrawerHeader,
 	DrawerBody,
-	DrawerFooter, DrawerCloseButton, Input, Checkbox
+	DrawerFooter, DrawerCloseButton, Input, Checkbox, RadioGroup, Radio
 } from "@chakra-ui/react";
 import {Box, Stack, Text} from "@chakra-ui/layout";
 import {Button} from "@chakra-ui/button";
@@ -26,7 +26,7 @@ import {
 import { ChangeEvent } from "react";
 import {TextInput} from "../TextInput/textinput";
 import {CryptoMachine} from "../../lib/crypto";
-import {etherClient} from "../../ethers/etherClient";
+import {etherClient, PrivateVaultEtherClient} from "../../ethers/etherClient";
 import {useSuccessToast, useWarningToast} from "../../hooks/useToast";
 
 const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
@@ -45,6 +45,7 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const [saveBtnLoading, setSaveBtnIsLoading] = useRecoilState(saveBtnIsLoadingState);
 	const [passwordHolder, setPasswordHolder]	= useState<string>("password ...")
 	const [checked, setChecked] = useState<boolean>(false)
+	const [model, setModel] = useState<string>("bridge")
 	const handleCheckChange = (event: ChangeEvent<HTMLInputElement>)=>setChecked(event.target.checked)
 	const handlePasswordChange = (event: React.FormEvent<HTMLInputElement>)=>setPassword(event.currentTarget.value)
 
@@ -73,6 +74,12 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			</Stack>
 		);
 	},[checked])
+
+	const showSaveModel= useMemo(()=>{
+		console.log("model:",model)
+		return(<>
+		</>);
+	},[model])
 
 	const economicModelDesc = useMemo(()=>{
 		if(checked===false) return;
@@ -150,6 +157,43 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			setSaveBtnIsLoading(false);
 			return;
 		}
+
+		if(model === "hidden"){
+			let queryAddrParams = await encryptor.calculateQueryPrivateVaultAddressParams(vaultName, password);
+			let vaultAddr = await etherClient.client?.queryPrivateVaultAddress(queryAddrParams.address, queryAddrParams.deadline, queryAddrParams.signature.r,
+				queryAddrParams.signature.s, queryAddrParams.signature.v);
+			let vaultClient = new PrivateVaultEtherClient(vaultAddr);
+			await vaultClient.loadProvider();
+
+			vaultClient.connectSeedlistContract()
+			vaultClient.connectSigner()
+			if(!vaultClient.client){
+				console.error("vault connect signer error");
+				setSaveBtnIsLoading(false);
+				return;
+			}
+
+			let domain = await vaultClient.client?.privateVaultDomainHash();
+			let saveDirectlyParams = await encryptor.calculatePrivateVaultSaveWithoutMintingParams(vaultName, password, savedContent, labelName, domain);
+			try {
+				let saveDirectlyRes = await vaultClient.client?.privateVaultSaveDataWithoutMinting(savedContent, labelName, saveDirectlyParams.deadline,
+					saveDirectlyParams.signature.r, saveDirectlyParams.signature.s, saveDirectlyParams.signature.v);
+			}catch (e) {
+				setSaveBtnIsLoading(false);
+				return;
+			}
+
+			if(lang==='zh-CN'){
+				successToast("存储成功");
+			}
+
+			if(lang==='en-US'){
+				successToast("save success");
+			}
+			setSaveBtnIsLoading(false);
+			return;
+		}
+
 		if(checked === true){
 			let hasMintedParams = await  encryptor.calculateHasMintedParams(vaultName, password);
 			let hasMintedRes = await etherClient.client?.hasMinted(hasMintedParams.address, hasMintedParams.deadline, hasMintedParams.signature.r,
@@ -204,7 +248,7 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			setSaveBtnIsLoading(false);
 		}
 
-	},[vaultName, savedContent, labelName, password, receiverAddr, checked])
+	},[vaultName, savedContent, labelName, password, receiverAddr, checked, model])
 
 	return(
 		<Drawer
@@ -212,6 +256,7 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			placement='right'
 			onClose={doCancel}
 			closeOnOverlayClick={false}
+			size = "sm"
 		>
 			<DrawerOverlay />
 			<DrawerContent>
@@ -236,22 +281,36 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 
 						</Box>
 					</Stack>
-					<Stack spacing='30px'>
-						<Box marginY="20px">
-							<Checkbox
-								size='md'
-								colorScheme='orange'
-								isChecked={checked}
-								onChange={handleCheckChange}
-							>
-								<Text color="white">
-									<Trans>I want to mint seed incentive token</Trans>
-								</Text>
-							</Checkbox>
-							{economicModelDesc}
-							{tokenReceiverAddress}
-						</Box>
-					</Stack>
+
+					<RadioGroup defaultValue={model} marginY="20px" onChange={setModel}>
+						<Stack spacing={5} direction='row'>
+							<Text color="white"><Trans>Save Model: </Trans></Text>
+							<Radio colorScheme='orange' value='bridge'>
+								<Text color="white"><Trans>Bridge Model</Trans></Text>
+							</Radio>
+							<Radio colorScheme='orange' value='hidden'>
+								<Text color="white"><Trans>Hidden Model</Trans></Text>
+							</Radio>
+						</Stack>
+					</RadioGroup>
+					{ model === "bridge" &&
+						<Stack spacing='30px'>
+							<Box>
+								<Checkbox
+									size='md'
+									colorScheme='orange'
+									isChecked={checked}
+									onChange={handleCheckChange}
+								>
+									<Text color="white">
+										<Trans>I want to mint seed incentive token</Trans>
+									</Text>
+								</Checkbox>
+								{economicModelDesc}
+								{tokenReceiverAddress}
+							</Box>
+						</Stack>
+					}
 				</DrawerBody>
 
 				<DrawerFooter borderTopWidth='1px'>

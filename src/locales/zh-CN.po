@@ -66,6 +66,10 @@ msgstr "比特币地址"
 msgid "Brain Wallet"
 msgstr "脑钱包"
 
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "Bridge Model"
+msgstr "桥接模式"
+
 #: src/components/Dialog/BitcoinAddress.tsx
 #: src/components/Dialog/EthereumAddress.tsx
 #: src/components/Dialog/PasswordInQuery.tsx
@@ -108,6 +112,10 @@ msgstr "以太坊主网"
 #: src/components/Footer/index.tsx
 msgid "Github"
 msgstr "源码"
+
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "Hidden Model"
+msgstr "隐蔽模式"
 
 #: src/components/Dialog/PasswordInSave.tsx
 msgid "I want to mint seed incentive token"
@@ -173,6 +181,10 @@ msgstr "Rinkeby测试网"
 #: src/components/Labels/save.tsx
 msgid "Save"
 msgstr "存储"
+
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "Save Model:"
+msgstr "存储模式:"
 
 #: src/components/Labels/singup.tsx
 msgid "Sign Up"

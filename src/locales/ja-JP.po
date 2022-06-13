@@ -70,6 +70,10 @@ msgstr ""
 msgid "Brain Wallet"
 msgstr ""
 
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "Bridge Model"
+msgstr ""
+
 #: src/components/Dialog/BitcoinAddress.tsx
 #: src/components/Dialog/EthereumAddress.tsx
 #: src/components/Dialog/PasswordInQuery.tsx
@@ -115,6 +119,10 @@ msgstr ""
 
 #: src/components/Footer/index.tsx
 msgid "Github"
+msgstr ""
+
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "Hidden Model"
 msgstr ""
 
 #: src/components/Dialog/PasswordInSave.tsx
@@ -184,6 +192,10 @@ msgstr ""
 
 #: src/components/Labels/save.tsx
 msgid "Save"
+msgstr ""
+
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "Save Model:"
 msgstr ""
 
 #: src/components/Labels/singup.tsx

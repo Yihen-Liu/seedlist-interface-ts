@@ -525,7 +525,7 @@ class CryptoMachine {
 		}
 	}
 
-	async calculatePrivateVaultSaveWithoutMintingParams(vaultName:string, password:string, data:string, label:string){
+	async calculatePrivateVaultSaveWithoutMintingParams(vaultName:string, password:string, data:string, label:string, domain:string){
 		let pairs = this.calculateMainPairs(vaultName, password);
 		let wallet = new ethers.Wallet(pairs.privKey);
 		let address = await wallet.getAddress();
@@ -533,7 +533,7 @@ class CryptoMachine {
 
 		let combineMessage = ethers.utils.solidityKeccak256(
 			["address", "string", "string", "uint256", "bytes32", "bytes32"],
-			[address, data, label, deadline, PRIVATE_VAULT_DOMAIN, SAVE_WITHOUT_MINTING_PERMIT_TYPE_HASH],
+			[address, data, label, deadline, domain, SAVE_WITHOUT_MINTING_PERMIT_TYPE_HASH],
 		);
 		let messageHash = ethers.utils.keccak256(ethers.utils.arrayify(combineMessage.toLowerCase()));
 

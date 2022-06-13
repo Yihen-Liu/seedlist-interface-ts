@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect, useMemo } from 'react';
-import {etherClient, IWalletInfo, vaultEtherClient} from '../../ethers/etherClient';
+import {etherClient, IWalletInfo} from '../../ethers/etherClient';
 import {Trans} from "@lingui/macro";
 import {Box} from "@chakra-ui/layout";
 import {Button} from "@chakra-ui/button";
@@ -94,7 +94,6 @@ const WalletInfo: React.FC<IBaseProps> = (props:IBaseProps) => {
 };
 
 export async function doGetWalletInfo() {
-	await vaultEtherClient.loadProvider();
     await etherClient.loadProvider();
     return await etherClient.getWalletInfo();
 }

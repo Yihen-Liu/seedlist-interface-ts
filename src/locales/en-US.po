@@ -70,6 +70,10 @@ msgstr "Bitcoin Address:"
 msgid "Brain Wallet"
 msgstr "Brain Wallet"
 
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "Bridge Model"
+msgstr "Bridge Model"
+
 #: src/components/Dialog/BitcoinAddress.tsx
 #: src/components/Dialog/EthereumAddress.tsx
 #: src/components/Dialog/PasswordInQuery.tsx
@@ -116,6 +120,10 @@ msgstr "Ethereum Mainnet"
 #: src/components/Footer/index.tsx
 msgid "Github"
 msgstr "Github"
+
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "Hidden Model"
+msgstr "Hidden Model"
 
 #: src/components/Dialog/PasswordInSave.tsx
 msgid "I want to mint seed incentive token"
@@ -185,6 +193,10 @@ msgstr "Rinkeby Test Network"
 #: src/components/Labels/save.tsx
 msgid "Save"
 msgstr "Save"
+
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "Save Model:"
+msgstr "Save Model:"
 
 #: src/components/Labels/singup.tsx
 msgid "Sign Up"

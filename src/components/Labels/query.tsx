@@ -12,7 +12,6 @@ import {labelNameState, savedContentState, vaultNameState, vaultPasswordState} f
 const QueryLabel:React.FC<IBaseProps> = (props:IBaseProps)=>{
     const dispatch = useDispatch();
 	const isConnection = useSelector((state:StateType)=>state.walletConnection);
-    const click = useCallback(()=>dispatch(queryAction(isConnection)),[dispatch, isConnection]);
 
 	const [color, setColor] = useState<string>("gray");
 	const page = useSelector((state:StateType)=>state.page);

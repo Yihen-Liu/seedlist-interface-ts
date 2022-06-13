@@ -222,7 +222,7 @@ class SeedlistClient {
 	//end
 }
 
-class PrivateVaultEtherClient {
+export class PrivateVaultEtherClient {
 	seedlistContractAddress: string;
 	winProvider?: any;
 	provider?: Web3Provider;
@@ -425,5 +425,4 @@ if (typeof INFURA_KEY0 === 'undefined') {
 	throw new Error(`REACT_APP_VAULTHUB_CONTRACT_ADDR must be a defined environment variable`)
 }
 
-export const vaultEtherClient = new PrivateVaultEtherClient(process.env.REACT_APP_PRIVATE_VAULT_CONTRACT_ADDR?process.env.REACT_APP_PRIVATE_VAULT_CONTRACT_ADDR:"");
 export const etherClient = new VaultHubEtherClient(process.env.REACT_APP_VAULTHUB_CONTRACT_ADDR?process.env.REACT_APP_VAULTHUB_CONTRACT_ADDR:"");
