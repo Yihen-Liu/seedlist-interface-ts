@@ -37,7 +37,6 @@ export const GET_LABEL_NAME_BY_INDEX = "0xbd5bc3ca2c7ea773b900edfe638ad04ce3697b
 export const QUERY_PRIVATE_VAULT_ADDRESS_PERMIT_TYPE_HASH = "0xf63b757fe5d6cdcf507967b75ba29c7b30eb7a73f255ccde1db9178daf683f69";
 
 // =========== private vault contract caller used ===========
-export const PRIVATE_VAULT_DOMAIN = "0xe68a7864e99a07be9966e90a1d0d222e36bb632843fb07e8c0e906102d9814d5"
 //keccak256('labelNameDirectly(uint64 index, uint256 deadline)')
 export const LABEL_NAME_PERMIT_TYPE_HASH =
 	"0xcbb2475c190d2e287f7de56c688846f7612f70b210a3856ad34c475cbad0dda7";

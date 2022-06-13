@@ -110,19 +110,6 @@ class CryptoMachine {
 		return ethers.utils.sha256(scryptRes);
 	}
 
-	getKids(watchAddr:string, labelValue:string, id:string){
-		let onceHash = this.calculateOnceHash(watchAddr+labelValue+id);
-		let prefixNum = onceHash.substring(0,4);
-		let res = parseInt(prefixNum, 16)%2;
-		if(res===1){
-			return this.calculateWalletAddressBaseOnSeed(this.calculateOnceHash(watchAddr+this.calculateMultiHash(labelValue, this.getLabelHashStep32_64(id))));
-		}else{
-			let kid0 = this.calculateWalletAddressBaseOnSeed(this.calculateOnceHash(watchAddr+this.calculateMultiHash(labelValue, this.getLabelHashStep32_64(id))));
-			let kid1 = this.calculateWalletAddressBaseOnSeed(this.calculateOnceHash(id+this.calculateMultiHash(labelValue, this.getLabelHashStep32_64(watchAddr))));
-			return [kid0, kid1];
-		}
-	}
-
 	calculateWalletAddressBaseOnSeed(seed:string):string{
 		return ethers.utils.computeAddress(seed);
 	}
@@ -225,61 +212,6 @@ class CryptoMachine {
 	getDecryptContent(keyspace:string, password:string, label:string, encryptContent:string):string{
 		let pwd = this.getContentPassword(keyspace, password, label);
 		return this.decryptMessage(encryptContent, pwd);
-	}
-
-	async getAddrAndEtherSignForStorage(keyspace:string, password:string) {
-		let seed = this.calculateValidSeed(keyspace, password);
-		let addr = this.calculateWalletAddressBaseOnSeed(seed);
-		let addr0 = this.calculateWalletAddressBaseOnSeed(this.calculateOnceHash(addr+this.calculateOnceHash(keyspace+password)));
-		let pairs = this.calculatePairsBaseOnSeed(this.calculateOnceHash(addr+this.calculateOnceHash(keyspace+password)));
-		let message = "\x19Ethereum Signed Message:\n"+addr0.length+addr0;
-		console.log("addr0.length:",addr0.length)
-		let signature = await this.signMessage(message, pairs.privKey);
-		let random256Num = ethers.utils.sha256(ethers.utils.toUtf8Bytes(addr0));
-
-		return{
-			Addr:  addr,
-			Addr0: addr0,
-			Sign:  signature,
-			RandomNum:random256Num,
-			SignMessageHash: ethers.utils.id(addr0)
-		};
-	}
-
-	getAddrAndEtherSignForAddingKey(keyspace:string, password:string, label:string) {
-		let seed = this.calculateValidSeed(keyspace, password);
-		let addr = this.calculateWalletAddressBaseOnSeed(seed);
-		let addr0 = this.calculateWalletAddressBaseOnSeed(this.calculateOnceHash(addr+this.calculateOnceHash(keyspace+password+label)));
-		let pairs = this.calculatePairsBaseOnSeed(this.calculateOnceHash(addr+this.calculateOnceHash(keyspace+password+label)));
-		let message = "\x19Ethereum Signed Message:\n"+addr0.length+addr0;
-		let signature = this.signMessage(message, pairs.privKey);
-
-		return{
-			Addr:  addr,
-			Addr0: addr0,
-			Sign:  signature
-		};
-	}
-
-	getAddrAndEtherSign(keyspace:string, password:string) {
-		let seed = this.calculateValidSeed(keyspace, password);
-		let addr = this.calculateWalletAddressBaseOnSeed(seed);
-		let pairs = this.calculatePairsBaseOnSeed(seed);
-		let message = "\x19Ethereum Signed Message:\n"+addr.length+addr;
-		let signature = this.signMessage(message, pairs.privKey);
-
-		return{
-			Addr: addr,
-			Sign: signature
-		};
-	}
-
-	getAddressSign(seed:string):Promise<Signature> {
-		let addr = this.calculateWalletAddressBaseOnSeed(seed);
-		let pairs = this.calculatePairsBaseOnSeed(seed);
-		let message = "\x19Ethereum Signed Message:\n"+addr.length+addr;
-		let signature = this.signMessage(message, pairs.privKey);
-		return signature
 	}
 
 	//////////////////////////////////
