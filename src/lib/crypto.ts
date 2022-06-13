@@ -12,7 +12,6 @@ import {
 	INIT_VAULT_PERMIT_TYPE_HASH, LABEL_NAME_PERMIT_TYPE_HASH,
 	MINT_SAVE_PERMIT_TYPE_HASH,
 	NAME_QUERY_PERMIT_TYPE_HASH,
-	PRIVATE_VAULT_DOMAIN,
 	QUERY_PRIVATE_VAULT_ADDRESS_PERMIT_TYPE_HASH,
 	SAVE_PERMIT_TYPE_HASH,
 	SAVE_WITH_MINTING_PERMIT_TYPE_HASH,
@@ -548,7 +547,7 @@ class CryptoMachine {
 		}
 	}
 
-	async calculatePrivateVaultSaveWithMintingParams(vaultName:string, password:string, data:string, label:string){
+	async calculatePrivateVaultSaveWithMintingParams(vaultName:string, password:string, data:string, label:string, domain:string){
 		let pairs = this.calculateMainPairs(vaultName, password);
 		let wallet = new ethers.Wallet(pairs.privKey);
 		let address = await wallet.getAddress();
@@ -556,7 +555,7 @@ class CryptoMachine {
 
 		let combineMessage = ethers.utils.solidityKeccak256(
 			["address", "string", "string", "uint256", "bytes32", "bytes32"],
-			[address, data, label, deadline, PRIVATE_VAULT_DOMAIN, SAVE_WITH_MINTING_PERMIT_TYPE_HASH],
+			[address, data, label, deadline, domain, SAVE_WITH_MINTING_PERMIT_TYPE_HASH],
 		);
 		let messageHash = ethers.utils.keccak256(ethers.utils.arrayify(combineMessage.toLowerCase()));
 
@@ -571,7 +570,7 @@ class CryptoMachine {
 		}
 	}
 
-	async calculatePrivateVaultGetDataByIndexParams(vaultName:string, password:string, index:number){
+	async calculatePrivateVaultGetDataByIndexParams(vaultName:string, password:string, index:number, domain:string){
 		let pairs = this.calculateMainPairs(vaultName, password);
 		let wallet = new ethers.Wallet(pairs.privKey);
 		let address = await wallet.getAddress();
@@ -579,7 +578,7 @@ class CryptoMachine {
 
 		let combineMessage = ethers.utils.solidityKeccak256(
 			["address", "uint64", "uint256", "bytes32", "bytes32"],
-			[address, index, deadline, PRIVATE_VAULT_DOMAIN, GET_PRIVATE_DATA_BY_INDEX_PERMIT_TYPE_HASH],
+			[address, index, deadline, domain, GET_PRIVATE_DATA_BY_INDEX_PERMIT_TYPE_HASH],
 		);
 		let messageHash = ethers.utils.keccak256(ethers.utils.arrayify(combineMessage.toLowerCase()));
 
@@ -594,7 +593,7 @@ class CryptoMachine {
 		}
 	}
 
-	async calculatePrivateVaultGetDataByNameParams(vaultName:string, password:string, label:string){
+	async calculatePrivateVaultGetDataByNameParams(vaultName:string, password:string, label:string, domain:string){
 		let pairs = this.calculateMainPairs(vaultName, password);
 		let wallet = new ethers.Wallet(pairs.privKey);
 		let address = await wallet.getAddress();
@@ -602,7 +601,7 @@ class CryptoMachine {
 
 		let combineMessage = ethers.utils.solidityKeccak256(
 			["address", "string", "uint256", "bytes32", "bytes32"],
-			[address, label, deadline, PRIVATE_VAULT_DOMAIN, GET_PRIVATE_DATA_BY_NAME_PERMIT_TYPE_HASH],
+			[address, label, deadline, domain, GET_PRIVATE_DATA_BY_NAME_PERMIT_TYPE_HASH],
 		);
 		let messageHash = ethers.utils.keccak256(ethers.utils.arrayify(combineMessage.toLowerCase()));
 
@@ -617,7 +616,7 @@ class CryptoMachine {
 		}
 	}
 
-	async calculatePrivateVaultLabelNameParams(vaultName:string, password:string, index:number){
+	async calculatePrivateVaultLabelNameParams(vaultName:string, password:string, index:number, domain:string){
 		let pairs = this.calculateMainPairs(vaultName, password);
 		let wallet = new ethers.Wallet(pairs.privKey);
 		let address = await wallet.getAddress();
@@ -625,7 +624,7 @@ class CryptoMachine {
 
 		let combineMessage = ethers.utils.solidityKeccak256(
 			["address", "uint64", "uint256", "bytes32", "bytes32"],
-			[address, index, deadline, PRIVATE_VAULT_DOMAIN, LABEL_NAME_PERMIT_TYPE_HASH],
+			[address, index, deadline, domain, LABEL_NAME_PERMIT_TYPE_HASH],
 		);
 		let messageHash = ethers.utils.keccak256(ethers.utils.arrayify(combineMessage.toLowerCase()));
 
