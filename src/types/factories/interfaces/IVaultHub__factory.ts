@@ -181,9 +181,9 @@ const _abi = [
         type: "address",
       },
       {
-        internalType: "string",
-        name: "label",
-        type: "string",
+        internalType: "address",
+        name: "labelHash",
+        type: "address",
       },
       {
         internalType: "uint256",
@@ -275,6 +275,11 @@ const _abi = [
       },
       {
         internalType: "address",
+        name: "labelHash",
+        type: "address",
+      },
+      {
+        internalType: "address",
         name: "receiver",
         type: "address",
       },
@@ -320,6 +325,11 @@ const _abi = [
         internalType: "string",
         name: "cryptoLabel",
         type: "string",
+      },
+      {
+        internalType: "address",
+        name: "labelHash",
+        type: "address",
       },
       {
         internalType: "uint256",

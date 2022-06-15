@@ -28,10 +28,10 @@ export interface IVaultHubInterface extends utils.Interface {
     "hasMinted(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "initPrivateVault(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "queryPrivateDataByIndex(address,uint64,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "queryPrivateDataByName(address,string,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "queryPrivateDataByName(address,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "queryPrivateVaultAddress(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "savePrivateDataWithMinting(address,string,string,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "savePrivateDataWithoutMinting(address,string,string,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "savePrivateDataWithMinting(address,string,string,address,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "savePrivateDataWithoutMinting(address,string,string,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "totalSavedItems(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "vaultHasRegister(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
   };
@@ -95,6 +95,7 @@ export interface IVaultHubInterface extends utils.Interface {
       string,
       string,
       string,
+      string,
       BigNumberish,
       BigNumberish,
       BytesLike,
@@ -104,6 +105,7 @@ export interface IVaultHubInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "savePrivateDataWithoutMinting",
     values: [
+      string,
       string,
       string,
       string,
@@ -230,7 +232,7 @@ export interface IVaultHub extends BaseContract {
 
     queryPrivateDataByName(
       addr: string,
-      label: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -251,6 +253,7 @@ export interface IVaultHub extends BaseContract {
       addr: string,
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       receiver: string,
       deadline: BigNumberish,
       v: BigNumberish,
@@ -263,6 +266,7 @@ export interface IVaultHub extends BaseContract {
       addr: string,
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -329,7 +333,7 @@ export interface IVaultHub extends BaseContract {
 
   queryPrivateDataByName(
     addr: string,
-    label: string,
+    labelHash: string,
     deadline: BigNumberish,
     v: BigNumberish,
     r: BytesLike,
@@ -350,6 +354,7 @@ export interface IVaultHub extends BaseContract {
     addr: string,
     data: string,
     cryptoLabel: string,
+    labelHash: string,
     receiver: string,
     deadline: BigNumberish,
     v: BigNumberish,
@@ -362,6 +367,7 @@ export interface IVaultHub extends BaseContract {
     addr: string,
     data: string,
     cryptoLabel: string,
+    labelHash: string,
     deadline: BigNumberish,
     v: BigNumberish,
     r: BytesLike,
@@ -428,7 +434,7 @@ export interface IVaultHub extends BaseContract {
 
     queryPrivateDataByName(
       addr: string,
-      label: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -449,6 +455,7 @@ export interface IVaultHub extends BaseContract {
       addr: string,
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       receiver: string,
       deadline: BigNumberish,
       v: BigNumberish,
@@ -461,6 +468,7 @@ export interface IVaultHub extends BaseContract {
       addr: string,
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -530,7 +538,7 @@ export interface IVaultHub extends BaseContract {
 
     queryPrivateDataByName(
       addr: string,
-      label: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -551,6 +559,7 @@ export interface IVaultHub extends BaseContract {
       addr: string,
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       receiver: string,
       deadline: BigNumberish,
       v: BigNumberish,
@@ -563,6 +572,7 @@ export interface IVaultHub extends BaseContract {
       addr: string,
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -630,7 +640,7 @@ export interface IVaultHub extends BaseContract {
 
     queryPrivateDataByName(
       addr: string,
-      label: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -651,6 +661,7 @@ export interface IVaultHub extends BaseContract {
       addr: string,
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       receiver: string,
       deadline: BigNumberish,
       v: BigNumberish,
@@ -663,6 +674,7 @@ export interface IVaultHub extends BaseContract {
       addr: string,
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,

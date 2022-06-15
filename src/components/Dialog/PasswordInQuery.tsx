@@ -93,19 +93,19 @@ const PasswordInQuery:React.FC<IBaseProps> = (props:IBaseProps)=>{
 
 		let totalSavedParams = await encryptor.calculateTotalSavedItemsParams(vaultName, password);
 
-		let savedItemsRes = await etherClient.client?.totalSavedItems(totalSavedParams.address, totalSavedParams.deadline, totalSavedParams.signature.r, totalSavedParams.signature.s, totalSavedParams.signature.v);
-		if(savedItemsRes <=0){
+		let total = await etherClient.client?.totalSavedItems(totalSavedParams.address, totalSavedParams.deadline, totalSavedParams.signature.r, totalSavedParams.signature.s, totalSavedParams.signature.v);
+		if(total <=0){
 			setIsLoading(false);
 			warningToast("nothing was saved");
 			return;
 		}
 		let _savedLabels:string[]= [];
 		let _savedContents:string[] = [];
+		let deLabels = await encryptor.getSomeDecryptLabels(etherClient, vaultName, password, total);
 
-		for(let i=0; i<savedItemsRes; i++){
-			let getLabelNameByIndexParams = await encryptor.calculateGetLabelNameByIndexParams(vaultName, password, i);
-			let label = await etherClient.client?.labelName(getLabelNameByIndexParams.address, i, getLabelNameByIndexParams.deadline,
-				getLabelNameByIndexParams.signature.r, getLabelNameByIndexParams.signature.s, getLabelNameByIndexParams.signature.v);
+		for(let i=0; i<total; i++){
+			let label = deLabels.get(i);
+			if(label === undefined) continue;
 			_savedLabels[i] = label;
 			_savedContents[i] = "**************************";
 		}
@@ -130,11 +130,18 @@ const PasswordInQuery:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			setIsLoading(false);
 			return
 		}
-
-		let queryByNameParams = await encryptor.calculateQueryByNameParams(vaultName, password, label);
-		let content = await etherClient.client?.queryDataByLabelName(queryByNameParams.address, label, queryByNameParams.deadline,
+		let labelHash = await encryptor.labelHash(label);
+		let queryByNameParams = await encryptor.calculateQueryByNameParams(vaultName, password, labelHash);
+		let content = await etherClient.client?.queryDataByLabelName(queryByNameParams.address, labelHash, queryByNameParams.deadline,
 			queryByNameParams.signature.r, queryByNameParams.signature.s, queryByNameParams.signature.v);
-		savedContents[index] = content;
+		let wheelLabels = "";
+		for(let i=0; i<index; i++){
+			wheelLabels += savedLabels[i];
+		}
+		wheelLabels += label;
+
+		let contentPassword = encryptor.getContentPassword(vaultName, password, wheelLabels);
+		savedContents[index] = encryptor.decryptMessage(content,contentPassword);
 		setSavedContents(savedContents.concat());
 		setIsLoading(false);
 	},[savedContents,savedLabels])

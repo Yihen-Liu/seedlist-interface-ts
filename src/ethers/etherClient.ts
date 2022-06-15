@@ -18,7 +18,7 @@ export interface IWalletInfo {
 export const contractChainId = 4;
 export const contractChainName = "Rinkeby";
 
-class VaultHubEtherClient {
+export class VaultHubEtherClient {
     seedlistContractAddress: string;
     winProvider?: any;
     provider?: Web3Provider;
@@ -87,6 +87,7 @@ class VaultHubEtherClient {
         }
     }
 }
+
 class SeedlistClient {
 	private seedlist: any | undefined;
 	private provider: Provider | undefined;
@@ -145,34 +146,34 @@ class SeedlistClient {
 	}
 
 	public async saveDataWithMinting(
-		addr:string, data:string, cryptoLabel:string, receiver:string, deadline:number,
+		addr:string, data:string, cryptoLabel:string, labelHash:string, receiver:string, deadline:number,
 		r:string, s:string, v:number, config:PayableOverrides={}):Promise<any>{
 
 		if(this.provider === undefined || this.seedlist === undefined || this.signer === undefined){
 			return Promise.reject("need to connect a valid provider and signer")
 		}
 
-		const gas=await this.seedlist.connect(this.signer).estimateGas.savePrivateDataWithMinting( addr, data, cryptoLabel, receiver, deadline, v, r, s, {...config})
+		const gas=await this.seedlist.connect(this.signer).estimateGas.savePrivateDataWithMinting( addr, data, cryptoLabel, labelHash, receiver, deadline, v, r, s, {...config})
 
 		const transaction = await this.seedlist.connect(this.signer).savePrivateDataWithMinting(
-			addr, data, cryptoLabel, receiver, deadline, v, r, s, { gasLimit:gas.mul(13).div(10), ...config })
+			addr, data, cryptoLabel, labelHash, receiver, deadline, v, r, s, { gasLimit:gas.mul(13).div(10), ...config })
 
 		const receipt = await transaction.wait(this._waitConfirmations);
 		return receipt;
 	}
 
 	public async saveDataWithoutMinting(
-		addr:string, data:string, cryptoLabel:string, deadline:number,
+		addr:string, data:string, cryptoLabel:string, labelHash:string, deadline:number,
 		r:string, s:string, v:number, config:PayableOverrides={}):Promise<any>{
 
 		if(this.provider === undefined || this.seedlist === undefined || this.signer === undefined){
 			return Promise.reject("need to connect a valid provider and signer")
 		}
 
-		const gas=await this.seedlist.connect(this.signer).estimateGas.savePrivateDataWithoutMinting( addr, data, cryptoLabel, deadline, v, r, s, {...config})
+		const gas=await this.seedlist.connect(this.signer).estimateGas.savePrivateDataWithoutMinting( addr, data, cryptoLabel, labelHash, deadline, v, r, s, {...config})
 
 		const transaction = await this.seedlist.connect(this.signer).savePrivateDataWithoutMinting(
-			addr, data, cryptoLabel, deadline, v, r, s, { gasLimit:gas.mul(13).div(10), ...config })
+			addr, data, cryptoLabel, labelHash, deadline, v, r, s, { gasLimit:gas.mul(13).div(10), ...config })
 
 		const receipt = await transaction.wait(this._waitConfirmations);
 		return receipt;
@@ -192,11 +193,11 @@ class SeedlistClient {
 		return this.seedlist.queryPrivateDataByIndex(addr, index, deadline, v, r, s);
 	}
 
-	public async queryDataByLabelName(addr:string ,label:string, deadline:number, r:string, s:string, v:number, config:PayableOverrides={}):Promise<any>{
+	public async queryDataByLabelName(addr:string ,labelHash:string, deadline:number, r:string, s:string, v:number, config:PayableOverrides={}):Promise<any>{
 		if(this.provider === undefined || this.seedlist === undefined || this.signer === undefined){
 			return Promise.reject("need to connect a valid provider and signer")
 		}
-		return this.seedlist.queryPrivateDataByName(addr, label, deadline, v, r, s);
+		return this.seedlist.queryPrivateDataByName(addr, labelHash, deadline, v, r, s);
 	}
 
 	public async hasMinted(addr:string, deadline:number, r:string, s:string, v:number, config:PayableOverrides={}):Promise<any>{
@@ -348,16 +349,16 @@ class PrivateVaultClient {
 	}
 
 	public async privateVaultSaveDataWithoutMinting(
-		data:string, cryptoLabel:string, deadline:number,
+		data:string, cryptoLabel:string, labelHash:string, deadline:number,
 		r:string, s:string, v:number, config:PayableOverrides={}):Promise<any>{
 
 		if(this.provider === undefined || this.seedlist === undefined || this.signer === undefined){
 			return Promise.reject("need to connect a valid provider and signer")
 		}
 
-		const gas=await this.seedlist.connect(this.signer).estimateGas.saveWithoutMintingDirectly( data, cryptoLabel, deadline, v, r, s, {...config})
+		const gas=await this.seedlist.connect(this.signer).estimateGas.saveWithoutMintingDirectly( data, cryptoLabel, labelHash, deadline, v, r, s, {...config})
 		const transaction = await this.seedlist.connect(this.signer).saveWithoutMintingDirectly(
-			data, cryptoLabel, deadline, v, r, s, { gasLimit:gas.mul(13).div(10), ...config })
+			data, cryptoLabel, labelHash, deadline, v, r, s, { gasLimit:gas.mul(13).div(10), ...config })
 
 		const receipt = await transaction.wait(this._waitConfirmations);
 		return receipt;
@@ -417,12 +418,8 @@ class PrivateVaultClient {
 }
 
 const INFURA_KEY = process.env.REACT_APP_VAULTHUB_CONTRACT_ADDR;
-const INFURA_KEY0 = process.env.REACT_APP_PRIVATE_VAULT_CONTRACT_ADDR;
 if (typeof INFURA_KEY === 'undefined') {
     throw new Error(`REACT_APP_VAULTHUB_CONTRACT_ADDR must be a defined environment variable`)
-}
-if (typeof INFURA_KEY0 === 'undefined') {
-	throw new Error(`REACT_APP_VAULTHUB_CONTRACT_ADDR must be a defined environment variable`)
 }
 
 export const etherClient = new VaultHubEtherClient(process.env.REACT_APP_VAULTHUB_CONTRACT_ADDR?process.env.REACT_APP_VAULTHUB_CONTRACT_ADDR:"");

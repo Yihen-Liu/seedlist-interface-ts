@@ -52,9 +52,9 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "string",
+        internalType: "address",
         name: "name",
-        type: "string",
+        type: "address",
       },
       {
         internalType: "uint256",
@@ -140,6 +140,11 @@ const _abi = [
         type: "string",
       },
       {
+        internalType: "address",
+        name: "labelHash",
+        type: "address",
+      },
+      {
         internalType: "uint256",
         name: "deadline",
         type: "uint256",
@@ -176,6 +181,11 @@ const _abi = [
         internalType: "string",
         name: "cryptoLabel",
         type: "string",
+      },
+      {
+        internalType: "address",
+        name: "labelHash",
+        type: "address",
       },
       {
         internalType: "uint256",

@@ -35,16 +35,15 @@ export interface PrivateVaultInterface extends utils.Interface {
     "SAVE_WITH_MINTING_PERMIT_TYPE_HASH()": FunctionFragment;
     "getPrivateDataByIndex(uint64)": FunctionFragment;
     "getPrivateDataByIndexDirectly(uint64,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "getPrivateDataByName(string)": FunctionFragment;
-    "getPrivateDataByNameDirectly(string,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "getPrivateDataByName(address)": FunctionFragment;
+    "getPrivateDataByNameDirectly(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "labelName(uint64)": FunctionFragment;
     "labelNameDirectly(uint64,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "minted()": FunctionFragment;
-    "saveWithMinting(string,string)": FunctionFragment;
-    "saveWithMintingDirectly(string,string,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "saveWithoutMinting(string,string)": FunctionFragment;
-    "saveWithoutMintingDirectly(string,string,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "signer()": FunctionFragment;
+    "saveWithMinting(string,string,address)": FunctionFragment;
+    "saveWithMintingDirectly(string,string,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "saveWithoutMinting(string,string,address)": FunctionFragment;
+    "saveWithoutMintingDirectly(string,string,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "total()": FunctionFragment;
   };
 
@@ -70,7 +69,6 @@ export interface PrivateVaultInterface extends utils.Interface {
       | "saveWithMintingDirectly"
       | "saveWithoutMinting"
       | "saveWithoutMintingDirectly"
-      | "signer"
       | "total"
   ): FunctionFragment;
 
@@ -137,21 +135,36 @@ export interface PrivateVaultInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "minted", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "saveWithMinting",
-    values: [string, string]
+    values: [string, string, string]
   ): string;
   encodeFunctionData(
     functionFragment: "saveWithMintingDirectly",
-    values: [string, string, BigNumberish, BigNumberish, BytesLike, BytesLike]
+    values: [
+      string,
+      string,
+      string,
+      BigNumberish,
+      BigNumberish,
+      BytesLike,
+      BytesLike
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "saveWithoutMinting",
-    values: [string, string]
+    values: [string, string, string]
   ): string;
   encodeFunctionData(
     functionFragment: "saveWithoutMintingDirectly",
-    values: [string, string, BigNumberish, BigNumberish, BytesLike, BytesLike]
+    values: [
+      string,
+      string,
+      string,
+      BigNumberish,
+      BigNumberish,
+      BytesLike,
+      BytesLike
+    ]
   ): string;
-  encodeFunctionData(functionFragment: "signer", values?: undefined): string;
   encodeFunctionData(functionFragment: "total", values?: undefined): string;
 
   decodeFunctionResult(
@@ -228,7 +241,6 @@ export interface PrivateVaultInterface extends utils.Interface {
     functionFragment: "saveWithoutMintingDirectly",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "signer", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "total", data: BytesLike): Result;
 
   events: {};
@@ -334,12 +346,14 @@ export interface PrivateVault extends BaseContract {
     saveWithMinting(
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     saveWithMintingDirectly(
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -350,20 +364,20 @@ export interface PrivateVault extends BaseContract {
     saveWithoutMinting(
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     saveWithoutMintingDirectly(
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
-
-    signer(overrides?: CallOverrides): Promise<[string]>;
 
     total(overrides?: CallOverrides): Promise<[BigNumber]>;
   };
@@ -438,12 +452,14 @@ export interface PrivateVault extends BaseContract {
   saveWithMinting(
     data: string,
     cryptoLabel: string,
+    labelHash: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   saveWithMintingDirectly(
     data: string,
     cryptoLabel: string,
+    labelHash: string,
     deadline: BigNumberish,
     v: BigNumberish,
     r: BytesLike,
@@ -454,12 +470,14 @@ export interface PrivateVault extends BaseContract {
   saveWithoutMinting(
     data: string,
     cryptoLabel: string,
+    labelHash: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   saveWithoutMintingDirectly(
     data: string,
     cryptoLabel: string,
+    labelHash: string,
     deadline: BigNumberish,
     v: BigNumberish,
     r: BytesLike,
@@ -540,12 +558,14 @@ export interface PrivateVault extends BaseContract {
     saveWithMinting(
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
     saveWithMintingDirectly(
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -556,20 +576,20 @@ export interface PrivateVault extends BaseContract {
     saveWithoutMinting(
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
     saveWithoutMintingDirectly(
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    signer(overrides?: CallOverrides): Promise<string>;
 
     total(overrides?: CallOverrides): Promise<BigNumber>;
   };
@@ -650,12 +670,14 @@ export interface PrivateVault extends BaseContract {
     saveWithMinting(
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     saveWithMintingDirectly(
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -666,20 +688,20 @@ export interface PrivateVault extends BaseContract {
     saveWithoutMinting(
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     saveWithoutMintingDirectly(
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
-
-    signer(overrides?: CallOverrides): Promise<BigNumber>;
 
     total(overrides?: CallOverrides): Promise<BigNumber>;
   };
@@ -760,12 +782,14 @@ export interface PrivateVault extends BaseContract {
     saveWithMinting(
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     saveWithMintingDirectly(
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -776,20 +800,20 @@ export interface PrivateVault extends BaseContract {
     saveWithoutMinting(
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     saveWithoutMintingDirectly(
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
-
-    signer(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     total(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };

@@ -24,7 +24,6 @@ const SaveArea:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const handleLabelChange = (event: React.FormEvent<HTMLInputElement>)=>setLabelName(event.currentTarget.value)
 
 	useMemo(()=>{
-		console.log("vault/label/content:",vaultName, labelName, content);
 		if(lang==='zh-CN'){
 			setVaultNameHolder("输入保险库空间名称 ...")
 			setLabelHolder("标签名")

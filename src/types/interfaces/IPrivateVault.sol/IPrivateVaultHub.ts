@@ -25,10 +25,10 @@ import type {
 export interface IPrivateVaultHubInterface extends utils.Interface {
   functions: {
     "getPrivateDataByIndexDirectly(uint64,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "getPrivateDataByNameDirectly(string,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "getPrivateDataByNameDirectly(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "labelNameDirectly(uint64,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "saveWithMintingDirectly(string,string,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "saveWithoutMintingDirectly(string,string,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "saveWithMintingDirectly(string,string,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "saveWithoutMintingDirectly(string,string,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
   };
 
   getFunction(
@@ -54,11 +54,27 @@ export interface IPrivateVaultHubInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "saveWithMintingDirectly",
-    values: [string, string, BigNumberish, BigNumberish, BytesLike, BytesLike]
+    values: [
+      string,
+      string,
+      string,
+      BigNumberish,
+      BigNumberish,
+      BytesLike,
+      BytesLike
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "saveWithoutMintingDirectly",
-    values: [string, string, BigNumberish, BigNumberish, BytesLike, BytesLike]
+    values: [
+      string,
+      string,
+      string,
+      BigNumberish,
+      BigNumberish,
+      BytesLike,
+      BytesLike
+    ]
   ): string;
 
   decodeFunctionResult(
@@ -142,6 +158,7 @@ export interface IPrivateVaultHub extends BaseContract {
     saveWithMintingDirectly(
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -152,6 +169,7 @@ export interface IPrivateVaultHub extends BaseContract {
     saveWithoutMintingDirectly(
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -190,6 +208,7 @@ export interface IPrivateVaultHub extends BaseContract {
   saveWithMintingDirectly(
     data: string,
     cryptoLabel: string,
+    labelHash: string,
     deadline: BigNumberish,
     v: BigNumberish,
     r: BytesLike,
@@ -200,6 +219,7 @@ export interface IPrivateVaultHub extends BaseContract {
   saveWithoutMintingDirectly(
     data: string,
     cryptoLabel: string,
+    labelHash: string,
     deadline: BigNumberish,
     v: BigNumberish,
     r: BytesLike,
@@ -238,6 +258,7 @@ export interface IPrivateVaultHub extends BaseContract {
     saveWithMintingDirectly(
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -248,6 +269,7 @@ export interface IPrivateVaultHub extends BaseContract {
     saveWithoutMintingDirectly(
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -289,6 +311,7 @@ export interface IPrivateVaultHub extends BaseContract {
     saveWithMintingDirectly(
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -299,6 +322,7 @@ export interface IPrivateVaultHub extends BaseContract {
     saveWithoutMintingDirectly(
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -338,6 +362,7 @@ export interface IPrivateVaultHub extends BaseContract {
     saveWithMintingDirectly(
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -348,6 +373,7 @@ export interface IPrivateVaultHub extends BaseContract {
     saveWithoutMintingDirectly(
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,

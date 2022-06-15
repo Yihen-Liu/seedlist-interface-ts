@@ -47,10 +47,10 @@ export interface VaultHubInterface extends utils.Interface {
     "initPrivateVault(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "owner()": FunctionFragment;
     "queryPrivateDataByIndex(address,uint64,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "queryPrivateDataByName(address,string,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "queryPrivateDataByName(address,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "queryPrivateVaultAddress(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "savePrivateDataWithMinting(address,string,string,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "savePrivateDataWithoutMinting(address,string,string,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "savePrivateDataWithMinting(address,string,string,address,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "savePrivateDataWithoutMinting(address,string,string,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "setTreasuryAddress(address)": FunctionFragment;
     "totalSavedItems(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "treasury()": FunctionFragment;
@@ -190,6 +190,7 @@ export interface VaultHubInterface extends utils.Interface {
       string,
       string,
       string,
+      string,
       BigNumberish,
       BigNumberish,
       BytesLike,
@@ -199,6 +200,7 @@ export interface VaultHubInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "savePrivateDataWithoutMinting",
     values: [
+      string,
       string,
       string,
       string,
@@ -450,7 +452,7 @@ export interface VaultHub extends BaseContract {
 
     queryPrivateDataByName(
       addr: string,
-      label: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -471,6 +473,7 @@ export interface VaultHub extends BaseContract {
       addr: string,
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       receiver: string,
       deadline: BigNumberish,
       v: BigNumberish,
@@ -483,6 +486,7 @@ export interface VaultHub extends BaseContract {
       addr: string,
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -592,7 +596,7 @@ export interface VaultHub extends BaseContract {
 
   queryPrivateDataByName(
     addr: string,
-    label: string,
+    labelHash: string,
     deadline: BigNumberish,
     v: BigNumberish,
     r: BytesLike,
@@ -613,6 +617,7 @@ export interface VaultHub extends BaseContract {
     addr: string,
     data: string,
     cryptoLabel: string,
+    labelHash: string,
     receiver: string,
     deadline: BigNumberish,
     v: BigNumberish,
@@ -625,6 +630,7 @@ export interface VaultHub extends BaseContract {
     addr: string,
     data: string,
     cryptoLabel: string,
+    labelHash: string,
     deadline: BigNumberish,
     v: BigNumberish,
     r: BytesLike,
@@ -734,7 +740,7 @@ export interface VaultHub extends BaseContract {
 
     queryPrivateDataByName(
       addr: string,
-      label: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -755,6 +761,7 @@ export interface VaultHub extends BaseContract {
       addr: string,
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       receiver: string,
       deadline: BigNumberish,
       v: BigNumberish,
@@ -767,6 +774,7 @@ export interface VaultHub extends BaseContract {
       addr: string,
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -894,7 +902,7 @@ export interface VaultHub extends BaseContract {
 
     queryPrivateDataByName(
       addr: string,
-      label: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -915,6 +923,7 @@ export interface VaultHub extends BaseContract {
       addr: string,
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       receiver: string,
       deadline: BigNumberish,
       v: BigNumberish,
@@ -927,6 +936,7 @@ export interface VaultHub extends BaseContract {
       addr: string,
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -1051,7 +1061,7 @@ export interface VaultHub extends BaseContract {
 
     queryPrivateDataByName(
       addr: string,
-      label: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -1072,6 +1082,7 @@ export interface VaultHub extends BaseContract {
       addr: string,
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       receiver: string,
       deadline: BigNumberish,
       v: BigNumberish,
@@ -1084,6 +1095,7 @@ export interface VaultHub extends BaseContract {
       addr: string,
       data: string,
       cryptoLabel: string,
+      labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
