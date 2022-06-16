@@ -11,7 +11,7 @@ const Footer:React.FC<IBaseProps>=(props:IBaseProps)=>{
     <FooterContainer maxW="container.xl" centerContent>
       <HStack py={5} wrap="wrap" spacing={6}>
 
-		  <Link href="https://github.com/seedlist/seedlist-interface-ts" target="_blank">
+		  <Link href="https://github.com/seedlist" target="_blank">
 			  <HStack spacing={2}>
 				  <Text fontSize="1xl" fontWeight="">
 					  <Trans>Github</Trans>: v1.0
