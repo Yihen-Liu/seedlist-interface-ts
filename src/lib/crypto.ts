@@ -57,7 +57,6 @@ class CryptoMachine {
 	}
 
 	calculateValidSeed(str1:string, str2:string):string{
-		//const DEEPING = this.getHashStep32_64(str1, str2);
 		let h1 = this.calculateMultiHash(str1, 2);
 		let h2 = this.calculateMultiHash(str2, 2);
 		let pair1 = this.calculatePairsBaseOnSeed(h1+h2);
@@ -78,10 +77,6 @@ class CryptoMachine {
 		let scryptRes = syncScrypt(ethers.utils.toUtf8Bytes(h1+h2), ethers.utils.toUtf8Bytes(saltStr), 32,64,16,64);
 
 		return ethers.utils.sha256(scryptRes);
-	}
-
-	calculateWalletAddressBaseOnSeed(seed:string):string{
-		return ethers.utils.computeAddress(seed);
 	}
 
 	encryptMessage(message:string, password:string):string{
@@ -214,16 +209,6 @@ class CryptoMachine {
 		}
 
 		return originHash;
-	}
-
-	getEncryptContent(vaultName:string, password:string, label:string, content:string):string {
-		let pwd = this.getContentPassword(vaultName, password, label);
-		return this.encryptMessage(content, pwd);  //VDF utilimate
-	}
-
-	getDecryptContent(vaultName:string, password:string, label:string, encryptContent:string):string{
-		let pwd = this.getContentPassword(vaultName, password, label);
-		return this.decryptMessage(encryptContent, pwd);
 	}
 
 	//////////////////////////////////
