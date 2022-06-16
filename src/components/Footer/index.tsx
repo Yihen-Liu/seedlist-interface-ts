@@ -19,7 +19,7 @@ const Footer:React.FC<IBaseProps>=(props:IBaseProps)=>{
 			  </HStack>
 		  </Link>
 
-          <NavLink to="/MIT">
+          <NavLink to="/license">
 			  <HStack spacing={2}>
 				  <Text fontSize="1xl" fontWeight="">
 					  <Trans>License</Trans>: MIT

@@ -2,7 +2,7 @@ import React from "react";
 import {Box, Center} from "@chakra-ui/layout";
 import { IBaseProps } from "../../interfaces/props";
 
-const MIT:React.FC<IBaseProps> = (props:IBaseProps)=>{
+const License:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	return(
 		<Center>
 				<Box w="60%">
@@ -32,4 +32,4 @@ const MIT:React.FC<IBaseProps> = (props:IBaseProps)=>{
 );
 }
 
-export {MIT};
+export {License};
