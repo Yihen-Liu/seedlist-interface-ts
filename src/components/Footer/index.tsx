@@ -43,7 +43,7 @@ const Footer:React.FC<IBaseProps>=(props:IBaseProps)=>{
 			  </HStack>
           </Link>
 
-          <Link href="https://github.com/seedlist/seedlist-interface/releases/tag/v1.0">
+          <Link href="https://github.com/seedlist/seedlist-interface/releases/tag/v1.0" target="_blank">
 			  <HStack spacing={2}>
 				  <Text fontSize="1xl" fontWeight="">
 					  <Trans>Download Zip</Trans>
