@@ -15,8 +15,6 @@ const Document:React.FC<IBaseProps> = (props:IBaseProps)=>{
 							<Text>seedlist-encrypt-process.jpg</Text>
 						</Center>
 					</Box>
-
-
 			</Center>
 );
 }
