@@ -16,8 +16,8 @@ const Seedlist:React.FC<IBaseProps>=(props:IBaseProps) => {
 					seedlist
 				</Text>
 
-				<Menu autoSelect={false} >
-					<MenuButton as={IconButton} rightIcon={<ChevronDownIcon />}
+				<Menu matchWidth={true} autoSelect={false} >
+					<MenuButton maxH="30px" as={IconButton} rightIcon={<ChevronDownIcon />}
 					            variant='outline' colorScheme={"blackAlpha.100"}
 					            bg={"#1a1d22"} borderRadius='md'
 					            borderWidth='0px' _hover={{ bg: '#2b2d32' }}
@@ -28,8 +28,7 @@ const Seedlist:React.FC<IBaseProps>=(props:IBaseProps) => {
 						</Text>
 					</MenuButton>
 					<MenuList maxWidth='60px' bgColor={"#2b2d32"} borderColor={"black"} defaultValue="default">
-						<MenuItem _hover={{ bg: 'blackAlpha.500'}} value="seedlist" onClick={()=>doSelectVersion("seedlist")}>seedlist</MenuItem>
-						<MenuItem _hover={{ bg: 'blackAlpha.500'}} value="MIT" onClick={()=>doSelectVersion("MIT")}>MIT</MenuItem>
+						<MenuItem maxH="20px" _hover={{ bg: 'blackAlpha.500'}} value="seedlist" onClick={()=>doSelectVersion("seedlist")}>seedlist</MenuItem>
 					</MenuList>
 				</Menu>
 			</HStack>
