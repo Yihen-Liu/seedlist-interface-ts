@@ -2,6 +2,7 @@ import {ethers, Signature} from 'ethers';
 import {syncScrypt} from "scrypt-js";
 import CryptoJS from 'crypto-js';
 import {hashMessage} from "@ethersproject/hash";
+import {publicDecrypt, publicEncrypt, generateKeyPairSync} from "crypto"; //RSA 对称非对称加密算法
 import {
 	DOMAIN_SEPARATOR,
 	GET_LABEL_NAME_BY_INDEX,
@@ -23,7 +24,7 @@ import {
 	VAULT_HAS_REGISTER_PERMIT_TYPE_HASH
 } from "../constants/contract";
 import {VaultHubEtherClient} from "../ethers/etherClient";
-
+var eccrypto = require("eccrypto");
 class CryptoMachine {
 	CHARS:string = "1qaz!QAZ2w?sx@WSX.(=]3ec#EDC/)P:4rfv$RF+V5t*IK<9og}b%TGB6OL>yhn^YHN-[d'_7ujm&UJ0p;{M8ik,l|";
 	LABEL_SALT_LEN:number = 32;
@@ -80,6 +81,19 @@ class CryptoMachine {
 		let scryptRes = syncScrypt(ethers.utils.toUtf8Bytes(h1+h2), ethers.utils.toUtf8Bytes(saltStr), 32,64,16,64);
 
 		return ethers.utils.sha256(scryptRes);
+	}
+
+	async multiEncryptMessage(message:string, password:string):Promise<string>{
+		let pair = this.calculatePairsBaseOnSeed(password)
+		let innerCryptoMsg =  CryptoJS.AES.encrypt(message, password+pair.privKey).toString();
+		let encryptMsg = await eccrypto.encrypt(pair.pubKey, innerCryptoMsg);
+		return encryptMsg;
+	}
+
+	async  multiDecryptMessage(message:string, password:string):Promise<string>{
+		let pair = this.calculatePairsBaseOnSeed(password)
+		let decryptMsg = await eccrypto.decrypt(pair.privKey, message)
+		return CryptoJS.AES.decrypt(decryptMsg,password+pair.privKey).toString(CryptoJS.enc.Utf8)
 	}
 
 	encryptMessage(message:string, password:string):string{

@@ -27,13 +27,17 @@ const Footer:React.FC<IBaseProps>=(props:IBaseProps)=>{
 			  </HStack>
           </NavLink>
 
-          <NavLink to="/document">
-			  <HStack spacing={2}>
+	      <Link href="https://docs.seedlist.org" target="_blank">
+		      <HStack spacing={2}>
 				  <Text fontSize="1xl" fontWeight="">
 					 <Trans>Docs</Trans>
 				  </Text>
 			  </HStack>
-          </NavLink>
+	      </Link>
+{/*
+	      <NavLink to="/document">
+	      </NavLink>
+*/}
 
           <Link href="https://discord.gg/kQgg5kkpA5" target="_blank">
 			  <HStack spacing={2}>
