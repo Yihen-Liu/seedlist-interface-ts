@@ -4,7 +4,10 @@
 
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IVaultHub, IVaultHubInterface } from "../../interfaces/IVaultHub";
+import type {
+  IVaultHub,
+  IVaultHubInterface,
+} from "../../../contracts/interfaces/IVaultHub";
 
 const _abi = [
   {
@@ -350,7 +353,7 @@ const _abi = [
     ],
     name: "savePrivateDataWithMinting",
     outputs: [],
-    stateMutability: "nonpayable",
+    stateMutability: "payable",
     type: "function",
   },
   {
@@ -398,7 +401,7 @@ const _abi = [
     ],
     name: "savePrivateDataWithoutMinting",
     outputs: [],
-    stateMutability: "nonpayable",
+    stateMutability: "payable",
     type: "function",
   },
   {

@@ -1,5 +1,5 @@
 // Get From Contract Interface By RPC
-export const DOMAIN_SEPARATOR = "0xc079b5f7046ca979a2ef7e5ec5586881db903159300b1d35045ab3c4b268b881";
+export const DOMAIN_SEPARATOR = "0x3f5a61a10015d9a366c1e0f9b97cbf2dc91312f3336b6043504356a8c8c2081c";
 
 // keccak256('savePrivateDataWithMinting(address addr, string memory data, string memory cryptoLabel, address labelHash,
 // address receiver, uint256 deadline)');
@@ -62,3 +62,6 @@ export const SAVE_WITH_MINTING_PERMIT_TYPE_HASH =
 
 //keccak256('labelIsExistDirectly(address labelHash, uint256 deadline)')
 export const LABEL_EXIST_DIRECTLY_PERMIT_TYPE_HASH = "0x5e9a0e1424c7f33522faa862eafa09a676e96246da16c8b58d5803ba8010584f";
+
+
+export const SAVING_PRIVATE_DATA_FEE = 150000000000000;

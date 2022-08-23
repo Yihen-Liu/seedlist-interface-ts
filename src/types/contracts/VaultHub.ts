@@ -9,11 +9,16 @@ import type {
   CallOverrides,
   ContractTransaction,
   Overrides,
+  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
 } from "ethers";
-import type { FunctionFragment, Result } from "@ethersproject/abi";
+import type {
+  FunctionFragment,
+  Result,
+  EventFragment,
+} from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type {
   TypedEventFilter,
@@ -22,36 +27,57 @@ import type {
   OnEvent,
 } from "../common";
 
-export interface IVaultHubInterface extends utils.Interface {
+export interface VaultHubInterface extends utils.Interface {
   functions: {
+    "DOMAIN_SEPARATOR()": FunctionFragment;
+    "fee()": FunctionFragment;
     "getLabelNameByIndex(address,uint256,uint64,uint8,bytes32,bytes32)": FunctionFragment;
     "hasMinted(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "initPrivateVault(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "labelExist(address,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "owner()": FunctionFragment;
     "queryPrivateDataByIndex(address,uint64,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "queryPrivateDataByName(address,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "queryPrivateVaultAddress(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "savePrivateDataWithMinting(address,string,string,address,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "savePrivateDataWithoutMinting(address,string,string,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "setFee(uint256)": FunctionFragment;
+    "setTreasuryAddress(address)": FunctionFragment;
     "totalSavedItems(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
+    "treasury()": FunctionFragment;
     "vaultHasRegister(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "withdrawETH(address,uint256)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "DOMAIN_SEPARATOR"
+      | "fee"
       | "getLabelNameByIndex"
       | "hasMinted"
       | "initPrivateVault"
       | "labelExist"
+      | "owner"
       | "queryPrivateDataByIndex"
       | "queryPrivateDataByName"
       | "queryPrivateVaultAddress"
       | "savePrivateDataWithMinting"
       | "savePrivateDataWithoutMinting"
+      | "setFee"
+      | "setTreasuryAddress"
       | "totalSavedItems"
+      | "transferOwnership"
+      | "treasury"
       | "vaultHasRegister"
+      | "withdrawETH"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "DOMAIN_SEPARATOR",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "fee", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "getLabelNameByIndex",
     values: [
@@ -75,6 +101,7 @@ export interface IVaultHubInterface extends utils.Interface {
     functionFragment: "labelExist",
     values: [string, string, BigNumberish, BigNumberish, BytesLike, BytesLike]
   ): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "queryPrivateDataByIndex",
     values: [
@@ -122,14 +149,36 @@ export interface IVaultHubInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "setFee",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setTreasuryAddress",
+    values: [string]
+  ): string;
+  encodeFunctionData(
     functionFragment: "totalSavedItems",
     values: [string, BigNumberish, BigNumberish, BytesLike, BytesLike]
   ): string;
   encodeFunctionData(
+    functionFragment: "transferOwnership",
+    values: [string]
+  ): string;
+  encodeFunctionData(functionFragment: "treasury", values?: undefined): string;
+  encodeFunctionData(
     functionFragment: "vaultHasRegister",
     values: [string, BigNumberish, BigNumberish, BytesLike, BytesLike]
   ): string;
+  encodeFunctionData(
+    functionFragment: "withdrawETH",
+    values: [string, BigNumberish]
+  ): string;
 
+  decodeFunctionResult(
+    functionFragment: "DOMAIN_SEPARATOR",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "fee", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getLabelNameByIndex",
     data: BytesLike
@@ -140,6 +189,7 @@ export interface IVaultHubInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "labelExist", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "queryPrivateDataByIndex",
     data: BytesLike
@@ -160,24 +210,60 @@ export interface IVaultHubInterface extends utils.Interface {
     functionFragment: "savePrivateDataWithoutMinting",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "setFee", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setTreasuryAddress",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "totalSavedItems",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "treasury", data: BytesLike): Result;
+  decodeFunctionResult(
     functionFragment: "vaultHasRegister",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawETH",
+    data: BytesLike
+  ): Result;
 
-  events: {};
+  events: {
+    "Save(uint8,address)": EventFragment;
+    "VaultInit(uint8,address)": EventFragment;
+  };
+
+  getEvent(nameOrSignatureOrTopic: "Save"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "VaultInit"): EventFragment;
 }
 
-export interface IVaultHub extends BaseContract {
+export interface SaveEventObject {
+  result: number;
+  signer: string;
+}
+export type SaveEvent = TypedEvent<[number, string], SaveEventObject>;
+
+export type SaveEventFilter = TypedEventFilter<SaveEvent>;
+
+export interface VaultInitEventObject {
+  result: number;
+  signer: string;
+}
+export type VaultInitEvent = TypedEvent<[number, string], VaultInitEventObject>;
+
+export type VaultInitEventFilter = TypedEventFilter<VaultInitEvent>;
+
+export interface VaultHub extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: IVaultHubInterface;
+  interface: VaultHubInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -199,6 +285,10 @@ export interface IVaultHub extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<[string]>;
+
+    fee(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     getLabelNameByIndex(
       addr: string,
       deadline: BigNumberish,
@@ -236,6 +326,8 @@ export interface IVaultHub extends BaseContract {
       s: BytesLike,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
+
+    owner(overrides?: CallOverrides): Promise<[string]>;
 
     queryPrivateDataByIndex(
       addr: string,
@@ -276,7 +368,7 @@ export interface IVaultHub extends BaseContract {
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     savePrivateDataWithoutMinting(
@@ -288,6 +380,16 @@ export interface IVaultHub extends BaseContract {
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    setFee(
+      _fee: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    setTreasuryAddress(
+      _treasury: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -300,6 +402,13 @@ export interface IVaultHub extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    treasury(overrides?: CallOverrides): Promise<[string]>;
+
     vaultHasRegister(
       addr: string,
       deadline: BigNumberish,
@@ -308,7 +417,17 @@ export interface IVaultHub extends BaseContract {
       s: BytesLike,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
+
+    withdrawETH(
+      receiver: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
   };
+
+  DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
+
+  fee(overrides?: CallOverrides): Promise<BigNumber>;
 
   getLabelNameByIndex(
     addr: string,
@@ -347,6 +466,8 @@ export interface IVaultHub extends BaseContract {
     s: BytesLike,
     overrides?: CallOverrides
   ): Promise<boolean>;
+
+  owner(overrides?: CallOverrides): Promise<string>;
 
   queryPrivateDataByIndex(
     addr: string,
@@ -387,7 +508,7 @@ export interface IVaultHub extends BaseContract {
     v: BigNumberish,
     r: BytesLike,
     s: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   savePrivateDataWithoutMinting(
@@ -399,6 +520,16 @@ export interface IVaultHub extends BaseContract {
     v: BigNumberish,
     r: BytesLike,
     s: BytesLike,
+    overrides?: PayableOverrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  setFee(
+    _fee: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  setTreasuryAddress(
+    _treasury: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -411,6 +542,13 @@ export interface IVaultHub extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
+  transferOwnership(
+    newOwner: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  treasury(overrides?: CallOverrides): Promise<string>;
+
   vaultHasRegister(
     addr: string,
     deadline: BigNumberish,
@@ -420,7 +558,17 @@ export interface IVaultHub extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
+  withdrawETH(
+    receiver: string,
+    amount: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   callStatic: {
+    DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
+
+    fee(overrides?: CallOverrides): Promise<BigNumber>;
+
     getLabelNameByIndex(
       addr: string,
       deadline: BigNumberish,
@@ -458,6 +606,8 @@ export interface IVaultHub extends BaseContract {
       s: BytesLike,
       overrides?: CallOverrides
     ): Promise<boolean>;
+
+    owner(overrides?: CallOverrides): Promise<string>;
 
     queryPrivateDataByIndex(
       addr: string,
@@ -513,6 +663,13 @@ export interface IVaultHub extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    setFee(_fee: BigNumberish, overrides?: CallOverrides): Promise<void>;
+
+    setTreasuryAddress(
+      _treasury: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     totalSavedItems(
       addr: string,
       deadline: BigNumberish,
@@ -522,19 +679,51 @@ export interface IVaultHub extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    transferOwnership(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    treasury(overrides?: CallOverrides): Promise<string>;
+
     vaultHasRegister(
       addr: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    withdrawETH(
+      receiver: string,
+      amount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<boolean>;
   };
 
-  filters: {};
+  filters: {
+    "Save(uint8,address)"(
+      result?: BigNumberish | null,
+      signer?: string | null
+    ): SaveEventFilter;
+    Save(result?: BigNumberish | null, signer?: string | null): SaveEventFilter;
+
+    "VaultInit(uint8,address)"(
+      result?: BigNumberish | null,
+      signer?: string | null
+    ): VaultInitEventFilter;
+    VaultInit(
+      result?: BigNumberish | null,
+      signer?: string | null
+    ): VaultInitEventFilter;
+  };
 
   estimateGas: {
+    DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<BigNumber>;
+
+    fee(overrides?: CallOverrides): Promise<BigNumber>;
+
     getLabelNameByIndex(
       addr: string,
       deadline: BigNumberish,
@@ -572,6 +761,8 @@ export interface IVaultHub extends BaseContract {
       s: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     queryPrivateDataByIndex(
       addr: string,
@@ -612,7 +803,7 @@ export interface IVaultHub extends BaseContract {
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     savePrivateDataWithoutMinting(
@@ -624,6 +815,16 @@ export interface IVaultHub extends BaseContract {
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    setFee(
+      _fee: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    setTreasuryAddress(
+      _treasury: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -636,6 +837,13 @@ export interface IVaultHub extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    treasury(overrides?: CallOverrides): Promise<BigNumber>;
+
     vaultHasRegister(
       addr: string,
       deadline: BigNumberish,
@@ -643,10 +851,20 @@ export interface IVaultHub extends BaseContract {
       r: BytesLike,
       s: BytesLike,
       overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    withdrawETH(
+      receiver: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
+    DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    fee(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     getLabelNameByIndex(
       addr: string,
       deadline: BigNumberish,
@@ -684,6 +902,8 @@ export interface IVaultHub extends BaseContract {
       s: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     queryPrivateDataByIndex(
       addr: string,
@@ -724,7 +944,7 @@ export interface IVaultHub extends BaseContract {
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     savePrivateDataWithoutMinting(
@@ -736,6 +956,16 @@ export interface IVaultHub extends BaseContract {
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setFee(
+      _fee: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setTreasuryAddress(
+      _treasury: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -748,6 +978,13 @@ export interface IVaultHub extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    treasury(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     vaultHasRegister(
       addr: string,
       deadline: BigNumberish,
@@ -755,6 +992,12 @@ export interface IVaultHub extends BaseContract {
       r: BytesLike,
       s: BytesLike,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    withdrawETH(
+      receiver: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

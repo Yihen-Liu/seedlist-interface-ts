@@ -28,6 +28,7 @@ import {TextInput} from "../TextInput/textinput";
 import {CryptoMachine} from "../../lib/crypto";
 import {etherClient, PrivateVaultEtherClient} from "../../ethers/etherClient";
 import {useSuccessToast, useWarningToast} from "../../hooks/useToast";
+import {SAVING_PRIVATE_DATA_FEE} from "../../constants/contract";
 
 const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const [isOpen, setOpen] = useState<boolean>(false)
@@ -215,6 +216,7 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 				let saveDirectlyRes = await vaultClient.client?.privateVaultSaveDataWithoutMinting(cryptoContent, cryptoLabel, labelHash, saveDirectlyParams.deadline,
 					saveDirectlyParams.signature.r, saveDirectlyParams.signature.s, saveDirectlyParams.signature.v);
 			}catch (e) {
+				console.log("private vault:", e);
 				setSaveBtnIsLoading(false);
 				return;
 			}
@@ -249,9 +251,10 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			try {
 				let mintedSaveRes = await etherClient.client?.saveDataWithMinting(mintedSaveParams.address, cryptoContent, cryptoLabel, labelHash,
 					receiverAddr, mintedSaveParams.deadline, mintedSaveParams.signature.r,
-					mintedSaveParams.signature.s, mintedSaveParams.signature.v);
+					mintedSaveParams.signature.s, mintedSaveParams.signature.v,{value:SAVING_PRIVATE_DATA_FEE});
 			}catch (e) {
 				setSaveBtnIsLoading(false);
+				console.log("save with minting err:", e)
 				return;
 			}
 
@@ -268,7 +271,7 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			try {
 				let saveRes = await etherClient.client?.saveDataWithoutMinting(saveParams.address, cryptoContent, cryptoLabel, labelHash,
 					saveParams.deadline, saveParams.signature.r,
-					saveParams.signature.s, saveParams.signature.v);
+					saveParams.signature.s, saveParams.signature.v, {value:SAVING_PRIVATE_DATA_FEE});
 			}catch (e) {
 					setSaveBtnIsLoading(false);
 					return;

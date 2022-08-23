@@ -4,7 +4,10 @@
 
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { ITreasury, ITreasuryInterface } from "../../interfaces/ITreasury";
+import type {
+  ITreasury,
+  ITreasuryInterface,
+} from "../../../contracts/interfaces/ITreasury";
 
 const _abi = [
   {

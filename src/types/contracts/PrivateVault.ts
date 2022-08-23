@@ -20,20 +20,12 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-} from "./common";
+} from "../common";
 
 export interface PrivateVaultInterface extends utils.Interface {
   functions: {
-    "DOMAIN_NAME()": FunctionFragment;
     "DOMAIN_SEPARATOR()": FunctionFragment;
-    "DOMAIN_TYPE_HASH()": FunctionFragment;
-    "DOMAIN_VERSION()": FunctionFragment;
-    "GET_PRIVATE_DATA_BY_INDEX_PERMIT_TYPE_HASH()": FunctionFragment;
-    "GET_PRIVATE_DATA_BY_NAME_PERMIT_TYPE_HASH()": FunctionFragment;
-    "LABEL_EXIST_PERMIT_TYPE_HASH()": FunctionFragment;
-    "LABEL_NAME_PERMIT_TYPE_HASH()": FunctionFragment;
-    "SAVE_WITHOUT_MINTING_PERMIT_TYPE_HASH()": FunctionFragment;
-    "SAVE_WITH_MINTING_PERMIT_TYPE_HASH()": FunctionFragment;
+    "caller()": FunctionFragment;
     "getPrivateDataByIndex(uint64)": FunctionFragment;
     "getPrivateDataByIndexDirectly(uint64,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "getPrivateDataByName(address)": FunctionFragment;
@@ -52,16 +44,8 @@ export interface PrivateVaultInterface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "DOMAIN_NAME"
       | "DOMAIN_SEPARATOR"
-      | "DOMAIN_TYPE_HASH"
-      | "DOMAIN_VERSION"
-      | "GET_PRIVATE_DATA_BY_INDEX_PERMIT_TYPE_HASH"
-      | "GET_PRIVATE_DATA_BY_NAME_PERMIT_TYPE_HASH"
-      | "LABEL_EXIST_PERMIT_TYPE_HASH"
-      | "LABEL_NAME_PERMIT_TYPE_HASH"
-      | "SAVE_WITHOUT_MINTING_PERMIT_TYPE_HASH"
-      | "SAVE_WITH_MINTING_PERMIT_TYPE_HASH"
+      | "caller"
       | "getPrivateDataByIndex"
       | "getPrivateDataByIndexDirectly"
       | "getPrivateDataByName"
@@ -79,45 +63,10 @@ export interface PrivateVaultInterface extends utils.Interface {
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "DOMAIN_NAME",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "DOMAIN_SEPARATOR",
     values?: undefined
   ): string;
-  encodeFunctionData(
-    functionFragment: "DOMAIN_TYPE_HASH",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "DOMAIN_VERSION",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "GET_PRIVATE_DATA_BY_INDEX_PERMIT_TYPE_HASH",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "GET_PRIVATE_DATA_BY_NAME_PERMIT_TYPE_HASH",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "LABEL_EXIST_PERMIT_TYPE_HASH",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "LABEL_NAME_PERMIT_TYPE_HASH",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "SAVE_WITHOUT_MINTING_PERMIT_TYPE_HASH",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "SAVE_WITH_MINTING_PERMIT_TYPE_HASH",
-    values?: undefined
-  ): string;
+  encodeFunctionData(functionFragment: "caller", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "getPrivateDataByIndex",
     values: [BigNumberish]
@@ -186,45 +135,10 @@ export interface PrivateVaultInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "total", values?: undefined): string;
 
   decodeFunctionResult(
-    functionFragment: "DOMAIN_NAME",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "DOMAIN_SEPARATOR",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "DOMAIN_TYPE_HASH",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "DOMAIN_VERSION",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "GET_PRIVATE_DATA_BY_INDEX_PERMIT_TYPE_HASH",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "GET_PRIVATE_DATA_BY_NAME_PERMIT_TYPE_HASH",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "LABEL_EXIST_PERMIT_TYPE_HASH",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "LABEL_NAME_PERMIT_TYPE_HASH",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "SAVE_WITHOUT_MINTING_PERMIT_TYPE_HASH",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "SAVE_WITH_MINTING_PERMIT_TYPE_HASH",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "caller", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getPrivateDataByIndex",
     data: BytesLike
@@ -303,33 +217,9 @@ export interface PrivateVault extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    DOMAIN_NAME(overrides?: CallOverrides): Promise<[string]>;
-
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<[string]>;
 
-    DOMAIN_TYPE_HASH(overrides?: CallOverrides): Promise<[string]>;
-
-    DOMAIN_VERSION(overrides?: CallOverrides): Promise<[string]>;
-
-    GET_PRIVATE_DATA_BY_INDEX_PERMIT_TYPE_HASH(
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    GET_PRIVATE_DATA_BY_NAME_PERMIT_TYPE_HASH(
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    LABEL_EXIST_PERMIT_TYPE_HASH(overrides?: CallOverrides): Promise<[string]>;
-
-    LABEL_NAME_PERMIT_TYPE_HASH(overrides?: CallOverrides): Promise<[string]>;
-
-    SAVE_WITHOUT_MINTING_PERMIT_TYPE_HASH(
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    SAVE_WITH_MINTING_PERMIT_TYPE_HASH(
-      overrides?: CallOverrides
-    ): Promise<[string]>;
+    caller(overrides?: CallOverrides): Promise<[string]>;
 
     getPrivateDataByIndex(
       index: BigNumberish,
@@ -428,33 +318,9 @@ export interface PrivateVault extends BaseContract {
     total(overrides?: CallOverrides): Promise<[BigNumber]>;
   };
 
-  DOMAIN_NAME(overrides?: CallOverrides): Promise<string>;
-
   DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
 
-  DOMAIN_TYPE_HASH(overrides?: CallOverrides): Promise<string>;
-
-  DOMAIN_VERSION(overrides?: CallOverrides): Promise<string>;
-
-  GET_PRIVATE_DATA_BY_INDEX_PERMIT_TYPE_HASH(
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  GET_PRIVATE_DATA_BY_NAME_PERMIT_TYPE_HASH(
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  LABEL_EXIST_PERMIT_TYPE_HASH(overrides?: CallOverrides): Promise<string>;
-
-  LABEL_NAME_PERMIT_TYPE_HASH(overrides?: CallOverrides): Promise<string>;
-
-  SAVE_WITHOUT_MINTING_PERMIT_TYPE_HASH(
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  SAVE_WITH_MINTING_PERMIT_TYPE_HASH(
-    overrides?: CallOverrides
-  ): Promise<string>;
+  caller(overrides?: CallOverrides): Promise<string>;
 
   getPrivateDataByIndex(
     index: BigNumberish,
@@ -547,33 +413,9 @@ export interface PrivateVault extends BaseContract {
   total(overrides?: CallOverrides): Promise<BigNumber>;
 
   callStatic: {
-    DOMAIN_NAME(overrides?: CallOverrides): Promise<string>;
-
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
 
-    DOMAIN_TYPE_HASH(overrides?: CallOverrides): Promise<string>;
-
-    DOMAIN_VERSION(overrides?: CallOverrides): Promise<string>;
-
-    GET_PRIVATE_DATA_BY_INDEX_PERMIT_TYPE_HASH(
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    GET_PRIVATE_DATA_BY_NAME_PERMIT_TYPE_HASH(
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    LABEL_EXIST_PERMIT_TYPE_HASH(overrides?: CallOverrides): Promise<string>;
-
-    LABEL_NAME_PERMIT_TYPE_HASH(overrides?: CallOverrides): Promise<string>;
-
-    SAVE_WITHOUT_MINTING_PERMIT_TYPE_HASH(
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    SAVE_WITH_MINTING_PERMIT_TYPE_HASH(
-      overrides?: CallOverrides
-    ): Promise<string>;
+    caller(overrides?: CallOverrides): Promise<string>;
 
     getPrivateDataByIndex(
       index: BigNumberish,
@@ -672,33 +514,9 @@ export interface PrivateVault extends BaseContract {
   filters: {};
 
   estimateGas: {
-    DOMAIN_NAME(overrides?: CallOverrides): Promise<BigNumber>;
-
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<BigNumber>;
 
-    DOMAIN_TYPE_HASH(overrides?: CallOverrides): Promise<BigNumber>;
-
-    DOMAIN_VERSION(overrides?: CallOverrides): Promise<BigNumber>;
-
-    GET_PRIVATE_DATA_BY_INDEX_PERMIT_TYPE_HASH(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    GET_PRIVATE_DATA_BY_NAME_PERMIT_TYPE_HASH(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    LABEL_EXIST_PERMIT_TYPE_HASH(overrides?: CallOverrides): Promise<BigNumber>;
-
-    LABEL_NAME_PERMIT_TYPE_HASH(overrides?: CallOverrides): Promise<BigNumber>;
-
-    SAVE_WITHOUT_MINTING_PERMIT_TYPE_HASH(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    SAVE_WITH_MINTING_PERMIT_TYPE_HASH(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    caller(overrides?: CallOverrides): Promise<BigNumber>;
 
     getPrivateDataByIndex(
       index: BigNumberish,
@@ -798,37 +616,9 @@ export interface PrivateVault extends BaseContract {
   };
 
   populateTransaction: {
-    DOMAIN_NAME(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    DOMAIN_TYPE_HASH(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    DOMAIN_VERSION(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    GET_PRIVATE_DATA_BY_INDEX_PERMIT_TYPE_HASH(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    GET_PRIVATE_DATA_BY_NAME_PERMIT_TYPE_HASH(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    LABEL_EXIST_PERMIT_TYPE_HASH(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    LABEL_NAME_PERMIT_TYPE_HASH(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    SAVE_WITHOUT_MINTING_PERMIT_TYPE_HASH(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    SAVE_WITH_MINTING_PERMIT_TYPE_HASH(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    caller(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     getPrivateDataByIndex(
       index: BigNumberish,

@@ -32,6 +32,10 @@ declare module "hardhat/types/runtime" {
       name: "VaultHub",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.VaultHub__factory>;
+    getContractFactory(
+      name: "Constant",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Constant__factory>;
 
     getContractAt(
       name: "IPrivateVaultHub",
@@ -58,6 +62,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.VaultHub>;
+    getContractAt(
+      name: "Constant",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Constant>;
 
     // default types
     getContractFactory(
