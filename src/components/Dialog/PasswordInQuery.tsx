@@ -141,7 +141,7 @@ const PasswordInQuery:React.FC<IBaseProps> = (props:IBaseProps)=>{
 		wheelLabels += label;
 
 		let contentPassword = encryptor.getContentPassword(vaultName, password, wheelLabels);
-		savedContents[index] = encryptor.decryptMessage(content,contentPassword);
+		savedContents[index] = await encryptor.multiDecryptMessage(content,contentPassword);
 		setSavedContents(savedContents.concat());
 		setIsLoading(false);
 	},[savedContents,savedLabels])

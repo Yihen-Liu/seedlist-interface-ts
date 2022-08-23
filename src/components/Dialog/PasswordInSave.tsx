@@ -193,7 +193,7 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			contentPassword = encryptor.getContentPassword(vaultName, password, wheelLabels+labelName);
 			cryptoLabel = encryptor.encryptMessage(labelName, wheelPassword);
 		}
-		cryptoContent = encryptor.encryptMessage(savedContent, contentPassword);
+		cryptoContent = await encryptor.multiEncryptMessage(savedContent, contentPassword);
 
 		if(model === "hidden"){
 			let queryAddrParams = await encryptor.calculateQueryPrivateVaultAddressParams(vaultName, password);

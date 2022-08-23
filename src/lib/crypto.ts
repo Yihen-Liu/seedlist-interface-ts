@@ -24,7 +24,7 @@ import {
 	VAULT_HAS_REGISTER_PERMIT_TYPE_HASH
 } from "../constants/contract";
 import {VaultHubEtherClient} from "../ethers/etherClient";
-var eccrypto = require("eccrypto");
+const EthCrypto = require('eth-crypto');
 class CryptoMachine {
 	CHARS:string = "1qaz!QAZ2w?sx@WSX.(=]3ec#EDC/)P:4rfv$RF+V5t*IK<9og}b%TGB6OL>yhn^YHN-[d'_7ujm&UJ0p;{M8ik,l|";
 	LABEL_SALT_LEN:number = 32;
@@ -86,13 +86,14 @@ class CryptoMachine {
 	async multiEncryptMessage(message:string, password:string):Promise<string>{
 		let pair = this.calculatePairsBaseOnSeed(password)
 		let innerCryptoMsg =  CryptoJS.AES.encrypt(message, password+pair.privKey).toString();
-		let encryptMsg = await eccrypto.encrypt(pair.pubKey, innerCryptoMsg);
-		return encryptMsg;
+		const publicKey = EthCrypto.publicKeyByPrivateKey(pair.privKey);
+		let encryptMsg = await EthCrypto.encryptWithPublicKey(publicKey, innerCryptoMsg);
+		return EthCrypto.cipher.stringify(encryptMsg);
 	}
 
 	async  multiDecryptMessage(message:string, password:string):Promise<string>{
 		let pair = this.calculatePairsBaseOnSeed(password)
-		let decryptMsg = await eccrypto.decrypt(pair.privKey, message)
+		let decryptMsg = await EthCrypto.decryptWithPrivateKey(pair.privKey, EthCrypto.cipher.parse(message))
 		return CryptoJS.AES.decrypt(decryptMsg,password+pair.privKey).toString(CryptoJS.enc.Utf8)
 	}
 
