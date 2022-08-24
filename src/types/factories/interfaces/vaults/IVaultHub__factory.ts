@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   IVaultHub,
   IVaultHubInterface,
-} from "../../../contracts/interfaces/IVaultHub";
+} from "../../../interfaces/vaults/IVaultHub";
 
 const _abi = [
   {

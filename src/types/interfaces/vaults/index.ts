@@ -3,5 +3,4 @@
 /* eslint-disable */
 import type * as iPrivateVaultSol from "./IPrivateVault.sol";
 export type { iPrivateVaultSol };
-export type { ITreasury } from "./ITreasury";
 export type { IVaultHub } from "./IVaultHub";

@@ -5,20 +5,20 @@
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
 import type {
-  ITreasury,
-  ITreasuryInterface,
-} from "../../../contracts/interfaces/ITreasury";
+  IWorker,
+  IWorkerInterface,
+} from "../../../interfaces/validator/IWorker";
 
 const _abi = [
   {
     inputs: [
       {
         internalType: "address",
-        name: "receiver",
+        name: "user",
         type: "address",
       },
     ],
-    name: "mint",
+    name: "run",
     outputs: [
       {
         internalType: "bool",
@@ -31,15 +31,15 @@ const _abi = [
   },
 ];
 
-export class ITreasury__factory {
+export class IWorker__factory {
   static readonly abi = _abi;
-  static createInterface(): ITreasuryInterface {
-    return new utils.Interface(_abi) as ITreasuryInterface;
+  static createInterface(): IWorkerInterface {
+    return new utils.Interface(_abi) as IWorkerInterface;
   }
   static connect(
     address: string,
     signerOrProvider: Signer | Provider
-  ): ITreasury {
-    return new Contract(address, _abi, signerOrProvider) as ITreasury;
+  ): IWorker {
+    return new Contract(address, _abi, signerOrProvider) as IWorker;
   }
 }
