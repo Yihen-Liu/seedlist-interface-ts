@@ -97,7 +97,7 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 						<Trans>4. When entering the next cycle, each excitation amount is half of the previous cycle;</Trans>
 					</Text>
 					<Text marginY="10px" color="white">
-						<Trans>5. With each user's token incentive, a 10% increment will be issued to the DAO address;</Trans>
+						<Trans>5. With each user's token incentive, a 10% increment will be issued to the treasury address;</Trans>
 					</Text>
 					<Text marginY="10px" color="white">
 						<Trans>6. Using the displacement halving, the total amount of token incentives for a complete cycle is about 23.1 million;</Trans>

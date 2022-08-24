@@ -30,7 +30,11 @@ msgid "4. When entering the next cycle, each excitation amount is half of the pr
 msgstr ""
 
 #: src/components/Dialog/PasswordInSave.tsx
-msgid "5. With each user's token incentive, a 10% increment will be issued to the DAO address;"
+#~ msgid "5. With each user's token incentive, a 10% increment will be issued to the DAO address;"
+#~ msgstr ""
+
+#: src/components/Dialog/PasswordInSave.tsx
+msgid "5. With each user's token incentive, a 10% increment will be issued to the treasury address;"
 msgstr ""
 
 #: src/components/Dialog/PasswordInSave.tsx
@@ -118,6 +122,10 @@ msgid "Ethereum Mainnet"
 msgstr ""
 
 #: src/components/Footer/index.tsx
+msgid "Forum"
+msgstr ""
+
+#: src/components/Footer/index.tsx
 msgid "Github"
 msgstr ""
 
@@ -150,8 +158,8 @@ msgid "Let's Sign"
 msgstr ""
 
 #: src/components/Footer/index.tsx
-msgid "License"
-msgstr ""
+#~ msgid "License"
+#~ msgstr ""
 
 #: src/components/Header/routers.tsx
 msgid "Meta Identity"
