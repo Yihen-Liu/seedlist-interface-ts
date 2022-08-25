@@ -1,5 +1,5 @@
 // Get From Contract Interface By RPC
-export const DOMAIN_SEPARATOR = "0x0c415604e28ad793e474f22dc0096872a0fa61675506f608caa0b077a27e39d1";
+export const DOMAIN_SEPARATOR = "0x6dbf5ec9ce69803f8b88efa7c3e5d6955c9d98ab54df1395b0a9608dd1060999";
 
 // keccak256('savePrivateDataWithMinting(address addr, string memory data, string memory cryptoLabel, address labelHash,
 // address receiver, uint256 deadline)');
