@@ -2,3 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export { Validator__factory } from "./Validator__factory";
+export { Worker__factory } from "./Worker__factory";

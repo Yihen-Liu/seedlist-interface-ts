@@ -36,6 +36,7 @@ export interface VaultHubInterface extends utils.Interface {
     "initPrivateVault(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "labelExist(address,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "owner()": FunctionFragment;
+    "privateVaultPermissionLib()": FunctionFragment;
     "queryPrivateDataByIndex(address,uint64,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "queryPrivateDataByName(address,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "queryPrivateVaultAddress(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
@@ -47,6 +48,7 @@ export interface VaultHubInterface extends utils.Interface {
     "transferOwnership(address)": FunctionFragment;
     "treasury()": FunctionFragment;
     "vaultHasRegister(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "vaultHubPermissionLib()": FunctionFragment;
     "withdrawETH(address,uint256)": FunctionFragment;
   };
 
@@ -59,6 +61,7 @@ export interface VaultHubInterface extends utils.Interface {
       | "initPrivateVault"
       | "labelExist"
       | "owner"
+      | "privateVaultPermissionLib"
       | "queryPrivateDataByIndex"
       | "queryPrivateDataByName"
       | "queryPrivateVaultAddress"
@@ -70,6 +73,7 @@ export interface VaultHubInterface extends utils.Interface {
       | "transferOwnership"
       | "treasury"
       | "vaultHasRegister"
+      | "vaultHubPermissionLib"
       | "withdrawETH"
   ): FunctionFragment;
 
@@ -102,6 +106,10 @@ export interface VaultHubInterface extends utils.Interface {
     values: [string, string, BigNumberish, BigNumberish, BytesLike, BytesLike]
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "privateVaultPermissionLib",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "queryPrivateDataByIndex",
     values: [
@@ -170,6 +178,10 @@ export interface VaultHubInterface extends utils.Interface {
     values: [string, BigNumberish, BigNumberish, BytesLike, BytesLike]
   ): string;
   encodeFunctionData(
+    functionFragment: "vaultHubPermissionLib",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "withdrawETH",
     values: [string, BigNumberish]
   ): string;
@@ -190,6 +202,10 @@ export interface VaultHubInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "labelExist", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "privateVaultPermissionLib",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "queryPrivateDataByIndex",
     data: BytesLike
@@ -226,6 +242,10 @@ export interface VaultHubInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "treasury", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "vaultHasRegister",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "vaultHubPermissionLib",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -329,6 +349,8 @@ export interface VaultHub extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
+    privateVaultPermissionLib(overrides?: CallOverrides): Promise<[string]>;
+
     queryPrivateDataByIndex(
       addr: string,
       index: BigNumberish,
@@ -418,6 +440,8 @@ export interface VaultHub extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
+    vaultHubPermissionLib(overrides?: CallOverrides): Promise<[string]>;
+
     withdrawETH(
       receiver: string,
       amount: BigNumberish,
@@ -468,6 +492,8 @@ export interface VaultHub extends BaseContract {
   ): Promise<boolean>;
 
   owner(overrides?: CallOverrides): Promise<string>;
+
+  privateVaultPermissionLib(overrides?: CallOverrides): Promise<string>;
 
   queryPrivateDataByIndex(
     addr: string,
@@ -558,6 +584,8 @@ export interface VaultHub extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
+  vaultHubPermissionLib(overrides?: CallOverrides): Promise<string>;
+
   withdrawETH(
     receiver: string,
     amount: BigNumberish,
@@ -608,6 +636,8 @@ export interface VaultHub extends BaseContract {
     ): Promise<boolean>;
 
     owner(overrides?: CallOverrides): Promise<string>;
+
+    privateVaultPermissionLib(overrides?: CallOverrides): Promise<string>;
 
     queryPrivateDataByIndex(
       addr: string,
@@ -695,6 +725,8 @@ export interface VaultHub extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
+    vaultHubPermissionLib(overrides?: CallOverrides): Promise<string>;
+
     withdrawETH(
       receiver: string,
       amount: BigNumberish,
@@ -763,6 +795,8 @@ export interface VaultHub extends BaseContract {
     ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
+
+    privateVaultPermissionLib(overrides?: CallOverrides): Promise<BigNumber>;
 
     queryPrivateDataByIndex(
       addr: string,
@@ -853,6 +887,8 @@ export interface VaultHub extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    vaultHubPermissionLib(overrides?: CallOverrides): Promise<BigNumber>;
+
     withdrawETH(
       receiver: string,
       amount: BigNumberish,
@@ -904,6 +940,10 @@ export interface VaultHub extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    privateVaultPermissionLib(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     queryPrivateDataByIndex(
       addr: string,
@@ -991,6 +1031,10 @@ export interface VaultHub extends BaseContract {
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    vaultHubPermissionLib(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

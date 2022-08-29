@@ -41,9 +41,17 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IVaultHub__factory>;
     getContractFactory(
+      name: "CalleeName",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.CalleeName__factory>;
+    getContractFactory(
       name: "Constant",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Constant__factory>;
+    getContractFactory(
+      name: "VaultHubPermission",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.VaultHubPermission__factory>;
     getContractFactory(
       name: "ERC20",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -60,6 +68,10 @@ declare module "hardhat/types/runtime" {
       name: "Validator",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Validator__factory>;
+    getContractFactory(
+      name: "Worker",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Worker__factory>;
     getContractFactory(
       name: "PrivateVault",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -105,10 +117,20 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.IVaultHub>;
     getContractAt(
+      name: "CalleeName",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.CalleeName>;
+    getContractAt(
       name: "Constant",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.Constant>;
+    getContractAt(
+      name: "VaultHubPermission",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.VaultHubPermission>;
     getContractAt(
       name: "ERC20",
       address: string,
@@ -129,6 +151,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.Validator>;
+    getContractAt(
+      name: "Worker",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Worker>;
     getContractAt(
       name: "PrivateVault",
       address: string,

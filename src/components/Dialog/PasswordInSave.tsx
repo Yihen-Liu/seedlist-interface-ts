@@ -321,7 +321,7 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 						</Box>
 					</Stack>
 
-{/*
+
 					<RadioGroup defaultValue={model} marginY="20px" onChange={setModel}>
 						<Stack spacing={5} direction='row'>
 							<Text color="white"><Trans>Save Model: </Trans></Text>
@@ -333,7 +333,7 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 							</Radio>
 						</Stack>
 					</RadioGroup>
-*/}
+
 					{ model === "bridge" &&
 						<Stack spacing='30px' marginY='20px'>
 							<Box>

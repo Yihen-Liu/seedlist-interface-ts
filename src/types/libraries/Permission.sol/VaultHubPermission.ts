@@ -7,9 +7,6 @@ import type {
   BigNumberish,
   BytesLike,
   CallOverrides,
-  ContractTransaction,
-  Overrides,
-  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -23,95 +20,97 @@ import type {
   OnEvent,
 } from "../../common";
 
-export interface IVaultHubInterface extends utils.Interface {
+export interface VaultHubPermissionInterface extends utils.Interface {
   functions: {
-    "getLabelNameByIndex(address,uint256,uint64,uint8,bytes32,bytes32)": FunctionFragment;
-    "hasMinted(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "initPrivateVault(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "labelExist(address,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "queryPrivateDataByIndex(address,uint64,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "queryPrivateDataByName(address,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "queryPrivateVaultAddress(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "savePrivateDataWithMinting(address,string,string,address,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "savePrivateDataWithoutMinting(address,string,string,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "totalSavedItems(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "vaultHasRegister(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "getLabelExistPermit(address,address,uint256,uint8,bytes32,bytes32,bytes32)": FunctionFragment;
+    "getLabelNamePermit(address,uint256,uint64,uint8,bytes32,bytes32,bytes32)": FunctionFragment;
+    "hasMintedPermit(address,uint256,uint8,bytes32,bytes32,bytes32)": FunctionFragment;
+    "hasRegisterPermit(address,uint256,uint8,bytes32,bytes32,bytes32)": FunctionFragment;
+    "initPermit(address,uint256,uint8,bytes32,bytes32,bytes32)": FunctionFragment;
+    "mintSavePermit(address,string,string,address,address,uint256,uint8,bytes32,bytes32,bytes32)": FunctionFragment;
+    "queryByIndexPermit(address,uint64,uint256,uint8,bytes32,bytes32,bytes32)": FunctionFragment;
+    "queryByNamePermit(address,address,uint256,uint8,bytes32,bytes32,bytes32)": FunctionFragment;
+    "queryPrivateVaultAddressPermit(address,uint256,uint8,bytes32,bytes32,bytes32)": FunctionFragment;
+    "saveWithoutMintPermit(address,string,string,address,uint256,uint8,bytes32,bytes32,bytes32)": FunctionFragment;
+    "totalSavedItemsPermit(address,uint256,uint8,bytes32,bytes32,bytes32)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "getLabelNameByIndex"
-      | "hasMinted"
-      | "initPrivateVault"
-      | "labelExist"
-      | "queryPrivateDataByIndex"
-      | "queryPrivateDataByName"
-      | "queryPrivateVaultAddress"
-      | "savePrivateDataWithMinting"
-      | "savePrivateDataWithoutMinting"
-      | "totalSavedItems"
-      | "vaultHasRegister"
+      | "getLabelExistPermit"
+      | "getLabelNamePermit"
+      | "hasMintedPermit"
+      | "hasRegisterPermit"
+      | "initPermit"
+      | "mintSavePermit"
+      | "queryByIndexPermit"
+      | "queryByNamePermit"
+      | "queryPrivateVaultAddressPermit"
+      | "saveWithoutMintPermit"
+      | "totalSavedItemsPermit"
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "getLabelNameByIndex",
+    functionFragment: "getLabelExistPermit",
+    values: [
+      string,
+      string,
+      BigNumberish,
+      BigNumberish,
+      BytesLike,
+      BytesLike,
+      BytesLike
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getLabelNamePermit",
     values: [
       string,
       BigNumberish,
       BigNumberish,
       BigNumberish,
       BytesLike,
-      BytesLike
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "hasMinted",
-    values: [string, BigNumberish, BigNumberish, BytesLike, BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "initPrivateVault",
-    values: [string, BigNumberish, BigNumberish, BytesLike, BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "labelExist",
-    values: [string, string, BigNumberish, BigNumberish, BytesLike, BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "queryPrivateDataByIndex",
-    values: [
-      string,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish,
       BytesLike,
       BytesLike
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "queryPrivateDataByName",
-    values: [string, string, BigNumberish, BigNumberish, BytesLike, BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "queryPrivateVaultAddress",
-    values: [string, BigNumberish, BigNumberish, BytesLike, BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "savePrivateDataWithMinting",
+    functionFragment: "hasMintedPermit",
     values: [
       string,
-      string,
-      string,
-      string,
-      string,
       BigNumberish,
       BigNumberish,
+      BytesLike,
       BytesLike,
       BytesLike
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "savePrivateDataWithoutMinting",
+    functionFragment: "hasRegisterPermit",
     values: [
+      string,
+      BigNumberish,
+      BigNumberish,
+      BytesLike,
+      BytesLike,
+      BytesLike
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "initPermit",
+    values: [
+      string,
+      BigNumberish,
+      BigNumberish,
+      BytesLike,
+      BytesLike,
+      BytesLike
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "mintSavePermit",
+    values: [
+      string,
       string,
       string,
       string,
@@ -119,66 +118,122 @@ export interface IVaultHubInterface extends utils.Interface {
       BigNumberish,
       BigNumberish,
       BytesLike,
+      BytesLike,
       BytesLike
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "totalSavedItems",
-    values: [string, BigNumberish, BigNumberish, BytesLike, BytesLike]
+    functionFragment: "queryByIndexPermit",
+    values: [
+      string,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BytesLike,
+      BytesLike,
+      BytesLike
+    ]
   ): string;
   encodeFunctionData(
-    functionFragment: "vaultHasRegister",
-    values: [string, BigNumberish, BigNumberish, BytesLike, BytesLike]
+    functionFragment: "queryByNamePermit",
+    values: [
+      string,
+      string,
+      BigNumberish,
+      BigNumberish,
+      BytesLike,
+      BytesLike,
+      BytesLike
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "queryPrivateVaultAddressPermit",
+    values: [
+      string,
+      BigNumberish,
+      BigNumberish,
+      BytesLike,
+      BytesLike,
+      BytesLike
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "saveWithoutMintPermit",
+    values: [
+      string,
+      string,
+      string,
+      string,
+      BigNumberish,
+      BigNumberish,
+      BytesLike,
+      BytesLike,
+      BytesLike
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "totalSavedItemsPermit",
+    values: [
+      string,
+      BigNumberish,
+      BigNumberish,
+      BytesLike,
+      BytesLike,
+      BytesLike
+    ]
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "getLabelNameByIndex",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "hasMinted", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "initPrivateVault",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "labelExist", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "queryPrivateDataByIndex",
+    functionFragment: "getLabelExistPermit",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "queryPrivateDataByName",
+    functionFragment: "getLabelNamePermit",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "queryPrivateVaultAddress",
+    functionFragment: "hasMintedPermit",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "savePrivateDataWithMinting",
+    functionFragment: "hasRegisterPermit",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "initPermit", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "mintSavePermit",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "savePrivateDataWithoutMinting",
+    functionFragment: "queryByIndexPermit",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "totalSavedItems",
+    functionFragment: "queryByNamePermit",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "vaultHasRegister",
+    functionFragment: "queryPrivateVaultAddressPermit",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "saveWithoutMintPermit",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "totalSavedItemsPermit",
     data: BytesLike
   ): Result;
 
   events: {};
 }
 
-export interface IVaultHub extends BaseContract {
+export interface VaultHubPermission extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: IVaultHubInterface;
+  interface: VaultHubPermissionInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -200,74 +255,59 @@ export interface IVaultHub extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    getLabelNameByIndex(
-      addr: string,
-      deadline: BigNumberish,
-      index: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    hasMinted(
-      addr: string,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
-    initPrivateVault(
-      addr: string,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    labelExist(
+    getLabelExistPermit(
       addr: string,
       labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
       overrides?: CallOverrides
-    ): Promise<[boolean]>;
+    ): Promise<[void]>;
 
-    queryPrivateDataByIndex(
+    getLabelNamePermit(
       addr: string,
+      deadline: BigNumberish,
       index: BigNumberish,
-      deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
       overrides?: CallOverrides
-    ): Promise<[string]>;
+    ): Promise<[void]>;
 
-    queryPrivateDataByName(
-      addr: string,
-      labelHash: string,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    queryPrivateVaultAddress(
+    hasMintedPermit(
       addr: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
       overrides?: CallOverrides
-    ): Promise<[string]>;
+    ): Promise<[void]>;
 
-    savePrivateDataWithMinting(
+    hasRegisterPermit(
+      addr: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<[void]>;
+
+    initPermit(
+      addr: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<[void]>;
+
+    mintSavePermit(
       addr: string,
       data: string,
       cryptoLabel: string,
@@ -277,10 +317,43 @@ export interface IVaultHub extends BaseContract {
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+      DOMAIN_SEPARATOR: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<[void]>;
 
-    savePrivateDataWithoutMinting(
+    queryByIndexPermit(
+      addr: string,
+      index: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<[void]>;
+
+    queryByNamePermit(
+      addr: string,
+      labelHash: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<[void]>;
+
+    queryPrivateVaultAddressPermit(
+      addr: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<[void]>;
+
+    saveWithoutMintPermit(
       addr: string,
       data: string,
       cryptoLabel: string,
@@ -289,96 +362,74 @@ export interface IVaultHub extends BaseContract {
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    totalSavedItems(
-      addr: string,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
       overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    ): Promise<[void]>;
 
-    vaultHasRegister(
+    totalSavedItemsPermit(
       addr: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+      DOMAIN_SEPARATOR: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<[void]>;
   };
 
-  getLabelNameByIndex(
-    addr: string,
-    deadline: BigNumberish,
-    index: BigNumberish,
-    v: BigNumberish,
-    r: BytesLike,
-    s: BytesLike,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  hasMinted(
-    addr: string,
-    deadline: BigNumberish,
-    v: BigNumberish,
-    r: BytesLike,
-    s: BytesLike,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
-  initPrivateVault(
-    addr: string,
-    deadline: BigNumberish,
-    v: BigNumberish,
-    r: BytesLike,
-    s: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  labelExist(
+  getLabelExistPermit(
     addr: string,
     labelHash: string,
     deadline: BigNumberish,
     v: BigNumberish,
     r: BytesLike,
     s: BytesLike,
+    DOMAIN_SEPARATOR: BytesLike,
     overrides?: CallOverrides
-  ): Promise<boolean>;
+  ): Promise<void>;
 
-  queryPrivateDataByIndex(
+  getLabelNamePermit(
     addr: string,
+    deadline: BigNumberish,
     index: BigNumberish,
-    deadline: BigNumberish,
     v: BigNumberish,
     r: BytesLike,
     s: BytesLike,
+    DOMAIN_SEPARATOR: BytesLike,
     overrides?: CallOverrides
-  ): Promise<string>;
+  ): Promise<void>;
 
-  queryPrivateDataByName(
-    addr: string,
-    labelHash: string,
-    deadline: BigNumberish,
-    v: BigNumberish,
-    r: BytesLike,
-    s: BytesLike,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  queryPrivateVaultAddress(
+  hasMintedPermit(
     addr: string,
     deadline: BigNumberish,
     v: BigNumberish,
     r: BytesLike,
     s: BytesLike,
+    DOMAIN_SEPARATOR: BytesLike,
     overrides?: CallOverrides
-  ): Promise<string>;
+  ): Promise<void>;
 
-  savePrivateDataWithMinting(
+  hasRegisterPermit(
+    addr: string,
+    deadline: BigNumberish,
+    v: BigNumberish,
+    r: BytesLike,
+    s: BytesLike,
+    DOMAIN_SEPARATOR: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<void>;
+
+  initPermit(
+    addr: string,
+    deadline: BigNumberish,
+    v: BigNumberish,
+    r: BytesLike,
+    s: BytesLike,
+    DOMAIN_SEPARATOR: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<void>;
+
+  mintSavePermit(
     addr: string,
     data: string,
     cryptoLabel: string,
@@ -388,10 +439,43 @@ export interface IVaultHub extends BaseContract {
     v: BigNumberish,
     r: BytesLike,
     s: BytesLike,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+    DOMAIN_SEPARATOR: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<void>;
 
-  savePrivateDataWithoutMinting(
+  queryByIndexPermit(
+    addr: string,
+    index: BigNumberish,
+    deadline: BigNumberish,
+    v: BigNumberish,
+    r: BytesLike,
+    s: BytesLike,
+    DOMAIN_SEPARATOR: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<void>;
+
+  queryByNamePermit(
+    addr: string,
+    labelHash: string,
+    deadline: BigNumberish,
+    v: BigNumberish,
+    r: BytesLike,
+    s: BytesLike,
+    DOMAIN_SEPARATOR: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<void>;
+
+  queryPrivateVaultAddressPermit(
+    addr: string,
+    deadline: BigNumberish,
+    v: BigNumberish,
+    r: BytesLike,
+    s: BytesLike,
+    DOMAIN_SEPARATOR: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<void>;
+
+  saveWithoutMintPermit(
     addr: string,
     data: string,
     cryptoLabel: string,
@@ -400,96 +484,74 @@ export interface IVaultHub extends BaseContract {
     v: BigNumberish,
     r: BytesLike,
     s: BytesLike,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  totalSavedItems(
-    addr: string,
-    deadline: BigNumberish,
-    v: BigNumberish,
-    r: BytesLike,
-    s: BytesLike,
+    DOMAIN_SEPARATOR: BytesLike,
     overrides?: CallOverrides
-  ): Promise<BigNumber>;
+  ): Promise<void>;
 
-  vaultHasRegister(
+  totalSavedItemsPermit(
     addr: string,
     deadline: BigNumberish,
     v: BigNumberish,
     r: BytesLike,
     s: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+    DOMAIN_SEPARATOR: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<void>;
 
   callStatic: {
-    getLabelNameByIndex(
-      addr: string,
-      deadline: BigNumberish,
-      index: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    hasMinted(
-      addr: string,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    initPrivateVault(
-      addr: string,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    labelExist(
+    getLabelExistPermit(
       addr: string,
       labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
       overrides?: CallOverrides
-    ): Promise<boolean>;
+    ): Promise<void>;
 
-    queryPrivateDataByIndex(
+    getLabelNamePermit(
       addr: string,
+      deadline: BigNumberish,
       index: BigNumberish,
-      deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
       overrides?: CallOverrides
-    ): Promise<string>;
+    ): Promise<void>;
 
-    queryPrivateDataByName(
-      addr: string,
-      labelHash: string,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    queryPrivateVaultAddress(
+    hasMintedPermit(
       addr: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
       overrides?: CallOverrides
-    ): Promise<string>;
+    ): Promise<void>;
 
-    savePrivateDataWithMinting(
+    hasRegisterPermit(
+      addr: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    initPermit(
+      addr: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    mintSavePermit(
       addr: string,
       data: string,
       cryptoLabel: string,
@@ -499,10 +561,43 @@ export interface IVaultHub extends BaseContract {
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    savePrivateDataWithoutMinting(
+    queryByIndexPermit(
+      addr: string,
+      index: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    queryByNamePermit(
+      addr: string,
+      labelHash: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    queryPrivateVaultAddressPermit(
+      addr: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    saveWithoutMintPermit(
       addr: string,
       data: string,
       cryptoLabel: string,
@@ -511,99 +606,77 @@ export interface IVaultHub extends BaseContract {
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    totalSavedItems(
+    totalSavedItemsPermit(
       addr: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
       overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    vaultHasRegister(
-      addr: string,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
+    ): Promise<void>;
   };
 
   filters: {};
 
   estimateGas: {
-    getLabelNameByIndex(
-      addr: string,
-      deadline: BigNumberish,
-      index: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    hasMinted(
-      addr: string,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    initPrivateVault(
-      addr: string,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    labelExist(
+    getLabelExistPermit(
       addr: string,
       labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    queryPrivateDataByIndex(
+    getLabelNamePermit(
       addr: string,
+      deadline: BigNumberish,
       index: BigNumberish,
-      deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    queryPrivateDataByName(
-      addr: string,
-      labelHash: string,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    queryPrivateVaultAddress(
+    hasMintedPermit(
       addr: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    savePrivateDataWithMinting(
+    hasRegisterPermit(
+      addr: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    initPermit(
+      addr: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    mintSavePermit(
       addr: string,
       data: string,
       cryptoLabel: string,
@@ -613,10 +686,43 @@ export interface IVaultHub extends BaseContract {
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      DOMAIN_SEPARATOR: BytesLike,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    savePrivateDataWithoutMinting(
+    queryByIndexPermit(
+      addr: string,
+      index: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    queryByNamePermit(
+      addr: string,
+      labelHash: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    queryPrivateVaultAddressPermit(
+      addr: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    saveWithoutMintPermit(
       addr: string,
       data: string,
       cryptoLabel: string,
@@ -625,97 +731,75 @@ export interface IVaultHub extends BaseContract {
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    totalSavedItems(
-      addr: string,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    vaultHasRegister(
+    totalSavedItemsPermit(
       addr: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      DOMAIN_SEPARATOR: BytesLike,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    getLabelNameByIndex(
-      addr: string,
-      deadline: BigNumberish,
-      index: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    hasMinted(
-      addr: string,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    initPrivateVault(
-      addr: string,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    labelExist(
+    getLabelExistPermit(
       addr: string,
       labelHash: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    queryPrivateDataByIndex(
+    getLabelNamePermit(
       addr: string,
+      deadline: BigNumberish,
       index: BigNumberish,
-      deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    queryPrivateDataByName(
-      addr: string,
-      labelHash: string,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    queryPrivateVaultAddress(
+    hasMintedPermit(
       addr: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    savePrivateDataWithMinting(
+    hasRegisterPermit(
+      addr: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    initPermit(
+      addr: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    mintSavePermit(
       addr: string,
       data: string,
       cryptoLabel: string,
@@ -725,10 +809,43 @@ export interface IVaultHub extends BaseContract {
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      DOMAIN_SEPARATOR: BytesLike,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    savePrivateDataWithoutMinting(
+    queryByIndexPermit(
+      addr: string,
+      index: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    queryByNamePermit(
+      addr: string,
+      labelHash: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    queryPrivateVaultAddressPermit(
+      addr: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    saveWithoutMintPermit(
       addr: string,
       data: string,
       cryptoLabel: string,
@@ -737,25 +854,18 @@ export interface IVaultHub extends BaseContract {
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    totalSavedItems(
-      addr: string,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
+      DOMAIN_SEPARATOR: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    vaultHasRegister(
+    totalSavedItemsPermit(
       addr: string,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      DOMAIN_SEPARATOR: BytesLike,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };
 }

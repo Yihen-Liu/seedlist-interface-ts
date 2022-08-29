@@ -17,7 +17,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-} from "../common";
+} from "../../common";
 
 export interface ConstantInterface extends utils.Interface {
   functions: {

@@ -3,7 +3,10 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { Constant, ConstantInterface } from "../../libraries/Constant";
+import type {
+  Constant,
+  ConstantInterface,
+} from "../../../libraries/Constant.sol/Constant";
 
 const _abi = [
   {
