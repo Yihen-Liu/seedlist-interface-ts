@@ -211,6 +211,37 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			}
 
 			let domain = await vaultClient.client?.privateVaultDomainHash();
+/*  test case, deleted in the future.
+
+			let labelNameParams	= await encryptor.calculatePrivateVaultLabelNameParams(vaultName, password, 0, domain);
+			try {
+				let labelNameRes = await vaultClient.client?.privateVaultLabelName(0, labelNameParams.deadline, labelNameParams.signature.r, labelNameParams.signature.s, labelNameParams.signature.v);
+				console.log("labelName of 0:", labelNameRes);
+			}catch (e) {
+
+			}
+			let getPrivateDataByIndexParams = await encryptor.calculatePrivateVaultGetDataByIndexParams(vaultName, password, 0, domain);
+			let getPrivateDataIndexRes = await vaultClient.client?.privateVaultGetDataByIndex(0, getPrivateDataByIndexParams.deadline, getPrivateDataByIndexParams.signature.r, getPrivateDataByIndexParams.signature.s, getPrivateDataByIndexParams.signature.v);
+			console.log("get data of index:", getPrivateDataIndexRes);
+
+			let helloLabelHash = await encryptor.labelHash("hello");
+			let getPrivateDataByNameParams = await encryptor.calculatePrivateVaultGetDataByNameParams(vaultName, password,helloLabelHash, domain);
+			let getPrivateDataNameRes = await vaultClient.client?.privateVaultGetDataByName(helloLabelHash, getPrivateDataByNameParams.deadline, getPrivateDataByNameParams.signature.r, getPrivateDataByNameParams.signature.s, getPrivateDataByNameParams.signature.v);
+			console.log("get data of name:", getPrivateDataNameRes);
+
+			let labelExistParams = await encryptor.calculatePrivateVaultLabelExistParams(vaultName, password,helloLabelHash,domain);
+			let labelExistRes = await vaultClient.client?.privateVaultLabelExist(helloLabelHash, labelExistParams.deadline, labelExistParams.signature.r, labelExistParams.signature.s, labelExistParams.signature.v);
+			console.log("label exist:", labelExistRes);
+
+			let _saveDirectlyparams = await encryptor.calculatePrivateVaultSaveWithMintingParams(vaultName, password, cryptoContent, cryptoLabel,labelHash, domain);
+			try {
+				let _saveDirectlyRes = await vaultClient.client?.privateVaultSaveDataWithMinting(cryptoContent,
+					cryptoLabel,labelHash,_saveDirectlyparams.deadline, _saveDirectlyparams.signature.r, _saveDirectlyparams.signature.s, _saveDirectlyparams.signature.v);
+			}catch (e) {
+				console.log("save directly:", e);
+			}
+
+*/
 			let saveDirectlyParams = await encryptor.calculatePrivateVaultSaveWithoutMintingParams(vaultName, password, cryptoContent, cryptoLabel, labelHash, domain);
 			try {
 				let saveDirectlyRes = await vaultClient.client?.privateVaultSaveDataWithoutMinting(cryptoContent, cryptoLabel, labelHash, saveDirectlyParams.deadline,

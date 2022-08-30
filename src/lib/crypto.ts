@@ -539,15 +539,15 @@ class CryptoMachine {
 		}
 	}
 
-	async calculatePrivateVaultSaveWithMintingParams(vaultName:string, password:string, data:string, label:string, domain:string){
+	async calculatePrivateVaultSaveWithMintingParams(vaultName:string, password:string, data:string, label:string, labelHash:string, domain:string){
 		let pairs = this.calculateMainPairs(vaultName, password);
 		let wallet = new ethers.Wallet(pairs.privKey);
 		let address = await wallet.getAddress();
 		let deadline = Date.parse(new Date().toString())/1000+100;
 
 		let combineMessage = ethers.utils.solidityKeccak256(
-			["address", "string", "string", "uint256", "bytes32", "bytes32"],
-			[address, data, label, deadline, domain, SAVE_WITH_MINTING_PERMIT_TYPE_HASH],
+			["address", "string", "string", "address", "uint256", "bytes32", "bytes32"],
+			[address, data, label, labelHash, deadline, domain, SAVE_WITH_MINTING_PERMIT_TYPE_HASH],
 		);
 		let messageHash = ethers.utils.keccak256(ethers.utils.arrayify(combineMessage.toLowerCase()));
 
@@ -592,7 +592,7 @@ class CryptoMachine {
 		let deadline = Date.parse(new Date().toString())/1000+3;
 
 		let combineMessage = ethers.utils.solidityKeccak256(
-			["address", "string", "uint256", "bytes32", "bytes32"],
+			["address", "address", "uint256", "bytes32", "bytes32"],
 			[address, label, deadline, domain, GET_PRIVATE_DATA_BY_NAME_PERMIT_TYPE_HASH],
 		);
 		let messageHash = ethers.utils.keccak256(ethers.utils.arrayify(combineMessage.toLowerCase()));
