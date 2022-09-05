@@ -2,7 +2,6 @@ import {ethers, Signature} from 'ethers';
 import {syncScrypt} from "scrypt-js";
 import CryptoJS from 'crypto-js';
 import {hashMessage} from "@ethersproject/hash";
-import {publicDecrypt, publicEncrypt, generateKeyPairSync} from "crypto"; //RSA 对称非对称加密算法
 import {
 	DOMAIN_SEPARATOR,
 	GET_LABEL_NAME_BY_INDEX,
@@ -516,15 +515,16 @@ class CryptoMachine {
 		}
 	}
 
-	async calculatePrivateVaultSaveWithoutMintingParams(vaultName:string, password:string, data:string, label:string, labelHash:string, domain:string){
+	//let params = ethers.utils.defaultAbiCoder.encode( ["address", "uint24"], ["0xf32d39ff9f6aa7a7a64d7a4f00a54826ef791a55", 500]);
+	async calculatePrivateVaultSaveWithoutMintingParams(vaultName:string, password:string, data:string, label:string, labelHash:string, domain:string, params:string="None"){
 		let pairs = this.calculateMainPairs(vaultName, password);
 		let wallet = new ethers.Wallet(pairs.privKey);
 		let address = await wallet.getAddress();
 		let deadline = Date.parse(new Date().toString())/1000+100;
 
 		let combineMessage = ethers.utils.solidityKeccak256(
-			["address", "string", "string","address", "uint256", "bytes32", "bytes32"],
-			[address, data, label, labelHash, deadline, domain, SAVE_WITHOUT_MINTING_PERMIT_TYPE_HASH],
+			["address", "string", "string","bytes", "address", "uint256", "bytes32", "bytes32"],
+			[address, data, label, params, labelHash, deadline, domain, SAVE_WITHOUT_MINTING_PERMIT_TYPE_HASH],
 		);
 		let messageHash = ethers.utils.keccak256(ethers.utils.arrayify(combineMessage.toLowerCase()));
 

@@ -26,6 +26,8 @@ export type { CalleeName } from "./libraries/Constant.sol/CalleeName";
 export { CalleeName__factory } from "./factories/libraries/Constant.sol/CalleeName__factory";
 export type { Constant } from "./libraries/Constant.sol/Constant";
 export { Constant__factory } from "./factories/libraries/Constant.sol/Constant__factory";
+export type { PrivateVaultPermission } from "./libraries/Permission.sol/PrivateVaultPermission";
+export { PrivateVaultPermission__factory } from "./factories/libraries/Permission.sol/PrivateVaultPermission__factory";
 export type { VaultHubPermission } from "./libraries/Permission.sol/VaultHubPermission";
 export { VaultHubPermission__factory } from "./factories/libraries/Permission.sol/VaultHubPermission__factory";
 export type { ERC20 } from "./src/treasury/Seed.sol/ERC20";

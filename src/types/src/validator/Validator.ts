@@ -23,7 +23,7 @@ import type {
 
 export interface ValidatorInterface extends utils.Interface {
   functions: {
-    "isValid(address)": FunctionFragment;
+    "isValid(bytes)": FunctionFragment;
     "owner()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "updateWorker(address)": FunctionFragment;
@@ -39,7 +39,7 @@ export interface ValidatorInterface extends utils.Interface {
       | "worker"
   ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "isValid", values: [string]): string;
+  encodeFunctionData(functionFragment: "isValid", values: [BytesLike]): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
@@ -94,7 +94,7 @@ export interface Validator extends BaseContract {
 
   functions: {
     isValid(
-      sender: string,
+      params: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -114,7 +114,7 @@ export interface Validator extends BaseContract {
   };
 
   isValid(
-    sender: string,
+    params: BytesLike,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -133,7 +133,7 @@ export interface Validator extends BaseContract {
   worker(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
-    isValid(sender: string, overrides?: CallOverrides): Promise<boolean>;
+    isValid(params: BytesLike, overrides?: CallOverrides): Promise<boolean>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
@@ -151,7 +151,7 @@ export interface Validator extends BaseContract {
 
   estimateGas: {
     isValid(
-      sender: string,
+      params: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -172,7 +172,7 @@ export interface Validator extends BaseContract {
 
   populateTransaction: {
     isValid(
-      sender: string,
+      params: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

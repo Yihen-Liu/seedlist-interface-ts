@@ -74,7 +74,7 @@ export interface ITreasury extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    mint(receiver: string, overrides?: CallOverrides): Promise<boolean>;
+    mint(receiver: string, overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   filters: {};

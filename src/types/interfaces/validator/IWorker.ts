@@ -23,12 +23,12 @@ import type {
 
 export interface IWorkerInterface extends utils.Interface {
   functions: {
-    "run(address)": FunctionFragment;
+    "run(bytes)": FunctionFragment;
   };
 
   getFunction(nameOrSignatureOrTopic: "run"): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "run", values: [string]): string;
+  encodeFunctionData(functionFragment: "run", values: [BytesLike]): string;
 
   decodeFunctionResult(functionFragment: "run", data: BytesLike): Result;
 
@@ -63,32 +63,32 @@ export interface IWorker extends BaseContract {
 
   functions: {
     run(
-      user: string,
+      params: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
   run(
-    user: string,
+    params: BytesLike,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    run(user: string, overrides?: CallOverrides): Promise<boolean>;
+    run(params: BytesLike, overrides?: CallOverrides): Promise<boolean>;
   };
 
   filters: {};
 
   estimateGas: {
     run(
-      user: string,
+      params: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     run(
-      user: string,
+      params: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };

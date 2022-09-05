@@ -36,8 +36,8 @@ export interface CalleeNameInterface extends utils.Interface {
     "QUERY_PRIVATE_VAULT_ADDRESS_PERMIT()": FunctionFragment;
     "SAVE_WITHOUT_MINTING_PERMIT()": FunctionFragment;
     "SAVE_WITHOUT_MINT_PERMIT()": FunctionFragment;
-    "SAVE_WITH_MINTING_PERMIT()": FunctionFragment;
     "TOTAL_SAVED_ITEMS_PERMIT()": FunctionFragment;
+    "UPDATE_VALIDATOR_PERMIT()": FunctionFragment;
   };
 
   getFunction(
@@ -57,8 +57,8 @@ export interface CalleeNameInterface extends utils.Interface {
       | "QUERY_PRIVATE_VAULT_ADDRESS_PERMIT"
       | "SAVE_WITHOUT_MINTING_PERMIT"
       | "SAVE_WITHOUT_MINT_PERMIT"
-      | "SAVE_WITH_MINTING_PERMIT"
       | "TOTAL_SAVED_ITEMS_PERMIT"
+      | "UPDATE_VALIDATOR_PERMIT"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -122,11 +122,11 @@ export interface CalleeNameInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "SAVE_WITH_MINTING_PERMIT",
+    functionFragment: "TOTAL_SAVED_ITEMS_PERMIT",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "TOTAL_SAVED_ITEMS_PERMIT",
+    functionFragment: "UPDATE_VALIDATOR_PERMIT",
     values?: undefined
   ): string;
 
@@ -191,11 +191,11 @@ export interface CalleeNameInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "SAVE_WITH_MINTING_PERMIT",
+    functionFragment: "TOTAL_SAVED_ITEMS_PERMIT",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "TOTAL_SAVED_ITEMS_PERMIT",
+    functionFragment: "UPDATE_VALIDATOR_PERMIT",
     data: BytesLike
   ): Result;
 
@@ -265,9 +265,9 @@ export interface CalleeName extends BaseContract {
 
     SAVE_WITHOUT_MINT_PERMIT(overrides?: CallOverrides): Promise<[string]>;
 
-    SAVE_WITH_MINTING_PERMIT(overrides?: CallOverrides): Promise<[string]>;
-
     TOTAL_SAVED_ITEMS_PERMIT(overrides?: CallOverrides): Promise<[string]>;
+
+    UPDATE_VALIDATOR_PERMIT(overrides?: CallOverrides): Promise<[string]>;
   };
 
   GET_LABEL_EXIST_PERMIT(overrides?: CallOverrides): Promise<string>;
@@ -302,9 +302,9 @@ export interface CalleeName extends BaseContract {
 
   SAVE_WITHOUT_MINT_PERMIT(overrides?: CallOverrides): Promise<string>;
 
-  SAVE_WITH_MINTING_PERMIT(overrides?: CallOverrides): Promise<string>;
-
   TOTAL_SAVED_ITEMS_PERMIT(overrides?: CallOverrides): Promise<string>;
+
+  UPDATE_VALIDATOR_PERMIT(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
     GET_LABEL_EXIST_PERMIT(overrides?: CallOverrides): Promise<string>;
@@ -341,9 +341,9 @@ export interface CalleeName extends BaseContract {
 
     SAVE_WITHOUT_MINT_PERMIT(overrides?: CallOverrides): Promise<string>;
 
-    SAVE_WITH_MINTING_PERMIT(overrides?: CallOverrides): Promise<string>;
-
     TOTAL_SAVED_ITEMS_PERMIT(overrides?: CallOverrides): Promise<string>;
+
+    UPDATE_VALIDATOR_PERMIT(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {};
@@ -385,9 +385,9 @@ export interface CalleeName extends BaseContract {
 
     SAVE_WITHOUT_MINT_PERMIT(overrides?: CallOverrides): Promise<BigNumber>;
 
-    SAVE_WITH_MINTING_PERMIT(overrides?: CallOverrides): Promise<BigNumber>;
-
     TOTAL_SAVED_ITEMS_PERMIT(overrides?: CallOverrides): Promise<BigNumber>;
+
+    UPDATE_VALIDATOR_PERMIT(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -443,11 +443,11 @@ export interface CalleeName extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    SAVE_WITH_MINTING_PERMIT(
+    TOTAL_SAVED_ITEMS_PERMIT(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    TOTAL_SAVED_ITEMS_PERMIT(
+    UPDATE_VALIDATOR_PERMIT(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

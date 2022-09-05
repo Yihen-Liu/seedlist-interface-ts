@@ -23,12 +23,12 @@ import type {
 
 export interface IValidatorInterface extends utils.Interface {
   functions: {
-    "isValid(address)": FunctionFragment;
+    "isValid(bytes)": FunctionFragment;
   };
 
   getFunction(nameOrSignatureOrTopic: "isValid"): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "isValid", values: [string]): string;
+  encodeFunctionData(functionFragment: "isValid", values: [BytesLike]): string;
 
   decodeFunctionResult(functionFragment: "isValid", data: BytesLike): Result;
 
@@ -63,32 +63,32 @@ export interface IValidator extends BaseContract {
 
   functions: {
     isValid(
-      sender: string,
+      params: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
   isValid(
-    sender: string,
+    params: BytesLike,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    isValid(sender: string, overrides?: CallOverrides): Promise<boolean>;
+    isValid(params: BytesLike, overrides?: CallOverrides): Promise<boolean>;
   };
 
   filters: {};
 
   estimateGas: {
     isValid(
-      sender: string,
+      params: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     isValid(
-      sender: string,
+      params: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };

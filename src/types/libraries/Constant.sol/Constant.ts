@@ -29,7 +29,7 @@ export interface ConstantInterface extends utils.Interface {
     "PRIVATE_LABEL_EXIST_PERMIT_TYPE_HASH()": FunctionFragment;
     "PRIVATE_LABEL_NAME_PERMIT_TYPE_HASH()": FunctionFragment;
     "PRIVATE_SAVE_WITHOUT_MINTING_PERMIT_TYPE_HASH()": FunctionFragment;
-    "PRIVATE_SAVE_WITH_MINTING_PERMIT_TYPE_HASH()": FunctionFragment;
+    "PRIVATE_UPDATE_VALIDATOR_PERMIT_TYPE_HASH()": FunctionFragment;
     "VAULTHUB_DOMAIN_NAME()": FunctionFragment;
     "VAULTHUB_DOMAIN_TYPE_HASH()": FunctionFragment;
     "VAULTHUB_DOMAIN_VERSION()": FunctionFragment;
@@ -56,7 +56,7 @@ export interface ConstantInterface extends utils.Interface {
       | "PRIVATE_LABEL_EXIST_PERMIT_TYPE_HASH"
       | "PRIVATE_LABEL_NAME_PERMIT_TYPE_HASH"
       | "PRIVATE_SAVE_WITHOUT_MINTING_PERMIT_TYPE_HASH"
-      | "PRIVATE_SAVE_WITH_MINTING_PERMIT_TYPE_HASH"
+      | "PRIVATE_UPDATE_VALIDATOR_PERMIT_TYPE_HASH"
       | "VAULTHUB_DOMAIN_NAME"
       | "VAULTHUB_DOMAIN_TYPE_HASH"
       | "VAULTHUB_DOMAIN_VERSION"
@@ -106,7 +106,7 @@ export interface ConstantInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "PRIVATE_SAVE_WITH_MINTING_PERMIT_TYPE_HASH",
+    functionFragment: "PRIVATE_UPDATE_VALIDATOR_PERMIT_TYPE_HASH",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -199,7 +199,7 @@ export interface ConstantInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "PRIVATE_SAVE_WITH_MINTING_PERMIT_TYPE_HASH",
+    functionFragment: "PRIVATE_UPDATE_VALIDATOR_PERMIT_TYPE_HASH",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -315,7 +315,7 @@ export interface Constant extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
-    PRIVATE_SAVE_WITH_MINTING_PERMIT_TYPE_HASH(
+    PRIVATE_UPDATE_VALIDATOR_PERMIT_TYPE_HASH(
       overrides?: CallOverrides
     ): Promise<[string]>;
 
@@ -396,7 +396,7 @@ export interface Constant extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  PRIVATE_SAVE_WITH_MINTING_PERMIT_TYPE_HASH(
+  PRIVATE_UPDATE_VALIDATOR_PERMIT_TYPE_HASH(
     overrides?: CallOverrides
   ): Promise<string>;
 
@@ -473,7 +473,7 @@ export interface Constant extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    PRIVATE_SAVE_WITH_MINTING_PERMIT_TYPE_HASH(
+    PRIVATE_UPDATE_VALIDATOR_PERMIT_TYPE_HASH(
       overrides?: CallOverrides
     ): Promise<string>;
 
@@ -553,7 +553,7 @@ export interface Constant extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    PRIVATE_SAVE_WITH_MINTING_PERMIT_TYPE_HASH(
+    PRIVATE_UPDATE_VALIDATOR_PERMIT_TYPE_HASH(
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -641,7 +641,7 @@ export interface Constant extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    PRIVATE_SAVE_WITH_MINTING_PERMIT_TYPE_HASH(
+    PRIVATE_UPDATE_VALIDATOR_PERMIT_TYPE_HASH(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

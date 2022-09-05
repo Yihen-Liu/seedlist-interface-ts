@@ -36,10 +36,10 @@ export interface PrivateVaultInterface extends utils.Interface {
     "labelNameDirectly(uint64,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "minted()": FunctionFragment;
     "saveWithMinting(string,string,address)": FunctionFragment;
-    "saveWithMintingDirectly(string,string,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "saveWithoutMinting(string,string,address)": FunctionFragment;
-    "saveWithoutMintingDirectly(string,string,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "saveWithoutMintingDirectly(string,string,address,uint256,uint8,bytes32,bytes32,bytes)": FunctionFragment;
     "total()": FunctionFragment;
+    "updateValidator(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
   };
 
   getFunction(
@@ -56,10 +56,10 @@ export interface PrivateVaultInterface extends utils.Interface {
       | "labelNameDirectly"
       | "minted"
       | "saveWithMinting"
-      | "saveWithMintingDirectly"
       | "saveWithoutMinting"
       | "saveWithoutMintingDirectly"
       | "total"
+      | "updateValidator"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -105,18 +105,6 @@ export interface PrivateVaultInterface extends utils.Interface {
     values: [string, string, string]
   ): string;
   encodeFunctionData(
-    functionFragment: "saveWithMintingDirectly",
-    values: [
-      string,
-      string,
-      string,
-      BigNumberish,
-      BigNumberish,
-      BytesLike,
-      BytesLike
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "saveWithoutMinting",
     values: [string, string, string]
   ): string;
@@ -129,10 +117,15 @@ export interface PrivateVaultInterface extends utils.Interface {
       BigNumberish,
       BigNumberish,
       BytesLike,
+      BytesLike,
       BytesLike
     ]
   ): string;
   encodeFunctionData(functionFragment: "total", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "updateValidator",
+    values: [string, BigNumberish, BigNumberish, BytesLike, BytesLike]
+  ): string;
 
   decodeFunctionResult(
     functionFragment: "DOMAIN_SEPARATOR",
@@ -174,10 +167,6 @@ export interface PrivateVaultInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "saveWithMintingDirectly",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "saveWithoutMinting",
     data: BytesLike
   ): Result;
@@ -186,6 +175,10 @@ export interface PrivateVaultInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "total", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "updateValidator",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -286,17 +279,6 @@ export interface PrivateVault extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    saveWithMintingDirectly(
-      data: string,
-      cryptoLabel: string,
-      labelHash: string,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     saveWithoutMinting(
       data: string,
       cryptoLabel: string,
@@ -312,10 +294,20 @@ export interface PrivateVault extends BaseContract {
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
+      params: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     total(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    updateValidator(
+      _privateValidator: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
   };
 
   DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
@@ -381,17 +373,6 @@ export interface PrivateVault extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  saveWithMintingDirectly(
-    data: string,
-    cryptoLabel: string,
-    labelHash: string,
-    deadline: BigNumberish,
-    v: BigNumberish,
-    r: BytesLike,
-    s: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   saveWithoutMinting(
     data: string,
     cryptoLabel: string,
@@ -407,10 +388,20 @@ export interface PrivateVault extends BaseContract {
     v: BigNumberish,
     r: BytesLike,
     s: BytesLike,
+    params: BytesLike,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   total(overrides?: CallOverrides): Promise<BigNumber>;
+
+  updateValidator(
+    _privateValidator: string,
+    deadline: BigNumberish,
+    v: BigNumberish,
+    r: BytesLike,
+    s: BytesLike,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   callStatic: {
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
@@ -479,17 +470,6 @@ export interface PrivateVault extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    saveWithMintingDirectly(
-      data: string,
-      cryptoLabel: string,
-      labelHash: string,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     saveWithoutMinting(
       data: string,
       cryptoLabel: string,
@@ -505,10 +485,20 @@ export interface PrivateVault extends BaseContract {
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
+      params: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
 
     total(overrides?: CallOverrides): Promise<BigNumber>;
+
+    updateValidator(
+      _privateValidator: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {};
@@ -583,17 +573,6 @@ export interface PrivateVault extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    saveWithMintingDirectly(
-      data: string,
-      cryptoLabel: string,
-      labelHash: string,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     saveWithoutMinting(
       data: string,
       cryptoLabel: string,
@@ -609,10 +588,20 @@ export interface PrivateVault extends BaseContract {
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
+      params: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     total(overrides?: CallOverrides): Promise<BigNumber>;
+
+    updateValidator(
+      _privateValidator: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -685,17 +674,6 @@ export interface PrivateVault extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    saveWithMintingDirectly(
-      data: string,
-      cryptoLabel: string,
-      labelHash: string,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
     saveWithoutMinting(
       data: string,
       cryptoLabel: string,
@@ -711,9 +689,19 @@ export interface PrivateVault extends BaseContract {
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
+      params: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     total(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    updateValidator(
+      _privateValidator: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
   };
 }

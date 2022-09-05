@@ -28,8 +28,7 @@ export interface IPrivateVaultHubInterface extends utils.Interface {
     "getPrivateDataByNameDirectly(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "labelIsExistDirectly(address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "labelNameDirectly(uint64,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "saveWithMintingDirectly(string,string,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "saveWithoutMintingDirectly(string,string,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "saveWithoutMintingDirectly(string,string,address,uint256,uint8,bytes32,bytes32,bytes)": FunctionFragment;
   };
 
   getFunction(
@@ -38,7 +37,6 @@ export interface IPrivateVaultHubInterface extends utils.Interface {
       | "getPrivateDataByNameDirectly"
       | "labelIsExistDirectly"
       | "labelNameDirectly"
-      | "saveWithMintingDirectly"
       | "saveWithoutMintingDirectly"
   ): FunctionFragment;
 
@@ -59,18 +57,6 @@ export interface IPrivateVaultHubInterface extends utils.Interface {
     values: [BigNumberish, BigNumberish, BigNumberish, BytesLike, BytesLike]
   ): string;
   encodeFunctionData(
-    functionFragment: "saveWithMintingDirectly",
-    values: [
-      string,
-      string,
-      string,
-      BigNumberish,
-      BigNumberish,
-      BytesLike,
-      BytesLike
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "saveWithoutMintingDirectly",
     values: [
       string,
@@ -78,6 +64,7 @@ export interface IPrivateVaultHubInterface extends utils.Interface {
       string,
       BigNumberish,
       BigNumberish,
+      BytesLike,
       BytesLike,
       BytesLike
     ]
@@ -97,10 +84,6 @@ export interface IPrivateVaultHubInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "labelNameDirectly",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "saveWithMintingDirectly",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -174,17 +157,6 @@ export interface IPrivateVaultHub extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
-    saveWithMintingDirectly(
-      data: string,
-      cryptoLabel: string,
-      labelHash: string,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     saveWithoutMintingDirectly(
       data: string,
       cryptoLabel: string,
@@ -193,6 +165,7 @@ export interface IPrivateVaultHub extends BaseContract {
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
+      params: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
@@ -233,17 +206,6 @@ export interface IPrivateVaultHub extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  saveWithMintingDirectly(
-    data: string,
-    cryptoLabel: string,
-    labelHash: string,
-    deadline: BigNumberish,
-    v: BigNumberish,
-    r: BytesLike,
-    s: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   saveWithoutMintingDirectly(
     data: string,
     cryptoLabel: string,
@@ -252,6 +214,7 @@ export interface IPrivateVaultHub extends BaseContract {
     v: BigNumberish,
     r: BytesLike,
     s: BytesLike,
+    params: BytesLike,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -292,17 +255,6 @@ export interface IPrivateVaultHub extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    saveWithMintingDirectly(
-      data: string,
-      cryptoLabel: string,
-      labelHash: string,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     saveWithoutMintingDirectly(
       data: string,
       cryptoLabel: string,
@@ -311,6 +263,7 @@ export interface IPrivateVaultHub extends BaseContract {
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
+      params: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -354,17 +307,6 @@ export interface IPrivateVaultHub extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    saveWithMintingDirectly(
-      data: string,
-      cryptoLabel: string,
-      labelHash: string,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     saveWithoutMintingDirectly(
       data: string,
       cryptoLabel: string,
@@ -373,6 +315,7 @@ export interface IPrivateVaultHub extends BaseContract {
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
+      params: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
@@ -414,17 +357,6 @@ export interface IPrivateVaultHub extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    saveWithMintingDirectly(
-      data: string,
-      cryptoLabel: string,
-      labelHash: string,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
     saveWithoutMintingDirectly(
       data: string,
       cryptoLabel: string,
@@ -433,6 +365,7 @@ export interface IPrivateVaultHub extends BaseContract {
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
+      params: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };

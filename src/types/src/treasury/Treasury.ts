@@ -27,12 +27,16 @@ export interface TreasuryInterface extends utils.Interface {
     "callable()": FunctionFragment;
     "caller()": FunctionFragment;
     "cycle()": FunctionFragment;
+    "enableHalf()": FunctionFragment;
+    "lastWithdrawAmount()": FunctionFragment;
     "mint(address)": FunctionFragment;
     "owner()": FunctionFragment;
     "seedToken()": FunctionFragment;
     "setCaller(address)": FunctionFragment;
+    "setHalf(bool)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "withdraw(address,address,uint256)": FunctionFragment;
+    "withdrawCnt()": FunctionFragment;
     "withdrawETH(address,uint256)": FunctionFragment;
   };
 
@@ -41,22 +45,35 @@ export interface TreasuryInterface extends utils.Interface {
       | "callable"
       | "caller"
       | "cycle"
+      | "enableHalf"
+      | "lastWithdrawAmount"
       | "mint"
       | "owner"
       | "seedToken"
       | "setCaller"
+      | "setHalf"
       | "transferOwnership"
       | "withdraw"
+      | "withdrawCnt"
       | "withdrawETH"
   ): FunctionFragment;
 
   encodeFunctionData(functionFragment: "callable", values?: undefined): string;
   encodeFunctionData(functionFragment: "caller", values?: undefined): string;
   encodeFunctionData(functionFragment: "cycle", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "enableHalf",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "lastWithdrawAmount",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "mint", values: [string]): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "seedToken", values?: undefined): string;
   encodeFunctionData(functionFragment: "setCaller", values: [string]): string;
+  encodeFunctionData(functionFragment: "setHalf", values: [boolean]): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [string]
@@ -66,6 +83,10 @@ export interface TreasuryInterface extends utils.Interface {
     values: [string, string, BigNumberish]
   ): string;
   encodeFunctionData(
+    functionFragment: "withdrawCnt",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "withdrawETH",
     values: [string, BigNumberish]
   ): string;
@@ -73,15 +94,25 @@ export interface TreasuryInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "callable", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "caller", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "cycle", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "enableHalf", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "lastWithdrawAmount",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "seedToken", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setCaller", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setHalf", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawCnt",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "withdrawETH",
     data: BytesLike
@@ -123,6 +154,10 @@ export interface Treasury extends BaseContract {
 
     cycle(overrides?: CallOverrides): Promise<[number]>;
 
+    enableHalf(overrides?: CallOverrides): Promise<[boolean]>;
+
+    lastWithdrawAmount(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     mint(
       receiver: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -134,6 +169,11 @@ export interface Treasury extends BaseContract {
 
     setCaller(
       _caller: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    setHalf(
+      enable: boolean,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -149,6 +189,8 @@ export interface Treasury extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    withdrawCnt(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     withdrawETH(
       receiver: string,
       amount: BigNumberish,
@@ -161,6 +203,10 @@ export interface Treasury extends BaseContract {
   caller(overrides?: CallOverrides): Promise<string>;
 
   cycle(overrides?: CallOverrides): Promise<number>;
+
+  enableHalf(overrides?: CallOverrides): Promise<boolean>;
+
+  lastWithdrawAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
   mint(
     receiver: string,
@@ -176,6 +222,11 @@ export interface Treasury extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  setHalf(
+    enable: boolean,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   transferOwnership(
     newOwner: string,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -187,6 +238,8 @@ export interface Treasury extends BaseContract {
     amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
+
+  withdrawCnt(overrides?: CallOverrides): Promise<BigNumber>;
 
   withdrawETH(
     receiver: string,
@@ -201,13 +254,19 @@ export interface Treasury extends BaseContract {
 
     cycle(overrides?: CallOverrides): Promise<number>;
 
-    mint(receiver: string, overrides?: CallOverrides): Promise<boolean>;
+    enableHalf(overrides?: CallOverrides): Promise<boolean>;
+
+    lastWithdrawAmount(overrides?: CallOverrides): Promise<BigNumber>;
+
+    mint(receiver: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
     seedToken(overrides?: CallOverrides): Promise<string>;
 
     setCaller(_caller: string, overrides?: CallOverrides): Promise<void>;
+
+    setHalf(enable: boolean, overrides?: CallOverrides): Promise<boolean>;
 
     transferOwnership(
       newOwner: string,
@@ -220,6 +279,8 @@ export interface Treasury extends BaseContract {
       amount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<boolean>;
+
+    withdrawCnt(overrides?: CallOverrides): Promise<BigNumber>;
 
     withdrawETH(
       receiver: string,
@@ -237,6 +298,10 @@ export interface Treasury extends BaseContract {
 
     cycle(overrides?: CallOverrides): Promise<BigNumber>;
 
+    enableHalf(overrides?: CallOverrides): Promise<BigNumber>;
+
+    lastWithdrawAmount(overrides?: CallOverrides): Promise<BigNumber>;
+
     mint(
       receiver: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -251,6 +316,11 @@ export interface Treasury extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    setHalf(
+      enable: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     transferOwnership(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -262,6 +332,8 @@ export interface Treasury extends BaseContract {
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    withdrawCnt(overrides?: CallOverrides): Promise<BigNumber>;
 
     withdrawETH(
       receiver: string,
@@ -277,6 +349,12 @@ export interface Treasury extends BaseContract {
 
     cycle(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    enableHalf(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    lastWithdrawAmount(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     mint(
       receiver: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -291,6 +369,11 @@ export interface Treasury extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    setHalf(
+      enable: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     transferOwnership(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -302,6 +385,8 @@ export interface Treasury extends BaseContract {
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
+
+    withdrawCnt(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     withdrawETH(
       receiver: string,

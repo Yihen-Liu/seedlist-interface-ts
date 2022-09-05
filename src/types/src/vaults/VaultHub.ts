@@ -254,29 +254,33 @@ export interface VaultHubInterface extends utils.Interface {
   ): Result;
 
   events: {
-    "Save(uint8,address)": EventFragment;
-    "VaultInit(uint8,address)": EventFragment;
+    "Save(uint256,uint256)": EventFragment;
+    "SaveMint(uint256,uint256,uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "Save"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "VaultInit"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "SaveMint"): EventFragment;
 }
 
 export interface SaveEventObject {
-  result: number;
-  signer: string;
+  gasPrice: BigNumber;
+  timestamp: BigNumber;
 }
-export type SaveEvent = TypedEvent<[number, string], SaveEventObject>;
+export type SaveEvent = TypedEvent<[BigNumber, BigNumber], SaveEventObject>;
 
 export type SaveEventFilter = TypedEventFilter<SaveEvent>;
 
-export interface VaultInitEventObject {
-  result: number;
-  signer: string;
+export interface SaveMintEventObject {
+  mintSeedAmount: BigNumber;
+  gasPrice: BigNumber;
+  timestamp: BigNumber;
 }
-export type VaultInitEvent = TypedEvent<[number, string], VaultInitEventObject>;
+export type SaveMintEvent = TypedEvent<
+  [BigNumber, BigNumber, BigNumber],
+  SaveMintEventObject
+>;
 
-export type VaultInitEventFilter = TypedEventFilter<VaultInitEvent>;
+export type SaveMintEventFilter = TypedEventFilter<SaveMintEvent>;
 
 export interface VaultHub extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -735,20 +739,25 @@ export interface VaultHub extends BaseContract {
   };
 
   filters: {
-    "Save(uint8,address)"(
-      result?: BigNumberish | null,
-      signer?: string | null
+    "Save(uint256,uint256)"(
+      gasPrice?: BigNumberish | null,
+      timestamp?: BigNumberish | null
     ): SaveEventFilter;
-    Save(result?: BigNumberish | null, signer?: string | null): SaveEventFilter;
+    Save(
+      gasPrice?: BigNumberish | null,
+      timestamp?: BigNumberish | null
+    ): SaveEventFilter;
 
-    "VaultInit(uint8,address)"(
-      result?: BigNumberish | null,
-      signer?: string | null
-    ): VaultInitEventFilter;
-    VaultInit(
-      result?: BigNumberish | null,
-      signer?: string | null
-    ): VaultInitEventFilter;
+    "SaveMint(uint256,uint256,uint256)"(
+      mintSeedAmount?: BigNumberish | null,
+      gasPrice?: BigNumberish | null,
+      timestamp?: BigNumberish | null
+    ): SaveMintEventFilter;
+    SaveMint(
+      mintSeedAmount?: BigNumberish | null,
+      gasPrice?: BigNumberish | null,
+      timestamp?: BigNumberish | null
+    ): SaveMintEventFilter;
   };
 
   estimateGas: {

@@ -13,9 +13,9 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "address",
-        name: "user",
-        type: "address",
+        internalType: "bytes",
+        name: "params",
+        type: "bytes",
       },
     ],
     name: "run",

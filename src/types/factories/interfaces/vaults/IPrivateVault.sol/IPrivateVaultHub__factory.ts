@@ -203,48 +203,10 @@ const _abi = [
         name: "s",
         type: "bytes32",
       },
-    ],
-    name: "saveWithMintingDirectly",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
       {
-        internalType: "string",
-        name: "data",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "cryptoLabel",
-        type: "string",
-      },
-      {
-        internalType: "address",
-        name: "labelHash",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "deadline",
-        type: "uint256",
-      },
-      {
-        internalType: "uint8",
-        name: "v",
-        type: "uint8",
-      },
-      {
-        internalType: "bytes32",
-        name: "r",
-        type: "bytes32",
-      },
-      {
-        internalType: "bytes32",
-        name: "s",
-        type: "bytes32",
+        internalType: "bytes",
+        name: "params",
+        type: "bytes",
       },
     ],
     name: "saveWithoutMintingDirectly",

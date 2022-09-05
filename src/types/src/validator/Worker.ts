@@ -21,12 +21,12 @@ import type {
 
 export interface WorkerInterface extends utils.Interface {
   functions: {
-    "run(address)": FunctionFragment;
+    "run(bytes)": FunctionFragment;
   };
 
   getFunction(nameOrSignatureOrTopic: "run"): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "run", values: [string]): string;
+  encodeFunctionData(functionFragment: "run", values: [BytesLike]): string;
 
   decodeFunctionResult(functionFragment: "run", data: BytesLike): Result;
 
@@ -60,22 +60,25 @@ export interface Worker extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    run(user: string, overrides?: CallOverrides): Promise<[boolean]>;
+    run(params: BytesLike, overrides?: CallOverrides): Promise<[boolean]>;
   };
 
-  run(user: string, overrides?: CallOverrides): Promise<boolean>;
+  run(params: BytesLike, overrides?: CallOverrides): Promise<boolean>;
 
   callStatic: {
-    run(user: string, overrides?: CallOverrides): Promise<boolean>;
+    run(params: BytesLike, overrides?: CallOverrides): Promise<boolean>;
   };
 
   filters: {};
 
   estimateGas: {
-    run(user: string, overrides?: CallOverrides): Promise<BigNumber>;
+    run(params: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    run(user: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    run(
+      params: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
   };
 }

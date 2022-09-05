@@ -1,5 +1,5 @@
 // Get From Contract Interface By RPC
-export const DOMAIN_SEPARATOR = "0xeff7361eb9be999d71f09b696682b429fa50c59d1d2bdca4c9a525ee40488dd2";
+export const DOMAIN_SEPARATOR = "0xc48ce4b407ece9dfccaa07ebe2e50735f5bf4bb2bc86375b606898bc76fbfe64";
 
 // keccak256('savePrivateDataWithMinting(address addr, string memory data, string memory cryptoLabel, address labelHash,
 // address receiver, uint256 deadline)');
@@ -52,9 +52,9 @@ export const  GET_PRIVATE_DATA_BY_NAME_PERMIT_TYPE_HASH =
 export const  GET_PRIVATE_DATA_BY_INDEX_PERMIT_TYPE_HASH =
 	"0x17558919af4007c4fb94572ba8e807922ff7db103814e127ad21ef481ca35d98";
 
-//keccak256('saveWithoutMintingDirectly(string memory data, string memory cryptoLabel, address labelHash, uint256 deadline)')
+//keccak256('saveWithoutMintingDirectly(string memory data, string memory cryptoLabel, address labelHash, uint256 deadline, bytes memory params)')
 export const  SAVE_WITHOUT_MINTING_PERMIT_TYPE_HASH =
-	"0x6681e086fd2042ee88d7eb0f54dbe27796a216fb36f4e834a75b15d90b082727";
+	"0x0146fc630af018bd01051793691b73d73b34e7977f68c1f081ed623cd3c2ab44";
 
 //keccak256('saveWithMintingDirectly(string memory data, string memory cryptoLabel, address labelHash, uint256 deadline)')
 export const SAVE_WITH_MINTING_PERMIT_TYPE_HASH =
@@ -63,5 +63,7 @@ export const SAVE_WITH_MINTING_PERMIT_TYPE_HASH =
 //keccak256('labelIsExistDirectly(address labelHash, uint256 deadline)')
 export const LABEL_EXIST_DIRECTLY_PERMIT_TYPE_HASH = "0x5e9a0e1424c7f33522faa862eafa09a676e96246da16c8b58d5803ba8010584f";
 
+//keccak256('updateValidator(address _privateValidator, uint256 deadline)')
+const  UPDATE_VALIDATOR_PERMIT_TYPE_HASH = "0x79c473821b1882439e653292df5add05615ab1a78b695620f6cf37ab0fb6dbbc";
 
 export const SAVING_PRIVATE_DATA_FEE = 150000000000000;

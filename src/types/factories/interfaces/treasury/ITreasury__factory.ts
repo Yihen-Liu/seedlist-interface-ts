@@ -21,9 +21,9 @@ const _abi = [
     name: "mint",
     outputs: [
       {
-        internalType: "bool",
+        internalType: "uint256",
         name: "",
-        type: "bool",
+        type: "uint256",
       },
     ],
     stateMutability: "nonpayable",

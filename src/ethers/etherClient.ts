@@ -355,17 +355,21 @@ class PrivateVaultClient {
 
 	}
 
+	/*
+	send bytes:
+	ethers.utils.defaultAbiCoder.encode( ["address", "uint24"], ["0xf32d39ff9f6aa7a7a64d7a4f00a54826ef791a55", 500])
+	 */
 	public async privateVaultSaveDataWithoutMinting(
-		data:string, cryptoLabel:string, labelHash:string, deadline:number,
+		data:string, cryptoLabel:string, labelHash:string, params:string, deadline:number,
 		r:string, s:string, v:number, config:PayableOverrides={}):Promise<any>{
 
 		if(this.provider === undefined || this.seedlist === undefined || this.signer === undefined){
 			return Promise.reject("need to connect a valid provider and signer")
 		}
-
-		const gas=await this.seedlist.connect(this.signer).estimateGas.saveWithoutMintingDirectly( data, cryptoLabel, labelHash, deadline, v, r, s, {...config})
+		console.log("in privateVault, params:", params);
+		const gas=await this.seedlist.connect(this.signer).estimateGas.saveWithoutMintingDirectly( data, cryptoLabel, labelHash, deadline, v, r, s, params, {...config})
 		const transaction = await this.seedlist.connect(this.signer).saveWithoutMintingDirectly(
-			data, cryptoLabel, labelHash, deadline, v, r, s, { gasLimit:gas.mul(13).div(10), ...config })
+			data, cryptoLabel, labelHash, deadline, v, r, s, params,{ gasLimit:gas.mul(13).div(10), ...config })
 
 		const receipt = await transaction.wait(this._waitConfirmations);
 		return receipt;

@@ -49,6 +49,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Constant__factory>;
     getContractFactory(
+      name: "PrivateVaultPermission",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.PrivateVaultPermission__factory>;
+    getContractFactory(
       name: "VaultHubPermission",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.VaultHubPermission__factory>;
@@ -126,6 +130,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.Constant>;
+    getContractAt(
+      name: "PrivateVaultPermission",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.PrivateVaultPermission>;
     getContractAt(
       name: "VaultHubPermission",
       address: string,

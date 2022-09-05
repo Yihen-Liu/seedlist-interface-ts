@@ -13,9 +13,9 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "address",
-        name: "sender",
-        type: "address",
+        internalType: "bytes",
+        name: "params",
+        type: "bytes",
       },
     ],
     name: "isValid",
