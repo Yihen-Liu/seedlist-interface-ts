@@ -81,7 +81,7 @@ const WalletButton:React.FC<IBaseProps> = (props:IBaseProps)=>{
 				return;
 			}
 
-			let encryptor = new CryptoMachine();
+			let encryptor = new CryptoMachine(vaultName, password);
 			let params = await encryptor.calculateVaultHasRegisterParams(vaultName, password)
 			let res = await etherClient.client?.vaultHasRegister(params.address, params.deadline, params.signature.r, params.signature.s, params.signature.v);
 			if(res === false){

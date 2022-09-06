@@ -122,7 +122,6 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 
 	const doSubmit = useCallback(async ()=>{
 		setSaveBtnIsLoading(true);
-		let encryptor = new CryptoMachine();
 		if(vaultName===undefined || password===undefined || savedContent === undefined || labelName===undefined ||
 			vaultName==="" || password === "" || savedContent === "" || labelName === ""){
 			if(lang==='zh-CN'){
@@ -143,7 +142,8 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			setSaveBtnIsLoading(false);
 			return;
 		}
-
+		let encryptor = new CryptoMachine(vaultName, password);
+		await encryptor.generateWallet(vaultName, password);
 		let params = await encryptor.calculateVaultHasRegisterParams(vaultName, password)
 		let res = await etherClient.client?.vaultHasRegister(params.address, params.deadline, params.signature.r, params.signature.s, params.signature.v);
 		if(res === false){

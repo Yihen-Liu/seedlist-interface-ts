@@ -68,7 +68,6 @@ const PasswordInQuery:React.FC<IBaseProps> = (props:IBaseProps)=>{
 
 	const doSubmit = useCallback(async ()=>{
 		setIsLoading(true);
-		let encryptor = new CryptoMachine();
 		if(vaultName===undefined || password===undefined) {
 			warningToast("Undefined content")
 			setIsLoading(false);
@@ -82,6 +81,9 @@ const PasswordInQuery:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			warningToast("connect signer error in signup")
 			return
 		}
+
+		let encryptor = new CryptoMachine(vaultName, password);
+		await encryptor.generateWallet(vaultName, password);
 
 		let params = await encryptor.calculateVaultHasRegisterParams(vaultName, password);
 		let res = await etherClient.client?.vaultHasRegister(params.address, params.deadline, params.signature.r, params.signature.s, params.signature.v);
@@ -115,7 +117,6 @@ const PasswordInQuery:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	},[vaultName, password])
 
 	const doDecrypto = useCallback(async (label:string, index:number)=>{
-		let encryptor = new CryptoMachine();
 		setIsLoading(true);
 		if(vaultName===undefined || password===undefined) {
 			warningToast("Undefined content")
@@ -123,6 +124,7 @@ const PasswordInQuery:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			return
 		}
 
+		let encryptor = new CryptoMachine(vaultName, password);
 		etherClient.connectSeedlistContract()
 		etherClient.connectSigner()
 		if(!etherClient.client){
@@ -130,6 +132,9 @@ const PasswordInQuery:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			setIsLoading(false);
 			return
 		}
+
+		await encryptor.generateWallet(vaultName, password);
+
 		let labelHash = await encryptor.labelHash(label);
 		let queryByNameParams = await encryptor.calculateQueryByNameParams(vaultName, password, labelHash);
 		let content = await etherClient.client?.queryDataByLabelName(queryByNameParams.address, labelHash, queryByNameParams.deadline,

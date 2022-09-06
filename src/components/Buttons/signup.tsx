@@ -23,7 +23,6 @@ const SignupButton:React.FC<IBaseProps> = (props:IBaseProps) => {
 
 	const signup = useCallback(async ()=>{
 		setSignupIsLoading(true);
-		let encryptor = new CryptoMachine();
 		if(spaceName===undefined || password===undefined || spaceName === "" || password===""){
 			if(lang === "en-US"){
 				warningToast("Vault name and password is EMPTY")
@@ -48,6 +47,8 @@ const SignupButton:React.FC<IBaseProps> = (props:IBaseProps) => {
 			return
 
 		}
+
+		let encryptor = new CryptoMachine(spaceName, password);
 		etherClient.connectSeedlistContract()
 		etherClient.connectSigner()
 		if(!etherClient.client){
@@ -61,7 +62,7 @@ const SignupButton:React.FC<IBaseProps> = (props:IBaseProps) => {
 			setSignupIsLoading(false);
 			return;
 		}
-
+		await encryptor.generateWallet(spaceName, password);
 		let params = await encryptor.calculateVaultHasRegisterParams(spaceName, password)
 		let res = await etherClient.client?.vaultHasRegister(params.address, params.deadline, params.signature.r, params.signature.s, params.signature.v);
 		if(res === true){
