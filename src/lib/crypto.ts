@@ -26,11 +26,21 @@ import {VaultHubEtherClient} from "../ethers/etherClient";
 const EthCrypto = require('eth-crypto');
 class CryptoMachine {
 	CHARS:string = "1qaz!QAZ2w?sx@WSX.(=]3ec#EDC/)P:4rfv$RF+V5t*IK<9og}b%TGB6OL>yhn^YHN-[d'_7ujm&UJ0p;{M8ik,l|";
-	LABEL_SALT_LEN:number = 32;
+	SALT_LEN:number = 32;
 	CONTENT_PASSWORD_SALT_LEN:number = 32;
+
+	SCRYPT_N:number = 1024; //math.pow(2,10)
+	SCRYPT_r:number = 64;
+	SCRYPT_p:number = 16;
+	SCRYPT_dkLen:number = 128;
 
 	calculateOnceHash(str:string):string{
 		return this.calculateMultiHash(str,1);
+	}
+
+	calculateTwiceHash(str:string):string{
+		let inStr = ethers.utils.ripemd160(ethers.utils.toUtf8Bytes(str))
+		return ethers.utils.sha256(inStr)
 	}
 
 	calculateMultiHash(str:string, n:number):string{
@@ -72,14 +82,12 @@ class CryptoMachine {
 		h1 = ethers.utils.joinSignature(signer2.signDigest(hashMessage(h1+h2)))
 
 		let saltStr = "";
-		for(let i=0;i<this.LABEL_SALT_LEN; i++){
-			let saltChar = this.getSaltChar(ethers.utils.sha256(ethers.utils.toUtf8Bytes(h1+h2+saltStr)));
+		for(let i=0;i<this.SALT_LEN; i++){
+			let saltChar = this.getSaltChar(ethers.utils.ripemd160(ethers.utils.toUtf8Bytes(h1+h2+saltStr)));
 			saltStr += saltChar;
 		}
-
-		let scryptRes = syncScrypt(ethers.utils.toUtf8Bytes(h1+h2), ethers.utils.toUtf8Bytes(saltStr), 32,64,16,64);
-
-		return ethers.utils.sha256(scryptRes);
+		let scryptRes = syncScrypt(ethers.utils.toUtf8Bytes(h1+h2), ethers.utils.toUtf8Bytes(saltStr), this.SCRYPT_N,this.SCRYPT_r,this.SCRYPT_p,this.SCRYPT_dkLen);
+		return ethers.utils.sha512(scryptRes);
 	}
 
 	async multiEncryptMessage(message:string, password:string):Promise<string>{
@@ -96,6 +104,9 @@ class CryptoMachine {
 		return CryptoJS.AES.decrypt(decryptMsg,password+pair.privKey).toString(CryptoJS.enc.Utf8)
 	}
 
+	//CryptoJS supports AES-128, AES-192, and AES-256.
+	// It will pick the variant by the size of the key you pass in.
+	// If you use a passphrase, then it will generate a 256-bit key.
 	encryptMessage(message:string, password:string):string{
 		return CryptoJS.AES.encrypt(message, password).toString();
 	}
@@ -115,24 +126,24 @@ class CryptoMachine {
 		let vPwd = this.calculateOnceHash(pwd);
 		let password = this.calculateMultiHash(vHash+vPwd, 2);
 		let saltStr = "";
-		for(let i=0;i<this.LABEL_SALT_LEN; i++){
-			let saltChar = this.getSaltChar(ethers.utils.sha256(ethers.utils.toUtf8Bytes(password+saltStr)));
+		for(let i=0;i<this.SALT_LEN; i++){
+			let saltChar = this.getSaltChar(ethers.utils.ripemd160(ethers.utils.toUtf8Bytes(password+saltStr)));
 			saltStr += saltChar;
 		}
 
-		let s1 = syncScrypt(ethers.utils.toUtf8Bytes(password), ethers.utils.toUtf8Bytes(saltStr), 32,64,16,64);
-		return s1.toString();
+		let s1 = syncScrypt(ethers.utils.toUtf8Bytes(password), ethers.utils.toUtf8Bytes(saltStr), this.SCRYPT_N,this.SCRYPT_r,this.SCRYPT_p,this.SCRYPT_dkLen);
+		return ethers.utils.sha512(s1);
 	}
 
 	async labelHash(label:string):Promise<string>{
 		let h = this.calculateMultiHash(label, 2);
 		let saltStr = "";
-		for(let i=0;i<this.LABEL_SALT_LEN; i++){
+		for(let i=0;i<this.SALT_LEN; i++){
 			let saltChar = this.getSaltChar(ethers.utils.sha256(ethers.utils.toUtf8Bytes(h+saltStr)));
 			saltStr += saltChar;
 		}
 
-		let s1 = syncScrypt(ethers.utils.toUtf8Bytes(h), ethers.utils.toUtf8Bytes(saltStr), 32,64,16,64);
+		let s1 = syncScrypt(ethers.utils.toUtf8Bytes(h), ethers.utils.toUtf8Bytes(saltStr), this.SCRYPT_N,this.SCRYPT_r,this.SCRYPT_p,this.SCRYPT_dkLen);
 		let wallet =  new ethers.Wallet(this.calculateOnceHash(s1.toString()));
 		return await wallet.getAddress()
 	}
@@ -173,13 +184,13 @@ class CryptoMachine {
 		let vWheel = this.calculateOnceHash(wheelLabels);
 		let password = this.calculateMultiHash(vHash+vPwd+vWheel, 2);
 		let saltStr = "";
-		for(let i=0;i<this.LABEL_SALT_LEN; i++){
-			let saltChar = this.getSaltChar(ethers.utils.sha256(ethers.utils.toUtf8Bytes(password+saltStr)));
+		for(let i=0;i<this.SALT_LEN; i++){
+			let saltChar = this.getSaltChar(ethers.utils.ripemd160(ethers.utils.toUtf8Bytes(password+saltStr)));
 			saltStr += saltChar;
 		}
 
-		let s1 = syncScrypt(ethers.utils.toUtf8Bytes(password), ethers.utils.toUtf8Bytes(saltStr), 32,64,16,64);
-		return s1.toString();
+		let s1 = syncScrypt(ethers.utils.toUtf8Bytes(password), ethers.utils.toUtf8Bytes(saltStr), this.SCRYPT_N,this.SCRYPT_r,this.SCRYPT_p,this.SCRYPT_dkLen);
+		return ethers.utils.sha512(s1);
 
 	}
 
@@ -189,49 +200,45 @@ class CryptoMachine {
 	}
 
 	getContentPassword(vaultName:string, password:string, label:string):string {
-		let h1 = this.calculateMultiHash(vaultName, 2);
-		let h2 = this.calculateMultiHash(password, 2);
-		let h3 = this.calculateMultiHash(label, 2);
-
+		let h1 = this.calculateTwiceHash(vaultName);
+		let h2 = this.calculateTwiceHash(password);
+		let h3 = this.calculateTwiceHash(label);
 		let pair1 = this.calculatePairsBaseOnSeed(h1+h2);
 		let pair2 = this.calculatePairsBaseOnSeed(h2+h3);
 		let pair3 = this.calculatePairsBaseOnSeed(h3+h1);
 
 		let signer1	= new ethers.utils.SigningKey(pair1.privKey)
-		h1 = ethers.utils.joinSignature(signer1.signDigest(hashMessage(h3+h2)))
+		let s1 = ethers.utils.joinSignature(signer1.signDigest(hashMessage(h3+h2)))
 
 		let signer2	= new ethers.utils.SigningKey(pair2.privKey)
-		h1 = ethers.utils.joinSignature(signer2.signDigest(hashMessage(h1+h3)))
+		let s2 = ethers.utils.joinSignature(signer2.signDigest(hashMessage(h1+h3)))
 
 		let signer3	= new ethers.utils.SigningKey(pair3.privKey)
-		h1 = ethers.utils.joinSignature(signer3.signDigest(hashMessage(h2+h1)))
-
-		let originHash = ethers.utils.sha256(ethers.utils.toUtf8Bytes(h1+h2+h3))
-
+		let s3 = ethers.utils.joinSignature(signer3.signDigest(hashMessage(h2+h1)))
 
 		let saltStr = "";
-		for(let i=0;i<this.LABEL_SALT_LEN; i++){
-			let saltChar = this.getSaltChar(ethers.utils.sha256(ethers.utils.toUtf8Bytes(originHash+saltStr)));
+		for(let i=0;i<this.SALT_LEN; i++){
+			let saltChar = this.getSaltChar(ethers.utils.ripemd160(ethers.utils.toUtf8Bytes(s1+s2+s3+saltStr)));
 			saltStr += saltChar;
 		}
 
-		originHash = syncScrypt(ethers.utils.toUtf8Bytes(originHash), ethers.utils.toUtf8Bytes(saltStr), 32,64,16,64).toString();
-
+		let originHash = syncScrypt(ethers.utils.toUtf8Bytes(s1+s2+s3), ethers.utils.toUtf8Bytes(saltStr), this.SCRYPT_N,this.SCRYPT_r,this.SCRYPT_p,this.SCRYPT_dkLen);
+		let hash512 = ethers.utils.sha512(originHash)
 		for(let i=0;i<this.CONTENT_PASSWORD_SALT_LEN; i++){
-			let saltChar = this.getSaltChar(ethers.utils.sha256(ethers.utils.toUtf8Bytes(originHash)));
-			let onceHash = this.calculateOnceHash(originHash);
+			let saltChar = this.getSaltChar(ethers.utils.ripemd160(ethers.utils.toUtf8Bytes(hash512)));
+			let onceHash = this.calculateOnceHash(hash512);
 			let random = onceHash.substring(0,6)+onceHash.substring(onceHash.length-4);
-			let position = parseInt(random, 16)%originHash.length;
-			originHash = originHash.substr(0, position)+ saltChar + originHash.substr(position, originHash.length-position);
+			let position = parseInt(random, 16)%hash512.length;
+			hash512 = hash512.substr(0, position)+ saltChar + hash512.substr(position, hash512.length-position);
 		}
 
-		return originHash;
+		return hash512;
 	}
 
 	//////////////////////////////////
 	calculateMainPairs(vaultName:string, password:string) {
 		let seed = this.calculateValidSeed(vaultName, password);
-		return this.calculatePairsBaseOnSeed(this.calculateOnceHash(seed));
+		return this.calculatePairsBaseOnSeed(seed);
 	}
 
 	async calculateVaultHasRegisterParams(vaultName:string, password:string){
