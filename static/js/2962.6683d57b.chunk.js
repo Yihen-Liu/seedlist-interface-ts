@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkseedlist_interface_ts=self.webpackChunkseedlist_interface_ts||[]).push([[2962],{72962:function(e,s,t){e.exports=t.p+"static/media/da-DK.a580d06e39f7c1913bdd.po"}}]);

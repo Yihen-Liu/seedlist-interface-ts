@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkseedlist_interface_ts=self.webpackChunkseedlist_interface_ts||[]).push([[8281],{78281:function(e,s,t){e.exports=t.p+"static/media/he-IL.1c3096ae1ecf9006ccf3.po"}}]);

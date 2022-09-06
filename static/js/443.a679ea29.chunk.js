@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkseedlist_interface_ts=self.webpackChunkseedlist_interface_ts||[]).push([[443],{30443:function(e,s,t){e.exports=t.p+"static/media/ko-KR.8ad153e0bd46340fa62f.po"}}]);

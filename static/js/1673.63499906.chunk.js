@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkseedlist_interface_ts=self.webpackChunkseedlist_interface_ts||[]).push([[1673],{1673:function(e,s,t){e.exports=t.p+"static/media/pseudo.6cfe22ec2720ec98c1b0.po"}}]);

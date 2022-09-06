@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkseedlist_interface_ts=self.webpackChunkseedlist_interface_ts||[]).push([[5469],{85469:function(e,s,t){e.exports=t.p+"static/media/id-ID.470f0632be35ba7c88ad.po"}}]);

@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkseedlist_interface_ts=self.webpackChunkseedlist_interface_ts||[]).push([[5551],{5551:function(e,s,t){e.exports=t.p+"static/media/el-GR.95384f1108afd1940a07.po"}}]);

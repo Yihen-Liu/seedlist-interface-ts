@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkseedlist_interface_ts=self.webpackChunkseedlist_interface_ts||[]).push([[7397],{97397:function(e,s,t){e.exports=t.p+"static/media/vi-VN.fd01b287b5321b3e0c88.po"}}]);
