@@ -228,6 +228,10 @@ msgstr "Switch"
 #~ msgstr "Switch to"
 
 #: src/components/Dialog/PasswordInSave.tsx
+msgid "This is an operation for advanced users, if you want to use it, please contact the developer:"
+msgstr "This is an operation for advanced users, if you want to use it, please contact the developer:"
+
+#: src/components/Dialog/PasswordInSave.tsx
 msgid "Token Address:"
 msgstr "Token Address:"
 

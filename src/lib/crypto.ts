@@ -35,21 +35,12 @@ class CryptoMachine {
 	SCRYPT_dkLen:number = 128;
 	Wallet: ethers.Wallet;
 	mainAddress: string ="";
-/*
-	private Wallet: Wallet | undefined ;
-	private mainAddress:string ="";
-*/
+
 	constructor(vaultName:string, password:string) {
 		let pairs = this.calculateMainPairs(vaultName, password);
 		this.Wallet = new ethers.Wallet(pairs.privKey);
 	}
 	async generateWallet(vaultName:string, password:string){
-
-/*
-		let pairs = this.calculateMainPairs(vaultName, password);
-
-		this.Wallet = new ethers.Wallet(pairs.privKey);
-*/
 		this.mainAddress= await this.Wallet.getAddress();
 	}
 

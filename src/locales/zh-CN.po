@@ -204,6 +204,10 @@ msgid "Switch"
 msgstr "切换"
 
 #: src/components/Dialog/PasswordInSave.tsx
+msgid "This is an operation for advanced users, if you want to use it, please contact the developer:"
+msgstr "这是一个面向高级用户的操作，如果您想使用它，请联系开发者:"
+
+#: src/components/Dialog/PasswordInSave.tsx
 msgid "Token Address:"
 msgstr "通证地址:"
 

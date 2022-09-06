@@ -30,6 +30,7 @@ import {CryptoMachine} from "../../lib/crypto";
 import {etherClient, PrivateVaultEtherClient} from "../../ethers/etherClient";
 import {useSuccessToast, useWarningToast} from "../../hooks/useToast";
 import {SAVING_PRIVATE_DATA_FEE} from "../../constants/contract";
+import {InfoIcon} from "@chakra-ui/icons";
 
 const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const [isOpen, setOpen] = useState<boolean>(false)
@@ -353,6 +354,21 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 								{tokenReceiverAddress}
 							</Box>
 						</Stack>
+					}
+
+					{ model === "hidden" &&
+					<Stack spacing='30px' marginY='20px'>
+						<Box>
+							<Text color="white">
+								<InfoIcon color='red.800' marginEnd="8px"/>
+								<Trans> This is an operation for advanced users,
+									if you want to use it, please contact the developer:</Trans> ebbe52e5@gmail.com
+							</Text>
+
+							<Text color="white">
+							</Text>
+						</Box>
+					</Stack>
 					}
 				</DrawerBody>
 
