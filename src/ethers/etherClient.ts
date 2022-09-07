@@ -92,10 +92,10 @@ class SeedlistClient {
 	private seedlist: any | undefined;
 	private provider: Provider | undefined;
 	private signer: Signer | undefined;
-	private _waitConfirmations = 5;
+	private _waitConfirmations = 3;
 
 	constructor() {
-		this._waitConfirmations = 5;
+		this._waitConfirmations = 3;
 	}
 
 	public connectProvider(address: string, provider: Provider): SeedlistClient {
@@ -304,10 +304,10 @@ class PrivateVaultClient {
 	private seedlist: any | undefined;
 	private provider: Provider | undefined;
 	private signer: Signer | undefined;
-	private _waitConfirmations = 5;
+	private _waitConfirmations = 3;
 
 	constructor() {
-		this._waitConfirmations = 5;
+		this._waitConfirmations = 3;
 	}
 
 	public connectProvider(address: string, provider: Provider): PrivateVaultClient {
