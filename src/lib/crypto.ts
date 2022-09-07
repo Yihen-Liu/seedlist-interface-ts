@@ -102,7 +102,7 @@ class CryptoMachine {
 
 	async multiEncryptMessage(message:string, password:string):Promise<string>{
 		let pair = this.calculatePairsBaseOnSeed(password)
-		let innerCryptoMsg =  CryptoJS.AES.encrypt(message, password+pair.privKey).toString();
+		let innerCryptoMsg =  CryptoJS.AES.encrypt(message, password+ethers.utils.sha512(pair.privKey)).toString();
 		const publicKey = EthCrypto.publicKeyByPrivateKey(pair.privKey);
 		let encryptMsg = await EthCrypto.encryptWithPublicKey(publicKey, innerCryptoMsg);
 		return EthCrypto.cipher.stringify(encryptMsg);
@@ -111,7 +111,7 @@ class CryptoMachine {
 	async  multiDecryptMessage(message:string, password:string):Promise<string>{
 		let pair = this.calculatePairsBaseOnSeed(password)
 		let decryptMsg = await EthCrypto.decryptWithPrivateKey(pair.privKey, EthCrypto.cipher.parse(message))
-		return CryptoJS.AES.decrypt(decryptMsg,password+pair.privKey).toString(CryptoJS.enc.Utf8)
+		return CryptoJS.AES.decrypt(decryptMsg,password+ethers.utils.sha512(pair.privKey)).toString(CryptoJS.enc.Utf8)
 	}
 
 	//CryptoJS supports AES-128, AES-192, and AES-256.
