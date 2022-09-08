@@ -5,7 +5,7 @@ import {IBaseProps} from "../../interfaces/props";
 import {useSelector} from "react-redux";
 import {StateType} from "../../reducers/state";
 import {WarningIcon} from "@chakra-ui/icons";
-import {CryptoMachine} from "../../lib/crypto";
+import {CryptoMachine2022} from "../../lib/crypto";
 import {useSuccessToast, useWarningToast} from "../../hooks/useToast";
 import {etherClient} from "../../ethers/etherClient";
 import {useRecoilState} from "recoil";
@@ -48,7 +48,7 @@ const SignupButton:React.FC<IBaseProps> = (props:IBaseProps) => {
 
 		}
 
-		let encryptor = new CryptoMachine(spaceName, password);
+		let encryptor = new CryptoMachine2022(spaceName, password);
 		etherClient.connectSeedlistContract()
 		etherClient.connectSigner()
 		if(!etherClient.client){
@@ -63,7 +63,7 @@ const SignupButton:React.FC<IBaseProps> = (props:IBaseProps) => {
 			return;
 		}
 		await encryptor.generateWallet(spaceName, password);
-		let params = await encryptor.calculateVaultHasRegisterParams(spaceName, password)
+		let params = await encryptor.calculateVaultHasRegisterParams();
 		let res = await etherClient.client?.vaultHasRegister(params.address, params.deadline, params.signature.r, params.signature.s, params.signature.v);
 		if(res === true){
 			if(lang === "en-US"){
@@ -76,14 +76,14 @@ const SignupButton:React.FC<IBaseProps> = (props:IBaseProps) => {
 			return;
 		}
 
-		let vaultParams = await encryptor.calculateInitVaultHubParams(spaceName, password);
+		let vaultParams = await encryptor.calculateInitVaultHubParams();
 		try {
 			let res0 = await etherClient.client?.initPrivateVault(vaultParams.address, vaultParams.signature.r, vaultParams.signature.s, vaultParams.signature.v ,vaultParams.deadline);
 		}catch (e) {
 			setSignupIsLoading(false);
 			return;
 		}
-		let _params = await encryptor.calculateVaultHasRegisterParams(spaceName, password)
+		let _params = await encryptor.calculateVaultHasRegisterParams()
 		let _res = await etherClient.client?.vaultHasRegister(_params.address, _params.deadline, _params.signature.r, _params.signature.s, _params.signature.v);
 		if(_res === true){
 			if(lang==="zh-CN"){
@@ -92,6 +92,14 @@ const SignupButton:React.FC<IBaseProps> = (props:IBaseProps) => {
 			if(lang=== "en-US"){
 				successToast("Init Vault Spacename Success");
 			}
+		}else{
+			if(lang==="zh-CN"){
+				warningToast("保险库空间名称注册失败");
+			}
+			if(lang=== "en-US"){
+				warningToast("Init Vault Spacename Fail");
+			}
+
 		}
 		setSignupIsLoading(false);
 

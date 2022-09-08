@@ -1,4 +1,4 @@
-import {ethers, Signature, Wallet} from 'ethers';
+import {ethers, Signature} from 'ethers';
 import {syncScrypt} from "scrypt-js";
 import CryptoJS from 'crypto-js';
 import {hashMessage} from "@ethersproject/hash";
@@ -34,6 +34,7 @@ class CryptoConstants{
 	SCRYPT_r:number = 64;
 	SCRYPT_p:number = 16;
 	SCRYPT_dkLen:number = 128;
+	TIMEOUT_DURATION:number = 300;
 
 }
 
@@ -132,7 +133,7 @@ class CryptoTools extends CryptoConstants{
 
 }
 
-class CryptoMachine extends CryptoTools{
+class CryptoMachine2022 extends CryptoTools{
 	Wallet: ethers.Wallet;
 	mainAddress: string ="";
 
@@ -178,12 +179,12 @@ class CryptoMachine extends CryptoTools{
 	}
 
 	async getSomeDecryptLabels(vaultHub:VaultHubEtherClient, vaultName:string, pwd:string, total:number):Promise<Map<number, string>>{
-		let encryptor = new CryptoMachine(vaultName, pwd);
+		let encryptor = new CryptoMachine2022(vaultName, pwd);
 		let labels = new Map<number, string>();
 		await encryptor.generateWallet(vaultName, pwd);
 
 		for(let i=0; i<total; i++){
-			let indexQueryParams = await encryptor.calculateGetLabelNameByIndexParams(vaultName, pwd, i);
+			let indexQueryParams = await encryptor.calculateGetLabelNameByIndexParams(i);
 			let eLabelName = await vaultHub.client?.labelName(indexQueryParams.address, i, indexQueryParams.deadline, indexQueryParams.signature.r,
 				indexQueryParams.signature.s, indexQueryParams.signature.v);
 			if(i===0){
@@ -260,8 +261,8 @@ class CryptoMachine extends CryptoTools{
 		return hash512;
 	}
 
-	async calculateVaultHasRegisterParams(vaultName:string, password:string){
-		let deadline = Date.parse(new Date().toString())/1000+3;
+	async calculateVaultHasRegisterParams(){
+		let deadline = Date.parse(new Date().toString())/1000+this.TIMEOUT_DURATION;
 
 		let combineMessage = ethers.utils.solidityKeccak256(
 			["address", "uint256", "bytes32", "bytes32"],
@@ -280,8 +281,8 @@ class CryptoMachine extends CryptoTools{
 		}
 	}
 
-	async calculateInitVaultHubParams(vaultName:string, password:string) {
-		let deadline = Date.parse(new Date().toString()) / 1000 + 300;
+	async calculateInitVaultHubParams() {
+		let deadline = Date.parse(new Date().toString()) / 1000 + this.TIMEOUT_DURATION;
 
 		let combineMessage = ethers.utils.solidityKeccak256(
 			["address", "uint256", "bytes32", "bytes32"],
@@ -300,8 +301,8 @@ class CryptoMachine extends CryptoTools{
 		}
 	}
 
-	async calculateHasMintedParams(vaultName:string, password:string){
-		let deadline = Date.parse(new Date().toString()) / 1000 + 300;
+	async calculateHasMintedParams(){
+		let deadline = Date.parse(new Date().toString()) / 1000 + this.TIMEOUT_DURATION;
 
 		let combineMessage = ethers.utils.solidityKeccak256(
 			["address", "uint256", "bytes32", "bytes32"],
@@ -321,8 +322,8 @@ class CryptoMachine extends CryptoTools{
 
 	}
 
-	async calculateSaveWithMintingParams(vaultName:string, password:string, content:string, label:string, labelHash:string, receiver:string) {
-		let deadline = Date.parse(new Date().toString()) / 1000 + 300;
+	async calculateSaveWithMintingParams(content:string, label:string, labelHash:string, receiver:string) {
+		let deadline = Date.parse(new Date().toString()) / 1000 + this.TIMEOUT_DURATION;
 
 		let combineMessage = ethers.utils.solidityKeccak256(
 			["address", "string", "string", "address", "address", "uint256", "bytes32", "bytes32"],
@@ -341,8 +342,8 @@ class CryptoMachine extends CryptoTools{
 		}
 	}
 
-	async calculateSaveWithoutMintingParams(vaultName:string, password:string, content:string, label:string, labelHash:string) {
-		let deadline = Date.parse(new Date().toString()) / 1000 + 300;
+	async calculateSaveWithoutMintingParams(content:string, label:string, labelHash:string) {
+		let deadline = Date.parse(new Date().toString()) / 1000 + this.TIMEOUT_DURATION;
 
 		let combineMessage = ethers.utils.solidityKeccak256(
 			["address", "string","string","address", "uint256", "bytes32", "bytes32"],
@@ -361,8 +362,8 @@ class CryptoMachine extends CryptoTools{
 		}
 	}
 
-	async calculateTotalSavedItemsParams(vaultName:string, password:string){
-		let deadline = Date.parse(new Date().toString())/1000+3;
+	async calculateTotalSavedItemsParams(){
+		let deadline = Date.parse(new Date().toString())/1000+this.TIMEOUT_DURATION;
 
 		let combineMessage = ethers.utils.solidityKeccak256(
 			["address", "uint256", "bytes32", "bytes32"],
@@ -381,8 +382,8 @@ class CryptoMachine extends CryptoTools{
 		}
 	}
 
-	async calculateLabelExistParams(vaultName:string, password:string, labelHash:string){
-		let deadline = Date.parse(new Date().toString())/1000+3;
+	async calculateLabelExistParams(labelHash:string){
+		let deadline = Date.parse(new Date().toString())/1000+this.TIMEOUT_DURATION;
 
 		let combineMessage = ethers.utils.solidityKeccak256(
 			["address", "address", "uint256", "bytes32", "bytes32"],
@@ -401,8 +402,8 @@ class CryptoMachine extends CryptoTools{
 		}
 	}
 
-	async calculateQueryByIndexParams(vaultName:string, password:string, index:number){
-		let deadline = Date.parse(new Date().toString())/1000+3;
+	async calculateQueryByIndexParams(index:number){
+		let deadline = Date.parse(new Date().toString())/1000+this.TIMEOUT_DURATION;
 
 		let combineMessage = ethers.utils.solidityKeccak256(
 			["address", "uint64", "uint256", "bytes32", "bytes32"],
@@ -421,8 +422,8 @@ class CryptoMachine extends CryptoTools{
 		}
 	}
 
-	async calculateQueryByNameParams(vaultName:string, password:string, labelHash:string){
-		let deadline = Date.parse(new Date().toString())/1000+3;
+	async calculateQueryByNameParams(labelHash:string){
+		let deadline = Date.parse(new Date().toString())/1000+this.TIMEOUT_DURATION;
 
 		let combineMessage = ethers.utils.solidityKeccak256(
 			["address", "address", "uint256", "bytes32", "bytes32"],
@@ -441,8 +442,8 @@ class CryptoMachine extends CryptoTools{
 		}
 	}
 
-	async calculateGetLabelNameByIndexParams(vaultName:string, password:string, index:number){
-		let deadline = Date.parse(new Date().toString())/1000+3;
+	async calculateGetLabelNameByIndexParams(index:number){
+		let deadline = Date.parse(new Date().toString())/1000+this.TIMEOUT_DURATION;
 
 		let combineMessage = ethers.utils.solidityKeccak256(
 			["address", "uint256", "uint64", "bytes32", "bytes32"],
@@ -461,8 +462,8 @@ class CryptoMachine extends CryptoTools{
 		}
 	}
 
-	async calculateQueryPrivateVaultAddressParams(vaultName:string, password:string){
-		let deadline = Date.parse(new Date().toString())/1000+3;
+	async calculateQueryPrivateVaultAddressParams(){
+		let deadline = Date.parse(new Date().toString())/1000+this.TIMEOUT_DURATION;
 
 		let combineMessage = ethers.utils.solidityKeccak256(
 			["address", "uint256", "bytes32", "bytes32"],
@@ -481,8 +482,8 @@ class CryptoMachine extends CryptoTools{
 		}
 	}
 
-	async calculatePrivateVaultLabelExistParams(vaultName:string, password:string, labelHash:string, domain:string){
-		let deadline = Date.parse(new Date().toString())/1000+3;
+	async calculatePrivateVaultLabelExistParams(labelHash:string, domain:string){
+		let deadline = Date.parse(new Date().toString())/1000+this.TIMEOUT_DURATION;
 
 		let combineMessage = ethers.utils.solidityKeccak256(
 			["address","address", "uint256", "bytes32", "bytes32"],
@@ -502,8 +503,8 @@ class CryptoMachine extends CryptoTools{
 	}
 
 	//let params = ethers.utils.defaultAbiCoder.encode( ["address", "uint24"], ["0xf32d39ff9f6aa7a7a64d7a4f00a54826ef791a55", 500]);
-	async calculatePrivateVaultSaveWithoutMintingParams(vaultName:string, password:string, data:string, label:string, labelHash:string, domain:string, params:string="None"){
-		let deadline = Date.parse(new Date().toString())/1000+100;
+	async calculatePrivateVaultSaveWithoutMintingParams(data:string, label:string, labelHash:string, domain:string, params:string="None"){
+		let deadline = Date.parse(new Date().toString())/1000+this.TIMEOUT_DURATION;
 
 		let combineMessage = ethers.utils.solidityKeccak256(
 			["address", "string", "string","bytes", "address", "uint256", "bytes32", "bytes32"],
@@ -522,8 +523,8 @@ class CryptoMachine extends CryptoTools{
 		}
 	}
 
-	async calculatePrivateVaultSaveWithMintingParams(vaultName:string, password:string, data:string, label:string, labelHash:string, domain:string){
-		let deadline = Date.parse(new Date().toString())/1000+100;
+	async calculatePrivateVaultSaveWithMintingParams(data:string, label:string, labelHash:string, domain:string){
+		let deadline = Date.parse(new Date().toString())/1000+this.TIMEOUT_DURATION;
 
 		let combineMessage = ethers.utils.solidityKeccak256(
 			["address", "string", "string", "address", "uint256", "bytes32", "bytes32"],
@@ -542,8 +543,8 @@ class CryptoMachine extends CryptoTools{
 		}
 	}
 
-	async calculatePrivateVaultGetDataByIndexParams(vaultName:string, password:string, index:number, domain:string){
-		let deadline = Date.parse(new Date().toString())/1000+3;
+	async calculatePrivateVaultGetDataByIndexParams(index:number, domain:string){
+		let deadline = Date.parse(new Date().toString())/1000+this.TIMEOUT_DURATION;
 
 		let combineMessage = ethers.utils.solidityKeccak256(
 			["address", "uint64", "uint256", "bytes32", "bytes32"],
@@ -562,8 +563,8 @@ class CryptoMachine extends CryptoTools{
 		}
 	}
 
-	async calculatePrivateVaultGetDataByNameParams(vaultName:string, password:string, label:string, domain:string){
-		let deadline = Date.parse(new Date().toString())/1000+3;
+	async calculatePrivateVaultGetDataByNameParams(label:string, domain:string){
+		let deadline = Date.parse(new Date().toString())/1000+this.TIMEOUT_DURATION;
 
 		let combineMessage = ethers.utils.solidityKeccak256(
 			["address", "address", "uint256", "bytes32", "bytes32"],
@@ -582,8 +583,8 @@ class CryptoMachine extends CryptoTools{
 		}
 	}
 
-	async calculatePrivateVaultLabelNameParams(vaultName:string, password:string, index:number, domain:string){
-		let deadline = Date.parse(new Date().toString())/1000+3;
+	async calculatePrivateVaultLabelNameParams(index:number, domain:string){
+		let deadline = Date.parse(new Date().toString())/1000+this.TIMEOUT_DURATION;
 
 		let combineMessage = ethers.utils.solidityKeccak256(
 			["address", "uint64", "uint256", "bytes32", "bytes32"],
@@ -603,4 +604,4 @@ class CryptoMachine extends CryptoTools{
 	}
 }
 
-export {CryptoMachine, CryptoTools}
+export {CryptoMachine2022, CryptoTools}

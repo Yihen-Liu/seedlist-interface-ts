@@ -17,7 +17,7 @@ import {Trans} from "@lingui/macro";
 import {useRecoilState} from "recoil";
 import {languageState, vaultNameState, vaultPasswordState} from "../../hooks/Atoms";
 import {TextInput} from "../TextInput/textinput";
-import {CryptoMachine} from "../../lib/crypto";
+import {CryptoMachine2022} from "../../lib/crypto";
 import {etherClient} from "../../ethers/etherClient";
 import {useWarningToast} from "../../hooks/useToast";
 
@@ -82,10 +82,10 @@ const PasswordInQuery:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			return
 		}
 
-		let encryptor = new CryptoMachine(vaultName, password);
+		let encryptor = new CryptoMachine2022(vaultName, password);
 		await encryptor.generateWallet(vaultName, password);
 
-		let params = await encryptor.calculateVaultHasRegisterParams(vaultName, password);
+		let params = await encryptor.calculateVaultHasRegisterParams();
 		let res = await etherClient.client?.vaultHasRegister(params.address, params.deadline, params.signature.r, params.signature.s, params.signature.v);
 		if(res === false){
 			setIsLoading(false);
@@ -93,7 +93,7 @@ const PasswordInQuery:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			return;
 		}
 
-		let totalSavedParams = await encryptor.calculateTotalSavedItemsParams(vaultName, password);
+		let totalSavedParams = await encryptor.calculateTotalSavedItemsParams();
 
 		let total = await etherClient.client?.totalSavedItems(totalSavedParams.address, totalSavedParams.deadline, totalSavedParams.signature.r, totalSavedParams.signature.s, totalSavedParams.signature.v);
 		if(total <=0){
@@ -124,7 +124,7 @@ const PasswordInQuery:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			return
 		}
 
-		let encryptor = new CryptoMachine(vaultName, password);
+		let encryptor = new CryptoMachine2022(vaultName, password);
 		etherClient.connectSeedlistContract()
 		etherClient.connectSigner()
 		if(!etherClient.client){
@@ -136,7 +136,7 @@ const PasswordInQuery:React.FC<IBaseProps> = (props:IBaseProps)=>{
 		await encryptor.generateWallet(vaultName, password);
 
 		let labelHash = await encryptor.labelHash(label);
-		let queryByNameParams = await encryptor.calculateQueryByNameParams(vaultName, password, labelHash);
+		let queryByNameParams = await encryptor.calculateQueryByNameParams(labelHash);
 		let content = await etherClient.client?.queryDataByLabelName(queryByNameParams.address, labelHash, queryByNameParams.deadline,
 			queryByNameParams.signature.r, queryByNameParams.signature.s, queryByNameParams.signature.v);
 		let wheelLabels = "";

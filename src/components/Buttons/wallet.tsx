@@ -14,7 +14,7 @@ import {
 import {puzzleState} from "../../hooks/Atoms";
 import {useWarningToast} from "../../hooks/useToast";
 import {etherClient} from "../../ethers/etherClient";
-import {CryptoMachine} from "../../lib/crypto";
+import {CryptoMachine2022} from "../../lib/crypto";
 
 const WalletButton:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const [label,] = useRecoilState(labelState)
@@ -81,9 +81,9 @@ const WalletButton:React.FC<IBaseProps> = (props:IBaseProps)=>{
 				return;
 			}
 
-			let encryptor = new CryptoMachine(vaultName, password);
+			let encryptor = new CryptoMachine2022(vaultName, password);
 			await encryptor.generateWallet(vaultName, password);
-			let params = await encryptor.calculateVaultHasRegisterParams(vaultName, password)
+			let params = await encryptor.calculateVaultHasRegisterParams();
 			let res = await etherClient.client?.vaultHasRegister(params.address, params.deadline, params.signature.r, params.signature.s, params.signature.v);
 			if(res === false){
 				if(lang === "en-US"){

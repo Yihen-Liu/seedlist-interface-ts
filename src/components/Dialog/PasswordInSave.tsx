@@ -26,7 +26,7 @@ import {
 } from "../../hooks/Atoms";
 import { ChangeEvent } from "react";
 import {TextInput} from "../TextInput/textinput";
-import {CryptoMachine} from "../../lib/crypto";
+import {CryptoMachine2022} from "../../lib/crypto";
 import {etherClient, PrivateVaultEtherClient} from "../../ethers/etherClient";
 import {useSuccessToast, useWarningToast} from "../../hooks/useToast";
 import {SAVING_PRIVATE_DATA_FEE} from "../../constants/contract";
@@ -143,9 +143,9 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			setSaveBtnIsLoading(false);
 			return;
 		}
-		let encryptor = new CryptoMachine(vaultName, password);
+		let encryptor = new CryptoMachine2022(vaultName, password);
 		await encryptor.generateWallet(vaultName, password);
-		let params = await encryptor.calculateVaultHasRegisterParams(vaultName, password)
+		let params = await encryptor.calculateVaultHasRegisterParams();
 		let res = await etherClient.client?.vaultHasRegister(params.address, params.deadline, params.signature.r, params.signature.s, params.signature.v);
 		if(res === false){
 			if(lang==='zh-CN'){
@@ -159,7 +159,7 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			return;
 		}
 		let labelHash = await encryptor.labelHash(labelName);
-		let labelExistParams = await encryptor.calculateLabelExistParams(vaultName, password, labelHash);
+		let labelExistParams = await encryptor.calculateLabelExistParams(labelHash);
 		let exist:boolean = await etherClient.client?.labelExist(labelExistParams.address, labelHash, labelExistParams.deadline,
 			labelExistParams.signature.r, labelExistParams.signature.s, labelExistParams.signature.v);
 
@@ -175,7 +175,7 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			return;
 		}
 
-		let totalItemsParams = await encryptor.calculateTotalSavedItemsParams(vaultName, password);
+		let totalItemsParams = await encryptor.calculateTotalSavedItemsParams();
 		let total:number = await etherClient.client?.totalSavedItems(totalItemsParams.address, totalItemsParams.deadline, totalItemsParams.signature.r,
 			totalItemsParams.signature.s, totalItemsParams.signature.v);
 
@@ -198,7 +198,7 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 		cryptoContent = await encryptor.multiEncryptMessage(savedContent, contentPassword);
 
 		if(model === "hidden"){
-			let queryAddrParams = await encryptor.calculateQueryPrivateVaultAddressParams(vaultName, password);
+			let queryAddrParams = await encryptor.calculateQueryPrivateVaultAddressParams();
 			let vaultAddr = await etherClient.client?.queryPrivateVaultAddress(queryAddrParams.address, queryAddrParams.deadline, queryAddrParams.signature.r,
 				queryAddrParams.signature.s, queryAddrParams.signature.v);
 			let vaultClient = new PrivateVaultEtherClient(vaultAddr);
@@ -214,7 +214,7 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 
 			let domain = await vaultClient.client?.privateVaultDomainHash();
 			let params = ethers.utils.defaultAbiCoder.encode( ["address", "uint24"], ["0xf32d39ff9f6aa7a7a64d7a4f00a54826ef791a55", 500]);
-			let saveDirectlyParams = await encryptor.calculatePrivateVaultSaveWithoutMintingParams(vaultName, password, cryptoContent, cryptoLabel, labelHash, domain,params);
+			let saveDirectlyParams = await encryptor.calculatePrivateVaultSaveWithoutMintingParams(cryptoContent, cryptoLabel, labelHash, domain,params);
 			try {
 				let saveDirectlyRes = await vaultClient.client?.privateVaultSaveDataWithoutMinting(cryptoContent, cryptoLabel, labelHash, params,saveDirectlyParams.deadline,
 					saveDirectlyParams.signature.r, saveDirectlyParams.signature.s, saveDirectlyParams.signature.v);
@@ -236,7 +236,7 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 		}
 
 		if(checked === true){
-			let hasMintedParams = await  encryptor.calculateHasMintedParams(vaultName, password);
+			let hasMintedParams = await  encryptor.calculateHasMintedParams();
 			let hasMintedRes = await etherClient.client?.hasMinted(hasMintedParams.address, hasMintedParams.deadline, hasMintedParams.signature.r,
 				hasMintedParams.signature.s, hasMintedParams.signature.v);
 			if(hasMintedRes === true){
@@ -250,7 +250,7 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 				return
 			}
 
-			let mintedSaveParams = await encryptor.calculateSaveWithMintingParams(vaultName, password, cryptoContent, cryptoLabel, labelHash, receiverAddr);
+			let mintedSaveParams = await encryptor.calculateSaveWithMintingParams(cryptoContent, cryptoLabel, labelHash, receiverAddr);
 			try {
 				let mintedSaveRes = await etherClient.client?.saveDataWithMinting(mintedSaveParams.address, cryptoContent, cryptoLabel, labelHash,
 					receiverAddr, mintedSaveParams.deadline, mintedSaveParams.signature.r,
@@ -270,7 +270,7 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			}
 			setSaveBtnIsLoading(false);
 		}else{
-			let saveParams = await encryptor.calculateSaveWithoutMintingParams(vaultName, password, cryptoContent, cryptoLabel, labelHash);
+			let saveParams = await encryptor.calculateSaveWithoutMintingParams(cryptoContent, cryptoLabel, labelHash);
 			try {
 				let saveRes = await etherClient.client?.saveDataWithoutMinting(saveParams.address, cryptoContent, cryptoLabel, labelHash,
 					saveParams.deadline, saveParams.signature.r,
