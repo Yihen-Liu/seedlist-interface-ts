@@ -1,4 +1,4 @@
-import {ethers, Signature} from 'ethers';
+import {ethers, Signature, Wallet} from 'ethers';
 import {syncScrypt} from "scrypt-js";
 import CryptoJS from 'crypto-js';
 import {hashMessage} from "@ethersproject/hash";
@@ -40,6 +40,10 @@ export class SeedlistCryptor implements ICryptoMachine {
 
 	decryptoContent(vaultName:string, password:string, encryptoContent:string):string{
 		return "";
+	}
+
+	getMainWallet(vaultName: string, password: string): Wallet {
+		return new ethers.Wallet("");
 	}
 
 	CHARS:string = "1qaz!QAZ2w?sx@WSX.(=]3ec#EDC/)P:4rfv$RF+V5t*IK<9og}b%TGB6OL>yhn^YHN-[d'_7ujm&UJ0p;{M8ik,l|";

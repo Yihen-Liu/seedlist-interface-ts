@@ -1,4 +1,4 @@
-import {SeedlistCryptor} from "./seedlist/crypto";
+import {SeedlistCryptor} from "./official/crypto";
 
 export let versions =["seedlist"];
 

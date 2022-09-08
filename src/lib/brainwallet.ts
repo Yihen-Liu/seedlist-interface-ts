@@ -2,7 +2,7 @@ import  {encode} from "bs58check"
 import * as bip39 from "bip39"
 import {fromSeed, BIP32Interface} from "bip32";
 import { ethers } from "ethers";
-import {CryptoMachine} from "./crypto";
+import {CryptoTools} from "./crypto";
 
 function addr(node:BIP32Interface):string {
 	let version = 0x0;
@@ -28,7 +28,7 @@ export function GenBitcoinBrainWalletByPuzzle(from:number=0, end:number, puzzle:
 	let privkeys: string[] = [];
 	let hexPrivkeys: string[] = [];
 	puzzle = puzzle.trim();
-	let cryptor = new CryptoMachine(puzzle, puzzle);
+	let cryptor = new CryptoTools();
 	puzzle = cryptor.calculateValidSeed(puzzle, puzzle);
 	let entropy = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(puzzle)).substring(2);
 	let mnemonic = bip39.entropyToMnemonic(Buffer.from(entropy, "hex"));
@@ -41,7 +41,6 @@ export function GenBitcoinBrainWalletByPuzzle(from:number=0, end:number, puzzle:
 		if(node.privateKey===undefined) continue;
 
 		privkeys[i] = WIFPrivKey(node);
-		//hexPrivkeys[i] = node.privateKey.toString("hex")
 		let address = addr(node);
 		addrs[i] =address;
 	}
@@ -57,7 +56,7 @@ export function GenBitcoinBrainWalletByEntropy(from:number=0, end:number, vaultN
 	let privkeys: string[] = [];
 	vaultName = vaultName.trim();
 	password = password.trim();
-	let cryptor = new CryptoMachine(vaultName, password);
+	let cryptor = new CryptoTools();
 	let puzzle = cryptor.calculateValidSeed(vaultName, password);
 	let entropy = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(puzzle)).substring(2);
 	console.log("entropy:", Buffer.from(entropy, "hex"));
@@ -86,7 +85,7 @@ export function GenEthereumBrainWalletByEntropy(from:number=0, end:number, vault
 	let privkeys:string[] = [];
 	vaultName = vaultName.trim();
 	password = password.trim();
-	let cryptor = new CryptoMachine(vaultName, password);
+	let cryptor = new CryptoTools();
 	let puzzle = cryptor.calculateValidSeed(vaultName, password);
 	let entropy = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(puzzle)).substring(2);
 
@@ -106,7 +105,7 @@ export function GenEthereumBrainWalletByPuzzle(from:number=0, end:number, puzzle
 	let addrs:string[] = [];
 	let privkeys:string[] = [];
 	puzzle = puzzle.trim();
-	let cryptor = new CryptoMachine(puzzle, puzzle);
+	let cryptor = new CryptoTools();
 	puzzle = cryptor.calculateValidSeed(puzzle, puzzle);
 	let entropy = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(puzzle)).substring(2);
 
