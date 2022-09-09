@@ -81,7 +81,7 @@ const PageRouter:React.FC<IBaseProps> = (props:IBaseProps)=> {
 						<NavLink to="/identity">
 							<Button  bg="#2b2d32" colorScheme="blackAlpha" onClick={()=>clickButton("identity")}>
 								<Text fontSize="xl" color={idColor}>
-										<Trans>Meta Identity</Trans>
+										<Trans>AnyMap</Trans>
 								</Text>
 							</Button>
 						</NavLink>

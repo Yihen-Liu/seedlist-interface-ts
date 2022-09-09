@@ -9,7 +9,7 @@ const Identity:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			<Container>
 				<Center>
 					<Text fontSize="4xl" fontWeight="extrabold">
-						COGITO ERGO SUM
+						IN CRYPTO, WE TRUST
 					</Text>
 				</Center>
 				<Center>
