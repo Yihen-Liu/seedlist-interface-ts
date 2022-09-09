@@ -1,7 +1,6 @@
 import {ethers, Signature} from 'ethers';
 import {syncScrypt} from "scrypt-js";
 import CryptoJS from 'crypto-js';
-import {hashMessage} from "@ethersproject/hash";
 import {
 	DOMAIN_SEPARATOR,
 	GET_LABEL_NAME_BY_INDEX,
@@ -34,7 +33,7 @@ class CryptoConstants{
 	SCRYPT_r:number = 64;
 	SCRYPT_p:number = 16;
 	SCRYPT_dkLen:number = 128;
-	TIMEOUT_DURATION:number = 300;
+	TIMEOUT_DURATION:number = 180;
 
 }
 
@@ -60,7 +59,7 @@ class CryptoTools extends CryptoConstants{
 
 	calculatePairsBaseOnSeed(seed:string):{privKey:string, pubKey:string}{
 		let secp256k1=require('secp256k1');
-		seed = hashMessage(seed)
+		seed = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(seed));
 		let privKey = Buffer.from(seed.slice(2),'hex');
 		//let privkey = ethers.utils.toUtf8Bytes(seed.slice(2))
 		let pubKey=secp256k1.publicKeyCreate(privKey,false).slice(1);
@@ -75,17 +74,8 @@ class CryptoTools extends CryptoConstants{
 	}
 
 	calculateValidSeed(str1:string, str2:string):string{
-		let h1 = this.calculateMultiHash(str1, 2);
-		let h2 = this.calculateMultiHash(str2, 2);
-		let pair1 = this.calculatePairsBaseOnSeed(h1+h2);
-		let pair2 = this.calculatePairsBaseOnSeed(h2+h1);
-
-		let signer1 = new ethers.utils.SigningKey(pair1.privKey)
-		h2 = ethers.utils.joinSignature(signer1.signDigest(hashMessage(h1+h2)))
-
-		let signer2 = new ethers.utils.SigningKey(pair2.privKey)
-		h1 = ethers.utils.joinSignature(signer2.signDigest(hashMessage(h1+h2)))
-
+		let h1 = ethers.utils.sha512(ethers.utils.toUtf8Bytes(str1));
+		let h2 = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(str2));
 		let saltStr = "";
 		for(let i=0;i<this.SALT_LEN; i++){
 			let saltChar = this.getSaltChar(ethers.utils.ripemd160(ethers.utils.toUtf8Bytes(h1+h2+saltStr)));
@@ -147,9 +137,7 @@ class CryptoMachine2022 extends CryptoTools{
 	}
 
 	getLabelPassword(vaultName:string, pwd:string):string {
-		let vHash = this.calculateOnceHash(vaultName);
-		let vPwd = this.calculateOnceHash(pwd);
-		let password = this.calculateMultiHash(vHash+vPwd, 2);
+		let password = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(vaultName+pwd));
 		let saltStr = "";
 		for(let i=0;i<this.SALT_LEN; i++){
 			let saltChar = this.getSaltChar(ethers.utils.ripemd160(ethers.utils.toUtf8Bytes(password+saltStr)));
@@ -161,15 +149,7 @@ class CryptoMachine2022 extends CryptoTools{
 	}
 
 	async labelHash(label:string):Promise<string>{
-		let h = this.calculateMultiHash(label, 2);
-		let saltStr = "";
-		for(let i=0;i<this.SALT_LEN; i++){
-			let saltChar = this.getSaltChar(ethers.utils.sha256(ethers.utils.toUtf8Bytes(h+saltStr)));
-			saltStr += saltChar;
-		}
-
-		let s1 = syncScrypt(ethers.utils.toUtf8Bytes(h), ethers.utils.toUtf8Bytes(saltStr), this.SCRYPT_N,this.SCRYPT_r,this.SCRYPT_p,this.SCRYPT_dkLen);
-		let wallet =  new ethers.Wallet(this.calculateOnceHash(s1.toString()));
+		let wallet =  new ethers.Wallet(ethers.utils.keccak256(ethers.utils.toUtf8Bytes(label)))
 		return await wallet.getAddress()
 	}
 
@@ -179,12 +159,12 @@ class CryptoMachine2022 extends CryptoTools{
 	}
 
 	async getSomeDecryptLabels(vaultHub:VaultHubEtherClient, vaultName:string, pwd:string, total:number):Promise<Map<number, string>>{
-		let encryptor = new CryptoMachine2022(vaultName, pwd);
+		//let encryptor = new CryptoMachine2022(vaultName, pwd);
 		let labels = new Map<number, string>();
-		await encryptor.generateWallet(vaultName, pwd);
+		//await encryptor.generateWallet(vaultName, pwd);
 
 		for(let i=0; i<total; i++){
-			let indexQueryParams = await encryptor.calculateGetLabelNameByIndexParams(i);
+			let indexQueryParams = await this.calculateGetLabelNameByIndexParams(i);
 			let eLabelName = await vaultHub.client?.labelName(indexQueryParams.address, i, indexQueryParams.deadline, indexQueryParams.signature.r,
 				indexQueryParams.signature.s, indexQueryParams.signature.v);
 			if(i===0){
@@ -205,10 +185,7 @@ class CryptoMachine2022 extends CryptoTools{
 	}
 
 	getWheelLabelPassword(vaultName:string, pwd:string, wheelLabels:string):string{
-		let vHash = this.calculateOnceHash(vaultName);
-		let vPwd = this.calculateOnceHash(pwd);
-		let vWheel = this.calculateOnceHash(wheelLabels);
-		let password = this.calculateMultiHash(vHash+vPwd+vWheel, 2);
+		let password = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(vaultName+pwd+wheelLabels))
 		let saltStr = "";
 		for(let i=0;i<this.SALT_LEN; i++){
 			let saltChar = this.getSaltChar(ethers.utils.ripemd160(ethers.utils.toUtf8Bytes(password+saltStr)));
@@ -226,22 +203,9 @@ class CryptoMachine2022 extends CryptoTools{
 	}
 
 	getContentPassword(vaultName:string, password:string, label:string):string {
-		let h1 = this.calculateTwiceHash(vaultName);
-		let h2 = this.calculateTwiceHash(password);
-		let h3 = this.calculateTwiceHash(label);
-		let pair1 = this.calculatePairsBaseOnSeed(h1+h2);
-		let pair2 = this.calculatePairsBaseOnSeed(h2+h3);
-		let pair3 = this.calculatePairsBaseOnSeed(h3+h1);
-
-		let signer1	= new ethers.utils.SigningKey(pair1.privKey)
-		let s1 = ethers.utils.joinSignature(signer1.signDigest(hashMessage(h3+h2)))
-
-		let signer2	= new ethers.utils.SigningKey(pair2.privKey)
-		let s2 = ethers.utils.joinSignature(signer2.signDigest(hashMessage(h1+h3)))
-
-		let signer3	= new ethers.utils.SigningKey(pair3.privKey)
-		let s3 = ethers.utils.joinSignature(signer3.signDigest(hashMessage(h2+h1)))
-
+		let s1 = ethers.utils.sha256(ethers.utils.toUtf8Bytes(vaultName));
+		let s2 = ethers.utils.sha512(ethers.utils.toUtf8Bytes(password));
+		let s3 = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(label));
 		let saltStr = "";
 		for(let i=0;i<this.SALT_LEN; i++){
 			let saltChar = this.getSaltChar(ethers.utils.ripemd160(ethers.utils.toUtf8Bytes(s1+s2+s3+saltStr)));
@@ -252,7 +216,7 @@ class CryptoMachine2022 extends CryptoTools{
 		let hash512 = ethers.utils.sha512(originHash)
 		for(let i=0;i<this.CONTENT_PASSWORD_SALT_LEN; i++){
 			let saltChar = this.getSaltChar(ethers.utils.ripemd160(ethers.utils.toUtf8Bytes(hash512)));
-			let onceHash = this.calculateOnceHash(hash512);
+			let onceHash = ethers.utils.sha256(ethers.utils.toUtf8Bytes(hash512));
 			let random = onceHash.substring(0,6)+onceHash.substring(onceHash.length-4);
 			let position = parseInt(random, 16)%hash512.length;
 			hash512 = hash512.substr(0, position)+ saltChar + hash512.substr(position, hash512.length-position);
