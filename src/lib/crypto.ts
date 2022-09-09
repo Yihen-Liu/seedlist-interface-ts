@@ -38,25 +38,6 @@ class CryptoConstants{
 }
 
 class CryptoTools extends CryptoConstants{
-	calculateMultiHash(str:string, n:number):string{
-		var sha256Value = "";
-		var tmpStr = str;
-		for (var i=0;i<n;i++){
-			sha256Value = ethers.utils.sha256(ethers.utils.toUtf8Bytes(tmpStr));
-			tmpStr = sha256Value;
-		}
-		return sha256Value
-	}
-
-	calculateOnceHash(str:string):string{
-		return this.calculateMultiHash(str,1);
-	}
-
-	calculateTwiceHash(str:string):string{
-		let inStr = ethers.utils.ripemd160(ethers.utils.toUtf8Bytes(str))
-		return ethers.utils.sha256(inStr)
-	}
-
 	calculatePairsBaseOnSeed(seed:string):{privKey:string, pubKey:string}{
 		let secp256k1=require('secp256k1');
 		seed = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(seed));

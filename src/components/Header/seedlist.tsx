@@ -6,7 +6,7 @@ import {ChevronDownIcon} from "@chakra-ui/icons";
 import {Trans} from "@lingui/macro";
 
 const Seedlist:React.FC<IBaseProps>=(props:IBaseProps) => {
-	const [version, setVersion] = useState<string>("seedlist");
+	const [version, setVersion] = useState<string>("2022");
 	const doSelectVersion = useCallback((value:string)=>{
 			setVersion(value);
 	},[])
@@ -27,8 +27,8 @@ const Seedlist:React.FC<IBaseProps>=(props:IBaseProps) => {
 						<Trans>version</Trans>: {version}
 						</Text>
 					</MenuButton>
-					<MenuList maxWidth='60px' bgColor={"#2b2d32"} borderColor={"black"} defaultValue="default">
-						<MenuItem maxH="20px" _hover={{ bg: 'blackAlpha.500'}} value="seedlist" onClick={()=>doSelectVersion("seedlist")}>seedlist</MenuItem>
+					<MenuList maxWidth='60px' bgColor={"#2b2d32"} borderColor={"black"} defaultValue="2022">
+						<MenuItem maxH="20px" _hover={{ bg: 'blackAlpha.500'}} value="2022" onClick={()=>doSelectVersion("2022")}>2022</MenuItem>
 					</MenuList>
 				</Menu>
 			</HStack>
