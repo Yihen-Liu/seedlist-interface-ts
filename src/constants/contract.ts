@@ -1,14 +1,14 @@
 // Get From Contract Interface By RPC
-export const DOMAIN_SEPARATOR = "0xc48ce4b407ece9dfccaa07ebe2e50735f5bf4bb2bc86375b606898bc76fbfe64";
+export const DOMAIN_SEPARATOR = "0x9a76b55be53113ac4e856def7bd8e82457c3e0c9182c62e84fe438c2d5810c43";
 
 // keccak256('savePrivateDataWithMinting(address addr, string memory data, string memory cryptoLabel, address labelHash,
 // address receiver, uint256 deadline)');
 export const MINT_SAVE_PERMIT_TYPE_HASH =
-	"0xe4f65c557ffdb3934e9fffd9af8d365eca51b20601a53082ce10b1e0ac04461f";
+	"0xcdd3cc6eb42396c94a4d5d905327888ade5ae14c59a5d22ae3235b88283c0035";
 
 // keccak256('savePrivateDataWithoutMinting(address addr, string memory data,
 // string memory cryptoLabel, address labelHash, uint256 deadline)');
-export const SAVE_PERMIT_TYPE_HASH = "0x25f3fe064ef39028ecb8ad22c47a4f382a81ca1f21d802b4fdb8c3e213b9df72";
+export const SAVE_PERMIT_TYPE_HASH = "0x50a5dca0d9658d6eb6282f2d7bdda2a899b962259e2708f7cce8c48021a63483";
 
 //keccak256('queryPrivateDataByIndex(address addr, uint64 index, uint256 deadline)')
 export const INDEX_QUERY_PERMIT_TYPE_HASH =
@@ -54,7 +54,7 @@ export const  GET_PRIVATE_DATA_BY_INDEX_PERMIT_TYPE_HASH =
 
 //keccak256('saveWithoutMintingDirectly(string memory data, string memory cryptoLabel, address labelHash, uint256 deadline, bytes memory params)')
 export const  SAVE_WITHOUT_MINTING_PERMIT_TYPE_HASH =
-	"0x0146fc630af018bd01051793691b73d73b34e7977f68c1f081ed623cd3c2ab44";
+	"0xb5874d5c3f6f8ad0eddae31287a8b0ff49e374249cd2389616fb828f06f42f63";
 
 //keccak256('saveWithMintingDirectly(string memory data, string memory cryptoLabel, address labelHash, uint256 deadline)')
 export const SAVE_WITH_MINTING_PERMIT_TYPE_HASH =

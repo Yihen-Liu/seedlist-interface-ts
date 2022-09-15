@@ -3,5 +3,7 @@
 /* eslint-disable */
 import type * as constantSol from "./Constant.sol";
 export type { constantSol };
+import type * as constantsSol from "./Constants.sol";
+export type { constantsSol };
 import type * as permissionSol from "./Permission.sol";
 export type { permissionSol };

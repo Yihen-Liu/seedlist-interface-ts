@@ -49,6 +49,22 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Constant__factory>;
     getContractFactory(
+      name: "PrivateVaultCallee",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.PrivateVaultCallee__factory>;
+    getContractFactory(
+      name: "PrivateVaultTypeHashs",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.PrivateVaultTypeHashs__factory>;
+    getContractFactory(
+      name: "VaultHubCallee",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.VaultHubCallee__factory>;
+    getContractFactory(
+      name: "VaultHubTypeHashs",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.VaultHubTypeHashs__factory>;
+    getContractFactory(
       name: "PrivateVaultPermission",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.PrivateVaultPermission__factory>;
@@ -68,6 +84,10 @@ declare module "hardhat/types/runtime" {
       name: "Treasury",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Treasury__factory>;
+    getContractFactory(
+      name: "PrivateValidator",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.PrivateValidator__factory>;
     getContractFactory(
       name: "Validator",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -131,6 +151,26 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.Constant>;
     getContractAt(
+      name: "PrivateVaultCallee",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.PrivateVaultCallee>;
+    getContractAt(
+      name: "PrivateVaultTypeHashs",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.PrivateVaultTypeHashs>;
+    getContractAt(
+      name: "VaultHubCallee",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.VaultHubCallee>;
+    getContractAt(
+      name: "VaultHubTypeHashs",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.VaultHubTypeHashs>;
+    getContractAt(
       name: "PrivateVaultPermission",
       address: string,
       signer?: ethers.Signer
@@ -155,6 +195,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.Treasury>;
+    getContractAt(
+      name: "PrivateValidator",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.PrivateValidator>;
     getContractAt(
       name: "Validator",
       address: string,

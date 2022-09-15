@@ -24,6 +24,7 @@ import type {
 
 export interface TreasuryInterface extends utils.Interface {
   functions: {
+    "addRule(string)": FunctionFragment;
     "callable()": FunctionFragment;
     "caller()": FunctionFragment;
     "cycle()": FunctionFragment;
@@ -31,6 +32,8 @@ export interface TreasuryInterface extends utils.Interface {
     "lastWithdrawAmount()": FunctionFragment;
     "mint(address)": FunctionFragment;
     "owner()": FunctionFragment;
+    "ruleSize()": FunctionFragment;
+    "rules(uint16)": FunctionFragment;
     "seedToken()": FunctionFragment;
     "setCaller(address)": FunctionFragment;
     "setHalf(bool)": FunctionFragment;
@@ -42,6 +45,7 @@ export interface TreasuryInterface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "addRule"
       | "callable"
       | "caller"
       | "cycle"
@@ -49,6 +53,8 @@ export interface TreasuryInterface extends utils.Interface {
       | "lastWithdrawAmount"
       | "mint"
       | "owner"
+      | "ruleSize"
+      | "rules"
       | "seedToken"
       | "setCaller"
       | "setHalf"
@@ -58,6 +64,7 @@ export interface TreasuryInterface extends utils.Interface {
       | "withdrawETH"
   ): FunctionFragment;
 
+  encodeFunctionData(functionFragment: "addRule", values: [string]): string;
   encodeFunctionData(functionFragment: "callable", values?: undefined): string;
   encodeFunctionData(functionFragment: "caller", values?: undefined): string;
   encodeFunctionData(functionFragment: "cycle", values?: undefined): string;
@@ -71,6 +78,8 @@ export interface TreasuryInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "mint", values: [string]): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "ruleSize", values?: undefined): string;
+  encodeFunctionData(functionFragment: "rules", values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: "seedToken", values?: undefined): string;
   encodeFunctionData(functionFragment: "setCaller", values: [string]): string;
   encodeFunctionData(functionFragment: "setHalf", values: [boolean]): string;
@@ -91,6 +100,7 @@ export interface TreasuryInterface extends utils.Interface {
     values: [string, BigNumberish]
   ): string;
 
+  decodeFunctionResult(functionFragment: "addRule", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "callable", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "caller", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "cycle", data: BytesLike): Result;
@@ -101,6 +111,8 @@ export interface TreasuryInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "ruleSize", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "rules", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "seedToken", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setCaller", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setHalf", data: BytesLike): Result;
@@ -148,6 +160,11 @@ export interface Treasury extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    addRule(
+      rule: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     callable(overrides?: CallOverrides): Promise<[boolean]>;
 
     caller(overrides?: CallOverrides): Promise<[string]>;
@@ -164,6 +181,10 @@ export interface Treasury extends BaseContract {
     ): Promise<ContractTransaction>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
+
+    ruleSize(overrides?: CallOverrides): Promise<[number]>;
+
+    rules(arg0: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
 
     seedToken(overrides?: CallOverrides): Promise<[string]>;
 
@@ -198,6 +219,11 @@ export interface Treasury extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
+  addRule(
+    rule: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   callable(overrides?: CallOverrides): Promise<boolean>;
 
   caller(overrides?: CallOverrides): Promise<string>;
@@ -214,6 +240,10 @@ export interface Treasury extends BaseContract {
   ): Promise<ContractTransaction>;
 
   owner(overrides?: CallOverrides): Promise<string>;
+
+  ruleSize(overrides?: CallOverrides): Promise<number>;
+
+  rules(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
   seedToken(overrides?: CallOverrides): Promise<string>;
 
@@ -248,6 +278,8 @@ export interface Treasury extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    addRule(rule: string, overrides?: CallOverrides): Promise<void>;
+
     callable(overrides?: CallOverrides): Promise<boolean>;
 
     caller(overrides?: CallOverrides): Promise<string>;
@@ -261,6 +293,10 @@ export interface Treasury extends BaseContract {
     mint(receiver: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<string>;
+
+    ruleSize(overrides?: CallOverrides): Promise<number>;
+
+    rules(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
     seedToken(overrides?: CallOverrides): Promise<string>;
 
@@ -292,6 +328,11 @@ export interface Treasury extends BaseContract {
   filters: {};
 
   estimateGas: {
+    addRule(
+      rule: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     callable(overrides?: CallOverrides): Promise<BigNumber>;
 
     caller(overrides?: CallOverrides): Promise<BigNumber>;
@@ -308,6 +349,10 @@ export interface Treasury extends BaseContract {
     ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
+
+    ruleSize(overrides?: CallOverrides): Promise<BigNumber>;
+
+    rules(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     seedToken(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -343,6 +388,11 @@ export interface Treasury extends BaseContract {
   };
 
   populateTransaction: {
+    addRule(
+      rule: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     callable(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     caller(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -361,6 +411,13 @@ export interface Treasury extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    ruleSize(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    rules(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     seedToken(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

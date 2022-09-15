@@ -2,4 +2,5 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as constantSol from "./Constant.sol";
+export * as constantsSol from "./Constants.sol";
 export * as permissionSol from "./Permission.sol";
