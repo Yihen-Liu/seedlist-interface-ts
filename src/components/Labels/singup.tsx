@@ -23,7 +23,7 @@ const SignupLabel:React.FC<IBaseProps> = (props:IBaseProps) =>{
 	const labelExplain = useMemo(()=>{
 		return(
 			<Trans>
-				User have to sign up a spacename before save or query content.
+				User have to create a private vault before save or query content.
 			</Trans>
 		)
 	},[])
@@ -36,7 +36,7 @@ const SignupLabel:React.FC<IBaseProps> = (props:IBaseProps) =>{
                 onClick={()=>dispatch(signupAction(isConnection))}
                 w={["32", "40"]}
             >
-	            <Text color={color}> <Trans> Sign Up </Trans> </Text>
+	            <Text color={color}> <Trans> Create Vault </Trans> </Text>
             </Button>
         </Tooltip>
     );

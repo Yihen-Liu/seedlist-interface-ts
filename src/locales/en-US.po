@@ -50,6 +50,10 @@ msgstr "Add More"
 msgid "Address"
 msgstr "Address"
 
+#: src/components/Header/routers.tsx
+msgid "AnyMap"
+msgstr "AnyMap"
+
 #: src/components/Header/menu.tsx
 msgid "Arbitrum Mainnet"
 msgstr "Arbitrum Mainnet"
@@ -88,6 +92,10 @@ msgstr "Cancel"
 #: src/components/Wallet/wallet.tsx
 msgid "Connect Wallet"
 msgstr "Connect Wallet"
+
+#: src/components/Labels/singup.tsx
+msgid "Create Vault"
+msgstr "Create Vault"
 
 #: src/components/Footer/index.tsx
 msgid "Docs"
@@ -141,6 +149,10 @@ msgstr "I want to mint seed incentive token"
 #~ msgid "Identity"
 #~ msgstr "Identity"
 
+#: src/components/Buttons/signup.tsx
+msgid "Let's Create"
+msgstr "Let's Create"
+
 #: src/components/Buttons/wallet.tsx
 msgid "Let's Generate"
 msgstr "Let's Generate"
@@ -154,16 +166,16 @@ msgid "Let's Save"
 msgstr "Let's Save"
 
 #: src/components/Buttons/signup.tsx
-msgid "Let's Sign"
-msgstr "Let's Sign"
+#~ msgid "Let's Sign"
+#~ msgstr "Let's Sign"
 
 #: src/components/Footer/index.tsx
 #~ msgid "License"
 #~ msgstr "License"
 
 #: src/components/Header/routers.tsx
-msgid "Meta Identity"
-msgstr "Meta Identity"
+#~ msgid "Meta Identity"
+#~ msgstr "Meta Identity"
 
 #: src/components/Dialog/BitcoinAddress.tsx
 #: src/components/Dialog/EthereumAddress.tsx
@@ -207,8 +219,8 @@ msgid "Save Model:"
 msgstr "Save Model:"
 
 #: src/components/Labels/singup.tsx
-msgid "Sign Up"
-msgstr "Sign Up"
+#~ msgid "Sign Up"
+#~ msgstr "Sign Up"
 
 #: src/components/Dialog/PasswordInQuery.tsx
 #: src/components/Dialog/PasswordInSave.tsx
@@ -240,8 +252,12 @@ msgid "Token Receiver:"
 msgstr "Token Receiver:"
 
 #: src/components/Labels/singup.tsx
-msgid "User have to sign up a spacename before save or query content."
-msgstr "User have to sign up a spacename before save or query content."
+msgid "User have to create a private vault before save or query content."
+msgstr "User have to create a private vault before save or query content."
+
+#: src/components/Labels/singup.tsx
+#~ msgid "User have to sign up a spacename before save or query content."
+#~ msgstr "User have to sign up a spacename before save or query content."
 
 #: src/components/Header/routers.tsx
 msgid "Vault"

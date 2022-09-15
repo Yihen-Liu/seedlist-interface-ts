@@ -46,6 +46,10 @@ msgstr "继续添加"
 msgid "Address"
 msgstr "钱包地址"
 
+#: src/components/Header/routers.tsx
+msgid "AnyMap"
+msgstr ""
+
 #: src/components/Header/menu.tsx
 msgid "Arbitrum Mainnet"
 msgstr "Arbitrum主网"
@@ -80,6 +84,10 @@ msgstr "取消"
 #: src/components/Wallet/wallet.tsx
 msgid "Connect Wallet"
 msgstr "连接钱包"
+
+#: src/components/Labels/singup.tsx
+msgid "Create Vault"
+msgstr "创建私库"
 
 #: src/components/Footer/index.tsx
 msgid "Docs"
@@ -125,6 +133,10 @@ msgstr "隐蔽模式"
 msgid "I want to mint seed incentive token"
 msgstr "存储时，我愿意参与激励通证铸造"
 
+#: src/components/Buttons/signup.tsx
+msgid "Let's Create"
+msgstr "开始创建"
+
 #: src/components/Buttons/wallet.tsx
 msgid "Let's Generate"
 msgstr "开始生成"
@@ -138,16 +150,16 @@ msgid "Let's Save"
 msgstr "开始存储"
 
 #: src/components/Buttons/signup.tsx
-msgid "Let's Sign"
-msgstr "开始注册"
+#~ msgid "Let's Sign"
+#~ msgstr "开始注册"
 
 #: src/components/Footer/index.tsx
 #~ msgid "License"
 #~ msgstr "许可证"
 
 #: src/components/Header/routers.tsx
-msgid "Meta Identity"
-msgstr "元身份"
+#~ msgid "Meta Identity"
+#~ msgstr "元身份"
 
 #: src/components/Dialog/BitcoinAddress.tsx
 #: src/components/Dialog/EthereumAddress.tsx
@@ -191,8 +203,8 @@ msgid "Save Model:"
 msgstr "存储模式:"
 
 #: src/components/Labels/singup.tsx
-msgid "Sign Up"
-msgstr "注册"
+#~ msgid "Sign Up"
+#~ msgstr "注册"
 
 #: src/components/Dialog/PasswordInQuery.tsx
 #: src/components/Dialog/PasswordInSave.tsx
@@ -216,8 +228,12 @@ msgid "Token Receiver:"
 msgstr "通证接收者:"
 
 #: src/components/Labels/singup.tsx
-msgid "User have to sign up a spacename before save or query content."
-msgstr "在存储和查询之前，用户需要先在以太坊链上，注册保险库空间名称"
+msgid "User have to create a private vault before save or query content."
+msgstr "在存储和查询之前，用户需要先在以太坊链上，创建私有保险库"
+
+#: src/components/Labels/singup.tsx
+#~ msgid "User have to sign up a spacename before save or query content."
+#~ msgstr "在存储和查询之前，用户需要先在以太坊链上，注册保险库空间名称"
 
 #: src/components/Header/routers.tsx
 msgid "Vault"

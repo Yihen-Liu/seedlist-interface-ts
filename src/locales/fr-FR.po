@@ -50,6 +50,10 @@ msgstr ""
 msgid "Address"
 msgstr ""
 
+#: src/components/Header/routers.tsx
+msgid "AnyMap"
+msgstr ""
+
 #: src/components/Header/menu.tsx
 msgid "Arbitrum Mainnet"
 msgstr ""
@@ -87,6 +91,10 @@ msgstr ""
 
 #: src/components/Wallet/wallet.tsx
 msgid "Connect Wallet"
+msgstr ""
+
+#: src/components/Labels/singup.tsx
+msgid "Create Vault"
 msgstr ""
 
 #: src/components/Footer/index.tsx
@@ -141,6 +149,10 @@ msgstr ""
 #~ msgid "Identity"
 #~ msgstr ""
 
+#: src/components/Buttons/signup.tsx
+msgid "Let's Create"
+msgstr ""
+
 #: src/components/Buttons/wallet.tsx
 msgid "Let's Generate"
 msgstr ""
@@ -154,16 +166,16 @@ msgid "Let's Save"
 msgstr ""
 
 #: src/components/Buttons/signup.tsx
-msgid "Let's Sign"
-msgstr ""
+#~ msgid "Let's Sign"
+#~ msgstr ""
 
 #: src/components/Footer/index.tsx
 #~ msgid "License"
 #~ msgstr ""
 
 #: src/components/Header/routers.tsx
-msgid "Meta Identity"
-msgstr ""
+#~ msgid "Meta Identity"
+#~ msgstr ""
 
 #: src/components/Dialog/BitcoinAddress.tsx
 #: src/components/Dialog/EthereumAddress.tsx
@@ -207,8 +219,8 @@ msgid "Save Model:"
 msgstr ""
 
 #: src/components/Labels/singup.tsx
-msgid "Sign Up"
-msgstr ""
+#~ msgid "Sign Up"
+#~ msgstr ""
 
 #: src/components/Dialog/PasswordInQuery.tsx
 #: src/components/Dialog/PasswordInSave.tsx
@@ -240,8 +252,12 @@ msgid "Token Receiver:"
 msgstr ""
 
 #: src/components/Labels/singup.tsx
-msgid "User have to sign up a spacename before save or query content."
+msgid "User have to create a private vault before save or query content."
 msgstr ""
+
+#: src/components/Labels/singup.tsx
+#~ msgid "User have to sign up a spacename before save or query content."
+#~ msgstr ""
 
 #: src/components/Header/routers.tsx
 msgid "Vault"

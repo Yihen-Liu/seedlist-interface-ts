@@ -114,7 +114,7 @@ const SignupButton:React.FC<IBaseProps> = (props:IBaseProps) => {
 				isLoading={signupIsLoading}
 				w="100%"
 			>
-				<Trans>Let's Sign </Trans>
+				<Trans>Let's Create</Trans>
 			</Button>
 		);
 
