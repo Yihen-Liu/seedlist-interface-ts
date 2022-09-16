@@ -75,8 +75,12 @@ msgid "Bitcoin Address:"
 msgstr "Bitcoin Address:"
 
 #: src/components/Header/routers.tsx
-msgid "Brain Wallet"
-msgstr "Brain Wallet"
+msgid "Brain Address"
+msgstr "Brain Address"
+
+#: src/components/Header/routers.tsx
+#~ msgid "Brain Wallet"
+#~ msgstr "Brain Wallet"
 
 #: src/components/Dialog/PasswordInSave.tsx
 msgid "Bridge Model"
