@@ -18,13 +18,13 @@ const WalletInfo: React.FC<IBaseProps> = (props:IBaseProps) => {
 	const [network,] = useRecoilState(networkState)
 	const [, setReceiverAddr] = useRecoilState(tokenReceiverAddr)
 	const dispatch = useDispatch();
-	const [chainId, setChainId] = useState<number>(4)
-	const [chainName, setChainName] = useState<string>("Rinkeby")
+	const [chainId, setChainId] = useState<number>(5)
+	const [chainName, setChainName] = useState<string>("Goerli")
 
 	useMemo(()=>{
-		if(network==="rinkeby"){
-			setChainName("Rinkeby")
-			setChainId(4)
+		if(network==="goerli"){
+			setChainName("Goerli")
+			setChainId(5)
 		}
 		if(network==="mainnet"){
 			setChainName("Mainnet")

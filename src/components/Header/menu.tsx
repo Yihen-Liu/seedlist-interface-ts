@@ -54,9 +54,9 @@ const Menus:React.FC<IBaseProps> = (props:IBaseProps) =>{
 					_focus={{ boxShadow: 'outline', bg:"#2b2d32" }}
 				/>
 				<MenuList maxWidth='100px' bgColor={"#2b2d32"} borderColor={"black"}>
-					<MenuOptionGroup defaultValue='rinkeby' title={networkTitle} type='radio'>
-						<MenuItemOption _hover={{ bg: 'blackAlpha.500'}} value='rinkeby' onClick={()=>doClickNetwork("rinkeby")}>
-						  <Trans> Rinkeby Test Network </Trans>
+					<MenuOptionGroup defaultValue='goerli' title={networkTitle} type='radio'>
+						<MenuItemOption _hover={{ bg: 'blackAlpha.500'}} value='goerli' onClick={()=>doClickNetwork("goerli")}>
+						  <Trans> Goerli Test Network </Trans>
 						</MenuItemOption>
 						<MenuItemOption isDisabled={true} _hover={{ bg: 'blackAlpha.500'}} value='mainnet' onClick={()=>doClickNetwork("mainnet")}>
 							<Trans> Ethereum Mainnet </Trans>
