@@ -48,7 +48,6 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 	const [saveBtnLoading, setSaveBtnIsLoading] = useRecoilState(saveBtnIsLoadingState);
 	const [passwordHolder, setPasswordHolder]	= useState<string>("password ...")
 	const [checked, setChecked] = useState<boolean>(false)
-	const [model, setModel] = useState<string>("bridge")
 	const handleCheckChange = (event: ChangeEvent<HTMLInputElement>)=>setChecked(event.target.checked)
 	const handlePasswordChange = (event: React.FormEvent<HTMLInputElement>)=>setPassword(event.currentTarget.value)
 
@@ -197,44 +196,6 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 		}
 		cryptoContent = await encryptor.multiEncryptMessage(savedContent, contentPassword);
 
-		if(model === "hidden"){
-			let queryAddrParams = await encryptor.calculateQueryPrivateVaultAddressParams();
-			let vaultAddr = await etherClient.client?.queryPrivateVaultAddress(queryAddrParams.address, queryAddrParams.deadline, queryAddrParams.signature.r,
-				queryAddrParams.signature.s, queryAddrParams.signature.v);
-			let vaultClient = new PrivateVaultEtherClient(vaultAddr);
-			await vaultClient.loadProvider();
-
-			vaultClient.connectSeedlistContract()
-			vaultClient.connectSigner()
-			if(!vaultClient.client){
-				console.error("vault connect signer error");
-				setSaveBtnIsLoading(false);
-				return;
-			}
-
-			let domain = await vaultClient.client?.privateVaultDomainHash();
-			let params = ethers.utils.defaultAbiCoder.encode( ["address", "uint24"], ["0xf32d39ff9f6aa7a7a64d7a4f00a54826ef791a55", 500]);
-			let saveDirectlyParams = await encryptor.calculatePrivateVaultSaveWithoutMintingParams(cryptoContent, cryptoLabel, labelHash, domain,params);
-			try {
-				let saveDirectlyRes = await vaultClient.client?.privateVaultSaveDataWithoutMinting(cryptoContent, cryptoLabel, labelHash, params,saveDirectlyParams.deadline,
-					saveDirectlyParams.signature.r, saveDirectlyParams.signature.s, saveDirectlyParams.signature.v);
-			}catch (e) {
-				console.log("private vault:", e);
-				setSaveBtnIsLoading(false);
-				return;
-			}
-
-			if(lang==='zh-CN'){
-				successToast("存储成功");
-			}
-
-			if(lang==='en-US'){
-				successToast("save success");
-			}
-			setSaveBtnIsLoading(false);
-			return;
-		}
-
 		if(checked === true){
 			let hasMintedParams = await  encryptor.calculateHasMintedParams();
 			let hasMintedRes = await etherClient.client?.hasMinted(hasMintedParams.address, hasMintedParams.deadline, hasMintedParams.signature.r,
@@ -290,7 +251,7 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 			setSaveBtnIsLoading(false);
 		}
 
-	},[vaultName, savedContent, labelName, password, receiverAddr, checked, model])
+	},[vaultName, savedContent, labelName, password, receiverAddr, checked])
 
 	return(
 		<Drawer
@@ -325,55 +286,23 @@ const PasswordInSave:React.FC<IBaseProps> = (props:IBaseProps)=>{
 					</Stack>
 
 
-{/*
-					<RadioGroup defaultValue={model} marginY="20px" onChange={setModel}>
-						<Stack spacing={5} direction='row'>
-							<Text color="white"><Trans>Save Model: </Trans></Text>
-							<Radio colorScheme='orange' value='bridge'>
-								<Text color="white"><Trans>Bridge Model</Trans></Text>
-							</Radio>
-							<Radio colorScheme='orange' value='hidden'>
-								<Text color="white"><Trans>Hidden Model</Trans></Text>
-							</Radio>
-						</Stack>
-					</RadioGroup>
-*/}
-
-					{ model === "bridge" &&
-						<Stack spacing='30px' marginY='20px'>
-							<Box>
-								<Checkbox
-									size='md'
-									colorScheme='orange'
-									isChecked={checked}
-									onChange={handleCheckChange}
-								>
-									<Text color="white">
-										<Trans>I want to mint seed incentive token</Trans>
-									</Text>
-								</Checkbox>
-								{economicModelDesc}
-								{tokenReceiverAddress}
-							</Box>
-						</Stack>
-					}
-
-{/*
-					{ model === "hidden" &&
 					<Stack spacing='30px' marginY='20px'>
 						<Box>
-							<Text color="white">
-								<InfoIcon color='red.800' marginEnd="8px"/>
-								<Trans> This is an operation for advanced users,
-									if you want to use it, please contact the developer:</Trans> ebbe52e5@gmail.com
-							</Text>
-
-							<Text color="white">
-							</Text>
+							<Checkbox
+								size='md'
+								colorScheme='orange'
+								isChecked={checked}
+								onChange={handleCheckChange}
+							>
+								<Text color="white">
+									<Trans>I want to mint seed incentive token</Trans>
+								</Text>
+							</Checkbox>
+							{economicModelDesc}
+							{tokenReceiverAddress}
 						</Box>
 					</Stack>
-					}
-*/}
+
 				</DrawerBody>
 
 				<DrawerFooter borderTopWidth='1px'>

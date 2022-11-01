@@ -11,6 +11,7 @@ import {StateType} from "../../reducers/state";
 import { walletConnectionAction} from "../../reducers/action";
 import {useRecoilState} from "recoil";
 import {networkState, tokenReceiverAddr} from "../../hooks/Atoms";
+import {NetworkConfig} from "../../constants/network";
 
 const WalletInfo: React.FC<IBaseProps> = (props:IBaseProps) => {
     const [walletInfo, setWalletInfo] = useState<IWalletInfo | null>(null);
@@ -18,13 +19,13 @@ const WalletInfo: React.FC<IBaseProps> = (props:IBaseProps) => {
 	const [network,] = useRecoilState(networkState)
 	const [, setReceiverAddr] = useRecoilState(tokenReceiverAddr)
 	const dispatch = useDispatch();
-	const [chainId, setChainId] = useState<number>(5)
+	const [chainId, setChainId] = useState<number>(1500)
 	const [chainName, setChainName] = useState<string>("Goerli")
 
 	useMemo(()=>{
 		if(network==="goerli"){
 			setChainName("Goerli")
-			setChainId(5)
+			setChainId(1500)
 		}
 		if(network==="mainnet"){
 			setChainName("Mainnet")
