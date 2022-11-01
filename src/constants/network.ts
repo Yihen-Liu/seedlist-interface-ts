@@ -2,7 +2,7 @@ export const RINKEBY_ENCRYPT_CONTRACT_ADDR:string = "0x6d89587672fb830A6B9Fb66E6
 
 export const MAINNET_ENCRYPT_CONTRACT_ADDR:string = "0x6d89587672fb830A6B9Fb66E665528A38779e4c1"
 
-type ChainName = "rinkeby" | "mainnet"
+type ChainName = "goerli" | "mainnet" |"local"
 
 type ChainList = {
 	readonly [chainName in ChainName]:{
@@ -12,7 +12,7 @@ type ChainList = {
 	}
 }
 export const NetworkConfig:ChainList = {
-	"rinkeby":{
+	"goerli":{
 		Addr:RINKEBY_ENCRYPT_CONTRACT_ADDR,
 		Name:"Rinkeby",
 		ChainId:4
@@ -21,5 +21,10 @@ export const NetworkConfig:ChainList = {
 		Addr:MAINNET_ENCRYPT_CONTRACT_ADDR,
 		Name:"Mainnet",
 		ChainId:1
+	},
+	"local":{
+		Name:"Local",
+		ChainId:1500,
+		Addr:""
 	}
 }

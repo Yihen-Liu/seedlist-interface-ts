@@ -15,8 +15,10 @@ export interface IWalletInfo {
     balance: string;
 }
 // rinkeby id
-export const contractChainId = 5;
+/*
+export const contractChainId = 1500;
 export const contractChainName = "Goerli";
+*/
 
 export class VaultHubEtherClient {
     seedlistContractAddress: string;
